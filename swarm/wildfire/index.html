@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wildfire Drone Swarm · Nihal</title>
+<meta name="description" content="Six drones learning to contain wildfires as a team, with a step-by-step replay and comparison against simple dispatch rules.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4e79'/%3E%3Ccircle cx='10' cy='11' r='3' fill='white'/%3E%3Ccircle cx='22' cy='11' r='3' fill='white'/%3E%3Ccircle cx='16' cy='21' r='3' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="/">Nihal <span>· Portfolio</span></a>
+  <nav><a href="/">Home</a><a href="/#projects">Projects</a><a class="on" href="/swarm/">Swarm Intelligence</a><a href="https://github.com/nihalunfc">GitHub</a></nav>
+</div></header>
+<main>
+  <p class="crumbs"><a href="/">Home</a> / <a href="/swarm/">Swarm Intelligence</a> / Wildfire</p>
+  <p class="eyebrow">Swarm Intelligence · Emergency response</p>
+  <h1>Wildfire Drone Swarm</h1>
+  <p class="lead">Six drones work together to contain a spreading forest fire. Each drone sees only the area around itself, decides where to fly and when to drop retardant, and returns to base to refill. They are tested on 50 fires they have never seen.</p>
+
+  <div class="callout" style="margin-top:20px">
+    <p><b>The problem.</b> A fire spreads unpredictably with the wind. A small fleet with limited payload has to decide, again and again, which flank to attack, when to go back and refill, and how to avoid all crowding onto the same spot.</p>
+    <p><b>The swarm.</b> Each drone carries 6 loads of retardant and sees a 7&times;7 patch of forest around itself. Every step it moves, drops retardant or holds, and it refills on the launch pad in the top-left corner. Two fires start in random places with a random wind on a 16&times;16 forest. The drones move three cells for every step the fire spreads. The team is rewarded for every cell of forest that doesn't burn.</p>
+  </div>
+
+  <div class="grid" style="margin-top:18px">
+    <div class="card kpi"><span class="label">Forest saved</span><span class="big">87.2%</span><span class="vs">Average over 50 unseen fires</span></div>
+    <div class="card kpi"><span class="label">With no drones</span><span class="big">33.2%</span><span class="vs">The fire burns until it runs out of fuel</span></div>
+    <div class="card kpi"><span class="label">Nearest-fire rule</span><span class="big">90.1%</span><span class="vs">The hand-written rule is still slightly ahead</span></div>
+    <div class="card kpi"><span class="label">Fire put out in</span><span class="big">39 steps</span><span class="vs">Against 150 with no drones</span></div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h2>Watch a fire</h2>
+    <p class="sub">Recorded runs on unseen fires. Every approach faces the same three fires. Press play, or drag the slider.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:14px;margin-bottom:10px">
+      <label>Approach <select id="pol" style="font:inherit;padding:3px 6px;border-radius:6px;border:1px solid var(--line-2)"></select></label>
+      <label>Fire <select id="ep" style="font:inherit;padding:3px 6px;border-radius:6px;border:1px solid var(--line-2)"></select></label>
+      <button id="play" type="button" class="btn primary" style="padding:5px 14px;cursor:pointer">Play</button>
+      <input id="step" type="range" min="0" max="0" value="0" style="flex:1 1 160px" aria-label="Step">
+    </div>
+    <div class="grid2" style="align-items:start">
+      <div>
+        <canvas id="cv" style="width:100%;max-width:460px;aspect-ratio:1/1;display:block;border-radius:8px;background:#fff"></canvas>
+        <div class="legend" style="margin-top:8px"><span style="--c:#7cc49a">Forest</span><span style="--c:#e0452f">Burning</span><span style="--c:#8a8f96">Burned</span><span style="--c:#2a78d6">Retardant</span><span style="--c:#18212b">Drone</span><span style="--c:#f2d27a">Launch pad</span></div>
+        <p id="status" class="muted" style="font-size:13.5px;margin:4px 0 0"></p>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Cells on fire at each step, this fire</h3>
+        <div class="legend"><span class="ln" style="--c: var(--c-swarm)">Swarm</span><span class="ln" style="--c: var(--c-rule)">Nearest-fire rule</span><span class="ln" style="--c: var(--c-extra)">Random</span><span class="ln" style="--c: var(--c-today)">No drones</span></div>
+        <div class="chart" id="ch-burn"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>All approaches compared</h2>
+      <p class="sub">Averages per fire over 50 unseen fires.</p>
+      <div class="scroll"><table>
+        <thead><tr><th class="l">Approach</th><th>Forest saved</th><th>Cells burned</th><th>Most cells on fire at once</th><th>Steps to put out</th></tr></thead>
+        <tbody>
+          <tr><td>Nearest-fire rule<small>each drone flies to the closest fire</small></td><td>90.1%</td><td>25</td><td>10</td><td>32</td></tr>
+          <tr class="hi"><td>Swarm</td><td>87.2%</td><td>33</td><td>11</td><td>39</td></tr>
+          <tr><td>Random moves</td><td>36.8%</td><td>162</td><td>35</td><td>151</td></tr>
+          <tr><td>No drones</td><td>33.2%</td><td>171</td><td>38</td><td>150</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <h2>How the drones were trained</h2>
+      <p class="sub">Forest saved on the same 50 fires, by training approach.</p>
+      <div class="chart" id="ch-var"></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="callout warn">
+      <p><b>Honest result.</b> The best drone swarm saves 87% of the forest. The simple "fly to the nearest fire" rule saves 90%. Learning from scratch only reached 77%. Letting the swarm first copy the rule and then improve with practice closed most of the gap, but it hasn't overtaken the rule yet.</p>
+      <p>Longer training and drone-to-drone messages did not help in this setup (85% and 80%). Those are useful negative results that point the next experiments elsewhere.</p>
+    </div>
+    <div class="card">
+      <h2>What comes next</h2>
+      <ul class="tight">
+        <li>Real fuel and terrain maps (Canadian Wildland Fire Information System) instead of a uniform forest.</li>
+        <li>Several launch pads. With one pad, results fall as the forest grows to 100 and 1,000 drones, and the simple rule falls too.</li>
+        <li>Situations where a fixed rule breaks: crossing fires, wind shifts, drones with different payloads.</li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">© 2026 Nihal · <a href="https://github.com/nihalunfc">github.com/nihalunfc</a></footer>
+
+<script src="/assets/d3.min.js"></script>
+<script>
+(() => {
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const PC = { 'swarm (trained)': css('--c-swarm'), 'nearest-fire rule': css('--c-rule'), 'random': css('--c-extra'), 'no drones': css('--c-today') };
+  const NAMES = { 'swarm (trained)': 'Swarm', 'nearest-fire rule': 'Nearest-fire rule', 'random': 'Random moves', 'no drones': 'No drones' };
+  const ORDER = ['swarm (trained)', 'nearest-fire rule', 'random', 'no drones'];
+  const CELL = { '0': '#7cc49a', '1': '#e0452f', '2': '#8a8f96', '3': '#2a78d6' };
+  const VARIANTS = [
+    ['Learn from scratch', 77.3, '600k practice steps'], ['Copy the rule only', 83.2, ''], ['Copy the rule, then practise', 87.2, 'best swarm'],
+    ['Copy, then practise twice as long', 84.9, ''], ['Copy, keep copying longer', 82.3, ''], ['Copy, practise, drone messages', 80.1, ''], ['Nearest-fire rule (hand-written)', 90.1, ''],
+  ];
+  const pol = document.getElementById('pol'), ep = document.getElementById('ep'), step = document.getElementById('step'), play = document.getElementById('play'), cv = document.getElementById('cv');
+  let rows = [], timer = null;
+
+  const frames = () => rows.filter(r => r.policy === pol.value && String(r.episode) === ep.value).sort((a, b) => a.step - b.step);
+  function paint() {
+    const fs = frames(); if (!fs.length) return;
+    const size = cv.clientWidth; const dpr = devicePixelRatio || 1;
+    cv.width = cv.height = Math.round(size * dpr);
+    const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const f = fs[Math.min(fs.length - 1, +step.value)];
+    const n = Math.round(Math.sqrt(f.grid.length)), cs = size / n;
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size);
+    for (let i = 0; i < f.grid.length; i++) {
+      const r = Math.floor(i / n), c = i % n;
+      ctx.fillStyle = (r < 3 && c < 3 && f.grid[i] === '0') ? '#f2d27a' : CELL[f.grid[i]];
+      ctx.fillRect(c * cs + 0.5, r * cs + 0.5, cs - 1, cs - 1);
+    }
+    let drones = []; try { drones = JSON.parse(f.drones); } catch (e) {}
+    ctx.fillStyle = '#18212b'; ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5;
+    drones.forEach(([r, c], k) => {
+      const jx = ((k % 3) - 1) * cs * 0.18, jy = ((Math.floor(k / 3) % 3) - 1) * cs * 0.18;
+      ctx.beginPath(); ctx.arc(c * cs + cs / 2 + jx, r * cs + cs / 2 + jy, Math.max(3, cs * 0.2), 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+    });
+    const burned = [...f.grid].filter(ch => ch === '2').length;
+    const saved = 100 * [...f.grid].filter(ch => ch === '0' || ch === '3').length / f.grid.length;
+    document.getElementById('status').textContent = `Step ${f.step} of ${fs[fs.length - 1].step} · ${f.burning} cells burning · ${burned} burned · ${saved.toFixed(0)}% of forest intact`;
+  }
+  function chart() {
+    const el = document.getElementById('ch-burn'); el.innerHTML = '';
+    const w = el.clientWidth; if (!w) return;
+    const h = 260, m = { l: 40, r: 10, t: 10, b: 30 };
+    const series = ORDER.map(p => ({ p, pts: rows.filter(r => r.policy === p && String(r.episode) === ep.value).sort((a, b) => a.step - b.step) })).filter(s => s.pts.length);
+    const x = d3.scaleLinear([0, d3.max(series, s => s.pts[s.pts.length - 1].step)], [m.l, w - m.r]);
+    const y = d3.scaleLinear([0, d3.max(series, s => d3.max(s.pts, d => d.burning))], [h - m.b, m.t]).nice();
+    const svg = d3.select(el).append('svg').attr('width', w).attr('height', h);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(w - m.l - m.r))).call(g => g.select('.domain').remove()).call(g => g.selectAll('line').attr('stroke', css('--grid')));
+    svg.append('g').attr('transform', `translate(0,${h - m.b})`).call(d3.axisBottom(x).ticks(6).tickSizeOuter(0)).call(g => g.select('.domain').attr('stroke', css('--axis')));
+    svg.append('text').attr('x', w - m.r).attr('y', h - 2).attr('text-anchor', 'end').text('step');
+    series.forEach(s => svg.append('path').datum(s.pts).attr('fill', 'none').attr('stroke', PC[s.p]).attr('stroke-width', s.p === pol.value ? 3 : 1.5)
+      .attr('d', d3.line().x(d => x(d.step)).y(d => y(d.burning))));
+    const cur = frames()[+step.value];
+    if (cur) svg.append('line').attr('x1', x(cur.step)).attr('x2', x(cur.step)).attr('y1', m.t).attr('y2', h - m.b).attr('stroke', css('--ink-3')).attr('stroke-dasharray', '3 3');
+  }
+  function variants() {
+    const el = document.getElementById('ch-var'); el.innerHTML = '';
+    const w = el.clientWidth; if (!w) return;
+    const narrow = w < 520, labW = narrow ? 0 : 230, bh = 18, gap = narrow ? 30 : 10;
+    const h = VARIANTS.length * (bh + gap);
+    const x = d3.scaleLinear([0, 100], [labW + 4, w - 50]);
+    const svg = d3.select(el).append('svg').attr('width', w).attr('height', h);
+    VARIANTS.forEach(([name, v, note], i) => {
+      const y = i * (bh + gap) + (narrow ? 16 : 0);
+      svg.append('text').attr('class', 'lbl').attr('x', narrow ? 0 : labW - 6).attr('y', narrow ? y - 4 : y + 13).attr('text-anchor', narrow ? 'start' : 'end').text(name).style('font-weight', i === 2 ? 600 : 400);
+      svg.append('rect').attr('x', x(0)).attr('y', y).attr('width', x(v) - x(0)).attr('height', bh).attr('rx', 3).attr('fill', i === 6 ? css('--c-rule') : i === 2 ? css('--c-swarm') : '#9cc3ee');
+      svg.append('text').attr('class', 'val').attr('x', x(v) + 6).attr('y', y + 13).text(v.toFixed(1) + '%');
+    });
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } play.textContent = 'Play'; }
+  play.addEventListener('click', () => {
+    if (timer) return stop();
+    if (+step.value >= +step.max) step.value = 0;
+    play.textContent = 'Pause';
+    timer = setInterval(() => { if (+step.value >= +step.max) return stop(); step.value = +step.value + 1; paint(); chart(); }, 180);
+  });
+  step.addEventListener('input', () => { stop(); paint(); chart(); });
+  const reset = () => { stop(); step.max = Math.max(0, frames().length - 1); step.value = 0; paint(); chart(); };
+  pol.addEventListener('change', reset); ep.addEventListener('change', reset);
+  fetch('data/wildfire_replay.json').then(r => r.json()).then(d => {
+    rows = d;
+    ORDER.filter(p => rows.some(r => r.policy === p)).forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = NAMES[p]; pol.appendChild(o); });
+    ['2', '3', '1'].filter(e => rows.some(r => String(r.episode) === e)).forEach(e => { const o = document.createElement('option'); o.value = e; o.textContent = 'Fire ' + e; ep.appendChild(o); });
+    reset();
+  });
+  variants();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { paint(); chart(); variants(); }, 150); });
+})();
+</script>
+
+</body>
+</html>

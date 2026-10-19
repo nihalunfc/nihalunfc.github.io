@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grid Battery Swarm · Nihal</title>
+<meta name="description" content="Ten grid-scale batteries coordinating as a swarm to cut demand peaks on real Texas grid data, compared with simple dispatch rules.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4e79'/%3E%3Ccircle cx='10' cy='11' r='3' fill='white'/%3E%3Ccircle cx='22' cy='11' r='3' fill='white'/%3E%3Ccircle cx='16' cy='21' r='3' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="/">Nihal <span>· Portfolio</span></a>
+  <nav><a href="/">Home</a><a href="/#projects">Projects</a><a class="on" href="/swarm/">Swarm Intelligence</a><a href="https://github.com/nihalunfc">GitHub</a></nav>
+</div></header>
+<main>
+  <p class="crumbs"><a href="/">Home</a> / <a href="/swarm/">Swarm Intelligence</a> / Energy</p>
+  <p class="eyebrow">Swarm Intelligence · Energy</p>
+  <h1>Grid Battery Swarm</h1>
+  <p class="lead">Ten grid-scale batteries learn to work as a team to flatten electricity demand on a real grid. They store power when demand is low and release it when demand peaks. The test uses three months of real demand they had never seen.</p>
+
+  <div class="callout" style="margin-top:20px">
+    <p><b>The problem.</b> A grid has to be built for its highest hour of demand. Those few peak hours call on the most expensive, most polluting standby plants, and they drive prices and capacity costs. Batteries can shave the peaks, but only if they still have charge left when the real peak arrives, and nobody knows in advance which hour that will be.</p>
+    <p><b>The swarm.</b> Each battery (100 MW, 4 hours of storage, 10 batteries making 1 GW in total) decides every hour whether to charge, wait or discharge. It sees the current demand, the weather, the time, its own charge and the swarm's average charge. The team is rewarded for keeping the grid close to a flat daily level.</p>
+  </div>
+
+  <div class="grid" style="margin-top:18px" id="kpis">
+    <div class="card kpi"><span class="label">Highest hour cut by</span><span class="big">949 MW</span><span class="vs">Best simple rule: 0 MW. Its batteries were already empty when the peak arrived.</span></div>
+    <div class="card kpi"><span class="label">Demand swings reduced</span><span class="big">9.9%</span><span class="vs">Hour-to-hour variation in load. Best rule: 9.1%.</span></div>
+    <div class="card kpi"><span class="label">Peak-to-average ratio</span><span class="big">1.58 → 1.50</span><span class="vs">Lower means a flatter, cheaper grid to run.</span></div>
+    <div class="card kpi"><span class="label">Test period</span><span class="big">92 days</span><span class="vs">October to December 2020. Learned on January to September only.</span></div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h2>Grid demand with and without the battery swarm</h2>
+    <p class="sub">Hourly demand on the ERCOT Coast zone (Houston area), in megawatts. Pick a week. The highest-demand week opens first. Hover or tap for values.</p>
+    <div class="legend"><span class="ln" style="--c: var(--c-today)">No batteries</span><span class="ln" style="--c: var(--c-rule)">Proportional rule</span><span class="ln" style="--c: var(--c-swarm)">Swarm</span></div>
+    <label style="font-size:14px">Week <select id="week" style="font:inherit;padding:3px 6px;border-radius:6px;border:1px solid var(--line-2)"></select></label>
+    <div class="chart" id="ch-load" style="margin-top:8px"></div>
+    <h3>Swarm's stored energy that week</h3>
+    <p class="sub">Average charge across the 10 batteries (0% = empty, 100% = full).</p>
+    <div class="chart" id="ch-soc"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>The hour that mattered</h2>
+      <p>The season's highest demand came on <b>Sunday 11 October at 4 pm</b> (18,556 MW). The simple rule had discharged its batteries from midday, as soon as demand rose above the day's average, so it was empty by 4 pm and couldn't touch the peak.</p>
+      <p>The swarm learned to <b>hold a reserve</b>. It waited until 2 pm, then released energy through the four highest hours, cutting the peak to 17,608 MW.</p>
+      <div class="chart" id="ch-peakday"></div>
+    </div>
+    <div class="card">
+      <h2>All approaches compared</h2>
+      <p class="sub">Whole test period (2,208 hours).</p>
+      <div class="scroll"><table>
+        <thead><tr><th class="l">Approach</th><th>Peak cut</th><th>Swings reduced</th><th>Peak-to-average</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td>Swarm</td><td>949 MW</td><td>9.9%</td><td>1.496</td></tr>
+          <tr><td>Proportional rule<small>sends just enough batteries to close the gap</small></td><td>0 MW</td><td>9.1%</td><td>1.577</td></tr>
+          <tr><td>Threshold rule<small>all batteries discharge when demand is high</small></td><td>0 MW</td><td>5.0%</td><td>1.577</td></tr>
+          <tr><td>No batteries</td><td>0 MW</td><td>0%</td><td>1.579</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted" style="font-size:13.5px;margin-top:10px">The rules are good at smoothing ordinary days (9.1% against 9.9%) but miss the one hour that sets the system's cost. That is exactly the judgement the swarm adds.</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Scales without retraining</h2>
+      <p>The same model, trained with 10 batteries, ran unchanged with the same 1 GW split into 100 and then 1,000 smaller batteries. It delivered the same 949 MW peak cut each time, and choosing all 1,000 actions took under a millisecond on one CPU core.</p>
+    </div>
+    <div class="card">
+      <h2>Data and assumptions</h2>
+      <ul class="tight">
+        <li>Demand: ERCOT Coast weather-zone hourly load, 2020. Weather: NREL solar and weather data for the same area.</li>
+        <li>Batteries: 10 &times; 100 MW / 400 MWh, 90% round-trip efficiency.</li>
+        <li>Learned on January to September, tested on October to December, which was never seen while learning.</li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">© 2026 Nihal · <a href="https://github.com/nihalunfc">github.com/nihalunfc</a></footer>
+
+<script src="/assets/d3.min.js"></script>
+<script>
+(() => {
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const C = { swarm: css('--c-swarm'), rule: css('--c-rule'), today: css('--c-today') };
+  const n0 = d3.format(',.0f');
+  let rows = [], weeks = [];
+  const sel = document.getElementById('week');
+
+  function lines(el, data, series, o) {
+    el.innerHTML = '';
+    const w = el.clientWidth; if (!w || !data.length) return;
+    const h = o.height, m = { l: 58, r: 12, t: 10, b: 30 };
+    const x = d3.scaleUtc(d3.extent(data, d => d.t), [m.l, w - m.r]);
+    const vals = data.flatMap(d => series.map(s => d[s.key]));
+    const y = d3.scaleLinear(o.y || [d3.min(vals) * 0.97, d3.max(vals) * 1.01], [h - m.b, m.t]).nice();
+    const svg = d3.select(el).append('svg').attr('width', w).attr('height', h);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(o.fmtAxis).tickSize(-(w - m.l - m.r)))
+      .call(g => g.select('.domain').remove()).call(g => g.selectAll('line').attr('stroke', css('--grid')));
+    svg.append('g').attr('transform', `translate(0,${h - m.b})`).call(d3.axisBottom(x).ticks(w < 500 ? 4 : 8).tickFormat(o.fmtX).tickSizeOuter(0))
+      .call(g => g.select('.domain').attr('stroke', css('--axis'))).call(g => g.selectAll('line').attr('stroke', css('--axis')));
+    series.forEach(s => svg.append('path').datum(data).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', s.width || 2)
+      .attr('d', d3.line().x(d => x(d.t)).y(d => y(d[s.key]))));
+    let tip = el.querySelector('.tip'); if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; el.appendChild(tip); }
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', h - m.b).attr('stroke', css('--ink-3')).style('display', 'none');
+    const dots = svg.append('g'); const bis = d3.bisector(d => d.t).center;
+    svg.append('rect').attr('x', m.l).attr('width', w - m.l - m.r).attr('height', h - m.b).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [px, py] = d3.pointer(ev); const d = data[bis(data, x.invert(px))];
+        rule.style('display', null).attr('x1', x(d.t)).attr('x2', x(d.t));
+        dots.selectAll('circle').data(series).join('circle').attr('r', 3.5).attr('cx', x(d.t)).attr('cy', s => y(d[s.key])).attr('fill', s => s.color);
+        tip.innerHTML = `<b>${d3.utcFormat('%a %b %-d, %-I %p')(d.t)}</b>` + series.map(s => `<div><i style="background:${s.color}"></i>${s.name}: ${o.fmt(d[s.key])}</div>`).join('');
+        tip.style.display = 'block';
+        const tw = tip.offsetWidth; tip.style.left = Math.max(0, Math.min(w - tw, x(d.t) + 12)) + 'px'; tip.style.top = Math.max(0, py - 10) + 'px';
+      })
+      .on('pointerleave', () => { tip.style.display = 'none'; rule.style('display', 'none'); dots.selectAll('*').remove(); });
+  }
+
+  function draw() {
+    if (!rows.length) return;
+    const s = new Date(sel.value), e = d3.utcDay.offset(s, 7);
+    const view = rows.filter(r => r.t >= s && r.t < e);
+    lines(document.getElementById('ch-load'), view, [
+      { key: 'nb', name: 'No batteries', color: C.today }, { key: 'pr', name: 'Proportional rule', color: C.rule }, { key: 'sw', name: 'Swarm', color: C.swarm, width: 2.5 },
+    ], { height: 320, fmtAxis: v => n0(v), fmt: v => n0(v) + ' MW', fmtX: d3.utcFormat('%a %-d') });
+    lines(document.getElementById('ch-soc'), view, [{ key: 'soc', name: 'Swarm charge', color: C.swarm }],
+      { height: 150, y: [0, 100], fmtAxis: v => v + '%', fmt: v => d3.format('.0f')(v) + '%', fmtX: d3.utcFormat('%a %-d') });
+    const day = rows.filter(r => r.t >= new Date('2020-10-11T06:00Z') && r.t <= new Date('2020-10-11T22:00Z'));
+    lines(document.getElementById('ch-peakday'), day, [
+      { key: 'nb', name: 'No batteries', color: C.today }, { key: 'pr', name: 'Proportional rule', color: C.rule }, { key: 'sw', name: 'Swarm', color: C.swarm, width: 2.5 },
+    ], { height: 230, fmtAxis: v => n0(v), fmt: v => n0(v) + ' MW', fmtX: d3.utcFormat('%-I %p') });
+  }
+
+  fetch('data/energy_curve.json').then(r => r.json()).then(d => {
+    rows = d.map(([h, nb, pr, sw, soc]) => ({ t: new Date(h + ':00Z'), nb, pr, sw, soc: soc * 100 }));
+    const peak = rows.reduce((a, b) => b.nb > a.nb ? b : a);
+    weeks = d3.utcMonday.range(d3.utcMonday.floor(rows[0].t), rows[rows.length - 1].t);
+    weeks.forEach(wk => { const o = document.createElement('option'); o.value = wk.toISOString();
+      o.textContent = 'Week of ' + d3.utcFormat('%b %-d')(wk) + (d3.utcMonday.floor(peak.t).getTime() === wk.getTime() ? ' (highest demand)' : ''); sel.appendChild(o); });
+    sel.value = d3.utcMonday.floor(peak.t).toISOString();
+    draw();
+  });
+  sel.addEventListener('change', draw);
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(draw, 150); });
+})();
+</script>
+
+</body>
+</html>

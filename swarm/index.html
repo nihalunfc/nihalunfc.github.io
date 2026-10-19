@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swarm Intelligence · Nihal</title>
+<meta name="description" content="A swarm-intelligence engine where many small agents each decide for themselves and act as one team, applied to hotels, energy grids and wildfire response.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4e79'/%3E%3Ccircle cx='10' cy='11' r='3' fill='white'/%3E%3Ccircle cx='22' cy='11' r='3' fill='white'/%3E%3Ccircle cx='16' cy='21' r='3' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="/">Nihal <span>· Portfolio</span></a>
+  <nav><a href="/">Home</a><a href="/#projects">Projects</a><a class="on" href="/swarm/">Swarm Intelligence</a><a href="https://github.com/nihalunfc">GitHub</a></nav>
+</div></header>
+<main>
+  <p class="crumbs"><a href="/">Home</a> / Swarm Intelligence</p>
+  <section class="hero">
+    <p class="eyebrow">Featured project</p>
+    <h1>Swarm Intelligence</h1>
+    <p class="lead">Many real operations are really thousands of small decisions made at the same time: when each battery charges, where each drone flies, which room each attendant cleans next. I built one engine that lets every one of those decision-makers think for itself while working toward a shared goal, so the whole group behaves like a well-coordinated team. It is the same idea as a flock of birds or a colony of ants.</p>
+  </section>
+
+  <h2 class="section">Explore by domain</h2>
+  <p class="section-sub">The same engine, applied to three different problems. Each page explains the problem, shows the results and compares the swarm with what people do today.</p>
+  <div class="grid">
+    <a class="card proj featured" href="/swarm/hotel/">
+      <p class="eyebrow" style="margin:0">Hospitality</p>
+      <h2>Hotel operations</h2>
+      <p>Five hotels: cutting peak-hour electricity charges, getting rooms ready for arriving guests, keeping overbooked guests in the group, and filling open shifts.</p>
+      <div class="stat-row"><div><b>$279k</b>energy saving / yr</div><div><b>$14.8k</b>better per oversold night</div></div>
+      <div class="tags"><span class="tag">4 problems</span><span class="tag">Learned + market swarms</span></div>
+    </a>
+    <a class="card proj" href="/swarm/energy/">
+      <p class="eyebrow" style="margin:0">Energy</p>
+      <h2>Grid batteries</h2>
+      <p>Ten grid-scale batteries on a real Texas grid zone, working together to flatten demand peaks on three months of data they had never seen.</p>
+      <div class="stat-row"><div><b>949 MW</b>peak cut</div><div><b>0 MW</b>by the best simple rule</div></div>
+      <div class="tags"><span class="tag">Real grid data</span><span class="tag">Learned swarm</span></div>
+    </a>
+    <a class="card proj" href="/swarm/wildfire/">
+      <p class="eyebrow" style="margin:0">Emergency response</p>
+      <h2>Wildfire drones</h2>
+      <p>Six drones dropping retardant to contain fires they have never seen before, with a replay you can watch step by step.</p>
+      <div class="stat-row"><div><b>87%</b>forest saved</div><div><b>33%</b>with no drones</div></div>
+      <div class="tags"><span class="tag">Simulation</span><span class="tag">Learned swarm</span></div>
+    </a>
+    <div class="card proj empty"><span>More domains coming</span></div>
+  </div>
+
+  <h2 class="section">How it works</h2>
+  <p class="section-sub">One shared "brain", many independent members.</p>
+  <div class="card diagram">
+    <svg viewBox="0 0 960 300" role="img" aria-label="Diagram: each agent sees its own local view, one shared model turns that into a choice, all choices change the world, and one shared team score teaches the model.">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7682"/></marker></defs>
+      <g font-size="14" fill="#18212b">
+        <rect x="20" y="40" width="200" height="220" rx="12" fill="#eaf2fc" stroke="#86b6ef"/>
+        <text x="120" y="68" text-anchor="middle" font-weight="700">1 · Each member looks</text>
+        <text x="120" y="92" text-anchor="middle" font-size="12.5" fill="#4a5561">only at what it can see</text>
+        <g font-size="12.5"><rect x="40" y="110" width="160" height="30" rx="6" fill="#fff" stroke="#cfd6de"/><text x="120" y="130" text-anchor="middle">Battery 1: charge level, demand</text>
+        <rect x="40" y="148" width="160" height="30" rx="6" fill="#fff" stroke="#cfd6de"/><text x="120" y="168" text-anchor="middle">Drone 4: fire nearby, fuel</text>
+        <rect x="40" y="186" width="160" height="30" rx="6" fill="#fff" stroke="#cfd6de"/><text x="120" y="206" text-anchor="middle">Attendant 2: rooms close by</text>
+        <text x="120" y="240" text-anchor="middle" fill="#6b7682">… 10, 100 or 1,000 members</text></g>
+
+        <rect x="300" y="90" width="170" height="120" rx="12" fill="#1f4e79"/>
+        <text x="385" y="132" text-anchor="middle" fill="#fff" font-weight="700">2 · One shared model</text>
+        <text x="385" y="156" text-anchor="middle" fill="#dbe8f7" font-size="12.5">the same small network</text>
+        <text x="385" y="174" text-anchor="middle" fill="#dbe8f7" font-size="12.5">runs for every member</text>
+
+        <rect x="550" y="40" width="170" height="220" rx="12" fill="#e7f5ec" stroke="#8fd1ad"/>
+        <text x="635" y="68" text-anchor="middle" font-weight="700">3 · Each one acts</text>
+        <g font-size="12.5"><text x="635" y="125" text-anchor="middle">Battery 1: discharge</text>
+        <text x="635" y="163" text-anchor="middle">Drone 4: drop retardant</text>
+        <text x="635" y="201" text-anchor="middle">Attendant 2: clean room 714</text></g>
+
+        <rect x="790" y="90" width="150" height="120" rx="12" fill="#fff3df" stroke="#eda100"/>
+        <text x="865" y="132" text-anchor="middle" font-weight="700">4 · One team score</text>
+        <text x="865" y="156" text-anchor="middle" font-size="12.5" fill="#4a5561">peak cut, forest saved,</text>
+        <text x="865" y="174" text-anchor="middle" font-size="12.5" fill="#4a5561">guest minutes waited</text>
+      </g>
+      <g stroke="#6b7682" stroke-width="2" fill="none">
+        <path d="M220 150 H296" marker-end="url(#ar)"/>
+        <path d="M470 150 H546" marker-end="url(#ar)"/>
+        <path d="M720 150 H786" marker-end="url(#ar)"/>
+        <path d="M865 210 V285 H385 V214" marker-end="url(#ar)" stroke-dasharray="5 4"/>
+      </g>
+      <text x="625" y="280" text-anchor="middle" font-size="12.5" fill="#4a5561">5 · The team score teaches the shared model what worked</text>
+    </svg>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h2>No central bottleneck</h2><p>Each member decides from its own local view, so the system keeps working when there are thousands of members, or when one drops out.</p></div>
+    <div class="card"><h2>One model, any size</h2><p>Every member uses the same model. A battery swarm trained with 10 batteries ran unchanged with 100 and 1,000, and still delivered the same 949 MW peak cut.</p></div>
+    <div class="card"><h2>Team goal, not selfish goals</h2><p>Members are rewarded for the team result (a flatter grid, less forest burned, fewer guests waiting), so they learn to cover for each other.</p></div>
+    <div class="card"><h2>Honest testing</h2><p>Every result is measured on data or scenarios kept aside while building, and compared with today's practice and the best simple rule. Where the swarm loses, the pages say so.</p></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Two kinds of swarm</h2>
+      <h3>Learned swarm</h3>
+      <p>Members learn by trial and error in a simulator (multi-agent reinforcement learning). They can also start by copying a good human rule and then improve on it. This is used for batteries, drones, hotel equipment and room attendants.</p>
+      <h3>Market swarm</h3>
+      <p>Members bid for tasks or resources based on what they are worth to the team, like a quick internal auction. The best combination of bids wins. This is used when a fair price can be worked out directly: walked hotel guests bidding for sister-hotel rooms, and staff bidding for open shifts.</p>
+    </div>
+    <div class="card">
+      <h2>Under the hood</h2>
+      <ul class="tight">
+        <li>Python and PyTorch, with one engine shared by all domains, each added as a small plug-in.</li>
+        <li>Shared-parameter Q-networks with team-reward mixing (VDN and QMIX-style), Double DQN, n-step returns and action masks for hard rules.</li>
+        <li>Optional attention-based messages between nearby members.</li>
+        <li>Learning from demonstrations: pre-training on a rule's moves before reinforcement learning.</li>
+        <li>Auction and contract-net markets, checked against exact optimisation (integer programming).</li>
+        <li>Batched across members and parallel simulators, so training cost barely grows with swarm size.</li>
+      </ul>
+      <p class="muted" style="font-size:13.5px">The engine's source code is private. These pages publish its results.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Scaling test: the same model at 10, 100 and 1,000 members</h2>
+    <p class="sub">Each model was trained at its original size, then run unchanged with more members. The battery fleet keeps the same total power, split among more batteries. The forest grows so each drone covers the same area, but all drones still launch from one pad.</p>
+    <div class="scroll"><table>
+      <thead><tr><th class="l">Domain</th><th>10 members</th><th>100 members</th><th>1,000 members</th><th class="l">What it shows</th></tr></thead>
+      <tbody>
+        <tr class="hi"><td>Grid batteries: peak cut</td><td>949 MW</td><td>949 MW</td><td>949 MW</td><td class="l">Identical result at every size. Choosing all 1,000 actions takes under 1 ms.</td></tr>
+        <tr><td>Wildfire drones: forest saved</td><td>83%</td><td>41%</td><td>26%</td><td class="l">Drops with size, and the simple rule drops too (79%, 47%, 40%). One launch pad can't serve a huge forest, so the next step is several pads.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</main>
+
+<footer class="foot">© 2026 Nihal · <a href="https://github.com/nihalunfc">github.com/nihalunfc</a></footer>
+
+</body>
+</html>
