@@ -3,80 +3,203 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nihal · Data, BI and AI Portfolio</title>
-<meta name="description" content="Projects by Nihal: swarm intelligence for energy, wildfire response and hotel operations, and hospitality business intelligence.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4e79'/%3E%3Ccircle cx='10' cy='11' r='3' fill='white'/%3E%3Ccircle cx='22' cy='11' r='3' fill='white'/%3E%3Ccircle cx='16' cy='21' r='3' fill='white'/%3E%3C/svg%3E">
+<title>Nihal · Data, BI and Applied AI</title>
+<meta name="description" content="Projects by Nihal: swarm intelligence for energy, wildfire response and hotel operations, and a hospitality business intelligence toolkit with live tools.">
+<meta property="og:title" content="Nihal · Data, BI and Applied AI">
+<meta property="og:description" content="Projects by Nihal: swarm intelligence for energy, wildfire response and hotel operations, and a hospitality business intelligence toolkit with live tools.">
+<meta name="theme-color" content="#0a1222">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%233b82f6'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cg fill='%2304111f'%3E%3Ccircle cx='10' cy='11' r='3'/%3E%3Ccircle cx='22' cy='11' r='3'/%3E%3Ccircle cx='16' cy='22' r='3'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body class="home">
 <header class="top"><div class="in">
-  <a class="brand" href="/">Nihal <span>· Portfolio</span></a>
-  <nav><a class="on" href="/">Home</a><a href="/#projects">Projects</a><a href="/swarm/">Swarm Intelligence</a><a href="/about/">About</a><a href="https://github.com/nihalunfc">GitHub</a></nav>
+  <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><g stroke="#04111f" stroke-width="1.6" opacity=".55"><line x1="10" y1="11" x2="22" y2="11"/><line x1="10" y1="11" x2="16" y2="22"/><line x1="22" y1="11" x2="16" y2="22"/></g><g fill="#04111f"><circle cx="10" cy="11" r="3"/><circle cx="22" cy="11" r="3"/><circle cx="16" cy="22" r="3"/></g></svg>Nihal <small>Portfolio</small></a>
+  <nav><a class="on" href="/">Home</a><a href="/#work">Projects</a><a href="/swarm/">Swarm Intelligence</a><a href="/about/">About</a><a class="gh" href="https://github.com/nihalunfc"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a></nav>
 </div></header>
-<main>
-  <section class="hero">
-    <p class="eyebrow">Portfolio</p>
-    <h1>Hi, I'm Nihal.</h1>
-    <p class="lead">I turn operational data into decisions people can act on, from BI dashboards and forecasting to AI systems that coordinate many small decisions at once. Below are the projects I'm proudest of, each with live results you can explore.</p>
+<section class="hh">
+  <canvas id="swarm-bg" aria-hidden="true"></canvas>
+  <div class="in">
+    <p class="hello"><i></i>Hi, I'm Nihal</p>
+    <h1>I turn operational data into <em>decisions</em>.</h1>
+    <p class="lead">Business intelligence, forecasting and applied AI. From dashboards managers actually use to swarms of AI agents that coordinate thousands of small decisions at once. Every project here has live results you can explore.</p>
     <div class="btns">
-      <a class="btn primary" href="/swarm/">Explore Swarm Intelligence</a>
-      <a class="btn ghost" href="#projects">See all projects</a>
+      <a class="btn primary" href="#work">View selected work <span aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="/about/">About me</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <h2 class="section" id="projects">Major projects</h2>
-  <p class="section-sub">Click a project to open its live pages.</p>
+<div class="statband"><div class="row">
+  <div><b>949 MW</b><span>grid peak cut by a battery swarm</span></div>
+  <div><b>87%</b><span>forest saved by a drone swarm</span></div>
+  <div><b>$279k</b><span>yearly hotel energy saving</span></div>
+  <div><b>11</b><span>live BI tools and dashboards</span></div>
+</div></div>
 
-  <div class="grid2">
-    <a class="card proj featured" href="/swarm/">
-      <p class="eyebrow" style="margin:0">Featured · AI research</p>
-      <h2>Swarm Intelligence</h2>
-      <p>One AI engine in which many small agents (batteries, drones, hotel equipment, staff) each make their own decision and together act as one coordinated team. It is applied to three real-world domains and tested against the rules people use today.</p>
-      <div class="stat-row">
-        <div><b>3</b>domains so far</div>
-        <div><b>949 MW</b>grid peak cut</div>
-        <div><b>87%</b>forest saved</div>
-        <div><b>$279k</b>hotel saving / yr</div>
+<main>
+  <p class="eyebrow" id="work" style="margin-top:56px;scroll-margin-top:90px">Selected work</p>
+  <h2 class="section" style="margin-top:0">Major projects</h2>
+  <p class="section-sub">Each project opens to live pages with the results, the method and how it compares with what people do today.</p>
+
+  <div class="work">
+    <a class="work-card" href="/swarm/">
+      <div class="txt">
+        <p class="eyebrow" style="margin:0">Featured · AI research</p>
+        <h3>Swarm Intelligence</h3>
+        <p>One AI engine in which many small agents (batteries, drones, hotel equipment, staff) each make their own decision and together act as one coordinated team. Applied to three real-world domains and tested against the rules people use today.</p>
+        <div class="stat-row"><div><b>3</b>domains</div><div><b>949 MW</b>peak cut</div><div><b>87%</b>forest saved</div></div>
+        <div class="tags"><span class="tag">Multi-agent RL</span><span class="tag">Auctions</span><span class="tag">PyTorch</span><span class="tag">Optimisation</span></div>
+        <div class="more"><span>Explore the project →</span></div>
       </div>
-      <div class="tags"><span class="tag">Multi-agent reinforcement learning</span><span class="tag">Auctions</span><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Optimisation</span></div>
+      <div class="viz">
+        <svg viewBox="0 0 460 300" role="img" aria-label="Illustration of a network of cooperating agents">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#22d3ee" stop-opacity=".35"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+            <linearGradient id="nd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+          </defs>
+          <circle cx="230" cy="150" r="140" fill="url(#glow)"/>
+          <g stroke="#3b82f6" stroke-opacity=".45" stroke-width="1.2">
+            <line x1="230" y1="150" x2="140" y2="90"/><line x1="230" y1="150" x2="320" y2="88"/><line x1="230" y1="150" x2="330" y2="205"/>
+            <line x1="230" y1="150" x2="135" y2="210"/><line x1="230" y1="150" x2="230" y2="55"/><line x1="230" y1="150" x2="232" y2="250"/>
+            <line x1="140" y1="90" x2="230" y2="55"/><line x1="320" y1="88" x2="230" y2="55"/><line x1="320" y1="88" x2="330" y2="205"/>
+            <line x1="330" y1="205" x2="232" y2="250"/><line x1="135" y1="210" x2="232" y2="250"/><line x1="140" y1="90" x2="135" y2="210"/>
+            <line x1="140" y1="90" x2="70" y2="60"/><line x1="135" y1="210" x2="62" y2="240"/><line x1="320" y1="88" x2="395" y2="52"/>
+            <line x1="330" y1="205" x2="402" y2="238"/><line x1="140" y1="90" x2="68" y2="150"/><line x1="135" y1="210" x2="68" y2="150"/>
+            <line x1="320" y1="88" x2="400" y2="145"/><line x1="330" y1="205" x2="400" y2="145"/>
+          </g>
+          <g fill="url(#nd)">
+            <circle cx="230" cy="150" r="13"/>
+            <circle cx="140" cy="90" r="8"/><circle cx="320" cy="88" r="8"/><circle cx="330" cy="205" r="8"/><circle cx="135" cy="210" r="8"/>
+            <circle cx="230" cy="55" r="6"/><circle cx="232" cy="250" r="6"/>
+          </g>
+          <g fill="#94a3b8"><circle cx="70" cy="60" r="4"/><circle cx="62" cy="240" r="4"/><circle cx="395" cy="52" r="4"/><circle cx="402" cy="238" r="4"/><circle cx="68" cy="150" r="4"/><circle cx="400" cy="145" r="4"/></g>
+          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#a9b6c9">
+            <rect x="18" y="16" width="70" height="22" rx="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)"/><text x="53" y="31" text-anchor="middle">hotels</text>
+            <rect x="372" y="16" width="70" height="22" rx="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)"/><text x="407" y="31" text-anchor="middle">grid</text>
+            <rect x="186" y="270" width="88" height="22" rx="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)"/><text x="230" y="285" text-anchor="middle">wildfire</text>
+          </g>
+        </svg>
+      </div>
     </a>
-    <a class="card proj" href="https://nihalunfc.github.io/hotel-business/">
-      <p class="eyebrow" style="margin:0">Business intelligence</p>
-      <h2>Hospitality BI Portfolio</h2>
-      <p>A working BI toolkit for a five-hotel group: a revenue command centre, a live staff schedule builder, and a set of free hotel tools for overbooking, rates, forecasting, group quotes, housekeeping, labour, KPIs, energy and the night audit.</p>
-      <div class="stat-row"><div><b>11</b>live tools and dashboards</div><div><b>5</b>sample hotels</div></div>
-      <div class="tags"><span class="tag">Revenue management</span><span class="tag">Forecasting</span><span class="tag">Scheduling optimisation</span><span class="tag">Dashboards</span><span class="tag">Free tools</span></div>
+
+    <a class="work-card" href="https://nihalunfc.github.io/hotel-business/">
+      <div class="txt">
+        <p class="eyebrow" style="margin:0">Business intelligence</p>
+        <h3>Hospitality BI Portfolio</h3>
+        <p>A working BI toolkit for a five-hotel group: a revenue command centre, a live staff schedule builder, and free tools for overbooking, rates, forecasting, group quotes, housekeeping, labour, KPIs, energy and the night audit.</p>
+        <div class="stat-row"><div><b>11</b>live tools</div><div><b>5</b>sample hotels</div><div><b>6 of 6</b>labour rules met</div></div>
+        <div class="tags"><span class="tag">Revenue management</span><span class="tag">Forecasting</span><span class="tag">Scheduling</span><span class="tag">Dashboards</span></div>
+        <div class="more"><span>Open the toolkit →</span></div>
+      </div>
+      <div class="viz">
+        <svg viewBox="0 0 460 300" role="img" aria-label="Illustration of a hotel KPI dashboard">
+          <defs><linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+          <rect x="10" y="10" width="440" height="280" rx="14" fill="#101b31" stroke="rgba(148,163,184,.18)"/>
+          <g font-family="Inter, sans-serif">
+            <rect x="28" y="28" width="124" height="66" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(148,163,184,.16)"/>
+            <text x="42" y="50" font-size="10.5" fill="#7f8ea6">OCCUPANCY</text><text x="42" y="80" font-size="22" font-weight="700" fill="#fff">65.4%</text>
+            <rect x="168" y="28" width="124" height="66" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(148,163,184,.16)"/>
+            <text x="182" y="50" font-size="10.5" fill="#7f8ea6">SELL-OUT NIGHTS</text><text x="182" y="80" font-size="22" font-weight="700" fill="#fff">31</text>
+            <rect x="308" y="28" width="124" height="66" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(148,163,184,.16)"/>
+            <text x="322" y="50" font-size="10.5" fill="#7f8ea6">FORECAST ERROR</text><text x="322" y="80" font-size="22" font-weight="700" fill="#34d399">7.0%</text>
+          </g>
+          <g stroke="rgba(148,163,184,.12)"><line x1="34" y1="140" x2="426" y2="140"/><line x1="34" y1="185" x2="426" y2="185"/><line x1="34" y1="230" x2="426" y2="230"/><line x1="34" y1="270" x2="426" y2="270"/></g>
+          <g fill="url(#bar)" opacity=".9">
+            <rect x="44" y="200" width="20" height="70" rx="3"/><rect x="76" y="180" width="20" height="90" rx="3"/><rect x="108" y="190" width="20" height="80" rx="3"/>
+            <rect x="140" y="160" width="20" height="110" rx="3"/><rect x="172" y="140" width="20" height="130" rx="3"/><rect x="204" y="128" width="20" height="142" rx="3"/>
+            <rect x="236" y="150" width="20" height="120" rx="3"/><rect x="268" y="172" width="20" height="98" rx="3"/><rect x="300" y="186" width="20" height="84" rx="3"/>
+            <rect x="332" y="168" width="20" height="102" rx="3"/><rect x="364" y="150" width="20" height="120" rx="3"/><rect x="396" y="142" width="20" height="128" rx="3"/>
+          </g>
+          <polyline fill="none" stroke="#fbbf24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="54,192 86,176 118,182 150,154 182,136 214,124 246,142 278,166 310,176 342,160 374,146 406,134"/>
+          <g fill="#fbbf24"><circle cx="214" cy="124" r="4"/><circle cx="406" cy="134" r="4"/></g>
+        </svg>
+      </div>
     </a>
   </div>
 
-  <h2 class="section">More projects</h2>
-  <p class="section-sub">Details are being added.</p>
-  <div class="grid">
-    <div class="card proj empty"><span>Project coming soon</span></div>
-    <div class="card proj empty"><span>Project coming soon</span></div>
-    <div class="card proj empty"><span>Project coming soon</span></div>
-    <div class="card proj empty"><span>Project coming soon</span></div>
-  </div>
-
-  <h2 class="section">About</h2>
-  <div class="grid2">
+  <p class="eyebrow" style="margin-top:56px">What I do</p>
+  <h2 class="section" style="margin-top:0">From raw data to a decision someone can act on</h2>
+  <div class="does" style="margin-top:18px">
     <div class="card">
-      <h2>What I work on</h2>
-      <ul class="tight">
-        <li><b>Business intelligence:</b> dashboards, KPIs and reporting that managers actually use.</li>
-        <li><b>Forecasting and optimisation:</b> demand forecasts, staff schedules, pricing.</li>
-        <li><b>Applied AI:</b> multi-agent systems that coordinate many decisions in real time.</li>
-      </ul>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div>
+      <h3>Business intelligence</h3>
+      <p>KPI design, dashboards and reporting pipelines that managers actually open every morning, in plain language with a clear "so what".</p>
     </div>
-    <a class="card proj" href="/about/"><h2>More about me</h2><p>How I work, the areas I focus on, and how to get in touch. Experience and education details are coming soon.</p><span style="margin-top:auto;font-weight:600;color:var(--link)">Read the About page →</span></a>
+    <div class="card">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+      <h3>Forecasting and optimisation</h3>
+      <p>Demand forecasts, pricing and staff scheduling with integer programming, checked on data kept aside and compared with today's practice.</p>
+    </div>
+    <div class="card">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5l2.8 8.2M16 7.5l-2.8 8.2M8.5 6h7"/></svg></div>
+      <h3>Applied AI</h3>
+      <p>Multi-agent reinforcement learning and market-based coordination, so many independent decision-makers behave like one well-run team.</p>
+    </div>
   </div>
-  <p class="muted" style="font-size:13.5px;margin-top:22px">Built with the help of AI tools. See the <a href="/disclaimer/">disclaimer</a> for credits, data sources and terms.</p>
+
+  <p class="eyebrow" style="margin-top:56px">Toolkit</p>
+  <h2 class="section" style="margin-top:0">What I build with</h2>
+  <div class="stack" style="margin-top:18px">
+    <div><h4>Data and analysis</h4><div class="chips"><span>Python</span><span>SQL</span><span>Data modelling</span><span>Excel</span></div></div>
+    <div><h4>Modelling and AI</h4><div class="chips"><span>PyTorch</span><span>PuLP</span><span>Reinforcement learning</span><span>Forecasting</span></div></div>
+    <div><h4>Dashboards and web</h4><div class="chips"><span>D3</span><span>Chart.js</span><span>JavaScript</span><span>HTML and CSS</span></div></div>
+  </div>
+
+  <p class="eyebrow" style="margin-top:56px">In the pipeline</p>
+  <h2 class="section" style="margin-top:0">More projects</h2>
+  <p class="section-sub">Details are being added.</p>
+  <div class="soon">
+    <div><b>Project coming soon</b>Write-up in progress</div>
+    <div><b>Project coming soon</b>Write-up in progress</div>
+    <div><b>Project coming soon</b>Write-up in progress</div>
+  </div>
+
+  <section class="cta">
+    <div><h2>Want to see how it works?</h2><p>Every project is open to explore, with the method and the numbers behind each result. The code is on GitHub.</p></div>
+    <div class="btns"><a class="btn primary" href="https://github.com/nihalunfc">View GitHub</a><a class="btn ghost" href="/about/">About me</a></div>
+  </section>
 </main>
 
-<footer class="foot">© 2026 Nihal. All rights reserved unless a project says otherwise. · <a href="/about/">About</a> · <a href="/disclaimer/">Disclaimer</a> · <a href="https://github.com/nihalunfc">GitHub</a></footer>
+<footer class="foot"><div class="in">
+  <div><a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><g stroke="#04111f" stroke-width="1.6" opacity=".55"><line x1="10" y1="11" x2="22" y2="11"/><line x1="10" y1="11" x2="16" y2="22"/><line x1="22" y1="11" x2="16" y2="22"/></g><g fill="#04111f"><circle cx="10" cy="11" r="3"/><circle cx="22" cy="11" r="3"/><circle cx="16" cy="22" r="3"/></g></svg>Nihal</a><p>Data, business intelligence and applied AI. Projects with live results you can explore.</p></div>
+  <div><h4>Projects</h4><a href="/swarm/">Swarm Intelligence</a><a href="/swarm/hotel/">Hotel operations</a><a href="/swarm/energy/">Grid batteries</a><a href="/swarm/wildfire/">Wildfire drones</a><a href="https://nihalunfc.github.io/hotel-business/">Hospitality BI</a></div>
+  <div><h4>Site</h4><a href="/about/">About</a><a href="/disclaimer/">Disclaimer</a><a href="https://github.com/nihalunfc">GitHub</a><a href="https://nihalunfc.github.io/hotel-business/tools/">Free hotel tools</a></div>
+  <div class="legal"><span>&copy; 2026 Nihal. All rights reserved unless a project says otherwise.</span><span>Built with the help of AI tools. <a href="/disclaimer/">See credits</a></span></div>
+</div></footer>
+
+<script>
+// A quiet swarm in the hero: dots drift and link up when they are close.
+(function () {
+  const c = document.getElementById('swarm-bg'); if (!c) return;
+  const x = c.getContext('2d'), still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w, h, dpr, pts = [], run = true;
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight;
+    c.width = w * dpr; c.height = h * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(90, Math.max(36, w * h / 14000)));
+    pts = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35 }));
+  }
+  function frame() {
+    x.clearRect(0, 0, w, h);
+    for (const p of pts) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1;
+    }
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+      const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d < 120) { x.strokeStyle = `rgba(96,165,250,${(1 - d / 120) * .28})`; x.lineWidth = 1; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); }
+    }
+    for (const p of pts) { x.fillStyle = 'rgba(125,211,252,.75)'; x.beginPath(); x.arc(p.x, p.y, 1.8, 0, 7); x.fill(); }
+    if (run && !still) requestAnimationFrame(frame);
+  }
+  size(); frame();
+  addEventListener('resize', () => { size(); if (still) frame(); });
+  new IntersectionObserver(([e]) => { const was = run; run = e.isIntersecting; if (run && !was && !still) frame(); }).observe(c);
+})();
+</script>
 
 </body>
 </html>
