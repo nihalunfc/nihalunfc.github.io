@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts, slugify } from '../../lib';
+const posts = await getPosts();
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+---
+<Base title="Blog" description="Nihal Sulaiman's blog: data engineering, BI, Kaggle and machine-learning notes from building real projects.">
+  <PageHero title="Blog" crumbs={[{ label: 'Blog' }]} lead="Notes from building data work: what broke, how I found it, what I changed and what it cost. Written for analysts, engineers and anyone hiring them." >
+    <div class="btns"><a class="btn ghost" href="/rss.xml">Subscribe by RSS</a></div>
+  </PageHero>
+  <main>
+    <div class="tagbar">{tags.map((t) => <a class="tag" href={`/blog/tags/${slugify(t)}/`}>{t}</a>)}</div>
+    <PostList posts={posts} />
+  </main>
+</Base>

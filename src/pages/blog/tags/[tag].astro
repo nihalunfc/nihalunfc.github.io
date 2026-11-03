@@ -1,0 +1,19 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import PostList from '../../../components/PostList.astro';
+import { getPosts, slugify } from '../../../lib';
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((t) => ({ params: { tag: slugify(t) }, props: { tag: t, posts: posts.filter((p) => p.data.tags.includes(t)), all: tags.sort() } }));
+}
+const { tag, posts, all } = Astro.props;
+---
+<Base title={`Posts about ${tag}`} description={`Blog posts by Nihal Sulaiman about ${tag}.`}>
+  <PageHero title={`Posts about ${tag}`} crumbs={[{ label: 'Blog', href: '/blog/' }, { label: tag }]} />
+  <main>
+    <div class="tagbar">{all.map((t) => <a class={`tag${t === tag ? ' on' : ''}`} href={`/blog/tags/${slugify(t)}/`}>{t}</a>)}</div>
+    <PostList posts={posts} />
+  </main>
+</Base>

@@ -1,0 +1,54 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE, SITE_URL } from '../../site';
+import { getPosts, fmtDate, readingTime, slugify } from '../../lib';
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({ params: { slug: post.id }, props: { post, newer: posts[i - 1], older: posts[i + 1] } }));
+}
+const { post, newer, older } = Astro.props;
+const { Content } = await render(post);
+const mins = readingTime(post.body);
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  dateModified: (post.data.updated ?? post.data.date).toISOString(),
+  author: { '@type': 'Person', name: 'Nihal Sulaiman', url: SITE_URL + '/about/' },
+  mainEntityOfPage: new URL(`/blog/${post.id}/`, SITE_URL).href,
+  keywords: post.data.tags.join(', '),
+};
+---
+<Base title={post.data.title} description={post.data.description} type="article" published={post.data.date} jsonld={ld}>
+  <PageHero title={post.data.title} crumbs={[{ label: 'Blog', href: '/blog/' }, { label: 'Post' }]} lead={post.data.description}>
+    <div class="post-meta">
+      <time datetime={post.data.date.toISOString()}>{fmtDate(post.data.date)}</time>
+      <span>·</span><span>{mins} min read</span>
+      {post.data.updated && <><span>·</span><span>Updated {fmtDate(post.data.updated)}</span></>}
+      <div class="tags">{post.data.tags.map((t) => <a class="tag" href={`/blog/tags/${slugify(t)}/`}>{t}</a>)}</div>
+    </div>
+  </PageHero>
+  <main>
+    <article class="prose"><Content /></article>
+    <div class="post-foot">
+      <div class="author">
+        <div class="av" aria-hidden="true">N</div>
+        <div>
+          <b>Nihal Sulaiman</b>
+          <p>Data analyst and BI developer in Ontario, with a Master's in Data Analytics and an MSc in Physics. I build hotel BI tools, compete on Kaggle and write about what I learn.</p>
+          <div class="links"><a href={SITE.links.linkedin}>LinkedIn</a><a href={SITE.links.github}>GitHub</a><a href="/cv/">CV</a><a href="/rss.xml">RSS</a></div>
+        </div>
+      </div>
+      {(newer || older) && (
+        <nav class="post-nav" aria-label="More posts">
+          {older && <a href={`/blog/${older.id}/`}><span>← Older</span>{older.data.title}</a>}
+          {newer && <a class="next" href={`/blog/${newer.id}/`}><span>Newer →</span>{newer.data.title}</a>}
+        </nav>
+      )}
+    </div>
+  </main>
+</Base>

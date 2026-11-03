@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nihalsulaiman.com/sitemap-index.xml
