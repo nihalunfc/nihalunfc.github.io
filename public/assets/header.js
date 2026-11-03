@@ -81,7 +81,8 @@
           all: { href: '/tools/', label: 'All tools' } },
         { label: 'Blog', href: '/blog/', match: ['/blog/'] },
         { label: 'Now', href: '/now/', match: ['/now/'] },
-        { label: 'About', href: '/about/', match: ['/about/', '/cv/', '/disclaimer/'] }
+        { label: 'About', href: '/about/', match: ['/about/', '/cv/', '/disclaimer/'] },
+        { label: 'Contact', href: '/contact/', match: ['/contact/'] }
       ],
       action: { label: 'GitHub', href: 'https://github.com/nihalunfc' }
     },
@@ -226,8 +227,8 @@
       '<p>Data, business intelligence and applied AI. Projects and free tools with live results you can explore.</p></div>' +
       col('Projects', [['/swarm/', 'Swarm Intelligence'], [H, 'Hospitality BI'], ['/kaggle/', 'Kaggle'], ['/projects/', 'All projects']]) +
       col('Tools', [['/tools/expense-calendar/', 'Expense calendar'], [H + 'tools/index.html', 'Hotel tools'], ['/tools/', 'All tools']]) +
-      col('Writing', [['/blog/', 'Blog'], ['/now/', 'Now'], ['/rss.xml', 'RSS feed']]) +
-      col('Site', [['/about/', 'About'], ['/cv/', 'CV'], ['/disclaimer/', 'Disclaimer and privacy'], ['https://www.linkedin.com/in/vsnihal/', 'LinkedIn'], ['https://github.com/nihalunfc', 'GitHub']]) +
+      col('Writing', [['/blog/', 'Blog'], ['/rss.xml', 'RSS feed'], ['https://www.linkedin.com/in/vsnihal/', 'LinkedIn'], ['https://github.com/nihalunfc', 'GitHub'], ['https://www.kaggle.com/vsnihal', 'Kaggle']]) +
+      col('Site', [['/about/', 'About'], ['/cv/', 'CV'], ['/now/', 'Now'], ['/contact/', 'Contact'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
       '<div class="sf-legal"><span>© 2026 Nihal.' + (hotel ? ' All hotels, guests, staff and figures on this site are fictional samples.' : '') + '</span>' +
       '<span>Built with the help of AI tools. <a href="/disclaimer/">Credits</a></span></div></div>';
   }
