@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib';
+const projects = await getProjects();
+const cats = [...new Set(projects.map((p) => p.data.category))];
+---
+<Base title="Projects" description="Projects by Nihal Sulaiman: hospitality BI warehouse and dashboards, swarm intelligence, wildfire drones, and Kaggle machine-learning work.">
+  <PageHero title="Projects" crumbs={[{ label: 'Projects' }]} lead="Business intelligence, applied AI and Kaggle work. Each write-up covers the problem, what I built, the hardest part and the result, including where my own changes didn't help." />
+  <main>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button type="button" aria-pressed="true" data-f="all">All</button>
+      {cats.map((c) => <button type="button" aria-pressed="false" data-f={c}>{c}</button>)}
+    </div>
+    <div class="pgrid" id="pgrid">{projects.map((p) => <ProjectCard p={p} />)}</div>
+  </main>
+  <script is:inline>
+    (function () {
+      var btns = document.querySelectorAll('.filters button');
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          var f = b.dataset.f;
+          document.querySelectorAll('#pgrid .pcard').forEach(function (c) { c.hidden = f !== 'all' && c.dataset.cat !== f; });
+        });
+      });
+    })();
+  </script>
+</Base>

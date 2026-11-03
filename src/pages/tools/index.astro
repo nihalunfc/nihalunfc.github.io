@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+<Base title="Tools" description="Free tools by Nihal Sulaiman: a personal expense calendar and hotel revenue and operations tools. They run in your browser.">
+  <PageHero title="Tools" crumbs={[{ label: 'Tools' }]} lead="Free tools I built. Personal tools are for everyday planning. Hotel tools are for revenue and operations teams and live on the Hospitality BI site. They all run in your browser, save your work on your own device and need no sign-up." />
+  <main>
+    <div class="toolgrid">
+      <div class="tg"><h3><i></i>Personal tools</h3><a href="/tools/expense-calendar/">Expense calendar<span>Plan and track expenses day by day. Works offline.</span></a></div>
+      <div class="tg hotel"><h3><i></i>Hotel tools</h3><div class="cols"><div><a href="/hotel-business/tools/rate-recommender.html">Rate recommender<span>A rate for each of the next 30 days</span></a><a href="/hotel-business/tools/forecaster.html">Occupancy forecaster<span>The next 30 to 90 days of occupancy</span></a><a href="/hotel-business/tools/overbooking.html">Overbooking calculator<span>How many extra rooms to sell</span></a><a href="/hotel-business/tools/group-displacement.html">Group quote and displacement<span>Is this group worth it?</span></a><a href="/hotel-business/tools/kpi.html">Hotel KPI dashboard<span>Occupancy, ADR, RevPAR and profit</span></a></div><div><a href="/hotel-business/schedule.html">Staff schedule builder<span>A week's schedule at the lowest cost</span></a><a href="/hotel-business/tools/housekeeping-board.html">Housekeeping board<span>Today's room assignments</span></a><a href="/hotel-business/tools/labour.html">Labour productivity<span>Hours and cost per occupied room</span></a><a href="/hotel-business/tools/night-audit.html">Night audit assistant<span>Checklist, balancing and daily report</span></a><a href="/hotel-business/tools/energy-estimator.html">Peak-energy savings<span>Ontario Global Adjustment savings</span></a><a href="/hotel-business/tools/report-dashboard/">Hotel report builder<span>Upload any exports, get a manager's report</span></a></div></div><a class="more" href="/hotel-business/tools/index.html">All hotel tools →</a></div>
+    </div>
+    <h2 class="section">Coming next</h2>
+    <div class="soon" style="margin-top:14px">
+      <div><b>Calendar sync</b>Pull expected bills from Google Calendar and phone or laptop calendars into the expense calendar</div>
+      <div><b>More tools</b>In progress</div>
+      <div><b>More tools</b>In progress</div>
+    </div>
+    <div class="callout" style="margin-top:24px"><p>These tools save what you enter in your own browser. Nothing is sent to a server and nothing is collected. They are free to use for any purpose under CC BY 4.0 with credit to Nihal. See <a href="/disclaimer/#tools">privacy and licence</a>.</p></div>
+  </main>
+</Base>

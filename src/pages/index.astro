@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { SITE } from '../site';
+import { getPosts, getProjects } from '../lib';
+const posts = (await getPosts()).slice(0, 3);
+const featured = (await getProjects()).filter((p) => p.data.featured).slice(0, 4);
+---
+<Base title={SITE.name} bodyClass="home">
+<section class="hero"><div class="in">
+  <div>
+    <p class="hello">Nihal Sulaiman · Data analyst and BI developer · Ontario</p>
+    <h1>I turn operational data into decisions.</h1>
+    <p class="lead">I build data work from end to end: pipelines and star-schema warehouses, dashboards that managers open every morning, forecasts and schedules that save money, and machine-learning models tested on data they have never seen. Physics taught me to model things. Data analytics taught me to make them useful.</p>
+    <div class="btns"><a class="btn primary" href="/projects/">See my work</a><a class="btn ghost" href="/cv/">View CV</a><a class="btn ghost" href="/blog/">Read the blog</a></div>
+  </div>
+  <div class="facts" aria-label="Highlights">
+    <div><b>640k</b><span>bookings in my hotel BI warehouse</span></div>
+    <div><b>Top 10%</b><span>of 4,346 teams in Kaggle's Name That LLM</span></div>
+    <div><b>949 MW</b><span>grid peak cut by a battery swarm</span></div>
+    <div><b>13</b><span>free tools and dashboards you can open</span></div>
+  </div>
+</div></section>
+
+<main>
+  <h2 class="section">Selected work</h2>
+  <p class="section-sub">Every project has working pages, the method behind each number and an honest note on what didn't work.</p>
+  <div class="pgrid">{featured.map((p) => <ProjectCard p={p} />)}</div>
+  <a class="seeall" href="/projects/">All projects →</a>
+
+  <h2 class="section">On Kaggle right now</h2>
+  <p class="section-sub">Public leaderboard positions while the competitions run. I only claim scores from my own work. <a href="/kaggle/">How I report ranks</a>.</p>
+  <div class="kstrip">
+    <a href="/projects/name-that-llm/"><b>Top 10%</b><span>436 of 4,346 teams</span><em>Name That LLM</em></a>
+    <a href="/projects/squares-in-squares/"><b>Top 13%</b><span>190 of 1,473 teams</span><em>Squares in Squares</em></a>
+    <a href="/projects/smart-buildings/"><b>0.01244</b><span>vs 0.01853 best public notebook</span><em>NeurIPS Smart Buildings</em></a>
+    <a href="/projects/casmi-2026/"><b>300</b><span>molecule leak-free hold-out</span><em>Enveda CASMI 2026</em></a>
+  </div>
+
+  <div class="split">
+    <div>
+      <h2 class="section">Latest writing</h2>
+      <p class="section-sub">Notes from building things: what broke, what I changed and what it cost.</p>
+      <PostList posts={posts} />
+      <a class="seeall" href="/blog/">All posts →</a>
+    </div>
+    <div>
+      <h2 class="section">What I'm doing now</h2>
+      <p class="section-sub">Updated November 2026.</p>
+      <div class="card">
+        <ul class="tight">
+          <li>Looking for <b>data analyst and BI roles</b> anywhere in Ontario.</li>
+          <li>Working remotely as an <b>AI training specialist</b> with Shipd by DataCurve.</li>
+          <li>Turning the hotel BI tools into <b>real ETL pipelines</b> loading Azure SQL Database.</li>
+          <li>Studying <b>T-SQL, Power BI and DAX</b>, and dbt for modelling.</li>
+          <li>Competing in four live <b>Kaggle</b> competitions.</li>
+        </ul>
+        <a class="seeall" href="/now/">More on the now page →</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section">What I build with</h2>
+  <div class="stack" style="margin-top:18px">
+    <div><h4>Data and BI</h4><div class="chips"><span>Python</span><span>SQL</span><span>Star schemas</span><span>Data quality tests</span><span>Excel</span><span>Power BI (learning)</span></div></div>
+    <div><h4>Modelling and AI</h4><div class="chips"><span>Forecasting</span><span>PuLP optimisation</span><span>XGBoost and LightGBM</span><span>PyTorch</span><span>LoRA fine-tuning</span><span>Reinforcement learning</span></div></div>
+    <div><h4>Dashboards and cloud</h4><div class="chips"><span>D3</span><span>JavaScript</span><span>Databricks</span><span>Google Cloud</span><span>Git and GitHub</span><span>Claude Code</span></div></div>
+  </div>
+
+  <h2 class="section" id="tools">Free tools</h2>
+  <p class="section-sub">They run in your browser, keep your data on your device and need no sign-up.</p>
+  <div class="toolgrid">
+    <div class="tg"><h3><i></i>Personal tools</h3><a href="/tools/expense-calendar/">Expense calendar<span>Plan and track expenses day by day. Works offline.</span></a><a class="more" href="/tools/">All tools →</a></div>
+    <div class="tg hotel"><h3><i></i>Hotel tools</h3><div class="cols"><div><a href="/hotel-business/tools/rate-recommender.html">Rate recommender<span>A rate for each of the next 30 days</span></a><a href="/hotel-business/tools/forecaster.html">Occupancy forecaster<span>The next 30 to 90 days of occupancy</span></a><a href="/hotel-business/tools/overbooking.html">Overbooking calculator<span>How many extra rooms to sell</span></a></div><div><a href="/hotel-business/schedule.html">Staff schedule builder<span>A week's schedule at the lowest cost</span></a><a href="/hotel-business/tools/kpi.html">Hotel KPI dashboard<span>Occupancy, ADR, RevPAR and profit</span></a><a href="/hotel-business/tools/night-audit.html">Night audit assistant<span>Checklist, balancing and daily report</span></a></div></div><a class="more" href="/hotel-business/tools/index.html">All hotel tools →</a></div>
+  </div>
+
+  <section class="cta">
+    <div><h2>Hiring for data or BI in Ontario?</h2><p>I'm available now for full-time, part-time or internship roles, on site or remote. The fastest way to reach me is LinkedIn.</p></div>
+    <div class="btns"><a class="btn primary" href={SITE.links.linkedin}>Message me on LinkedIn</a><a class="btn ghost" href="/cv/">View CV</a></div>
+  </section>
+</main>
+</Base>

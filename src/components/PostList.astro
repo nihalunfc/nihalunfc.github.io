@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { fmtDate } from '../lib';
+interface Props { posts: CollectionEntry<'blog'>[] }
+const { posts } = Astro.props;
+---
+<div class="posts">
+  {posts.map((p) => (
+    <a class="post-row" href={`/blog/${p.id}/`}>
+      <time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time>
+      <div>
+        <h3>{p.data.title}</h3>
+        <p>{p.data.description}</p>
+        {p.data.tags.length > 0 && <div class="tags">{p.data.tags.map((t) => <span class="tag">{t}</span>)}</div>}
+      </div>
+    </a>
+  ))}
+</div>
