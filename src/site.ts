@@ -1,6 +1,6 @@
 // One place for site-wide facts. When the custom domain goes live, change SITE_URL
 // here and in astro.config.mjs, and add public/CNAME with the bare domain.
-export const SITE_URL = 'https://nihalunfc.github.io';
+export const SITE_URL = 'https://nihalsulaiman.com';
 export const SITE = {
   name: 'Nihal Sulaiman',
   short: 'Nihal',
@@ -13,6 +13,6 @@ export const SITE = {
     github: 'https://github.com/nihalunfc',
     linkedin: 'https://www.linkedin.com/in/vsnihal/',
     kaggle: 'https://www.kaggle.com/vsnihal',
-    hotel: '/hotel-business/',
+    hotel: "/hotel-business/",
   },
 };

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nihalunfc.github.io/sitemap-index.xml
+Sitemap: https://nihalsulaiman.com/sitemap-index.xml
