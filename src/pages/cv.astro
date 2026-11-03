@@ -1,62 +1,71 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../site';
+import ProfileLinks from '../components/ProfileLinks.astro';
 ---
-<Base title="CV" description="CV of Nihal Sulaiman: data analyst and BI developer, Master's in Data Analytics, MSc Physics. Python, SQL, star schemas, dashboards, forecasting and machine learning.">
-  <section class="phero"><div class="in cv cv-head">
-    <div>
-      <p class="crumbs no-print"><a href="/">Home</a> / CV</p>
-      <h1>Nihal Vellaramkallingal Sulaiman</h1>
-      <p class="lead">Data analyst and BI developer · Niagara Falls, Ontario · open to anywhere in Ontario</p>
-      <div class="btns no-print"><button class="btn primary" type="button" onclick="window.print()">Print or save as PDF</button></div>
-    </div>
-    <div class="contact">
-      <a href={SITE.links.linkedin}>linkedin.com/in/vsnihal</a>
-      <a href={SITE.links.github}>github.com/nihalunfc</a>
-      <a href={SITE.links.kaggle}>kaggle.com/vsnihal</a>
-    </div>
-  </div></section>
-  <main class="cv">
-    <h2>Summary</h2>
-    <p>Data analyst and BI developer with a Master's in Data Analytics and an MSc in Physics (astrophysics). I build end-to-end data work in Python and SQL, from pipelines and star-schema warehouses to dashboards, forecasts and machine-learning models, and I test every result on data it hasn't seen. Hotel operations experience from the floor, and top-10% Kaggle results.</p>
+<Base title="CV" description="CV of Nihal Vellaramkallingal Sulaiman: data analyst and BI developer in Ontario. SQL, Python, star schemas, dashboards, forecasting and machine learning.">
+<main class="prof">
+  <h1 class="name"><b>Nihal</b> Vellaramkallingal Sulaiman</h1>
+  <p class="tagline">Data analyst and BI developer · Niagara Falls, Ontario · open to roles anywhere in Ontario</p>
+  <ProfileLinks print />
 
-    <h2>Projects</h2>
-    <ol class="tl">
-      <li><span class="when">2026</span><div><h3><a href="/projects/hospitality-bi/">Hospitality BI for a five-hotel group</a></h3><ul>
-        <li>Built a star-schema warehouse of about 640,000 synthetic bookings over four years, with ten automated data-quality checks and unit tests.</li>
-        <li>Built a revenue command centre (occupancy, ADR, RevPAR, pace, back-tested demand forecast) and a staff schedule builder that turns forecast workload into shifts with PuLP and checks Ontario labour rules.</li>
-      </ul></div></li>
-      <li><span class="when">2026</span><div><h3><a href="/projects/swarm-intelligence/">Swarm Intelligence</a> and <a href="/projects/warl-wildfire/">WARL wildfire drones</a></h3><ul>
-        <li>Multi-agent reinforcement learning (PyTorch DQN) for grid batteries, wildfire drones and hotel operations, compared against today's operating rules.</li>
-        <li>Live dashboards in JavaScript, D3 and Leaflet, with a Gemini-powered explainable-AI chatbot.</li>
-      </ul></div></li>
-      <li><span class="when">2026</span><div><h3><a href="/kaggle/">Kaggle competitions</a></h3><ul>
-        <li>Name That LLM: 436th of 4,346 teams (top 10%) attributing passages to 18 LLMs; built prompt-grouped, leak-free validation for LoRA-tuned Qwen and Llama ensembles.</li>
-        <li>Enveda CASMI 2026: built a leak-free 300-structure hold-out that predicted leaderboard drops the provided validation panel missed.</li>
-        <li>Mallorn Challenge: top 15% with gradient-boosted models.</li>
-      </ul></div></li>
-    </ol>
+  <h2>summary</h2>
+  <p>Data analyst with a Master's in Data Analytics and an MSc in Physics. I build end-to-end data work in Python and SQL: ETL pipelines, star-schema warehouses with automated quality checks, KPI dashboards, demand forecasts and optimised schedules. Comfortable with the mathematics behind a model and with explaining the result in plain language.</p>
 
-    <h2>Experience</h2>
-    <ol class="tl">
-      <li><span class="when">Current</span><div><h3>AI Training Specialist (remote)</h3><div class="where">Shipd by DataCurve</div></div></li>
-      <li><span class="when">Over a year</span><div><h3>Room Attendant</h3><div class="where">Hotel housekeeping, Niagara Falls, Ontario</div><ul><li>Also trained as Night Maid and Houseman.</li></ul></div></li>
-      <li><span class="when">2019 to 2022</span><div><h3>Founder, ad-supported content websites</h3><div class="where">Self-employed, India</div><ul><li>Managed content, traffic, ad revenue and marketing data.</li></ul></div></li>
-    </ol>
+  <h2>skills</h2>
+  <dl class="skills">
+    <dt>Data and SQL</dt><dd>SQL (SQL Server, SQLite), dimensional modelling, ETL, data-quality checks, Python (pandas, NumPy, Polars)</dd>
+    <dt>BI and reporting</dt><dd>KPI design, dashboards (Chart.js, D3), Excel, Power BI (learning), hotel revenue metrics: occupancy, ADR, RevPAR, pace</dd>
+    <dt>Modelling</dt><dd>Forecasting, integer programming (PuLP), machine learning (XGBoost, LightGBM, CatBoost, Optuna), deep learning and reinforcement learning (PyTorch)</dd>
+    <dt>Engineering</dt><dd>Git and GitHub, pytest, HTML, CSS, JavaScript, Claude Code with read-only safety rules, LaTeX</dd>
+  </dl>
 
-    <h2>Education</h2>
-    <ol class="tl">
-      <li><span class="when">2026</span><div><h3>Master's in Data Analytics</h3><div class="where">University of Niagara Falls Canada</div></div></li>
-      <li><span class="when">2017 to 2019</span><div><h3>MSc Physics (astrophysics major, mathematics minor)</h3><div class="where">Cochin University of Science and Technology, India</div></div></li>
-      <li><span class="when">2013 to 2016</span><div><h3>BSc Physics</h3><div class="where">Government Victoria College, University of Calicut, India</div></div></li>
-    </ol>
+  <h2>experience</h2>
+  <div class="item">
+    <div class="head"><h3>AI Training Specialist (remote)</h3><span class="when">Current</span></div>
+    <p class="where">DataCurve (Shipd), United States</p>
+    <p>Invited after my result in Kaggle's Mallorn Challenge. Train and evaluate AI models on technical tasks.</p>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Room Attendant, hotel housekeeping</h3><span class="when">Over one year</span></div>
+    <p class="where">Niagara Falls, Ontario</p>
+    <p>Also trained as night attendant and houseman. A floor-level view of room turns, staffing and demand swings, which shaped my hospitality BI work.</p>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Owner, ad-supported content websites</h3><span class="when">2019 – 2022</span></div>
+    <p class="where">Self-employed, India</p>
+    <p>Ran websites earning ad revenue: content, traffic and marketing data.</p>
+  </div>
 
-    <h2>Skills</h2>
-    <dl class="skills">
-      <dt>Data and BI</dt><dd>Python (pandas, NumPy, Polars), SQL (SQL Server, SQLite), dimensional modelling, data-quality testing, Excel; learning Power BI and DAX</dd>
-      <dt>Modelling</dt><dd>Forecasting, optimisation (PuLP), XGBoost, LightGBM, CatBoost, Optuna, scikit-learn</dd>
-      <dt>Deep learning and AI</dt><dd>PyTorch, Hugging Face Transformers, LoRA fine-tuning, reinforcement learning, Gemini API</dd>
-      <dt>Web and tools</dt><dd>JavaScript, D3, Leaflet, HTML and CSS, Git and GitHub, Databricks, Google Cloud, LaTeX, Claude Code</dd>
-    </dl>
-  </main>
+  <h2>projects</h2>
+  <div class="item">
+    <div class="head"><h3><a href="/hotel-business/">Hospitality BI portfolio</a></h3><span class="when">2026</span></div>
+    <ul>
+      <li>Star-schema warehouse for a synthetic five-hotel group (about 640,000 bookings), with ten automated data-quality checks and unit tests.</li>
+      <li>Revenue Command Centre: occupancy, ADR, RevPAR, pace against last year, back-tested demand forecast, demand lost on sold-out nights.</li>
+      <li>Staff schedule builder: integer programming from forecast workload, checked against Ontario labour rules, exported to Excel.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3><a href="https://github.com/nihalunfc/GDGCHackathon2026">WARL: wildfire drone swarm</a></h3><span class="when">2026</span></div>
+    <p>PyTorch DQN swarm routing drones to fire choke points, with a live map dashboard and a Gemini explainer chatbot. GDG on Campus Build with AI hackathon.</p>
+  </div>
+  <div class="item">
+    <div class="head"><h3><a href="/kaggle/">Kaggle</a></h3><span class="when">2026</span></div>
+    <p>Name That LLM: top 10% of 4,346 (public leaderboard, in progress). Squares in Squares: top 13% of 1,473 (in progress).</p>
+  </div>
+
+  <h2>education</h2>
+  <div class="item">
+    <div class="head"><h3>Master's, Data Analytics</h3><span class="when">2026</span></div>
+    <p class="where">University of Niagara Falls Canada, Ontario</p>
+  </div>
+  <div class="item">
+    <div class="head"><h3>MSc Physics</h3><span class="when">2017 – 2019</span></div>
+    <p class="where">Cochin University of Science and Technology, Kochi, India · astrophysics major, mathematics minor</p>
+  </div>
+  <div class="item">
+    <div class="head"><h3>BSc Physics</h3><span class="when">2013 – 2016</span></div>
+    <p class="where">Government Victoria College, Palakkad (University of Calicut), India</p>
+  </div>
+</main>
 </Base>
