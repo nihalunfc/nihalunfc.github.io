@@ -27,7 +27,7 @@ Add a Markdown file to `src/content/projects/` with `title`, `summary`, `categor
 ## Other pages
 
 - `src/pages/` holds Home, About, CV, Now, Kaggle, Tools and the blog and project templates.
-- `public/` is copied as is: the shared header and styles (`assets/`), the Swarm demos (`swarm/`), the expense calendar (`tools/expense-calendar/`) and the disclaimer. `/hotel-business/` is served from the separate hotel-business repo.
+- `public/` is copied as is: the shared header and styles (`assets/`), the Swarm demos (`swarm/`), tool apps (`tools/<tool>/<edition>/`), hospitality sub-pages (`projects/hospitality-bi/`), courses (`learn/`), data and downloads, and the disclaimer. The full map of what lives where is `public/site-structure.md`.
 
 ## Run it locally
 

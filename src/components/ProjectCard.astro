@@ -1,12 +1,15 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { catClass } from '../lib';
+import { fieldName, kindName } from '../data/fields';
+import Progress from './Progress.astro';
+import { partsFor } from '../lib';
 interface Props { p: CollectionEntry<'projects'> }
 const { p } = Astro.props;
 ---
-<a class="pcard" href={`/projects/${p.id}/`} data-cat={p.data.category}>
-  <div class="top"><p class={`eyebrow ${catClass(p.data.category)}`} style="margin:0">{p.data.category}</p><span class={`status ${p.data.status}`}>{p.data.status}</span></div>
+<a class="pcard" href={`/projects/${p.id}/`} data-cat={p.data.field}>
+  <div class="top"><p class="eyebrow" style="margin:0">{fieldName(p.data.field)} · {kindName(p.data.kind)}</p><span class={`status ${p.data.status}`}>{p.data.status}</span></div>
   <h3>{p.data.title}</h3>
   <p>{p.data.summary}</p>
   {p.data.stats.length > 0 && <div class="stat-row">{p.data.stats.slice(0, 3).map((s) => <div><b>{s.value}</b>{s.label}</div>)}</div>}
+  <Progress parts={partsFor(p.data)} compact />
 </a>

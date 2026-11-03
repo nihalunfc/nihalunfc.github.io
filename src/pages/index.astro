@@ -6,6 +6,10 @@ import LogList from '../components/LogList.astro';
 import { getPosts, getLog, fmtDate } from '../lib';
 const posts = (await getPosts()).slice(0, 3);
 const log = (await getLog()).slice(0, 4);
+import { getEntry } from 'astro:content';
+import Progress from '../components/Progress.astro';
+import { partsFor } from '../lib';
+const bi = await getEntry('projects', 'bi-toolkit');
 ---
 <Base title={SITE.name}>
 <main class="hub">
@@ -22,8 +26,13 @@ const log = (await getLog()).slice(0, 4);
   <div class="hub-grid">
     <div class="card w2"><h2><i></i>About</h2>
       <p>This site is everything I think up, build and deploy, so you can see how I work. Most of it is business intelligence: pipelines that pull data out of the systems people already have, clean it, store it in a warehouse and put the answer on a dashboard. I build each tool once and fit it to each field, from shops and clinics to banks and research labs. <b>Master's in Data Analytics</b> (2026) and <b>MSc in Physics</b> (astrophysics).</p>
-      <p class="more"><a href="/about/">More about me</a><a href="/cv/">CV</a><a href="/contact/">Contact</a></p>
+      <p class="more"><a href="/about/">More about me</a><a href="/about/cv/">CV</a><a href="/contact/">Contact</a></p>
     </div>
+
+    <a class="card proj-c w2 flagship" href="/swarm/"><h2><i class="ai"></i>Swarm Intelligence <span class="flag">Flagship</span></h2>
+      <p>One multi-agent engine where every battery, drone or hotel system makes its own decision and the group still acts as one team. Applied to energy, crisis management and hospitality so far, and coming to every field.</p>
+      <div class="kv"><span><b>949 MW</b>grid peak cut</span><span><b>87%</b>forest saved</span><span><b>$279k</b>hotel energy a year</span></div>
+    </a>
 
     <div class="card"><h2><i></i>What I build</h2>
       <ul class="tight">
@@ -36,9 +45,10 @@ const log = (await getLog()).slice(0, 4);
       <p class="more"><a href="/tools/">Tools</a><a href="/projects/">Projects</a></p>
     </div>
 
-    <div class="card"><h2><i></i>Who it's for</h2>
-      <p class="chips sm"><a href="/sectors/#retail">Retail</a><a href="/sectors/#small-business">Small business</a><a href="/sectors/#hospitality">Hospitality</a><a href="/sectors/#restaurants">Restaurants</a><a href="/sectors/#logistics">Logistics</a><a href="/sectors/#finance">Finance and insurance</a><a href="/sectors/#automotive">Automotive</a><a href="/sectors/#healthcare">Healthcare</a><a href="/sectors/#research">Research</a><a href="/sectors/#everyday">Everyday people</a></p>
-      <p class="more"><a href="/sectors/">See tools by field</a></p>
+    <div class="card"><h2><i></i>Fields</h2>
+      <p class="chips sm"><a href="/fields/hospitality/">Hospitality</a><a href="/fields/logistics/">Logistics</a><a href="/fields/energy/">Energy</a><a href="/fields/crisis/">Crisis management</a><a href="/fields/science/">Science</a><a href="/fields/health/">Health</a><a href="/fields/finance/">Finance</a></p>
+      <p style="margin-top:8px">Each with BI, optimisation, tools, pipelines and machine learning.</p>
+      <p class="more"><a href="/fields/">All fields</a></p>
     </div>
 
     <div class="card"><h2><i></i>Learn with me</h2>
@@ -64,15 +74,11 @@ const log = (await getLog()).slice(0, 4);
 
     <a class="card proj-c" href="/projects/bi-toolkit/"><h2><i class="bi"></i>BI toolkit</h2>
       <p>One warehouse model, ten data-quality checks and 12 decision tools, fitted to each sector. Hospitality is live; restaurant chains and retail are next.</p>
-      <div class="kv"><span><b>12</b>tools</span><span><b>10</b>quality checks</span><span><b>3</b>sector editions</span></div>
+      <div class="kv"><span><b>14</b>tools</span><span><b>10</b>quality checks</span><span><b>3</b>editions</span></div>
+      {bi && <Progress parts={partsFor(bi.data)} compact />}
     </a>
 
-    <a class="card proj-c" href="/projects/swarm-intelligence/"><h2><i class="ai"></i>Swarm Intelligence</h2>
-      <p>One multi-agent engine for grid batteries, wildfire drones and hotel operations, tested against today's rules.</p>
-      <div class="kv"><span><b>949 MW</b>peak cut</span><span><b>87%</b>forest saved</span></div>
-    </a>
-
-    <a class="card proj-c" href="/kaggle/"><h2><i class="kg"></i>Kaggle</h2>
+    <a class="card proj-c" href="/projects/kaggle/"><h2><i class="kg"></i>Kaggle</h2>
       <p>Name That LLM, CASMI 2026, NeurIPS Smart Buildings and Squares in Squares, with honest notes on what's my own work.</p>
       <div class="kv"><span><b>Top 10%</b>Name That LLM</span><span><b>Top 13%</b>Squares</span></div>
     </a>
@@ -93,7 +99,7 @@ const log = (await getLog()).slice(0, 4);
     <dt>Nov 2026</dt><dd>Added an <a href="https://github.com/nihalunfc/hotel-business/tree/main/ai-workflow">AI workflow kit</a> to the Hospitality BI portfolio: safety rules for Claude Code on a live warehouse, an ETL triage method and a tested read-only SQL runner.</dd>
     <dt>Nov 2026</dt><dd>Currently in the top 10% of 4,346 on the public leaderboard of Kaggle's <i>Name That LLM</i> competition.</dd>
     <dt>Oct 2026</dt><dd>Graduated with a Master's in Data Analytics.</dd>
-    <dt>Oct 2026</dt><dd>Launched the <a href="/hotel-business/">Hospitality BI portfolio</a>: a revenue command centre, a staff schedule builder and 12 hotel tools on a five-hotel sample group.</dd>
+    <dt>Oct 2026</dt><dd>Launched the <a href="/projects/hospitality-bi/overview/">Hospitality BI portfolio</a>: a revenue command centre, a staff schedule builder and 12 hotel tools on a five-hotel sample group.</dd>
     <dt>Sep 2026</dt><dd>Built <a href="https://github.com/nihalunfc/GDGCHackathon2026">WARL</a>, a drone-swarm wildfire response with a live dashboard, at the GDG on Campus Build with AI hackathon.</dd>
   </dl>
 

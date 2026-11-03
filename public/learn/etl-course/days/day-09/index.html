@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 9 · Transforming with Polars and DuckDB · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="/learn/etl-course/assets/style.css">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="/learn/etl-course/"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="/learn/etl-course/">Course</a><a href="/learn/etl-course/pages/projects/">Projects</a><a href="/learn/etl-course/pages/stack/">Stack map</a><a href="/learn/etl-course/pages/setup/">Setup</a><a href="/learn/etl-course/pages/glossary/">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-1/">Week overview</a></li><li><a href="/learn/etl-course/days/day-01/" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="/learn/etl-course/days/day-02/" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="/learn/etl-course/days/day-03/" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="/learn/etl-course/days/day-04/" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="/learn/etl-course/days/day-05/" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="/learn/etl-course/days/day-06/" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="/learn/etl-course/days/day-07/" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk" open><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-2/">Week overview</a></li><li><a href="/learn/etl-course/days/day-08/" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a class="on" href="/learn/etl-course/days/day-09/" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="/learn/etl-course/days/day-10/" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="/learn/etl-course/days/day-11/" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="/learn/etl-course/days/day-12/" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="/learn/etl-course/days/day-13/" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="/learn/etl-course/days/day-14/" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-3/">Week overview</a></li><li><a href="/learn/etl-course/days/day-15/" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="/learn/etl-course/days/day-16/" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="/learn/etl-course/days/day-17/" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="/learn/etl-course/days/day-18/" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="/learn/etl-course/days/day-19/" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="/learn/etl-course/days/day-20/" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="/learn/etl-course/days/day-21/" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-4/">Week overview</a></li><li><a href="/learn/etl-course/days/day-22/" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="/learn/etl-course/days/day-23/" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="/learn/etl-course/days/day-24/" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="/learn/etl-course/days/day-25/" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="/learn/etl-course/days/day-26/" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="/learn/etl-course/days/day-27/" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="/learn/etl-course/days/day-28/" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-5/">Week overview</a></li><li><a href="/learn/etl-course/days/day-29/" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="/learn/etl-course/days/day-30/" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="/learn/etl-course/days/day-31/" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="/learn/etl-course/days/day-32/" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="/learn/etl-course/days/day-33/" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="/learn/etl-course/days/day-34/" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="/learn/etl-course/days/day-35/" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-6/">Week overview</a></li><li><a href="/learn/etl-course/days/day-36/" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="/learn/etl-course/days/day-37/" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="/learn/etl-course/days/day-38/" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="/learn/etl-course/days/day-39/" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="/learn/etl-course/days/day-40/" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="/learn/etl-course/days/day-41/" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="/learn/etl-course/days/day-42/" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-7/">Week overview</a></li><li><a href="/learn/etl-course/days/day-43/" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="/learn/etl-course/days/day-44/" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="/learn/etl-course/days/day-45/" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="/learn/etl-course/days/day-46/" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="/learn/etl-course/days/day-47/" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="/learn/etl-course/days/day-48/" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="/learn/etl-course/days/day-49/" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="/learn/etl-course/weeks/week-2/">Week 2 · Clean and trust the data</a> › Day 9</p>
+<h1>Day 9. Transforming with Polars and DuckDB</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 60m · lab 140m · ship 25m · review 15m</span><span class="pill">🏷 QSR</span><span class="pill">Before: Day 8</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Write lazy Polars pipelines with expressions</li><li>Query CSV and Parquet directly with DuckDB SQL</li><li>Write partitioned Parquet and explain why columnar formats win</li><li>Choose pandas, Polars or DuckDB for a given job</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>pandas taught a generation to analyse data, but for pipelines it's slow and memory-hungry. <strong>Polars</strong> (Rust, multi-threaded, lazy) and <strong>DuckDB</strong> (an in-process analytical SQL database) are now the standard open-source tools for single-machine ETL. With them, a laptop handles hundreds of millions of rows, and medium-sized companies often don't need Spark at all.</p>
+<h2 id="2-polars-expressions-and-laziness">2. Polars: expressions and laziness</h2>
+<pre class="highlight"><code class="language-python">import polars as pl
+
+lf = (
+    pl.scan_csv("data/landing/shared_drive/qsr/*/pos_*.csv", include_file_paths="src_file",
+                schema_overrides={"order_ts": pl.Utf8}, encoding="utf8-lossy")
+      .with_columns(
+          pl.col("order_ts").str.strptime(pl.Datetime, "%Y-%m-%d %H:%M:%S", strict=False),
+          (pl.col("qty") * pl.col("price")).alias("line_total"),
+      )
+      .filter(pl.col("order_ts").is_not_null())
+)
+daily = (lf.group_by(pl.col("restaurant_id"), pl.col("order_ts").dt.date().alias("cal_date"))
+           .agg(pl.len().alias("lines"), pl.col("line_total").sum().alias("revenue")))
+print(daily.explain())        # the optimised plan: predicate and projection pushdown
+df = daily.collect()</code></pre>
+<p><strong>Lazy</strong> means Polars builds a plan and optimises it before running: it reads only the columns you use, pushes filters into the scan, and runs in parallel.</p>
+<h2 id="3-duckdb-sql-on-files">3. DuckDB: SQL on files</h2>
+<pre class="highlight"><code class="language-python">import duckdb
+con = duckdb.connect("data/warehouse.duckdb")
+con.sql("""
+  create or replace table stg_pos as
+  select * replace (try_strptime(order_ts, '%Y-%m-%d %H:%M:%S') as order_ts)
+  from read_csv('data/landing/shared_drive/qsr/*/pos_*.csv', union_by_name=true, filename=true, all_varchar=true)
+""")
+con.sql("copy stg_pos to 'data/staging/qsr_pos' (format parquet, partition_by (restaurant_id), overwrite_or_ignore)")</code></pre>
+<p>DuckDB and Polars share data with zero copy through <strong>Apache Arrow</strong>: <code>con.sql("…").pl()</code> returns a Polars frame; <code>con.sql("select * from df")</code> queries a Polars frame in place.</p>
+<h2 id="4-why-parquet">4. Why Parquet</h2>
+<p>Parquet stores data <strong>by column</strong>, compressed, with min/max statistics per row group. A query for <code>sum(revenue) where cal_date = '2026-09-14'</code> reads one column and skips row groups whose date range doesn't include that day.</p>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> columnar storage reduces I/O in proportion to the share of columns and rows a query needs.</p>
+<p><strong>Equation:</strong> bytes read <span class="arithmatex">\(\approx N \cdot \sum_{c \in Q} w_c \cdot s\)</span>, where <span class="arithmatex">\(Q\)</span> = columns used, <span class="arithmatex">\(w_c\)</span> = compressed width, <span class="arithmatex">\(s\)</span> = share of row groups not skipped. A row store reads <span class="arithmatex">\(N \cdot \sum_{\text{all } c} w_c\)</span>.</p>
+<p><strong>Analogy:</strong> reading one column of a spreadsheet printout vs photocopying every page. Where it breaks: <code>select *</code> on a few rows (point lookups) favours row stores; that's why OLTP databases are row stores.</p>
+<p><strong>Try it:</strong> 20 columns of equal width; query uses 3; date filter keeps 1/30 of row groups. Fraction of bytes read vs CSV? <em>(3/20 × 1/30 = 0.5%, before compression gains.)</em></p>
+</details>
+<h2 id="5-which-tool-when">5. Which tool when</h2>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Pick</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reading messy files, row-wise Python logic</td>
+<td>Polars (or pandas for odd formats)</td>
+<td>Expressions + UDF escape hatch</td>
+</tr>
+<tr>
+<td>Set logic, joins, aggregation, window functions</td>
+<td>DuckDB SQL</td>
+<td>SQL is readable and portable to the warehouse later</td>
+</tr>
+<tr>
+<td>Exploring in a notebook with plotting libraries</td>
+<td>pandas / Polars</td>
+<td>Ecosystem</td>
+</tr>
+<tr>
+<td>Data bigger than memory on one machine</td>
+<td>DuckDB or Polars streaming</td>
+<td>Out-of-core execution</td>
+</tr>
+<tr>
+<td>Many TB, many machines</td>
+<td>Spark / Databricks, or the warehouse itself</td>
+<td>Then it's worth the overhead</td>
+</tr>
+</tbody>
+</table>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>A useful rule: <strong>write business logic in SQL, plumbing in Python.</strong> SQL logic moves to Azure SQL or dbt in Weeks 4–5 nearly unchanged; Polars logic has to be rewritten. Keep Polars for parsing, typing and shaping raw files, and push joins and metrics to SQL. Also: pin your Polars version. It moves fast and renames things between minor versions.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Lab</p>
+<ol>
+<li>Load all QSR POS files with pandas, Polars (lazy) and DuckDB. Time each with <code>time.perf_counter()</code> and record peak memory (<code>/usr/bin/time -v</code> on Linux, Task Manager on Windows). Put the table in the README.</li>
+<li>Build <code>stg_qsr_pos</code> in Polars: parse timestamps (bad ones → null), add <code>line_total</code>, <code>src_file</code>, <code>loaded_at</code>.</li>
+<li>Write it to Parquet partitioned by <code>business_date</code> (use calendar date for now; Day 10 fixes the business day).</li>
+<li>In DuckDB, query the Parquet: revenue by brand and channel for one week. Check DuckDB's <code>explain analyze</code> shows partition pruning.</li>
+<li>Re-run with 120 days of generated data (<code>--days 120</code>) and repeat the timing. Which tool scaled best on your machine?</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p><code>feat(clean): staging POS in Polars, Parquet partitions, benchmark table</code>.</p>
+</div>
+<section class="quiz" id="quiz-day-09-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> What does "lazy" mean in Polars?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-09-1-0" value="0" data-ok="0"> <span>It runs on one thread to save power</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-0" value="1" data-ok="1"> <span>It builds and optimises a query plan, and only executes on collect()</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-0" value="2" data-ok="0"> <span>It skips bad rows</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-0" value="3" data-ok="0"> <span>It caches every result</span></label></li>
+</ul><p class="why" hidden>Laziness enables predicate/projection pushdown and parallel execution.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> Why keep metric logic in SQL rather than Polars when you'll load into a warehouse later?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-09-1-1" value="0" data-ok="0"> <span>SQL is always faster</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-1" value="1" data-ok="1"> <span>SQL moves to the warehouse and dbt nearly unchanged; Polars code must be rewritten</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-1" value="2" data-ok="0"> <span>Polars can't aggregate</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-1" value="3" data-ok="0"> <span>Power BI reads SQL files</span></label></li>
+</ul><p class="why" hidden>Portability of business logic is a design goal.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> A query needs 2 of 40 columns. Which format reads the least data?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-09-1-2" value="0" data-ok="0"> <span>CSV</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-2" value="1" data-ok="0"> <span>JSON lines</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-2" value="2" data-ok="1"> <span>Parquet</span></label></li>
+<li><label><input type="radio" name="quiz-day-09-1-2" value="3" data-ok="0"> <span>Excel</span></label></li>
+</ul><p class="why" hidden>Columnar storage reads only the two columns' pages.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-09" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="/learn/etl-course/days/day-08/">← Day 8</a><button class="btn done" data-action="complete" data-day="day-09">Mark day 9 complete</button><a href="/learn/etl-course/days/day-10/">Day 10 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="/learn/etl-course/assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/katex.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="/learn/etl-course/assets/days.js"></script>
+<script src="/learn/etl-course/assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

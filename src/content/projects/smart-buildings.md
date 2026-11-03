@@ -1,4 +1,6 @@
 ---
+field: energy
+kind: ml
 title: NeurIPS 2026 Smart Buildings
 summary: An HVAC control policy that keeps people comfortable while cutting energy and carbon in buildings and climates it has never seen. Physics-informed control, validated on 30 simulated unseen scenarios.
 category: Kaggle

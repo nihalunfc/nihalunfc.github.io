@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../site';
+---
+<Base title="About" description="About Nihal Sulaiman: data analyst and BI developer in Ontario with a Master's in Data Analytics and an MSc in Physics (astrophysics).">
+  <PageHero title="About me" crumbs={[{ label: 'About' }]} lead="I'm Nihal Sulaiman, a data analyst and BI developer in Niagara Falls, Ontario. I build things that turn operational data into decisions: warehouses and dashboards that managers actually use, forecasting and optimisation for planning, and machine-learning models tested honestly.">
+    <div class="btns"><a class="btn primary" href="/about/cv/">View CV</a><a class="btn ghost" href={SITE.links.linkedin}>LinkedIn</a><a class="btn ghost" href={SITE.links.github}>GitHub</a><a class="btn ghost" href={SITE.links.kaggle}>Kaggle</a></div>
+  </PageHero>
+  <main>
+    <div class="grid2">
+      <div class="card">
+        <img class="about-photo" src="/assets/photo.jpg" alt="Nihal Sulaiman" width="112" height="112">
+        <h2>My path</h2>
+        <p>I started in physics, with a BSc and then an MSc majoring in astrophysics. That's where I learned mathematical modelling, statistics and numerical methods, and the habit of distrusting a result until it survives a test.</p>
+        <p>For five years I worked as a content writer, turning technical and scientific topics into clear writing for a general audience. After moving to Canada I worked in Niagara's hospitality sector, including hotel housekeeping, and saw how hotel operations really work from the floor.</p>
+        <p>In October 2026 I finished a Master's in Data Analytics. Now I build BI and machine-learning work that brings those three things together.</p>
+      </div>
+      <div class="card">
+        <h2>How I work</h2>
+        <ul class="tight">
+          <li><b>Start from the decision.</b> Who has to decide what, and when? The data and the model come second.</li>
+          <li><b>Use the data that already exists.</b> Booking systems, meters and rosters usually hold the answer.</li>
+          <li><b>Check every number.</b> Results are tested on data kept aside, compared with today's practice, and reported honestly, including where something doesn't work yet.</li>
+          <li><b>Make it usable.</b> Plain English, clear recommendations and tools that work without training.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section">Experience</h2>
+    <div class="card">
+      <ol class="tl">
+        <li><span class="when">Feb 2026 – now</span><div><h3>Data Engineer (remote)</h3><div class="where">Shipd by DataCurve, San Francisco</div><ul><li>Recruited after a top-15% Kaggle finish to build training data for large language models and AI coding agents.</li><li>Design programming and data challenges with verified reference solutions, and write and test machine-learning code.</li></ul></div></li>
+        <li><span class="when">Jun 2025 – Sep 2026</span><div><h3>Data Annotator (remote)</h3><div class="where">TELUS Digital, Canada</div><ul><li>Labelled and quality-rated multimodal AI training data (text, image and video) against detailed guidelines.</li></ul></div></li>
+        <li><span class="when">Apr 2019 – Apr 2024</span><div><h3>Content Writer (full-time, remote)</h3><div class="where">BrightMedia International, Calicut, India</div><ul><li>News, investigative reports, science communication, reviews and marketing copy, to deadline for five years.</li></ul></div></li>
+        <li><span class="when">Since 2025</span><div><h3>Hospitality work in Niagara</h3><div class="where">Hotel housekeeping, waterpark and restaurant roles, Niagara Falls</div><ul><li>The floor-level view behind my hospitality BI work: room turns, staffing and demand swings. Full list on my <a href="/about/cv/">CV</a>.</li></ul></div></li>
+      </ol>
+    </div>
+
+    <h2 class="section">Education</h2>
+    <div class="card">
+      <ol class="tl">
+        <li><span class="when">2026</span><div><h3>Master's in Data Analytics</h3><div class="where">University of Niagara Falls Canada, Ontario</div><ul><li>SQL, Python, machine learning, statistics and business analytics.</li></ul></div></li>
+        <li><span class="when">2017 to 2019</span><div><h3>MSc Physics</h3><div class="where">Cochin University of Science and Technology (CUSAT), Kochi, India</div><ul><li>Astrophysics major, mathematics minor.</li></ul></div></li>
+        <li><span class="when">2013 to 2016</span><div><h3>BSc Physics</h3><div class="where">Government Victoria College, Palakkad (University of Calicut), India</div></div></li>
+      </ol>
+    </div>
+
+    <section class="cta">
+      <div><h2>Get in touch</h2><p>I'm based in Niagara Falls and open to roles anywhere in Ontario, on site or remote. LinkedIn is the fastest way to reach me.</p></div>
+      <div class="btns"><a class="btn primary" href={SITE.links.linkedin}>LinkedIn</a><a class="btn ghost" href={SITE.links.github}>GitHub</a></div>
+    </section>
+  </main>
+</Base>

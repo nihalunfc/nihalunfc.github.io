@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: optimisation
 title: "Shift schedule builder"
 summary: "Turns forecast workload into a week of shifts at the lowest labour cost, checks each one against Ontario employment rules and exports to Excel."
 group: People and scheduling
@@ -14,9 +16,9 @@ sectors:
   - "Logistics"
   - "Healthcare"
 editions:
-  - { sector: Hotels (housekeeping and front desk), href: "/hotel-business/schedule.html", status: Live }
+  - { sector: Hotels (housekeeping and front desk), href: "/tools/shift-scheduler/hotels/", status: Live }
   - { sector: Restaurants and retail, status: Planned }
-open: "/hotel-business/schedule.html"
+open: "/tools/shift-scheduler/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Department and store managers"

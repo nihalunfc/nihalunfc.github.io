@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: bi
 title: "KPI dashboard"
 summary: "The handful of numbers a manager checks every morning, with pace against last year and a plain-language note on what changed."
 group: Reporting
@@ -12,10 +14,10 @@ sectors:
   - "Any business"
   - "Finance and insurance"
 editions:
-  - { sector: "Hotels (occupancy, ADR, RevPAR)", href: "/hotel-business/tools/kpi.html", status: Live }
+  - { sector: "Hotels (occupancy, ADR, RevPAR)", href: "/tools/kpi-dashboard/hotels/", status: Live }
   - { sector: "Restaurants (covers, average cheque, labour %)", status: Planned }
   - { sector: "Retail (sales per square foot, conversion, basket)", status: Planned }
-open: "/hotel-business/tools/kpi.html"
+open: "/tools/kpi-dashboard/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "General and store managers"

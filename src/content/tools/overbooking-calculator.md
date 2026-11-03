@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: optimisation
 title: "No-show and overbooking calculator"
 summary: "How many extra bookings to accept so no-shows and late cancellations don't leave capacity empty, with the cost of getting it wrong."
 group: Pricing and revenue
@@ -11,9 +13,9 @@ sectors:
   - "Clinics"
   - "Transport"
 editions:
-  - { sector: Hotels, href: "/hotel-business/tools/overbooking.html", status: Live }
+  - { sector: Hotels, href: "/tools/overbooking-calculator/hotels/", status: Live }
   - { sector: Restaurants and clinics, status: Planned }
-open: "/hotel-business/tools/overbooking.html"
+open: "/tools/overbooking-calculator/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Revenue managers"

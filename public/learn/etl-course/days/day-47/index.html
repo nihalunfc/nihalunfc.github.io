@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 47 · Performance, scale and when to change gear · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="/learn/etl-course/assets/style.css">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="/learn/etl-course/"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="/learn/etl-course/">Course</a><a href="/learn/etl-course/pages/projects/">Projects</a><a href="/learn/etl-course/pages/stack/">Stack map</a><a href="/learn/etl-course/pages/setup/">Setup</a><a href="/learn/etl-course/pages/glossary/">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-1/">Week overview</a></li><li><a href="/learn/etl-course/days/day-01/" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="/learn/etl-course/days/day-02/" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="/learn/etl-course/days/day-03/" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="/learn/etl-course/days/day-04/" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="/learn/etl-course/days/day-05/" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="/learn/etl-course/days/day-06/" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="/learn/etl-course/days/day-07/" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-2/">Week overview</a></li><li><a href="/learn/etl-course/days/day-08/" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="/learn/etl-course/days/day-09/" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="/learn/etl-course/days/day-10/" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="/learn/etl-course/days/day-11/" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="/learn/etl-course/days/day-12/" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="/learn/etl-course/days/day-13/" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="/learn/etl-course/days/day-14/" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-3/">Week overview</a></li><li><a href="/learn/etl-course/days/day-15/" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="/learn/etl-course/days/day-16/" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="/learn/etl-course/days/day-17/" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="/learn/etl-course/days/day-18/" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="/learn/etl-course/days/day-19/" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="/learn/etl-course/days/day-20/" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="/learn/etl-course/days/day-21/" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-4/">Week overview</a></li><li><a href="/learn/etl-course/days/day-22/" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="/learn/etl-course/days/day-23/" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="/learn/etl-course/days/day-24/" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="/learn/etl-course/days/day-25/" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="/learn/etl-course/days/day-26/" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="/learn/etl-course/days/day-27/" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="/learn/etl-course/days/day-28/" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-5/">Week overview</a></li><li><a href="/learn/etl-course/days/day-29/" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="/learn/etl-course/days/day-30/" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="/learn/etl-course/days/day-31/" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="/learn/etl-course/days/day-32/" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="/learn/etl-course/days/day-33/" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="/learn/etl-course/days/day-34/" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="/learn/etl-course/days/day-35/" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-6/">Week overview</a></li><li><a href="/learn/etl-course/days/day-36/" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="/learn/etl-course/days/day-37/" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="/learn/etl-course/days/day-38/" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="/learn/etl-course/days/day-39/" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="/learn/etl-course/days/day-40/" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="/learn/etl-course/days/day-41/" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="/learn/etl-course/days/day-42/" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk" open><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-7/">Week overview</a></li><li><a href="/learn/etl-course/days/day-43/" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="/learn/etl-course/days/day-44/" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="/learn/etl-course/days/day-45/" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="/learn/etl-course/days/day-46/" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a class="on" href="/learn/etl-course/days/day-47/" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="/learn/etl-course/days/day-48/" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="/learn/etl-course/days/day-49/" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="/learn/etl-course/weeks/week-7/">Week 7 · Run it in production</a> › Day 47</p>
+<h1>Day 47. Performance, scale and when to change gear</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 70m · lab 135m · ship 20m · review 15m</span><span class="pill">🏷 QSR at chain scale</span><span class="pill">Before: Day 46</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Profile a pipeline and find the real bottleneck</li><li>Make every layer incremental and measure the saving</li><li>Use partitioned Parquet and open table formats (Iceberg, Delta) appropriately</li><li>Recognise the signals that justify Spark, ClickHouse or a cloud warehouse</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>At 18 restaurants everything is fast. At 500 restaurants with three years of history, the same code takes hours. A senior person knows <strong>where time goes</strong>, fixes the right thing, and can say with numbers when the platform needs a bigger engine.</p>
+<h2 id="2-profile-before-optimising">2. Profile before optimising</h2>
+<p>Measure each asset's duration (Dagster shows it), then inside the slow one: <code>time.perf_counter()</code> around steps, <code>py-spy</code> for Python hot spots, <code>EXPLAIN ANALYZE</code> for SQL, Polars <code>.profile()</code> for lazy queries. Typical findings, in order: re-reading all history every run; row-by-row Python loops; non-sargable SQL; network round trips; tiny files.</p>
+<h2 id="3-incremental-everything">3. Incremental everything</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Full approach</th>
+<th>Incremental approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Landing</td>
+<td>List and hash every file</td>
+<td>Manifest + new files only (hash only unseen names/sizes)</td>
+</tr>
+<tr>
+<td>Staging</td>
+<td>Re-clean all files</td>
+<td>Partition by business date, process only new partitions</td>
+</tr>
+<tr>
+<td>Load</td>
+<td>Truncate and reload</td>
+<td>Merge / delete-insert by partition</td>
+</tr>
+<tr>
+<td>dbt</td>
+<td><code>table</code></td>
+<td><code>incremental</code> with look-back; microbatch</td>
+</tr>
+<tr>
+<td>BI</td>
+<td>Full refresh</td>
+<td>Incremental refresh (last N days)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-files-size-and-layout">4. Files: size and layout</h2>
+<ul>
+<li>Target Parquet files of roughly <strong>100 MB–1 GB</strong>; thousands of tiny files are slow everywhere ("small files problem"). Compact daily partitions into monthly files for history.</li>
+<li>Sort within files by common filters (date, location) so min/max stats skip row groups.</li>
+<li><strong>Open table formats</strong> (Apache <strong>Iceberg</strong>, <strong>Delta Lake</strong>) add transactions, schema evolution, time travel and safe concurrent writes on top of Parquet in object storage. DuckDB, Spark, Trino, ClickHouse and Snowflake read them. Use them when several engines write or read the lake; for a single-writer daily pipeline, plain partitioned Parquet plus a manifest is often enough.</li>
+</ul>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> incremental processing changes cost from proportional to history to proportional to change.</p>
+<p><strong>Equation:</strong> full run cost <span class="arithmatex">\(\propto N_{\text{total}} = \sum_{d \le D} n_d \approx D \bar n\)</span>, growing linearly with time. Incremental cost <span class="arithmatex">\(\propto n_D + \text{look-back} \approx (1 + L)\bar n\)</span>, constant over time. Speed-up after <span class="arithmatex">\(D\)</span> days <span class="arithmatex">\(\approx D / (1 + L)\)</span>.</p>
+<p><strong>Analogy:</strong> updating a running sum vs re-adding the whole list every day. Where it breaks: logic that genuinely needs history (rebuilt SCD2, all-time distinct counts) needs smarter state, like keeping per-entity aggregates.</p>
+<p><strong>Try it:</strong> 3 years of daily partitions, 7-day look-back. Approximate speed-up vs full rebuild? <em>(1,095 / 8 ≈ 137×.)</em></p>
+</details>
+<h2 id="5-when-to-change-gear">5. When to change gear</h2>
+<p>Move beyond single-node Postgres + DuckDB when <strong>several</strong> of these are true and you've already done the incremental work:</p>
+<ul>
+<li>Daily processing windows are missed even when incremental, on a reasonably sized machine.</li>
+<li>Facts reach <strong>billions</strong> of rows and dashboards need sub-second aggregations across them → ClickHouse (or a cloud warehouse).</li>
+<li>Many teams and many concurrent heavy queries → elastic cloud warehouse (Snowflake, BigQuery, Fabric, Databricks SQL).</li>
+<li>Data science on very large data, ML features at scale → Spark / Databricks.</li>
+<li>Streaming needs (minutes, not days) → Kafka/Redpanda + a streaming engine, or warehouse-native streaming.</li>
+</ul>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>Most "we need Spark" conversations at medium companies end with "we needed incremental loads and a columnstore". Before proposing a bigger engine, show the profile, the incremental redesign and its measured effect. If it's still not enough, you'll have the numbers that justify the spend, and the finance director will approve it because you tried the cheap fix first.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Lab</p>
+<ol>
+<li>Generate a big dataset: <code>--days 365</code> and edit the generator's reference to 150 restaurants (or loop the generator with different seeds into separate folders). Measure your full pipeline run time.</li>
+<li>Profile: find the top 3 slowest steps. Record before numbers.</li>
+<li>Make landing, staging, load and dbt incremental (most already are; find the gaps). Record after numbers.</li>
+<li>Compact one month of daily Parquet into one file sorted by <code>business_date, restaurant_id</code>; compare a DuckDB query before and after.</li>
+<li>Optional: write the staging layer as an Iceberg or Delta table (<code>pyiceberg</code> or <code>deltalake</code> Python packages) and query it from DuckDB.</li>
+<li>Write <code>docs/performance.md</code> with before/after and your "when to change gear" judgment for this chain.</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p><code>perf: profiling, incremental gaps closed, compaction; before/after numbers</code>.</p>
+</div>
+<section class="quiz" id="quiz-day-47-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> A pipeline takes longer every month. Most likely cause?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-47-1-0" value="0" data-ok="1"> <span>Some step re-processes all history instead of only new partitions</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-0" value="1" data-ok="0"> <span>The server is ageing</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-0" value="2" data-ok="0"> <span>Python gets slower over time</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-0" value="3" data-ok="0"> <span>Power BI refresh</span></label></li>
+</ul><p class="why" hidden>Linear growth in run time points to full reprocessing.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> 40,000 Parquet files of 50 KB each. What's the problem and fix?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-47-1-1" value="0" data-ok="0"> <span>No problem</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-1" value="1" data-ok="1"> <span>Small-files overhead; compact into fewer files of ~100 MB–1 GB</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-1" value="2" data-ok="0"> <span>Convert to CSV</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-1" value="3" data-ok="0"> <span>Add more columns</span></label></li>
+</ul><p class="why" hidden>Per-file overhead dominates with tiny files.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> When would you introduce Iceberg or Delta?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-47-1-2" value="0" data-ok="0"> <span>Always, from day one</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-2" value="1" data-ok="1"> <span>When several engines read/write the lake and you need transactions, schema evolution or time travel</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-2" value="2" data-ok="0"> <span>Only with Power BI</span></label></li>
+<li><label><input type="radio" name="quiz-day-47-1-2" value="3" data-ok="0"> <span>Never with DuckDB</span></label></li>
+</ul><p class="why" hidden>Table formats solve multi-writer, multi-engine problems.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-47" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="/learn/etl-course/days/day-46/">← Day 46</a><button class="btn done" data-action="complete" data-day="day-47">Mark day 47 complete</button><a href="/learn/etl-course/days/day-48/">Day 48 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="/learn/etl-course/assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/katex.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="/learn/etl-course/assets/days.js"></script>
+<script src="/learn/etl-course/assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

@@ -7,4 +7,16 @@ import PageHero from '../components/PageHero.astro';
     <div class="btns"><a class="btn primary" href="/">Home</a><a class="btn ghost" href="/projects/">Projects</a><a class="btn ghost" href="/blog/">Blog</a></div>
   </PageHero>
   <main></main>
+  <script is:inline>
+    /* Deep links inside the dashboard apps (for example a person's page) have no file of
+       their own: hand the path to the app, which restores it. */
+    (function () {
+      var apps = ['/tools/workforce-suite/hotels/', '/tools/operations-suite/hotels/'];
+      var p = location.pathname;
+      for (var i = 0; i < apps.length; i++) if (p.indexOf(apps[i]) === 0 && p !== apps[i]) {
+        try { sessionStorage.setItem('spa-path', p); } catch (e) {}
+        location.replace(apps[i]); return;
+      }
+    })();
+  </script>
 </Base>

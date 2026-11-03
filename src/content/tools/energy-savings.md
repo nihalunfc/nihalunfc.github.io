@@ -1,4 +1,6 @@
 ---
+field: energy
+kind: tools
 title: "Peak-energy savings estimator"
 summary: "Estimates what an Ontario business could save on the Global Adjustment by cutting power use during the five provincial peak hours."
 group: Energy and cost
@@ -11,8 +13,8 @@ sectors:
   - "Manufacturing"
   - "Any Ontario business"
 editions:
-  - { sector: Any Ontario business, href: "/hotel-business/tools/energy-estimator.html", status: Live }
-open: "/hotel-business/tools/energy-estimator.html"
+  - { sector: Any Ontario business, href: "/tools/energy-savings/ontario/", status: Live }
+open: "/tools/energy-savings/ontario/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Facility and energy managers"

@@ -10,9 +10,9 @@ level: Intermediate
 topics: [ETL, Data cleaning, Dagster, Azure SQL, PostgreSQL, DuckDB, dbt, Power BI, Claude Code]
 who: "Analysts moving into data engineering, BI developers who want to own the pipeline, and anyone who wants a practical path from spreadsheets to a warehouse."
 links:
-  - { label: "Setup guide", href: "/learn/etl-course/pages/setup.html" }
-  - { label: "Glossary", href: "/learn/etl-course/pages/glossary.html" }
-  - { label: "Projects", href: "/learn/etl-course/pages/projects.html" }
+  - { label: "Setup guide", href: "/learn/etl-course/pages/setup/" }
+  - { label: "Glossary", href: "/learn/etl-course/pages/glossary/" }
+  - { label: "Projects", href: "/learn/etl-course/pages/projects/" }
 ---
 
 1. **Ingest anything.** Landing zones, email, shared drives, SFTP and APIs, on a retail chain.

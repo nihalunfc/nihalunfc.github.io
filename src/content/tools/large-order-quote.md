@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: bi
 title: "Group and large-order quote"
 summary: "Is a big booking worth it? Compares a group or bulk order with the regular business it would push out, and suggests the lowest price worth accepting."
 group: Pricing and revenue
@@ -12,9 +14,9 @@ sectors:
   - "Wholesale"
   - "Logistics"
 editions:
-  - { sector: Hotels (group displacement), href: "/hotel-business/tools/group-displacement.html", status: Live }
+  - { sector: Hotels (group displacement), href: "/tools/large-order-quote/hotels/", status: Live }
   - { sector: Restaurants (private dining and catering), status: Planned }
-open: "/hotel-business/tools/group-displacement.html"
+open: "/tools/large-order-quote/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Sales and revenue managers"

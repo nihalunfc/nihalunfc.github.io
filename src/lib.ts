@@ -41,6 +41,33 @@ export async function getLog() {
   return all.sort((a, b) => b.data.time.valueOf() - a.data.time.valueOf());
 }
 
+// Entry number: #1 is the oldest entry, so numbers never change when new ones are added.
+export async function logNumbers() {
+  const all = await getLog();
+  const m = new Map<string, number>();
+  all.slice().reverse().forEach((e, i) => m.set(e.id, i + 1));
+  return m;
+}
+
+// One colour per project, the same everywhere (log, filters). Eight muted hues that read in light and dark.
+const HUES = [212, 152, 28, 280, 350, 190, 48, 100];
+export function projectHue(name: string) {
+  let h = 0; for (const c of name) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return HUES[h % HUES.length];
+}
+
+// Progress ticker. `parts` in frontmatter: [{ name, done, added }]; a part with `added`
+// was added after the original plan (an extension). Without `parts`, the ticker is derived:
+// live editions are done parts, planned editions and roadmap items are open parts.
+export type Part = { name: string; done: boolean; added?: Date };
+export function partsFor(d: { parts?: Part[]; editions?: { sector: string; status: string }[]; roadmap?: string[] }): Part[] {
+  if (d.parts && d.parts.length) return d.parts;
+  return [
+    ...(d.editions || []).map((e) => ({ name: `${e.sector} edition`, done: e.status === 'Live' })),
+    ...(d.roadmap || []).map((r) => ({ name: r, done: false })),
+  ];
+}
+
 const TZ = 'America/Toronto';
 export const fmtTime = (d: Date) => d.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: TZ });
 export const dayKey = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: TZ });

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 40 · Open-source BI for companies without Microsoft licences · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="/learn/etl-course/assets/style.css">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="/learn/etl-course/"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="/learn/etl-course/">Course</a><a href="/learn/etl-course/pages/projects/">Projects</a><a href="/learn/etl-course/pages/stack/">Stack map</a><a href="/learn/etl-course/pages/setup/">Setup</a><a href="/learn/etl-course/pages/glossary/">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-1/">Week overview</a></li><li><a href="/learn/etl-course/days/day-01/" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="/learn/etl-course/days/day-02/" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="/learn/etl-course/days/day-03/" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="/learn/etl-course/days/day-04/" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="/learn/etl-course/days/day-05/" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="/learn/etl-course/days/day-06/" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="/learn/etl-course/days/day-07/" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-2/">Week overview</a></li><li><a href="/learn/etl-course/days/day-08/" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="/learn/etl-course/days/day-09/" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="/learn/etl-course/days/day-10/" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="/learn/etl-course/days/day-11/" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="/learn/etl-course/days/day-12/" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="/learn/etl-course/days/day-13/" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="/learn/etl-course/days/day-14/" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-3/">Week overview</a></li><li><a href="/learn/etl-course/days/day-15/" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="/learn/etl-course/days/day-16/" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="/learn/etl-course/days/day-17/" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="/learn/etl-course/days/day-18/" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="/learn/etl-course/days/day-19/" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="/learn/etl-course/days/day-20/" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="/learn/etl-course/days/day-21/" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-4/">Week overview</a></li><li><a href="/learn/etl-course/days/day-22/" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="/learn/etl-course/days/day-23/" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="/learn/etl-course/days/day-24/" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="/learn/etl-course/days/day-25/" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="/learn/etl-course/days/day-26/" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="/learn/etl-course/days/day-27/" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="/learn/etl-course/days/day-28/" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-5/">Week overview</a></li><li><a href="/learn/etl-course/days/day-29/" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="/learn/etl-course/days/day-30/" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="/learn/etl-course/days/day-31/" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="/learn/etl-course/days/day-32/" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="/learn/etl-course/days/day-33/" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="/learn/etl-course/days/day-34/" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="/learn/etl-course/days/day-35/" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk" open><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-6/">Week overview</a></li><li><a href="/learn/etl-course/days/day-36/" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="/learn/etl-course/days/day-37/" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="/learn/etl-course/days/day-38/" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="/learn/etl-course/days/day-39/" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a class="on" href="/learn/etl-course/days/day-40/" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="/learn/etl-course/days/day-41/" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="/learn/etl-course/days/day-42/" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-7/">Week overview</a></li><li><a href="/learn/etl-course/days/day-43/" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="/learn/etl-course/days/day-44/" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="/learn/etl-course/days/day-45/" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="/learn/etl-course/days/day-46/" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="/learn/etl-course/days/day-47/" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="/learn/etl-course/days/day-48/" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="/learn/etl-course/days/day-49/" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="/learn/etl-course/weeks/week-6/">Week 6 · Deliver BI people trust</a> › Day 40</p>
+<h1>Day 40. Open-source BI for companies without Microsoft licences</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 60m · lab 145m · ship 20m · review 15m</span><span class="pill">🏷 restaurants, retail</span><span class="pill">Before: Day 39</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Run Metabase and Apache Superset on Postgres with Docker</li><li>Rebuild your Power BI pages in Metabase and compare honestly</li><li>Know where Evidence, Lightdash, Grafana and Streamlit fit</li><li>Choose a BI tool for a medium company by cost, skills and governance</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>Your mission includes <strong>profitable stacks for medium companies</strong>. Power BI Pro is cheap per user but adds up across 200 restaurant managers, and some companies run Google Workspace or nothing at all. Open-source BI tools are mature, free to self-host, and in many cases good enough. A senior person can recommend either with numbers.</p>
+<h2 id="2-the-options">2. The options</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Style</th>
+<th>Strengths</th>
+<th>Weak spots</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Metabase</strong> (OSS + paid cloud)</td>
+<td>Point-and-click questions + SQL, dashboards, subscriptions</td>
+<td>Fastest for business users; email/Slack subscriptions; embedding</td>
+<td>Complex modelling, very large semantic layers</td>
+</tr>
+<tr>
+<td><strong>Apache Superset</strong></td>
+<td>SQL Lab + chart builder, many chart types</td>
+<td>Scales to many users, RBAC, row-level security, rich viz</td>
+<td>Steeper setup and authoring</td>
+</tr>
+<tr>
+<td><strong>Evidence</strong></td>
+<td>Reports as code (Markdown + SQL), static site</td>
+<td>Git-native, beautiful, cheap to host</td>
+<td>Not for self-service exploration</td>
+</tr>
+<tr>
+<td><strong>Lightdash</strong></td>
+<td>BI on top of dbt models/metrics</td>
+<td>Uses dbt YAML as the semantic layer</td>
+<td>Needs dbt</td>
+</tr>
+<tr>
+<td><strong>Grafana</strong></td>
+<td>Time-series and ops dashboards</td>
+<td>Pipeline monitoring, alerts</td>
+<td>Not a business BI tool</td>
+</tr>
+<tr>
+<td><strong>Streamlit / Dash</strong></td>
+<td>Python apps</td>
+<td>Custom tools (forecast what-ifs, schedule builders)</td>
+<td>You maintain code</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-metabase-in-ten-minutes">3. Metabase in ten minutes</h2>
+<pre class="highlight"><code class="language-yaml"># docker-compose.metabase.yml
+services:
+  mb-db: { image: postgres:16, environment: { POSTGRES_USER: mb, POSTGRES_PASSWORD: mb, POSTGRES_DB: metabase } }
+  metabase:
+    image: metabase/metabase:latest        # pin a version in real use
+    ports: ["3001:3000"]
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: mb
+      MB_DB_PASS: mb
+      MB_DB_HOST: mb-db
+    depends_on: [mb-db]</code></pre>
+<p>Metabase's own app database goes in Postgres (not the default H2 file) so it survives upgrades. Then add your warehouse (Postgres, or Azure SQL via the SQL Server driver) as a data source using the read-only <code>report_reader</code> login.</p>
+<h2 id="4-superset-in-brief">4. Superset in brief</h2>
+<p>Use the official Docker Compose setup from the Superset repo for local trials; production deployments use the Helm chart or a managed provider. Connect via SQLAlchemy URLs (<code>postgresql+psycopg2://…</code>, <code>mssql+pyodbc://…</code>). Define <strong>datasets</strong> (a table or SQL), then charts, then dashboards. Row-level security is configured per role and dataset.</p>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> licence cost scales with users; self-hosting cost scales with servers and people time. The cheaper option flips at some user count.</p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(C_{\text{licensed}}(u) = p \cdot u\)</span>; <span class="arithmatex">\(C_{\text{self}}(u) = C_{\text{vm}} + h \cdot w + \epsilon u\)</span>. Break-even <span class="arithmatex">\(u^* = \dfrac{C_{\text{vm}} + h w}{p - \epsilon}\)</span>.</p>
+<p><strong>Analogy:</strong> fixed vs variable cost in a cost-volume-profit analysis. Where it breaks: hidden costs on both sides (training, SSO, support, the analyst's time building in a less familiar tool).</p>
+<p><strong>Try it:</strong> licence &#36;14/user/month; self-hosted VM &#36;60/month plus 4 h/month at &#36;50/h; marginal user cost ≈ 0. Break-even users? <em>((60 + 200) / 14 ≈ 19 users. Above that, self-hosting is cheaper on paper.)</em></p>
+</details>
+<h2 id="5-choosing">5. Choosing</h2>
+<ol>
+<li><strong>Microsoft 365 company, Excel-heavy users</strong> → Power BI. The integration (Teams, Excel, Entra) is worth the licence.</li>
+<li><strong>No Microsoft, many viewers, few authors</strong> → Metabase (subscriptions and simple questions cover most needs).</li>
+<li><strong>Data team wants many chart types, SQL-first, strict RBAC</strong> → Superset.</li>
+<li><strong>Reports as code, published monthly or daily</strong> → Evidence.</li>
+<li><strong>A custom tool</strong> (what-if pricing, schedule builder) → Streamlit next to whichever BI tool.</li>
+</ol>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>The tool matters less than <strong>one set of metric definitions</strong> feeding it. If you move a company from Power BI to Metabase, the metric dictionary (Day 34) and the dbt marts don't change; only the presentation layer does. Say that in interviews: "I keep business logic in dbt so the BI tool is replaceable." It shows you think about the company's exit costs, not just your favourite tool.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Lab</p>
+<ol>
+<li>Load your marts into Postgres (Week 4 resource with <code>P2D_WAREHOUSE=postgres</code>).</li>
+<li>Run Metabase with Postgres app DB. Rebuild the QSR ops page: KPI tiles with comparisons, trend, restaurant bars, channel mix.</li>
+<li>Set up a Metabase dashboard subscription to your own email (configure SMTP to a test account).</li>
+<li>Run Superset locally; build the hotel pace chart and set one RLS rule.</li>
+<li>Build the same QSR page in Evidence (<code>npx degit evidence-dev/template</code>), publish locally.</li>
+<li>Write <code>docs/bi-comparison.md</code>: time to build each page, what was harder, what each did better, cost at 20 / 100 / 300 users using the formula above with current prices you look up.</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p><code>feat(bi): Metabase, Superset and Evidence versions with a costed comparison</code>.</p>
+</div>
+<section class="quiz" id="quiz-day-40-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> Why store Metabase's application database in Postgres instead of the default H2 file?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-40-1-0" value="0" data-ok="0"> <span>H2 is slower for queries on your warehouse</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-0" value="1" data-ok="1"> <span>The app DB holds questions, dashboards and users; Postgres is durable and survives upgrades/restarts reliably</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-0" value="2" data-ok="0"> <span>Metabase can't connect to Postgres warehouses otherwise</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-0" value="3" data-ok="0"> <span>It's required for SQL queries</span></label></li>
+</ul><p class="why" hidden>Your dashboards live in the app DB. Protect it.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> A 300-restaurant QSR chain on Google Workspace wants daily emailed dashboards for managers and a few analysts building. Reasonable default?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-40-1-1" value="0" data-ok="0"> <span>Power BI Premium</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-1" value="1" data-ok="1"> <span>Metabase self-hosted (or cloud) on a Postgres warehouse, with subscriptions</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-1" value="2" data-ok="0"> <span>Grafana</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-1" value="3" data-ok="0"> <span>Excel files on email</span></label></li>
+</ul><p class="why" hidden>Many viewers, few authors, scheduled delivery: Metabase's strengths.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> What makes switching BI tools cheap?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-40-1-2" value="0" data-ok="0"> <span>Using the same colours</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-2" value="1" data-ok="1"> <span>Business logic and metric definitions kept in dbt/warehouse, not inside the BI tool</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-2" value="2" data-ok="0"> <span>Exporting PDFs</span></label></li>
+<li><label><input type="radio" name="quiz-day-40-1-2" value="3" data-ok="0"> <span>Using DirectQuery</span></label></li>
+</ul><p class="why" hidden>The presentation layer is replaceable when logic lives upstream.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-40" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="/learn/etl-course/days/day-39/">← Day 39</a><button class="btn done" data-action="complete" data-day="day-40">Mark day 40 complete</button><a href="/learn/etl-course/days/day-41/">Day 41 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="/learn/etl-course/assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/katex.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="/learn/etl-course/assets/days.js"></script>
+<script src="/learn/etl-course/assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

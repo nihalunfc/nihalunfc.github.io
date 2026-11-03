@@ -1,19 +1,20 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
-import { getTools } from '../../lib';
-import { SECTORS, inSector } from '../../data/sectors';
+import { getTools, partsFor } from '../../lib';
+import Progress from '../../components/Progress.astro';
+import { FIELDS } from '../../data/fields';
 const tools = await getTools();
 const groups = [...new Set(tools.map((t) => t.data.group))];
-const tagsFor = (t: (typeof tools)[number]) => SECTORS.filter((s) => inSector(t.data.sectors, s)).map((s) => s.id).join('|');
+const tagsFor = (t: (typeof tools)[number]) => t.data.field;
 const planned = tools.flatMap((t) => t.data.editions.filter((e) => e.status !== 'Live').map((e) => ({ t, e })));
 ---
 <Base title="Tools" description="Free business intelligence tools by Nihal Sulaiman for pricing, forecasting, scheduling, operations and reporting, with editions for hotels, restaurants and retail.">
   <PageHero title="Tools" crumbs={[{ label: 'Tools' }]} lead="Free tools for pricing, forecasting, scheduling, operations and reporting. Each one solves a problem most businesses share, with editions fitted to a sector. They run in your browser today, and each page explains who it's for, its limits, what's next and how it can run on your own database or warehouse." />
   <main>
-    <div class="filters" role="group" aria-label="Filter tools by sector">
-      <button type="button" aria-pressed="true" data-f="all">All sectors</button>
-      {SECTORS.map((s) => <button type="button" aria-pressed="false" data-f={s.id}>{s.name}</button>)}
+    <div class="filters" role="group" aria-label="Filter tools by field">
+      <button type="button" aria-pressed="true" data-f="all">All fields</button>
+      {FIELDS.map((f) => <button type="button" aria-pressed="false" data-f={f.id}>{f.name}</button>)}
     </div>
     <div class="tgroups" id="tgroups">
       {groups.map((g) => (
@@ -21,13 +22,14 @@ const planned = tools.flatMap((t) => t.data.editions.filter((e) => e.status !== 
           <h3><i></i>{g}</h3>
           {tools.filter((t) => t.data.group === g).map((t) => (
             <a href={`/tools/${t.id}/`} data-s={tagsFor(t)}>{t.data.title}<span>{t.data.summary}</span>
+              <Progress parts={partsFor(t.data)} compact />
               <span class="cnt" data-count-path={`/tools/${t.id}/`} hidden></span>
               <span class="ed-line">{t.data.editions.map((e) => <em class={`es ${e.status.replace(' ', '')}`}>{e.sector.replace(/ \(.*\)/, '')}</em>)}</span></a>
           ))}
         </section>
       ))}
     </div>
-    <p class="muted" style="margin-top:18px">See them grouped by field on <a href="/sectors/">Who it's for</a>, with the tools planned for each.</p>
+    <p class="muted" style="margin-top:18px">See everything grouped by field, with what's planned, on <a href="/fields/">Fields</a>.</p>
     <h2 class="section">Editions in the works</h2>
     <p class="muted">The hospitality edition came first because that's the industry I've worked in. Restaurant-chain and retail editions reuse the same models with sector-specific inputs.</p>
     <ul class="hub-list soon-list">{planned.map(({ t, e }) => <li><a href={`/tools/${t.id}/`}>{t.data.title}</a><span>{e.sector} · {e.status}</span></li>)}</ul>

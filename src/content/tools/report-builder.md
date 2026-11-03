@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: bi
 title: "Report builder"
 summary: "Upload the exports you already have (CSV or Excel) and get a manager's report with charts and notes, without building a dashboard."
 group: Reporting
@@ -10,9 +12,9 @@ sectors:
   - "Finance and insurance"
   - "Research"
 editions:
-  - { sector: Hotels, href: "/hotel-business/tools/report-dashboard/", status: Live }
+  - { sector: Hotels, href: "/tools/report-builder/hotels/", status: Live }
   - { sector: Any business, status: In progress }
-open: "/hotel-business/tools/report-dashboard/"
+open: "/tools/report-builder/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Managers who get exports but no dashboards"

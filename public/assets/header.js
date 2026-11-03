@@ -1,23 +1,18 @@
-/* Shared site header, footer and light/dark theme for Nihal's portfolio (/) and
-   the Hospitality BI site (/hotel-business/). The same file lives in both repos:
-   nihalunfc.github.io/assets/header.js and hotel-business/docs/assets/header.js.
-   Keep the two copies identical.
+/* Site header, footer and light/dark theme for nihalsulaiman.com. One file for every page.
 
    How a page uses it:
-     in <head>, after the stylesheet: a plain (not deferred) script tag with src ".../assets/header.js"
+     in <head>, after the stylesheet: a plain script tag loading /assets/header.js (not deferred)
      <body> <site-header></site-header> ... page ... <site-footer></site-footer>
    A full-screen app can leave out <site-header>: the script then only applies the saved theme.
 
-   URL schema (all links are root-relative, so a custom domain only needs the CNAME):
-     /                         portfolio home         /projects/        all projects
-     /swarm/ /swarm/<domain>/  Swarm Intelligence     /tools/           every tool, written for any sector
-     /tools/<slug>/            a personal tool        /about/ /cv/ /now/ /disclaimer/
-     /blog/ /blog/<slug>/      blog posts             /projects/<slug>/ project write-ups   /kaggle/
-     /hotel-business/                 Hospitality BI home
-     /hotel-business/dashboards/<slug>/   sample-data dashboards and demos
-     /hotel-business/tools/<slug>/        hotel tools (older tools keep their tools/<slug>.html address)
-     /hotel-business/swarm/               AI swarm for hotels
-   New pages are folders with an index.html. Existing addresses never move.
+   URL scheme (one site, root-relative links, every page is a folder with index.html):
+     /                                home
+     /<section>/                      section index: projects, tools, learn, blog, sectors, about, now, log
+     /<section>/<item>/               one item: /projects/bi-toolkit/, /tools/shift-scheduler/, /blog/<post>/
+     /<section>/<item>/<page>/        a page of that item: /tools/shift-scheduler/hotels/ (an edition),
+                                      /swarm/grid-batteries/ (a demo)
+     /tools/<tool>/<edition>/<view>/  a view inside a tool app (no #/ routes)
+   Full map and rules: /site-structure.md. A #fragment only ever points inside the same page.
 
    Theme: saved in localStorage "nihal.theme" ("light" or "dark", default light) and set as
    <html data-theme="...">. A "themechange" event is sent on window when it changes. */
@@ -37,32 +32,6 @@
   window.addEventListener('storage', function (e) { if (e.key === KEY) { applyTheme(savedTheme()); window.dispatchEvent(new Event('themechange')); } });
 
   /* ---------------------------------------------------------------- data */
-  var H = '/hotel-business/';
-  var PERSONAL_TOOLS = [
-    { href: '/tools/expense-calendar/', label: 'Expense calendar', sub: 'Plan and track expenses day by day' }
-  ];
-  var HOTEL_TOOLS = [
-    { group: 'Revenue', items: [
-      { href: H + 'tools/rate-recommender.html', label: 'Rate recommender', sub: 'A rate for each of the next 30 days' },
-      { href: H + 'tools/forecaster.html', label: 'Occupancy forecaster', sub: 'The next 30 to 90 days of occupancy' },
-      { href: H + 'tools/overbooking.html', label: 'Overbooking calculator', sub: 'How many extra rooms to sell' },
-      { href: H + 'tools/group-displacement.html', label: 'Group quote and displacement', sub: 'Is this group worth it?' },
-      { href: H + 'tools/kpi.html', label: 'Hotel KPI dashboard', sub: 'Occupancy, ADR, RevPAR and profit' }
-    ] },
-    { group: 'Operations', items: [
-      { href: H + 'schedule.html', label: 'Staff schedule builder', sub: "A week's schedule at the lowest cost" },
-      { href: H + 'tools/housekeeping-board.html', label: 'Housekeeping board', sub: "Today's room assignments" },
-      { href: H + 'tools/labour.html', label: 'Labour productivity', sub: 'Hours and cost per occupied room' },
-      { href: H + 'tools/night-audit.html', label: 'Night audit assistant', sub: 'Checklist, balancing and daily report' },
-      { href: H + 'tools/energy-estimator.html', label: 'Peak-energy savings', sub: 'Ontario Global Adjustment savings' },
-      { href: H + 'tools/report-dashboard/', label: 'Hotel report builder', sub: "Upload any exports, get a manager's report" }
-    ] }
-  ];
-  var HOTEL_DASHBOARDS = [
-    { href: H + 'revenue.html', label: 'Revenue command centre', sub: 'Twelve months of pricing decisions' },
-    { href: H + 'dashboards/workforce/', label: 'Workforce', sub: 'Scheduling, time clock, timesheets and payroll' },
-    { href: H + 'dashboards/operations/', label: 'Operations', sub: 'Housekeeping, maintenance and guest requests in one app' }
-  ];
   var GH = 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z';
 
   var SITES = {
@@ -71,33 +40,20 @@
       /* Plain links, no drop-downs: every section has its own card-style index page. */
       nav: [
         { label: 'Home', href: '/', exact: true },
-        { label: 'Projects', href: '/projects/', match: ['/projects/', '/swarm/', '/kaggle/'] },
-        { label: 'Tools', href: '/tools/', match: ['/tools/', '/sectors/'] },
+        { label: 'Swarm', href: '/swarm/', match: ['/swarm/'] },
+        { label: 'Fields', href: '/fields/', match: ['/fields/'] },
+        { label: 'Projects', href: '/projects/', match: ['/projects/'] },
+        { label: 'Tools', href: '/tools/', match: ['/tools/'] },
         { label: 'Learn', href: '/learn/', match: ['/learn/'] },
         { label: 'Blog', href: '/blog/', match: ['/blog/'] },
         { label: 'Now', href: '/now/', match: ['/now/', '/log/'] },
-        { label: 'About', href: '/about/', match: ['/about/', '/cv/', '/disclaimer/', '/contact/'] },
-        { label: 'Search', href: '/search/', match: ['/search/'] }
+        { label: 'About', href: '/about/', match: ['/about/', '/disclaimer/', '/contact/', '/search/', '/sitemap/'] }
       ],
       action: { label: 'Contact', href: '/contact/' }
-    },
-    hotel: {
-      home: H, name: 'Hospitality BI', sub: 'by Nihal',
-      nav: [
-        { label: 'Home', href: H, exact: true },
-        { label: 'Dashboards', href: H + 'dashboards/', match: [H + 'dashboards/', H + 'revenue.html'], menu: [{ items: HOTEL_DASHBOARDS }], all: { href: H + 'dashboards/', label: 'All dashboards' } },
-        { label: 'Hotel tools', href: H + 'tools/', match: [H + 'tools/', H + 'schedule.html'], wide: true,
-          menu: HOTEL_TOOLS.map(function (g) { return { group: g.group, tag: 'hotel', items: g.items }; }),
-          all: { href: H + 'tools/index.html', label: 'All hotel tools' },
-          extra: { href: '/tools/', label: 'Personal tools on Nihal’s portfolio' } },
-        { label: 'AI swarm', href: H + 'swarm/', match: [H + 'swarm/'] },
-        { label: 'Proposals', href: H + 'index.html#proposals' }
-      ],
-      action: { label: 'Code', href: 'https://github.com/nihalunfc/hotel-business' }
     }
   };
   var src = (document.currentScript && document.currentScript.src) || '';
-  var SITE = SITES[/\/hotel-business\//.test(src) ? 'hotel' : 'portfolio'];
+  var SITE = SITES.portfolio;
 
   /* --------------------------------------------------------------- styles */
   var CSS = [
@@ -216,14 +172,14 @@
       '<div class="sh-right">' + action(SITE.action) + THEME + BURGER + '</div></div>';
   }
   function footerHTML() {
-    var hotel = SITE === SITES.hotel;
+    var hotel = /^\/(tools\/[^/]+\/hotels|projects\/hospitality-bi)\//.test(location.pathname);
     var col = function (title, links) { return '<div><h2>' + title + '</h2>' + links.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('') + '</div>'; };
     return '<div class="sf-in"><div><a class="sh-brand" href="/">' + MARK + 'Nihal <small>Portfolio</small></a>' +
       '<p>Data, business intelligence and applied AI. Projects and free tools with live results you can explore.</p></div>' +
-      col('Projects', [['/projects/bi-toolkit/', 'BI toolkit'], [H, 'Hospitality edition'], ['/swarm/', 'Swarm Intelligence'], ['/kaggle/', 'Kaggle'], ['/projects/', 'All projects']]) +
-      col('Tools', [['/tools/', 'All tools'], ['/sectors/', "Who it's for"], ['/learn/', 'Learn: ETL course'], ['/tools/expense-calendar/', 'Expense calendar']]) +
-      col('Writing', [['/blog/', 'Blog'], ['/log/', 'Activity log'], ['/rss.xml', 'RSS feed'], ['https://www.linkedin.com/in/vsnihal/', 'LinkedIn'], ['https://github.com/nihalunfc', 'GitHub'], ['https://www.kaggle.com/vsnihal', 'Kaggle']]) +
-      col('Site', [['/about/', 'About'], ['/cv/', 'CV'], ['/now/', 'Now'], ['/contact/', 'Contact'], ['/search/', 'Search'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
+      col('Work', [['/swarm/', 'Swarm Intelligence'], ['/fields/', 'Fields'], ['/projects/', 'Projects'], ['/projects/kaggle/', 'Kaggle']]) +
+      col('Fields', [['/fields/hospitality/', 'Hospitality'], ['/fields/logistics/', 'Logistics'], ['/fields/energy/', 'Energy'], ['/fields/crisis/', 'Crisis management'], ['/fields/science/', 'Science'], ['/fields/health/', 'Health'], ['/fields/finance/', 'Finance']]) +
+      col('Use', [['/tools/', 'Tools'], ['/learn/', 'Learn'], ['/blog/', 'Blog'], ['/log/', 'Activity log'], ['/rss.xml', 'RSS feed']]) +
+      col('Site', [['/about/', 'About'], ['/about/cv/', 'CV'], ['/now/', 'Now'], ['/contact/', 'Contact'], ['/search/', 'Search'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
       '<div class="sf-legal"><span>© 2026 Nihal.' + (hotel ? ' All hotels, guests, staff and figures on this site are fictional samples.' : '') + '</span>' +
       '<span>Built with the help of AI tools. <a href="/disclaimer/">Credits</a></span></div></div>';
   }

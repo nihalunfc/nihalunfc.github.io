@@ -1,20 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import LogList from '../components/LogList.astro';
-import { getLog } from '../lib';
-const recent = (await getLog()).slice(0, 6);
 ---
 <Base title="Now" description="What Nihal Sulaiman is working on right now: job search, current projects, Kaggle competitions and what he's learning.">
   <PageHero title="What I'm doing now" crumbs={[{ label: 'Now' }]} lead="A snapshot of my current work, updated whenever something changes. Inspired by the nownownow.com idea.">
-    <p class="updated" style="margin-top:12px">Day by day: <a href="/log/">activity log</a> · Last updated 3 November 2026 · Niagara Falls, Ontario</p>
+    <p class="updated" style="margin-top:12px">Last updated 3 November 2026 · Niagara Falls, Ontario</p>
   </PageHero>
   <main>
     <div class="now-grid">
-      <div class="card diary"><h2><i></i>Live diary</h2><LogList entries={recent} compact /><p style="margin:10px 0 0;font-size:13.5px;font-weight:600"><a href="/log/">Full activity log →</a></p></div>
-      <div class="card"><h2><i></i>Looking for work</h2><p>Data analyst, BI developer, data scientist or ML roles anywhere in Ontario: full-time, part-time or internship, on site or remote. Any sector: retail, finance, logistics, healthcare, hospitality and more.</p><p><a href="/cv/">View CV →</a></p></div>
+      <div class="card"><h2><i></i>Activity log</h2><p>Every piece of work, numbered and colour-coded by project, is on its own page.</p><p><a href="/log/">Open the activity log →</a></p></div>
+      <div class="card"><h2><i></i>Looking for work</h2><p>Data analyst, BI developer, data scientist or ML roles anywhere in Ontario: full-time, part-time or internship, on site or remote. Any sector: retail, finance, logistics, healthcare, hospitality and more.</p><p><a href="/about/cv/">View CV →</a></p></div>
       <div class="card"><h2><i></i>Working</h2><p>Remote Data Engineer with Shipd by DataCurve, building training data and coding challenges for AI models.</p></div>
-      <div class="card"><h2><i></i>Building</h2><ul class="tight"><li>Turning the <a href="/projects/bi-toolkit/">BI toolkit</a> into scheduled ETL pipelines that load an Azure SQL Database.</li><li>Editions for restaurant chains and retail, then <a href="/sectors/">other fields</a>.</li><li>More seeds and domains for <a href="/projects/swarm-intelligence/">Swarm Intelligence</a>.</li><li>This site and blog.</li></ul></div>
+      <div class="card"><h2><i></i>Building</h2><ul class="tight"><li>Turning the <a href="/projects/bi-toolkit/">BI toolkit</a> into scheduled ETL pipelines that load an Azure SQL Database.</li><li>Tools for each of my <a href="/fields/">seven fields</a>, starting with logistics and health.</li><li>More seeds and fields for <a href="/swarm/">Swarm Intelligence</a>, my flagship.</li><li>This site and blog.</li></ul></div>
       <div class="card"><h2><i></i>Learning</h2><ul class="tight"><li>Working through my own <a href="/learn/">Pipeline to Dashboard</a> course.</li><li>T-SQL and SQL Server, my main gap to close.</li><li>Power BI and DAX.</li><li>dbt and dimensional modelling, Dagster for orchestration.</li></ul></div>
       <div class="card"><h2><i></i>Competing</h2><ul class="tight"><li><a href="/projects/name-that-llm/">Name That LLM</a>, ends January 2027</li><li><a href="/projects/casmi-2026/">Enveda CASMI 2026</a>, ends December 2026</li><li><a href="/projects/smart-buildings/">NeurIPS Smart Buildings</a>, ends January 2027</li><li><a href="/projects/squares-in-squares/">Squares in Squares</a>, ends July 2027</li></ul></div>
       <div class="card"><h2><i></i>Writing</h2><p>Write-ups of each Kaggle competition as it ends, and notes on building BI pipelines on a small budget. <a href="/blog/">Read the blog →</a></p></div>

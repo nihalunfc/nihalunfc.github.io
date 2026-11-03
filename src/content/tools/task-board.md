@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: tools
 title: "Daily task board"
 summary: "Splits today's tasks fairly across the people on shift and tracks each one from assigned to done."
 group: Operations
@@ -12,9 +14,9 @@ sectors:
   - "Retail"
   - "Logistics"
 editions:
-  - { sector: Hotels (housekeeping board), href: "/hotel-business/tools/housekeeping-board.html", status: Live }
+  - { sector: Hotels (housekeeping board), href: "/tools/task-board/hotels/", status: Live }
   - { sector: Cleaning and facilities crews, status: Planned }
-open: "/hotel-business/tools/housekeeping-board.html"
+open: "/tools/task-board/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Supervisors"

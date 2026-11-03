@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: tools
 title: "End-of-day close assistant"
 summary: "A guided checklist for closing the day, balancing the takings against the system and producing the daily report."
 group: Operations
@@ -10,9 +12,9 @@ sectors:
   - "Restaurants"
   - "Retail"
 editions:
-  - { sector: Hotels (night audit), href: "/hotel-business/tools/night-audit.html", status: Live }
+  - { sector: Hotels (night audit), href: "/tools/daily-close/hotels/", status: Live }
   - { sector: Restaurants and retail (cash-up), status: Planned }
-open: "/hotel-business/tools/night-audit.html"
+open: "/tools/daily-close/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Night auditors"

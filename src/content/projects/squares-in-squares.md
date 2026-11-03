@@ -1,4 +1,6 @@
 ---
+field: science
+kind: optimisation
 title: Squares in Squares
 summary: Pack N unit squares into the smallest possible square for every N up to 1,000. A validation and submission pipeline that only submits packings proven valid on Kaggle's high-precision checker.
 category: Kaggle

@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: optimisation
 title: "Pricing recommender"
 summary: "A suggested price for each of the next 30 days, from how full you already are, how fast you're filling and what you charged last year."
 group: Pricing and revenue
@@ -11,9 +13,9 @@ sectors:
   - "Venues and events"
   - "Parking"
 editions:
-  - { sector: Hotels, href: "/hotel-business/tools/rate-recommender.html", status: Live }
+  - { sector: Hotels, href: "/tools/pricing-recommender/hotels/", status: Live }
   - { sector: Venues and events, status: Planned }
-open: "/hotel-business/tools/rate-recommender.html"
+open: "/tools/pricing-recommender/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Revenue and pricing managers"

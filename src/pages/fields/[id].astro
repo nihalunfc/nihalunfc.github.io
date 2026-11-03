@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ItemList from '../../components/ItemList.astro';
+import { FIELDS, KINDS } from '../../data/fields';
+import { getTools, getProjects } from '../../lib';
+export function getStaticPaths() { return FIELDS.map((f) => ({ params: { id: f.id }, props: { f } })); }
+const { f } = Astro.props;
+const tools = (await getTools()).filter((t) => t.data.field === f.id);
+const projects = (await getProjects()).filter((p) => p.data.field === f.id);
+const swarm = (await getCollection('swarm')).filter((s) => s.data.field === f.id);
+const byKind = KINDS.map((k) => ({ k, items: [
+  ...projects.filter((p) => p.data.kind === k.id).map((p) => ({ href: `/projects/${p.id}/`, title: p.data.title, note: `Project · ${p.data.status}` })),
+  ...tools.filter((t) => t.data.kind === k.id).map((t) => ({ href: `/tools/${t.id}/`, title: t.data.title, note: `Tool · ${t.data.status}` })),
+] }));
+---
+<Base title={f.name} description={`${f.name}: ${f.blurb} BI, optimisation, tools, pipelines and machine learning by Nihal Sulaiman.`}>
+  <PageHero title={f.name} crumbs={[{ label: 'Fields', href: '/fields/' }, { label: f.name }]} lead={f.blurb} />
+  <main>
+    <div class="now-grid two">
+      {swarm.length > 0 && <section class="card"><h2><i></i>Swarm Intelligence</h2><ItemList items={swarm.map((s) => ({ href: s.data.demo || '/swarm/', title: s.data.title, note: `Swarm · ${s.data.status}` }))} /></section>}
+      {byKind.map(({ k, items }) => (
+        <section class="card" id={k.id}>
+          <h2><i></i>{k.name}</h2>
+          {items.length ? <ItemList items={items} /> : <p class="muted">Nothing here yet.</p>}
+        </section>
+      ))}
+      <section class="card"><h2><i></i>Planned</h2><ul class="tight">{f.ideas.map((i) => <li>{i}</li>)}</ul></section>
+    </div>
+    <nav class="field-nav" aria-label="Other fields">{FIELDS.filter((x) => x.id !== f.id).map((x) => <a href={`/fields/${x.id}/`}>{x.name}</a>)}</nav>
+  </main>
+</Base>

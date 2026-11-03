@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: bi
 title: Business intelligence toolkit
 summary: One data model, one set of quality checks and a dozen decision tools for pricing, forecasting, scheduling and reporting, built once and fitted to each sector as an edition.
 category: Business intelligence

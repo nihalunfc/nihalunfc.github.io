@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: bi
 title: "Labour productivity"
 summary: "Hours and labour cost per unit of work, such as per occupied room, per cover or per transaction, by team and by week."
 group: People and scheduling
@@ -12,9 +14,9 @@ sectors:
   - "Any business"
   - "Logistics"
 editions:
-  - { sector: Hotels (per occupied room), href: "/hotel-business/tools/labour.html", status: Live }
+  - { sector: Hotels (per occupied room), href: "/tools/labour-productivity/hotels/", status: Live }
   - { sector: Restaurants (per cover) and retail (per transaction), status: Planned }
-open: "/hotel-business/tools/labour.html"
+open: "/tools/labour-productivity/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Operations and finance managers"

@@ -12,7 +12,7 @@
     document.querySelectorAll("[data-weekbar]").forEach(function(s){var w=+s.dataset.weekbar,ds=days.filter(function(d){return d.week===w}),k=ds.filter(function(d){return done[d.slug]}).length;s.style.width=(ds.length?100*k/ds.length:0)+"%"});
     document.querySelectorAll(".wprog").forEach(function(s){var w=+s.dataset.week,ds=days.filter(function(d){return d.week===w}),k=ds.filter(function(d){return done[d.slug]}).length;s.textContent=k+"/"+ds.length});
     var next=days.find(function(d){return !done[d.slug]});
-    document.querySelectorAll("[data-action=resume]").forEach(function(a){if(next){a.href=a.getAttribute("href").replace(/day-\d+\.html/,next.slug+".html");a.textContent=n?"Continue: Day "+next.day+" · "+next.title:"Start Day 1"}else{a.textContent="Course complete 🎉";a.href="pages/projects.html"}});
+    document.querySelectorAll("[data-action=resume]").forEach(function(a){if(next){a.href="/learn/etl-course/days/"+next.slug+"/";a.textContent=n?"Continue: Day "+next.day+" · "+next.title:"Start Day 1"}else{a.textContent="Course complete 🎉";a.href="/learn/etl-course/pages/projects/"}});
   }
   document.addEventListener("click",function(e){
     var t=e.target.closest("[data-action]"); if(!t) return;
@@ -83,7 +83,7 @@
   } else {
     var main=document.querySelector("main")||document.body;
     var rm=document.createElement("p");rm.className="bk-remind";rm.hidden=true;
-    rm.innerHTML='Your progress is only in this browser and isn\'t backed up. <a href="'+(location.pathname.indexOf("/days/")>-1||location.pathname.indexOf("/weeks/")>-1||location.pathname.indexOf("/pages/")>-1?"../":"")+'index.html#bk-h">Download a backup</a> so you don\'t lose it.';
+    rm.innerHTML='Your progress is only in this browser and isn\'t backed up. <a href="/learn/etl-course/#bk-h">Download a backup</a> so you don\'t lose it.';
     main.insertBefore(rm,main.firstChild);
   }
   document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-action=complete]");if(t)setTimeout(paintBk,0)});

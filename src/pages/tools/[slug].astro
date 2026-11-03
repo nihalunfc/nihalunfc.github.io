@@ -2,9 +2,11 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import Progress from '../../components/Progress.astro';
 import RunYourOwn from '../../components/RunYourOwn.astro';
 import LogList from '../../components/LogList.astro';
-import { getTools, getUpdates, fmtDate } from '../../lib';
+import { fieldName, kindName } from '../../data/fields';
+import { getTools, getUpdates, partsFor, fmtDate } from '../../lib';
 export async function getStaticPaths() {
   const ts = await getTools();
   return ts.map((t) => ({ params: { slug: t.id }, props: { t } }));
@@ -19,9 +21,10 @@ const list = (h: string, xs: string[]) => ({ h, xs });
 <Base title={d.title} description={d.summary} type="article">
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   <PageHero title={d.title} crumbs={[{ label: 'Tools', href: '/tools/' }, { label: d.title }]} lead={d.summary}>
-    <div class="post-meta"><span class="eyebrow" style="margin:0">{d.group}</span><span class={`status ${d.status.replace(' ', '')}`}>{d.status}</span>
-      <div class="tags">{d.sectors.map((s) => <span class="tag">{s}</span>)}</div></div>
+    <div class="post-meta"><a class="eyebrow" style="margin:0" href={`/fields/${d.field}/`}>{fieldName(d.field)} · {kindName(d.kind)}</a><span class={`status ${d.status.replace(' ', '')}`}>{d.status}</span>
+      </div>
     {d.open && <p style="margin-top:14px"><a class="btn primary" href={d.open} data-open-count={t.id}>Open the tool</a></p>}
+    <Progress parts={partsFor(d)} />
   </PageHero>
   <main>
     <div class="detail">
@@ -37,6 +40,7 @@ const list = (h: string, xs: string[]) => ({ h, xs });
       </article>
       <aside>
         {d.editions.length > 0 && <div class="card ed"><h2>Editions</h2><ul class="editions">{d.editions.map((e) => <li>{e.href ? <a href={e.href}>{e.sector}</a> : <span>{e.sector}</span>}<em class={`es ${e.status.replace(' ', '')}`}>{e.status}</em></li>)}</ul></div>}
+        {d.sectors.length > 0 && <div class="card"><h2>Also useful for</h2><div class="tags">{d.sectors.map((s) => <span class="tag">{s}</span>)}</div></div>}
         {d.method.length > 0 && <div class="card"><h2>Built with</h2><div class="tags">{d.method.map((m) => <span class="tag">{m}</span>)}</div></div>}
         <div class="card lk"><h2>Links</h2>{d.open && <a href={d.open} data-open-count={t.id}>Open the tool →</a>}{d.code && <a href={d.code}>Code on GitHub →</a>}<a href="/contact/">Ask about a custom version →</a></div>
         <div class="card usage"><h2>Usage</h2><p><span data-views hidden></span><span data-opens={t.id} hidden></span><span class="muted small">Counted without cookies</span></p></div>

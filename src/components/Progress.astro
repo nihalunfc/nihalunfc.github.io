@@ -1,0 +1,23 @@
+---
+// Small progress ticker: one segment per part. Filled = done. Parts added after the
+// original plan sit after a gap with a dashed outline, so an extended plan is visible.
+import type { Part } from '../lib';
+interface Props { parts: Part[]; compact?: boolean }
+const { parts, compact = false } = Astro.props;
+const orig = parts.filter((p) => !p.added), ext = parts.filter((p) => p.added);
+const doneO = orig.filter((p) => p.done).length, doneAll = parts.filter((p) => p.done).length;
+const pct = (a: number, b: number) => (b ? Math.round((100 * a) / b) : 0);
+const label = ext.length
+  ? `Original plan ${doneO}/${orig.length} (${pct(doneO, orig.length)}%) · extended by ${ext.length} · ${doneAll}/${parts.length} overall (${pct(doneAll, parts.length)}%)`
+  : `${doneAll} of ${parts.length} parts done (${pct(doneAll, parts.length)}%)`;
+---
+{parts.length > 0 && (
+  <div class={`tick${compact ? ' sm' : ''}`} role="img" aria-label={`Progress: ${label}`}>
+    <div class="tick-bar">
+      {orig.map((p) => <span class={p.done ? 'on' : ''} title={`${p.done ? 'Done' : 'To do'}: ${p.name}`}></span>)}
+      {ext.length > 0 && <i class="tick-gap"></i>}
+      {ext.map((p) => <span class={`ext${p.done ? ' on' : ''}`} title={`${p.done ? 'Done' : 'To do'} (added later): ${p.name}`}></span>)}
+    </div>
+    <p class="tick-l">{label}</p>
+  </div>
+)}

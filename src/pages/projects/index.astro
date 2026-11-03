@@ -3,15 +3,16 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { getProjects } from '../../lib';
+import { FIELDS } from '../../data/fields';
 const projects = await getProjects();
-const cats = [...new Set(projects.map((p) => p.data.category))];
+const cats = FIELDS.filter((f) => projects.some((p) => p.data.field === f.id));
 ---
 <Base title="Projects" description="Projects by Nihal Sulaiman: hospitality BI warehouse and dashboards, swarm intelligence, wildfire drones, and Kaggle machine-learning work.">
-  <PageHero title="Projects" crumbs={[{ label: 'Projects' }]} lead="Business intelligence, applied AI and Kaggle work. Each write-up covers the problem, what I built, the hardest part and the result, including where my own changes didn't help." />
+  <PageHero title="Projects" crumbs={[{ label: 'Projects' }]} lead="Projects across my seven fields. My flagship, Swarm Intelligence, has its own section. Each write-up covers the problem, what I built, the hardest part and the result, including where my own changes didn't help." />
   <main>
     <div class="filters" role="group" aria-label="Filter projects">
       <button type="button" aria-pressed="true" data-f="all">All</button>
-      {cats.map((c) => <button type="button" aria-pressed="false" data-f={c}>{c}</button>)}
+      {cats.map((c) => <button type="button" aria-pressed="false" data-f={c.id}>{c.name}</button>)}
     </div>
     <div class="pgrid" id="pgrid">{projects.map((p) => <ProjectCard p={p} />)}</div>
   </main>

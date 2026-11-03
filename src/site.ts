@@ -17,6 +17,6 @@ export const SITE = {
     github: 'https://github.com/nihalunfc',
     linkedin: 'https://www.linkedin.com/in/vsnihal/',
     kaggle: 'https://www.kaggle.com/vsnihal',
-    hotel: "/hotel-business/",
+    hotel: "/projects/hospitality-bi/overview/",
   },
 };

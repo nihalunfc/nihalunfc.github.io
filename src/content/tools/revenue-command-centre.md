@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: bi
 title: "Revenue command centre"
 summary: "One page for the whole business: demand pace, forecast, lost demand on sold-out days, net revenue by sales channel and cancellations."
 group: Reporting
@@ -11,10 +13,10 @@ sectors:
   - "Retail chains"
   - "Automotive dealerships"
 editions:
-  - { sector: Hotels, href: "/hotel-business/revenue.html", status: Live }
+  - { sector: Hotels, href: "/tools/revenue-command-centre/hotels/", status: Live }
   - { sector: Restaurant chains, status: Planned }
   - { sector: Retail chains, status: Planned }
-open: "/hotel-business/revenue.html"
+open: "/tools/revenue-command-centre/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Revenue and commercial leads"

@@ -1,4 +1,6 @@
 ---
+field: finance
+kind: tools
 title: "Expense calendar"
 summary: "Plan and track expenses day by day on a calendar. Works offline and keeps everything on your device."
 group: Personal
@@ -11,9 +13,9 @@ sectors:
   - "Small households"
   - "Household"
 editions:
-  - { sector: Personal, href: /tools/expense-calendar/, status: Live }
-open: /tools/expense-calendar/
-code: https://github.com/nihalunfc/nihalunfc.github.io/tree/main/public/tools/expense-calendar
+  - { sector: Personal, href: /tools/expense-calendar/personal/, status: Live }
+open: /tools/expense-calendar/personal/
+code: https://github.com/nihalunfc/nihalunfc.github.io/tree/main/public/tools/expense-calendar/personal
 who:
   - "Anyone planning monthly bills"
   - "Students and newcomers budgeting on a tight income"

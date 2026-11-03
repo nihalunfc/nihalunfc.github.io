@@ -1,4 +1,6 @@
 ---
+field: hospitality
+kind: ml
 title: "Demand forecaster"
 summary: "Forecasts the next 30 to 90 days of demand from your history, with a range and a back-test so you can see how far to trust it."
 group: Forecasting and planning
@@ -13,10 +15,10 @@ sectors:
   - "Logistics"
   - "Healthcare"
 editions:
-  - { sector: Hotels (occupancy), href: "/hotel-business/tools/forecaster.html", status: Live }
+  - { sector: Hotels (occupancy), href: "/tools/demand-forecaster/hotels/", status: Live }
   - { sector: Restaurants (covers), status: Planned }
   - { sector: Retail (footfall and units), status: Planned }
-open: "/hotel-business/tools/forecaster.html"
+open: "/tools/demand-forecaster/hotels/"
 code: "https://github.com/nihalunfc/hotel-business"
 who:
   - "Operations and revenue managers"

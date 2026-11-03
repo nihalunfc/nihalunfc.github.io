@@ -6,6 +6,18 @@ These are the rules any Claude session (claude.ai chat, project thread, Cowork o
 
 To work on the site, a session needs the repo nihalunfc/nihalunfc.github.io: in Claude Code, clone or attach it; in claude.ai, use the GitHub connector. If neither is possible, see section 7.
 
+## 0. The run, start to finish
+
+1. Read this file and the structure map.
+2. Get the repo: `git clone https://github.com/nihalunfc/nihalunfc.github.io` (or `git pull origin main` if already cloned), then `npm ci`.
+3. If `/mnt/project-files/update-log/inbox/` has files from an earlier session, commit those first, oldest first (section 7).
+4. List what was done in this conversation since the last #UpdateLog, one activity per line, each with the time it happened.
+5. For each activity: write the log entry (section 2), update or create the right page (section 3), and ask nihal where section 3 or 4 says to.
+6. `npm run build`, and check the new pages exist in `dist/` (section 6).
+7. Commit each entry with its real time, then `git push origin main` once (pull and rebase first if the push is rejected).
+8. Wait for the "Deploy site" GitHub Actions run to finish green, then open the changed pages on nihalsulaiman.com to confirm.
+9. Reply to nihal (section 10).
+
 ## 1. Trigger
 
 The trigger is case-insensitive and forgiving about spacing. `#UpdateLog`, `#updatelog`, `#UPDATELOG`, `#updatelOG`, `#update-log`, `#update_log` and `#update log` all count. In code terms: `/#\s*update[\s_-]*log/i`.
@@ -25,7 +37,7 @@ time: 2026-11-03T15:45:00-05:00
 title: What was done, in one plain line
 project: Human-readable project or tool name
 status: done            # started | progress | done | blocked | idea
-ref: tools/shift-scheduler   # optional: the page this updates, projects/<id> or tools/<id>
+ref: tools/shift-scheduler   # optional: the page this updates: projects/<id>, tools/<id>, swarm/<id> or courses/<id>
 link: /tools/shift-scheduler/                 # optional: page or demo to look at
 repo: https://github.com/nihalunfc/some-repo  # optional: the code
 commit: https://github.com/nihalunfc/some-repo/commit/<sha>   # optional: the work itself
@@ -35,6 +47,7 @@ One to three sentences of detail, if useful.
 ```
 
 - Give every entry at least one link (`link`, `repo` or `commit`) when one exists, so anyone can check the work.
+- Keep `project` names consistent (the same spelling every time): the log gives each project its own colour and filter, and numbers entries automatically (#1 is the oldest).
 - Work that isn't a project (study, job search, admin) is still logged, with `project: Learning`, `project: Job search` and so on, and no page update.
 
 ## 3. Then update the right page
@@ -45,11 +58,13 @@ Decide what the activity touched:
 |---|---|
 | An existing project in `src/content/projects/` | Update that file: `updated` date, `status`, `stats`, `links`, `roadmap`, `limitations`, and the body if something real changed. Set `ref: projects/<id>` on the log entry. |
 | An existing tool in `src/content/tools/` | Update that file: `updated`, `status`, `editions`, `howto`, `limitations`, `roadmap`, `selfhost`. A new sector version is a new entry in `editions`, not a new tool. Set `ref: tools/<id>`. |
-| A new tool | First check for a similar tool (see section 4). If none, create `src/content/tools/<slug>.md` with every field filled. |
-| A new project | Create `src/content/projects/<slug>.md`, and add it to the home page "More projects" card if it's significant. |
+| A new tool | First check for a similar tool (see section 4). If none, create `src/content/tools/<slug>.md` with every field filled, including `field`, `kind` and `parts`. The app goes in `public/tools/<slug>/<edition>/`. |
+| A new project | Create `src/content/projects/<slug>.md` with `field`, `kind` and `parts`, and add it to the home page "More projects" card if it's significant. |
 | A course (new or changed) | Follow "Courses" in the structure map: course files in `public/learn/<id>/`, a card file `src/content/courses/<id>.md`, and `/learn/<id>/` in `STATIC_PAGES`. Progress stays in the learner's browser with the backup notice. Set `ref: courses/<id>`. |
-| A new field or sector | Add it to `src/data/sectors.ts` (`match` words and planned `ideas`), and tag the tools that fit with that sector. |
-| Anything that changes the site's structure | Update `public/site-structure.md` in the same commit. |
+| Swarm work (the flagship) | Update or create `src/content/swarm/<id>.md` with its `field`, and put the demo at `public/swarm/<id>/`. Set `ref: swarm/<id>`. |
+| Progress on any item | Update its `parts`: mark finished parts `done: true`; add new parts with `added:` set to today when the plan grows. |
+| Unclear field or kind | **Ask nihal** which of the seven fields (hospitality, logistics, energy, crisis, science, health, finance) and which kind (BI, optimisation, tools, pipelines and ETL, machine learning) it belongs to. Example: an ambulance-rerouting algorithm could be logistics or health. Until nihal answers, write the log entry only. |
+| Anything that changes the site's structure | Follow the URL scheme in the structure map (no `.html` addresses, no `#/` routes, no second home or header), and update `public/site-structure.md` in the same commit. |
 
 The log entry and its page change go in the same commit.
 
