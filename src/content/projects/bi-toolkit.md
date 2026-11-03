@@ -8,6 +8,8 @@ status: Ongoing
 date: 2026-10-01
 updated: 2026-11-03
 order: 0
+demo: /tools/revenue-command-centre/hotels/
+repo: https://github.com/nihalunfc/hotel-business
 featured: true
 tags: [Star schema, ETL, Data quality, Python, SQL, Power BI]
 sectors: [Hotels, Restaurant chains, Retail, Any multi-site business]

@@ -240,3 +240,10 @@ a.proj:hover { text-decoration: none; border-color: var(--brand-2); box-shadow: 
 .btn.primary { text-decoration: none !important; }
 .card { border-radius: 12px; }
 h1, h2, h3 { letter-spacing: -.015em; }
+
+/* Direct action buttons on cards (2026-11-03): live demo and code one click away. */
+.btn.sm { padding: 6px 11px; font-size: 13.5px; border-radius: 7px; }
+.acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.acts-l { font-size: 13px; color: var(--ink-3); margin-right: 2px; }
+.card h2 a, .swarm-item h2 a { color: inherit; }
+.card h2 a:hover, .swarm-item h2 a:hover { text-decoration: underline; }

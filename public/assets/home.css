@@ -98,7 +98,9 @@
   .cvp .cv-skills, .cvp .cv-list, .cvp .cv-note, .cvp .side-col .where { font-size: 9.5px; }
   .cvp .links, .home-search { display: none; }
 }
-@media (max-width: 960px) { .cvp .cols { grid-template-columns: 1fr; } }
+@media screen and (max-width: 960px) { .cvp .cols { grid-template-columns: 1fr; } }
+.cvp .print-only { display: none; }
+@media print { .cvp .print-only { display: block; } .cvp .cv-meta { font-size: 10.5px; } .cvp h1.name { font-size: 26px; } }
 .prof h1.name { overflow-wrap: anywhere; }
 
 /* Card hub home (2026-11-03): short widgets like the Now page */
@@ -154,3 +156,8 @@ a.proj-c:hover { text-decoration: none; border-color: var(--brand-2); box-shadow
 .chips.sm a:hover { border-color: var(--brand-2); color: var(--brand-2); text-decoration: none; }
 .flagship { border-color: var(--ink); }
 .flagship .flag { margin-left: 8px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; background: var(--ink); color: var(--bg); }
+@media print {
+  .prof.wide.cvp h2 { font-size: 15px; margin: 14px 0 4px; }
+  .prof.wide.cvp .item h3, .prof.cvp .side-col .item h3 { font-size: 13.5px; }
+  .prof.cvp .side-col .item .when, .prof.cvp .side-col .item .where { font-size: 12px; }
+}

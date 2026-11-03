@@ -7,6 +7,8 @@ category: Applied AI
 status: Complete
 date: 2026-09-20
 order: 3
+demo: /swarm/wildfire-drones/
+repo: https://github.com/nihalunfc/GDGCHackathon2026
 featured: false
 sectors: [Research, Emergency response]
 tags: [PyTorch, DQN, Leaflet, Gemini API, Hackathon]
@@ -14,7 +16,7 @@ stats:
   - { value: "DQN", label: "one policy per drone" }
   - { value: "Live", label: "map dashboard" }
 links:
-  - { label: "Live demo", href: "https://nihalsulaiman.com/GDGCHackathon2026/docs/" }
+  - { label: "Original hackathon dashboard", href: "https://nihalsulaiman.com/GDGCHackathon2026/docs/" }
   - { label: "Code on GitHub", href: "https://github.com/nihalunfc/GDGCHackathon2026" }
 ---
 

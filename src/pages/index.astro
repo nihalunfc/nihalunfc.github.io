@@ -26,13 +26,14 @@ const bi = await getEntry('projects', 'bi-toolkit');
   <div class="hub-grid">
     <div class="card w2"><h2><i></i>About</h2>
       <p>This site is everything I think up, build and deploy, so you can see how I work. Most of it is business intelligence: pipelines that pull data out of the systems people already have, clean it, store it in a warehouse and put the answer on a dashboard. I build each tool once and fit it to each field, from shops and clinics to banks and research labs. <b>Master's in Data Analytics</b> (2026) and <b>MSc in Physics</b> (astrophysics).</p>
-      <p class="more"><a href="/about/">More about me</a><a href="/about/cv/">CV</a><a href="/contact/">Contact</a></p>
+      <p class="more"><a href="/about/">More about me</a><a href="/nihal-sulaiman-cv.pdf" type="application/pdf">CV (PDF)</a><a href="/contact/">Contact</a></p>
     </div>
 
-    <a class="card proj-c w2 flagship" href="/swarm/"><h2><i class="ai"></i>Swarm Intelligence <span class="flag">Flagship</span></h2>
+    <div class="card w2 flagship"><h2><i class="ai"></i><a href="/swarm/">Swarm Intelligence</a> <span class="flag">Flagship</span></h2>
       <p>One multi-agent engine where every battery, drone or hotel system makes its own decision and the group still acts as one team. Applied to energy, crisis management and hospitality so far, and coming to every field.</p>
       <div class="kv"><span><b>949 MW</b>grid peak cut</span><span><b>87%</b>forest saved</span><span><b>$279k</b>hotel energy a year</span></div>
-    </a>
+      <div class="acts"><span class="acts-l">Live demos:</span><a class="btn primary sm" href="/swarm/grid-batteries/">Grid batteries</a><a class="btn primary sm" href="/swarm/wildfire-drones/">Wildfire drones</a><a class="btn primary sm" href="/swarm/hotel-operations/">Hotel operations</a><a class="btn ghost sm" href="/swarm/">How it works</a></div>
+    </div>
 
     <div class="card"><h2><i></i>What I build</h2>
       <ul class="tight">
@@ -72,11 +73,12 @@ const bi = await getEntry('projects', 'bi-toolkit');
       <p class="more"><a href="/now/">Now page</a></p>
     </div>
 
-    <a class="card proj-c" href="/projects/bi-toolkit/"><h2><i class="bi"></i>BI toolkit</h2>
+    <div class="card"><h2><i class="bi"></i><a href="/projects/bi-toolkit/">BI toolkit</a></h2>
       <p>One warehouse model, ten data-quality checks and 12 decision tools, fitted to each sector. Hospitality is live; restaurant chains and retail are next.</p>
       <div class="kv"><span><b>14</b>tools</span><span><b>10</b>quality checks</span><span><b>3</b>editions</span></div>
       {bi && <Progress parts={partsFor(bi.data)} compact />}
-    </a>
+      <div class="acts"><a class="btn primary sm" href="/tools/revenue-command-centre/hotels/">Live dashboard</a><a class="btn ghost sm" href="/tools/">All tools</a><a class="btn ghost sm" href="https://github.com/nihalunfc/hotel-business">Code</a></div>
+    </div>
 
     <a class="card proj-c" href="/projects/kaggle/"><h2><i class="kg"></i>Kaggle</h2>
       <p>Name That LLM, CASMI 2026, NeurIPS Smart Buildings and Squares in Squares, with honest notes on what's my own work.</p>

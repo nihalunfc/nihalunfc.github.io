@@ -7,6 +7,8 @@ category: Business intelligence
 status: Live
 date: 2026-10-01
 order: 1
+demo: /tools/revenue-command-centre/hotels/
+repo: https://github.com/nihalunfc/hotel-business
 featured: true
 tags: [Python, SQL, Star schema, PuLP, D3, Excel]
 sectors: [Hotels, Resorts, Short-term rentals]

@@ -6,6 +6,7 @@ status: Live
 order: 2
 date: 2026-10-01
 demo: /swarm/wildfire-drones/
+code: https://github.com/nihalunfc/nihalunfc.github.io/tree/main/public/swarm/wildfire-drones
 project: warl-wildfire
 stats:
   - { value: "87%", label: "forest saved in test scenarios" }

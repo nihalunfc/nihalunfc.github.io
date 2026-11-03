@@ -23,7 +23,7 @@ const list = (h: string, xs: string[]) => ({ h, xs });
   <PageHero title={d.title} crumbs={[{ label: 'Tools', href: '/tools/' }, { label: d.title }]} lead={d.summary}>
     <div class="post-meta"><a class="eyebrow" style="margin:0" href={`/fields/${d.field}/`}>{fieldName(d.field)} · {kindName(d.kind)}</a><span class={`status ${d.status.replace(' ', '')}`}>{d.status}</span>
       </div>
-    {d.open && <p style="margin-top:14px"><a class="btn primary" href={d.open} data-open-count={t.id}>Open the tool</a></p>}
+    {(d.open || d.code) && <div class="btns">{d.open && <a class="btn primary" href={d.open} data-open-count={t.id}>Open the live tool</a>}{d.code && <a class="btn ghost" href={d.code}>Code on GitHub</a>}</div>}
     <Progress parts={partsFor(d)} />
   </PageHero>
   <main>

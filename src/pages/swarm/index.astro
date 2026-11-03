@@ -16,13 +16,17 @@ const updates = (await getLog()).filter((e) => (e.data.ref || '').startsWith('sw
   <main>
     <div class="now-grid two">
       {items.map((i) => (
-        <a class="card swarm-item" href={i.data.demo || `/swarm/${i.id}/`}>
+        <article class="card swarm-item">
           <p class="eyebrow" style="margin:0">{fieldName(i.data.field)} · {i.data.status}</p>
-          <h2>{i.data.title}</h2>
+          <h2><a href={i.data.demo || `/swarm/${i.id}/`}>{i.data.title}</a></h2>
           <p>{i.data.summary}</p>
           {i.data.stats.length > 0 && <div class="stat-row">{i.data.stats.map((s) => <div><b>{s.value}</b>{s.label}</div>)}</div>}
-          <span class="go">Open the demo →</span>
-        </a>
+          <div class="acts">
+            {i.data.demo && <a class="btn primary sm" href={i.data.demo}>Open the live demo</a>}
+            {i.data.code && <a class="btn ghost sm" href={i.data.code}>Code</a>}
+            {i.data.project && <a class="btn ghost sm" href={`/projects/${i.data.project}/`}>Write-up</a>}
+          </div>
+        </article>
       ))}
       <section class="card">
         <h2><i></i>Coming to every field</h2>
