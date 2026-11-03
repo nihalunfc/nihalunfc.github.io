@@ -159,3 +159,30 @@ a.tag:hover { text-decoration: none; border-color: var(--brand-2); color: var(--
 .tl > li:last-child { padding-bottom: 0; }
 .tl ul li { display: list-item; padding: 0; border: 0; }
 .tl ul li + li { margin-top: 4px; }
+
+/* Compact spacing (2026-11-03) */
+.phero .in { padding: 24px 16px 22px; }
+.phero h1 { font-size: clamp(26px, 3vw, 32px); margin-bottom: 6px; }
+.phero .lead { font-size: 16px; }
+.phero .btns { margin-top: 14px; }
+.crumbs { margin-bottom: 8px; }
+main { padding-top: 22px; padding-bottom: 36px; }
+h2.section { font-size: clamp(19px, 2vw, 22px); margin: 32px 0 4px; }
+p.section-sub { margin-bottom: 12px; }
+.card { padding: 16px 18px; }
+.cta { margin-top: 36px; padding: 22px 24px; }
+.pgrid { gap: 14px; }
+.pcard { padding: 18px 20px; gap: 6px; }
+.post-row { padding: 14px 0; }
+.tl > li { padding: 12px 0; }
+.now-grid, .grid2 { gap: 14px; }
+.detail { gap: 32px; }
+.post-foot { margin-top: 32px; }
+
+/* search (Pagefind) */
+.search-box { max-width: 760px; --pagefind-ui-scale: .9; --pagefind-ui-primary: var(--brand-2); --pagefind-ui-text: var(--ink); --pagefind-ui-background: var(--surface); --pagefind-ui-border: var(--line-2); --pagefind-ui-tag: var(--surface-2); --pagefind-ui-border-width: 1px; --pagefind-ui-border-radius: 8px; --pagefind-ui-font: inherit; }
+.search-box mark { background: var(--brand-soft); color: inherit; }
+.fine { font-size: 13.5px; color: var(--ink-3); }
+.home-search { display: flex; gap: 8px; margin-top: 14px; max-width: 420px; }
+.home-search input { flex: 1; font: inherit; font-size: 14.5px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 12px; min-width: 0; }
+.home-search button { font: inherit; font-size: 14.5px; font-weight: 600; border: 0; border-radius: 8px; padding: 8px 14px; background: var(--brand-2); color: var(--on-brand); cursor: pointer; }
