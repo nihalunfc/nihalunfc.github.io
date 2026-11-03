@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 25 · Postgres, DuckDB and ClickHouse side by side · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk" open><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a class="on" href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="../weeks/week-4.html">Week 4 · Load to the warehouse</a> › Day 25</p>
+<h1>Day 25. Postgres, DuckDB and ClickHouse side by side</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 60m · lab 145m · ship 20m · review 15m</span><span class="pill">🏷 marketing, QSR</span><span class="pill">Before: Day 24</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Load the same data into Postgres (COPY + ON CONFLICT), DuckDB and ClickHouse</li><li>Use ClickHouse&#x27;s ReplacingMergeTree for upserts</li><li>Benchmark load and query times fairly</li><li>Write a swappable Warehouse resource for Dagster</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>Your later mission is low-cost stacks for medium companies. That means knowing the open-source warehouses <strong>by hand</strong>, not by blog post. Today you load the same tables into three of them and measure.</p>
+<h2 id="2-postgres">2. Postgres</h2>
+<pre class="highlight"><code class="language-bash">docker run -d --name pg -e POSTGRES_PASSWORD=pg -p 5432:5432 postgres:16</code></pre>
+<pre class="highlight"><code class="language-python">import psycopg, io
+with psycopg.connect("postgresql://postgres:pg@localhost:5432/postgres") as con, con.cursor() as cur:
+    cur.execute("create table if not exists stg_ads_load (like fct_ads_daily including defaults)")
+    cur.execute("truncate stg_ads_load")
+    buf = io.StringIO(); df.write_csv(buf); buf.seek(0)
+    with cur.copy("copy stg_ads_load from stdin with (format csv, header true)") as cp:
+        cp.write(buf.read())                                          # COPY: the fast path
+    cur.execute("""
+      insert into fct_ads_daily select * from stg_ads_load
+      on conflict (ad_date, campaign_id) do update set
+        spend = excluded.spend, clicks = excluded.clicks, conversions = excluded.conversions, updated_at = now()
+      where (fct_ads_daily.spend, fct_ads_daily.clicks, fct_ads_daily.conversions)
+            is distinct from (excluded.spend, excluded.clicks, excluded.conversions)""")</code></pre>
+<h2 id="3-duckdb">3. DuckDB</h2>
+<pre class="highlight"><code class="language-python">con = duckdb.connect("data/wh.duckdb")
+con.sql("""create table if not exists fct_ads_daily (
+  ad_date date, campaign_id varchar, spend decimal(18,2), clicks integer, impressions bigint,
+  conversions integer, conversion_value decimal(18,2), updated_at timestamp,
+  primary key (ad_date, campaign_id))""")
+con.sql("""insert or replace into fct_ads_daily          -- upsert: needs the primary key above
+  select ad_date, campaign_id, spend, clicks, impressions, conversions, conversion_value, now()
+  from 'data/staging/ads/*.parquet'""")</code></pre>
+<p>DuckDB can also <strong>attach Postgres</strong> (<code>attach 'postgresql://…' as pg (type postgres)</code>) and query or write it directly, which is useful for heavy scans over a Postgres warehouse.</p>
+<h2 id="4-clickhouse">4. ClickHouse</h2>
+<pre class="highlight"><code class="language-bash">docker run -d --name ch -p 8123:8123 -p 9000:9000 -e CLICKHOUSE_PASSWORD=ch clickhouse/clickhouse-server</code></pre>
+<pre class="highlight"><code class="language-sql">create table fct_ads_daily (
+  ad_date Date, campaign_id LowCardinality(String), spend Decimal(18,2), clicks UInt32,
+  impressions UInt64, conversions UInt32, conversion_value Decimal(18,2), updated_at DateTime64(3)
+) engine = ReplacingMergeTree(updated_at)
+order by (campaign_id, ad_date);</code></pre>
+<p><code>ReplacingMergeTree</code> keeps the row with the latest <code>updated_at</code> per sort key, <strong>eventually</strong> (during background merges). Queries that need exact answers now use <code>FINAL</code> or <code>argMax</code>. That's the ClickHouse trade-off: blazing scans and inserts, unusual update semantics.</p>
+<pre class="highlight"><code class="language-python">import clickhouse_connect
+ch = clickhouse_connect.get_client(host="localhost", username="default", password="ch")
+ch.insert_df("fct_ads_daily", df.to_pandas())
+ch.query("select campaign_id, sum(spend) from fct_ads_daily final group by campaign_id")</code></pre>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> benchmark fairly: same data, same query, warm and cold runs, report the median of several.</p>
+<p><strong>Equation:</strong> report <span class="arithmatex">\(\tilde t = \text{median}(t_1..t_k)\)</span> and the spread (min–max). Speed-up <span class="arithmatex">\(= \tilde t_A / \tilde t_B\)</span>. A difference under ~20% on a laptop is usually noise.</p>
+<p><strong>Analogy:</strong> repeated measurements with error bars before claiming an effect. Where it breaks: caches. The first (cold) run reads from disk; later runs hit memory. Report both.</p>
+<p><strong>Try it:</strong> runs (s): 2.1, 0.40, 0.42, 0.39, 0.41. Cold time and warm median? <em>(Cold 2.1 s; warm median 0.405 s.)</em></p>
+</details>
+<h2 id="5-one-interface-many-warehouses">5. One interface, many warehouses</h2>
+<pre class="highlight"><code class="language-python">class Warehouse(dg.ConfigurableResource):
+    def upsert(self, table: str, df: pl.DataFrame, keys: list[str]) -&gt; dict: ...
+    def replace_partition(self, table: str, df: pl.DataFrame, col: str, value) -&gt; dict: ...
+    def query(self, sql: str) -&gt; pl.DataFrame: ...
+
+class AzureSqlWarehouse(Warehouse): ...   # Day 23–24 code
+class PostgresWarehouse(Warehouse): ...   # COPY + ON CONFLICT
+class DuckDBWarehouse(Warehouse): ...</code></pre>
+<p>The asset calls <code>warehouse.upsert(...)</code>; the environment chooses which.</p>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>SQL dialects differ in the details that bite: <code>MERGE</code> vs <code>ON CONFLICT</code>; <code>datetime2</code> vs <code>timestamptz</code>; <code>top</code> vs <code>limit</code>; string concatenation; identifier quoting; case sensitivity (Postgres folds unquoted names to lower case). Keep warehouse-specific SQL inside the resource classes and in dbt adapters (Week 5). <strong>SQLGlot</strong> can transpile simple queries between dialects, which helps for migrations.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Lab</p>
+<ol>
+<li>Implement <code>PostgresWarehouse</code> and <code>DuckDBWarehouse</code> with <code>upsert</code> and <code>replace_partition</code>. Reuse Day 24 for <code>AzureSqlWarehouse</code>.</li>
+<li>Load 120 days of ads and QSR data into all three (plus ClickHouse by hand). Time loads.</li>
+<li>Run the same 4 queries everywhere: total by channel, daily trend, top 10 campaigns by ROAS, a 7-day rolling sum with a window function. Cold and warm, median of 5.</li>
+<li>Put the results table and a short interpretation in the README. Note anything that needed dialect changes.</li>
+<li>Wire the resource into Dagster with <code>P2D_WAREHOUSE=duckdb|postgres|azuresql</code>.</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p><code>feat(warehouse): swappable Postgres/DuckDB/Azure SQL resource and benchmark</code>.</p>
+</div>
+<section class="quiz" id="quiz-day-25-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> What's the fast path for bulk-loading Postgres from Python?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-25-1-0" value="0" data-ok="0"> <span>Single-row INSERTs</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-0" value="1" data-ok="1"> <span>COPY FROM STDIN into a staging table, then INSERT … ON CONFLICT</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-0" value="2" data-ok="0"> <span>pandas to_sql with default settings</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-0" value="3" data-ok="0"> <span>pg_dump</span></label></li>
+</ul><p class="why" hidden>COPY streams rows in bulk; the upsert runs set-based in the database.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> A ClickHouse ReplacingMergeTree query returns two versions of the same campaign-day. Why?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-25-1-1" value="0" data-ok="0"> <span>Data corruption</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-1" value="1" data-ok="1"> <span>Background merges haven't run yet; use FINAL or argMax for exact results</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-1" value="2" data-ok="0"> <span>The sort key is wrong</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-1" value="3" data-ok="0"> <span>ClickHouse doesn't support updates at all</span></label></li>
+</ul><p class="why" hidden>Deduplication is eventual in merge trees.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> Warm medians: DuckDB 0.31 s, Postgres 0.36 s on a laptop. Fair conclusion?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-25-1-2" value="0" data-ok="0"> <span>DuckDB is 16% faster in general</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-2" value="1" data-ok="1"> <span>The difference is within noise on this test; other factors should drive the choice</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-2" value="2" data-ok="0"> <span>Postgres is broken</span></label></li>
+<li><label><input type="radio" name="quiz-day-25-1-2" value="3" data-ok="0"> <span>Use ClickHouse</span></label></li>
+</ul><p class="why" hidden>Small differences on one machine aren't meaningful.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-25" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="day-24.html">← Day 24</a><button class="btn done" data-action="complete" data-day="day-25">Mark day 25 complete</button><a href="day-26.html">Day 26 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

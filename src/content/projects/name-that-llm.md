@@ -6,6 +6,7 @@ status: Ongoing
 date: 2026-11-02
 order: 4
 featured: true
+sectors: [Research]
 tags: [PyTorch, Transformers, LoRA, scikit-learn, NLP]
 stats:
   - { value: "Top 10%", label: "436 of 4,346 teams (public LB)" }

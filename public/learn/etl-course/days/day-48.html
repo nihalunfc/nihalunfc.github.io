@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 48 · Capstone build: daily-data-platform · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk" open><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a class="on" href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="../weeks/week-7.html">Week 7 · Run it in production</a> › Day 48</p>
+<h1>Day 48. Capstone build: daily-data-platform</h1>
+<div class="meta"><span class="pill">⏱ 4h · build 210m · review 30m</span><span class="pill">🏷 all four sectors in one platform</span><span class="pill">Before: Days 1 to 47</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Combine the six proofs into one platform that runs end to end from one command</li><li>Demonstrate a full morning, including a late file and a bad file</li><li>Have every acceptance criterion evidenced in the repo</li></ul></div><h2 id="1-the-brief">1. The brief</h2>
+<p>You are the first data hire at a fictional <strong>holding company</strong> that owns a 12-store grocery chain, an 18-restaurant QSR group with three brands, a 5-hotel group, and an in-house marketing agency running ads for all three. Every morning data arrives by email, shared drive, SFTP and API. Managers want their reports by 08:00. The owner wants to know what it costs.</p>
+<h2 id="2-architecture-target">2. Architecture (target)</h2>
+<pre class="highlight"><code class="language-text">generate_data.py ──► landing/ (email, shared drive, SFTP, API)
+                       │
+Dagster ─ sensors ─► land_* assets ─► raw zone (Parquet + manifest, MinIO or folder)
+         schedules     │
+                       ├─► clean_* assets (contracts, quarantine, DQ checks)
+                       ├─► load to warehouse (Postgres | Azure SQL | DuckDB via resource)
+                       ├─► dbt models (staging → marts; tests as asset checks; partitions)
+                       ├─► reports: email + PDF, Power BI refresh trigger
+                       └─► ops: load_audit, dq_results, report_sent, SLOs
+BI: Power BI (PBIP) + Metabase on Postgres · Health: Grafana/Metabase ops board · CI: GitHub Actions</code></pre>
+<h2 id="3-acceptance-criteria">3. Acceptance criteria</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Criterion</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>just demo</code> generates data, starts the stack (Docker Compose) and materialises everything</td>
+<td>README, video</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Four sources land idempotently with a manifest and completeness report</td>
+<td>screenshot, test</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Contracts, quarantine, five DQ families, robust volume checks</td>
+<td>DQ report</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Dagster: partitions, sensors, retries, blocking checks, backfill</td>
+<td>screenshots</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Warehouse resource with ≥2 targets; merge/delete-insert patterns; audit</td>
+<td>tests, audit query</td>
+</tr>
+<tr>
+<td>6</td>
+<td>dbt star schemas for all four sectors; SCD2; tests; docs</td>
+<td>dbt docs</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Metric dictionary; menu engineering; hotel pace; ROAS; retail basket</td>
+<td>docs + dashboards</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Power BI PBIP + Metabase dashboards; RLS; freshness banner</td>
+<td>screenshots</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Idempotent daily email with partial-data rule</td>
+<td>screenshot</td>
+</tr>
+<tr>
+<td>10</td>
+<td>SLOs, health dashboard, 2 triage reports, 1 incident review</td>
+<td>docs</td>
+</tr>
+<tr>
+<td>11</td>
+<td>CI green; data diff; Dockerfile; deploy + rollback docs</td>
+<td>Actions run</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Cost model, security/ops plan, business case, ADRs</td>
+<td>docs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-the-demo-morning">4. The demo morning</h2>
+<p>Script a "morning" you can replay in the video:</p>
+<ol>
+<li>04:00 hotel files land, one is still <code>.partial</code>.</li>
+<li>06:00 retail emails arrive; R107 is missing; one is sent twice; one has renamed columns.</li>
+<li>06:15 schedule runs; the drifted file is quarantined with a blocker for that store only; R107 shows as <em>missing</em>, not zero.</li>
+<li>07:40 the late hotel file completes; the sensor reprocesses that partition.</li>
+<li>07:55 the email goes out with a banner listing R107 and the drifted store; the dashboards show "data as of 07:52".</li>
+</ol>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> an end-to-end check closes the loop: the number on the report must be derivable from the files that arrived.</p>
+<p><strong>Equation:</strong> for each source <span class="arithmatex">\(s\)</span> and date <span class="arithmatex">\(d\)</span>: <span class="arithmatex">\(\text{report}_{s,d} = \sum \text{raw}_{s,d} - \text{dups}_{s,d} - \text{quarantine}_{s,d} \pm \text{explained transforms}\)</span>. Automate it as the final asset check before the email.</p>
+<p><strong>Analogy:</strong> closing a thermodynamic cycle: if you don't come back to the starting state, something leaked. Where it breaks: sources with no control totals. Then compare to the source's own row counts or file sums.</p>
+<p><strong>Try it:</strong> retail raw &#36;120,400 for a day, duplicates &#36;3,100, quarantine &#36;0, refunds split out &#36;900. Expected report net sales if refunds are shown separately? <em>(&#36;120,400 − &#36;3,100 = &#36;117,300 gross sales; refunds &#36;900 as their own line.)</em></p>
+</details>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>Scope ruthlessly. If you're behind, ship the core path (retail + QSR end to end, Azure SQL or Postgres, Power BI) with excellent docs, and list hotels and ads as "next" with links to Proofs 3 and 4. A finished, honest, well-documented platform beats an unfinished ambitious one every time.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Today</p>
+<p>Work through the acceptance table in order, ticking items in <code>docs/acceptance.md</code> with links to evidence. Record the demo morning video at the end of the day.</p>
+</div>
+<section class="quiz" id="quiz-day-48-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> You're behind on day 48. Best move?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-48-1-0" value="0" data-ok="0"> <span>Stay up and add every sector</span></label></li>
+<li><label><input type="radio" name="quiz-day-48-1-0" value="1" data-ok="1"> <span>Ship the core path end to end with excellent docs, and list the rest as linked next steps</span></label></li>
+<li><label><input type="radio" name="quiz-day-48-1-0" value="2" data-ok="0"> <span>Skip the README</span></label></li>
+<li><label><input type="radio" name="quiz-day-48-1-0" value="3" data-ok="0"> <span>Remove tests to save time</span></label></li>
+</ul><p class="why" hidden>Finished and honest beats unfinished and ambitious.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> In the demo, R107 sent nothing. What should the email show?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-48-1-1" value="0" data-ok="0"> <span>R107 with $0 sales</span></label></li>
+<li><label><input type="radio" name="quiz-day-48-1-1" value="1" data-ok="1"> <span>A banner: R107 not received, excluded from totals</span></label></li>
+<li><label><input type="radio" name="quiz-day-48-1-1" value="2" data-ok="0"> <span>Yesterday's R107 numbers</span></label></li>
+<li><label><input type="radio" name="quiz-day-48-1-1" value="3" data-ok="0"> <span>Nothing about it</span></label></li>
+</ul><p class="why" hidden>Missing is not zero, and the reader must know.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-48" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="day-47.html">← Day 47</a><button class="btn done" data-action="complete" data-day="day-48">Mark day 48 complete</button><a href="day-49.html">Day 49 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

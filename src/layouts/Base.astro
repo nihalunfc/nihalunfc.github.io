@@ -60,6 +60,7 @@ const v = Date.now().toString(36); // changes every build, so browsers fetch fre
 <link rel="stylesheet" href={`/assets/blog.css?v=${v}`}>
 <link rel="stylesheet" href={`/assets/home.css?v=${v}`}>
 <script is:inline src={`/assets/header.js?v=${v}`}></script>
+<script is:inline defer src={`/assets/counter.js?v=${v}`}></script>
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
 <body class={bodyClass}>

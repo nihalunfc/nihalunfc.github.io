@@ -17,6 +17,20 @@ export async function getProjects() {
   return all.sort((a, b) => a.data.order - b.data.order);
 }
 
+export async function getTools() {
+  const all = await getCollection('tools');
+  return all.sort((a, b) => a.data.order - b.data.order);
+}
+
+export async function getCourses() {
+  const all = await getCollection('courses');
+  return all.sort((a, b) => a.data.order - b.data.order);
+}
+
+export async function getUpdates(ref: string) {
+  return (await getLog()).filter((e) => e.data.ref === ref);
+}
+
 export function readingTime(body = '') {
   const words = body.trim().split(/\s+/).length;
   return Math.max(1, Math.round(words / 220));

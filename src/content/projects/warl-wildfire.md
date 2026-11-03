@@ -6,6 +6,7 @@ status: Complete
 date: 2026-09-20
 order: 3
 featured: false
+sectors: [Research, Emergency response]
 tags: [PyTorch, DQN, Leaflet, Gemini API, Hackathon]
 stats:
   - { value: "DQN", label: "one policy per drone" }

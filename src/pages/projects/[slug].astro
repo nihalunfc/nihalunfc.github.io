@@ -2,13 +2,18 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
-import { getProjects, catClass } from '../../lib';
+import RunYourOwn from '../../components/RunYourOwn.astro';
+import LogList from '../../components/LogList.astro';
+import { getProjects, getUpdates, catClass } from '../../lib';
 export async function getStaticPaths() {
   const ps = await getProjects();
   return ps.map((p) => ({ params: { slug: p.id }, props: { p } }));
 }
 const { p } = Astro.props;
 const { Content } = await render(p);
+const d = p.data;
+const updates = await getUpdates(`projects/${p.id}`);
+const isBI = d.category === 'Business intelligence' || d.category === 'Tools';
 ---
 <Base title={p.data.title} description={p.data.summary} type="article">
   <PageHero title={p.data.title} crumbs={[{ label: 'Projects', href: '/projects/' }, { label: p.data.title }]} lead={p.data.summary}>
@@ -17,8 +22,16 @@ const { Content } = await render(p);
   </PageHero>
   <main>
     <div class="detail">
-      <article class="prose"><Content /></article>
+      <article class="prose"><Content />
+        {d.limitations.length > 0 && <><h2>Limitations</h2><ul>{d.limitations.map((x) => <li>{x}</li>)}</ul></>}
+        {d.roadmap.length > 0 && <><h2>What's next</h2><ul>{d.roadmap.map((x) => <li>{x}</li>)}</ul></>}
+        {isBI && <RunYourOwn />}
+        <h2>Updates</h2>
+        {updates.length ? <LogList entries={updates} compact /> : <p class="muted">No logged updates yet. New work on this project will appear here and in the <a href="/log/">activity log</a>.</p>}
+      </article>
       <aside>
+        {d.editions.length > 0 && <div class="card"><h2>Editions</h2><ul class="editions">{d.editions.map((e) => <li>{e.href ? <a href={e.href}>{e.sector}</a> : <span>{e.sector}</span>}<em class={`es ${e.status.replace(' ', '')}`}>{e.status}</em></li>)}</ul></div>}
+        {d.sectors.length > 0 && <div class="card"><h2>Useful for</h2><div class="tags">{d.sectors.map((s) => <span class="tag">{s}</span>)}</div></div>}
         {p.data.stats.length > 0 && <div class="card"><h2>Results</h2><div class="stat-row">{p.data.stats.map((s) => <div><b>{s.value}</b>{s.label}</div>)}</div></div>}
         {p.data.links.length > 0 && <div class="card lk"><h2>Links</h2>{p.data.links.map((l) => <a href={l.href}>{l.label} →</a>)}</div>}
       </aside>

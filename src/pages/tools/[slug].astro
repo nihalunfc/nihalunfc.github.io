@@ -1,0 +1,47 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import RunYourOwn from '../../components/RunYourOwn.astro';
+import LogList from '../../components/LogList.astro';
+import { getTools, getUpdates, fmtDate } from '../../lib';
+export async function getStaticPaths() {
+  const ts = await getTools();
+  return ts.map((t) => ({ params: { slug: t.id }, props: { t } }));
+}
+const { t } = Astro.props;
+const d = t.data;
+const { Content } = await render(t);
+const updates = await getUpdates(`tools/${t.id}`);
+const ld = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: d.title, description: d.summary, applicationCategory: 'BusinessApplication', operatingSystem: 'Web browser', offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' }, author: { '@type': 'Person', name: 'Nihal Sulaiman' } };
+const list = (h: string, xs: string[]) => ({ h, xs });
+---
+<Base title={d.title} description={d.summary} type="article">
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  <PageHero title={d.title} crumbs={[{ label: 'Tools', href: '/tools/' }, { label: d.title }]} lead={d.summary}>
+    <div class="post-meta"><span class="eyebrow" style="margin:0">{d.group}</span><span class={`status ${d.status.replace(' ', '')}`}>{d.status}</span>
+      <div class="tags">{d.sectors.map((s) => <span class="tag">{s}</span>)}</div></div>
+    {d.open && <p style="margin-top:14px"><a class="btn primary" href={d.open} data-open-count={t.id}>Open the tool</a></p>}
+  </PageHero>
+  <main>
+    <div class="detail">
+      <article class="prose tool-doc">
+        <h2>What it does</h2>
+        <Content />
+        {[list('Who can use it', d.who), list('Where it fits', d.where), list('How to use it', d.howto), list('Limitations', d.limitations), list("What's next", d.roadmap)].filter((x) => x.xs.length).map((x) => (
+          <><h2>{x.h}</h2>{x.h === 'How to use it' ? <ol>{x.xs.map((s) => <li>{s}</li>)}</ol> : <ul>{x.xs.map((s) => <li>{s}</li>)}</ul>}</>
+        ))}
+        <RunYourOwn specific={d.selfhost} />
+        <h2>Updates</h2>
+        {updates.length ? <LogList entries={updates} compact /> : <p class="muted">No logged updates yet. Changes to this tool will appear here and in the <a href="/log/">activity log</a>.</p>}
+      </article>
+      <aside>
+        {d.editions.length > 0 && <div class="card ed"><h2>Editions</h2><ul class="editions">{d.editions.map((e) => <li>{e.href ? <a href={e.href}>{e.sector}</a> : <span>{e.sector}</span>}<em class={`es ${e.status.replace(' ', '')}`}>{e.status}</em></li>)}</ul></div>}
+        {d.method.length > 0 && <div class="card"><h2>Built with</h2><div class="tags">{d.method.map((m) => <span class="tag">{m}</span>)}</div></div>}
+        <div class="card lk"><h2>Links</h2>{d.open && <a href={d.open} data-open-count={t.id}>Open the tool →</a>}{d.code && <a href={d.code}>Code on GitHub →</a>}<a href="/contact/">Ask about a custom version →</a></div>
+        <div class="card usage"><h2>Usage</h2><p><span data-views hidden></span><span data-opens={t.id} hidden></span><span class="muted small">Counted without cookies</span></p></div>
+        <p class="muted small">Added {fmtDate(d.date)}{d.updated && <> · updated {fmtDate(d.updated)}</>}</p>
+      </aside>
+    </div>
+  </main>
+</Base>

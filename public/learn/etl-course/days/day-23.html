@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 23 · Azure SQL Database, hands on · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk" open><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a class="on" href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="../weeks/week-4.html">Week 4 · Load to the warehouse</a> › Day 23</p>
+<h1>Day 23. Azure SQL Database, hands on</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 60m · lab 145m · ship 20m · review 15m</span><span class="pill">🏷 marketing agency</span><span class="pill">Before: Day 22</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Create an Azure SQL database on the free offer (or a local SQL Server container) safely</li><li>Connect from Python with ODBC Driver 18, SQLAlchemy and Microsoft Entra tokens</li><li>Bulk-load fast with fast_executemany, bcp or BULK INSERT</li><li>Organise a database into raw, stg and mart schemas with least-privilege users</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>This is #TODO item 1 in your own plan: real pipelines writing to Azure SQL. Today you build the connection layer every later load uses, and you do it the way a security team would approve.</p>
+<h2 id="2-create-the-database">2. Create the database</h2>
+<p><strong>Option A: Azure.</strong> In the Azure portal create a resource group <code>rg-p2d</code>, then <strong>Azure SQL Database</strong>. Microsoft offers a <strong>free Azure SQL Database offer</strong> (a General Purpose serverless database with a monthly allowance of vCore-seconds and storage; check the current terms in the portal when you create it). Choose:</p>
+<ul>
+<li>Authentication: <strong>Microsoft Entra only</strong> or Entra + SQL. Set yourself as Entra admin.</li>
+<li>Networking: public endpoint, <strong>allow your client IP</strong> only. Don't tick "allow all Azure services" unless you need it.</li>
+<li>Compute: serverless with <strong>auto-pause</strong> so it costs nothing while idle. Set a cost alert in Cost Management on day one.</li>
+</ul>
+<p><strong>Option B: local, free, offline.</strong> The same engine in Docker:</p>
+<pre class="highlight"><code class="language-bash">docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Str0ng!Passw0rd" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest</code></pre>
+<p>Everything in this week works on both. Use B for heavy experiments; use A for the portfolio screenshot and Entra auth.</p>
+<h2 id="3-connect-from-python">3. Connect from Python</h2>
+<p>Install the <strong>Microsoft ODBC Driver 18 for SQL Server</strong> (Windows installer, or <code>apt</code>/<code>brew</code> per Microsoft docs), then:</p>
+<pre class="highlight"><code class="language-python">import struct, urllib.parse
+import sqlalchemy as sa
+from azure.identity import DefaultAzureCredential
+
+SERVER, DB = "p2d-sql.database.windows.net", "p2d"
+odbc = (f"Driver={{ODBC Driver 18 for SQL Server}};Server=tcp:{SERVER},1433;Database={DB};"
+        "Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30")
+
+def entra_token_connect_args():
+    tok = DefaultAzureCredential().get_token("https://database.windows.net/.default").token.encode("utf-16-le")
+    return {"attrs_before": {1256: struct.pack(f"&lt;I{len(tok)}s", len(tok), tok)}}  # SQL_COPT_SS_ACCESS_TOKEN
+
+engine = sa.create_engine(f"mssql+pyodbc:///?odbc_connect={urllib.parse.quote_plus(odbc)}",
+                          connect_args=entra_token_connect_args(), fast_executemany=True, pool_pre_ping=True)</code></pre>
+<p><code>DefaultAzureCredential</code> uses your <code>az login</code> locally and a <strong>managed identity</strong> in Azure (Day 27), so there's no password anywhere. For the local container, use a SQL login in the connection string from <code>.env</code>, with <code>TrustServerCertificate=yes</code> (local only).</p>
+<p>Microsoft also ships a newer native Python driver (<code>mssql-python</code>); check its status before choosing it for production.</p>
+<h2 id="4-schemas-and-users">4. Schemas and users</h2>
+<pre class="highlight"><code class="language-sql">create schema raw;   create schema stg;   create schema mart;   create schema ops;   -- ops = audit, watermarks
+
+-- a loader identity that can write raw/stg/ops but not drop the database
+create user [p2d-loader] from external provider;          -- Entra app or managed identity
+-- (local container: create login p2d_loader with password = '...'; create user p2d_loader for login p2d_loader;)
+grant select, insert, update, delete, alter on schema::raw to [p2d-loader];
+grant select, insert, update, delete, alter on schema::stg to [p2d-loader];
+grant select, insert, update on schema::ops to [p2d-loader];
+
+-- a reader for Power BI
+create role report_reader;
+grant select on schema::mart to report_reader;</code></pre>
+<h2 id="5-loading-fast">5. Loading fast</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Speed</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>df.to_sql(..., method=None)</code> with <code>fast_executemany=True</code></td>
+<td>Good to ~1M rows</td>
+<td>Default for daily loads</td>
+</tr>
+<tr>
+<td><code>executemany</code> without fast mode</td>
+<td>Very slow (row by row round trips)</td>
+<td>Never for bulk</td>
+</tr>
+<tr>
+<td><code>bcp</code> CLI</td>
+<td>Fast</td>
+<td>Big one-off loads from CSV</td>
+</tr>
+<tr>
+<td><code>BULK INSERT</code> / <code>OPENROWSET</code> from Azure Blob</td>
+<td>Fastest in Azure</td>
+<td>Files already in storage</td>
+</tr>
+<tr>
+<td>dlt <code>mssql</code> destination</td>
+<td>Good, plus schema evolution</td>
+<td>When using dlt</td>
+</tr>
+</tbody>
+</table>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> network round trips dominate small-batch loading. Batching turns <span class="arithmatex">\(N\)</span> trips into <span class="arithmatex">\(N/b\)</span>.</p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(T \approx \frac{N}{b} \cdot \text{RTT} + \frac{N \cdot s}{\text{bandwidth}}\)</span>. Row-by-row (<span class="arithmatex">\(b=1\)</span>) with 30 ms RTT for 100,000 rows: 3,000 s. Batches of 10,000: 0.3 s of latency plus transfer.</p>
+<p><strong>Analogy:</strong> moving house in one van trip vs a trip per box. Where it breaks: huge batches hit memory and transaction-log limits; tune <span class="arithmatex">\(b\)</span> (10k–100k rows).</p>
+<p><strong>Try it:</strong> 500,000 rows, RTT 20 ms, <span class="arithmatex">\(b\)</span> = 5,000. Latency part? <em>(100 trips × 20 ms = 2 s.)</em></p>
+</details>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>Security teams say yes to: Entra-only auth, managed identities, IP-restricted or private endpoints, least-privilege users per job, auditing on. They say no to: a shared <code>sa</code>-style admin login in a config file. Build it the "yes" way in your portfolio and <em>say so in the README</em>; a hiring manager in a Microsoft shop will notice immediately.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Lab</p>
+<ol>
+<li>Create the database (A, B or both). Set a cost alert if A.</li>
+<li>Build <code>warehouse/azure_sql.py</code>: engine factory with Entra token (A) or SQL login (B), chosen by settings.</li>
+<li>Create the schemas, a loader user and a reader role.</li>
+<li>Load <code>raw.ads_daily</code> from your staging Parquet with <code>to_sql</code> + <code>fast_executemany</code>. Time it at 10k, 100k, 1M rows (repeat rows to scale). Then time without <code>fast_executemany</code> at 10k. Record the table.</li>
+<li>Write <code>ops.load_audit(load_id, asset, partition_key, rows, started_at, finished_at, status)</code> and insert a row per load.</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p><code>feat(warehouse): Azure SQL connection with Entra tokens, schemas, roles, timed bulk load</code>.</p>
+</div>
+<section class="quiz" id="quiz-day-23-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> Which connection method avoids storing any password for a pipeline running in Azure?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-23-1-0" value="0" data-ok="0"> <span>SQL login in .env</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-0" value="1" data-ok="1"> <span>Microsoft Entra token from a managed identity via DefaultAzureCredential</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-0" value="2" data-ok="0"> <span>Windows authentication</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-0" value="3" data-ok="0"> <span>Sharing the admin login</span></label></li>
+</ul><p class="why" hidden>Managed identity + Entra means no secret to leak or rotate.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> Loading 200,000 rows with pyodbc executemany without fast_executemany is slow because...</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-23-1-1" value="0" data-ok="0"> <span>SQL Server is slow</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-1" value="1" data-ok="1"> <span>It makes a round trip per row; fast_executemany sends parameter arrays in batches</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-1" value="2" data-ok="0"> <span>pandas is slow</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-1" value="3" data-ok="0"> <span>The ODBC driver is old</span></label></li>
+</ul><p class="why" hidden>Round trips dominate. Batch them.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> What permission should the Power BI reader have?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-23-1-2" value="0" data-ok="0"> <span>db_owner</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-2" value="1" data-ok="0"> <span>insert on mart</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-2" value="2" data-ok="1"> <span>select on the mart schema only</span></label></li>
+<li><label><input type="radio" name="quiz-day-23-1-2" value="3" data-ok="0"> <span>alter on all schemas</span></label></li>
+</ul><p class="why" hidden>Readers read the modelled layer, nothing else.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-23" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="day-22.html">← Day 22</a><button class="btn done" data-action="complete" data-day="day-23">Mark day 23 complete</button><a href="day-24.html">Day 24 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

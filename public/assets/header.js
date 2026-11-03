@@ -10,7 +10,7 @@
 
    URL schema (all links are root-relative, so a custom domain only needs the CNAME):
      /                         portfolio home         /projects/        all projects
-     /swarm/ /swarm/<domain>/  Swarm Intelligence     /tools/           every tool (personal + hotel)
+     /swarm/ /swarm/<domain>/  Swarm Intelligence     /tools/           every tool, written for any sector
      /tools/<slug>/            a personal tool        /about/ /cv/ /now/ /disclaimer/
      /blog/ /blog/<slug>/      blog posts             /projects/<slug>/ project write-ups   /kaggle/
      /hotel-business/                 Hospitality BI home
@@ -63,29 +63,23 @@
     { href: H + 'dashboards/workforce/', label: 'Workforce', sub: 'Scheduling, time clock, timesheets and payroll' },
     { href: H + 'dashboards/operations/', label: 'Operations', sub: 'Housekeeping, maintenance and guest requests in one app' }
   ];
-  var PROJECTS = [
-    { href: '/swarm/', label: 'Swarm Intelligence', sub: 'One AI engine for hotels, grid batteries and wildfire drones' },
-    { href: H, label: 'Hospitality BI', sub: 'Dashboards and free tools for a five-hotel group' },
-    { href: '/kaggle/', label: 'Kaggle', sub: 'Competitions, ranks and what is my own work' }
-  ];
   var GH = 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z';
 
   var SITES = {
     portfolio: {
       home: '/', name: 'Nihal', sub: 'Portfolio',
+      /* Plain links, no drop-downs: every section has its own card-style index page. */
       nav: [
         { label: 'Home', href: '/', exact: true },
-        { label: 'Projects', href: '/projects/', match: ['/projects/', '/swarm/', '/kaggle/'], menu: [{ items: PROJECTS }], all: { href: '/projects/', label: 'All projects' } },
-        { label: 'Tools', href: '/tools/', match: ['/tools/'], wide: true,
-          menu: [{ group: 'Personal tools', tag: 'personal', items: PERSONAL_TOOLS }].concat(HOTEL_TOOLS.map(function (g) { return { group: 'Hotel tools · ' + g.group, tag: 'hotel', items: g.items }; })),
-          all: { href: '/tools/', label: 'All tools' } },
+        { label: 'Projects', href: '/projects/', match: ['/projects/', '/swarm/', '/kaggle/'] },
+        { label: 'Tools', href: '/tools/', match: ['/tools/', '/sectors/'] },
+        { label: 'Learn', href: '/learn/', match: ['/learn/'] },
         { label: 'Blog', href: '/blog/', match: ['/blog/'] },
         { label: 'Now', href: '/now/', match: ['/now/', '/log/'] },
-        { label: 'About', href: '/about/', match: ['/about/', '/cv/', '/disclaimer/'] },
-        { label: 'Contact', href: '/contact/', match: ['/contact/'] },
+        { label: 'About', href: '/about/', match: ['/about/', '/cv/', '/disclaimer/', '/contact/'] },
         { label: 'Search', href: '/search/', match: ['/search/'] }
       ],
-      action: { label: 'GitHub', href: 'https://github.com/nihalunfc' }
+      action: { label: 'Contact', href: '/contact/' }
     },
     hotel: {
       home: H, name: 'Hospitality BI', sub: 'by Nihal',
@@ -109,8 +103,8 @@
   var CSS = [
     'site-header{display:block;position:sticky;top:0;z-index:50;min-height:64px;background:var(--sh-bg);border-bottom:1px solid var(--sh-line);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}',
     'site-footer{display:block}',
-    ':root{--sh-bg:#fff;--sh-ink:#111827;--sh-ink-2:#4b5563;--sh-ink-3:#6b7280;--sh-line:#e5e7eb;--sh-hover:#f3f4f6;--sh-brand:#1d4ed8;--sh-brand-soft:#eef3fe;--sh-hotel:#0f766e;--sh-hotel-soft:#e6f4f1;--sh-shadow:0 12px 32px rgba(17,24,39,.12),0 2px 6px rgba(17,24,39,.06);--sh-foot:#f9fafb}',
-    ':root[data-theme="dark"]{--sh-bg:#161b22;--sh-ink:#e6e9ee;--sh-ink-2:#b4bdc9;--sh-ink-3:#8b95a3;--sh-line:#2a313c;--sh-hover:#1f2630;--sh-brand:#7aa7ff;--sh-brand-soft:rgba(122,167,255,.14);--sh-hotel:#3cc9b5;--sh-hotel-soft:rgba(60,201,181,.14);--sh-shadow:0 12px 32px rgba(0,0,0,.45);--sh-foot:#12161c}',
+    ':root{--sh-bg:#fff;--sh-ink:#09090b;--sh-ink-2:#3f3f46;--sh-ink-3:#71717a;--sh-line:#e4e4e7;--sh-hover:#f4f4f5;--sh-brand:#09090b;--sh-brand-soft:#f4f4f5;--sh-hotel:#52525b;--sh-hotel-soft:#f4f4f5;--sh-shadow:0 12px 32px rgba(17,24,39,.12),0 2px 6px rgba(17,24,39,.06);--sh-foot:#fafafa}',
+    ':root[data-theme="dark"]{--sh-bg:#09090b;--sh-ink:#fafafa;--sh-ink-2:#d4d4d8;--sh-ink-3:#a1a1aa;--sh-line:#27272a;--sh-hover:#1c1c1f;--sh-brand:#fafafa;--sh-brand-soft:rgba(250,250,250,.08);--sh-hotel:#a1a1aa;--sh-hotel-soft:rgba(250,250,250,.06);--sh-shadow:0 12px 32px rgba(0,0,0,.45);--sh-foot:#09090b}',
     '.sh-in{max-width:1180px;margin:0 auto;padding:0 16px;height:64px;display:flex;align-items:center;gap:24px}',
     '.sh-brand{display:inline-flex;align-items:center;gap:10px;color:var(--sh-ink);font-weight:700;font-size:16.5px;letter-spacing:-.01em;white-space:nowrap;text-decoration:none}',
     '.sh-brand:hover{text-decoration:none}',
@@ -194,13 +188,13 @@
     return (item.menu || []).some(function (g) { return g.items.some(function (i) { return isHere(i.href); }); });
   }
   var CHEV = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3"/></svg>';
-  var MARK = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1d4ed8"/><g stroke="#fff" stroke-width="1.6" opacity=".6"><line x1="10" y1="11" x2="22" y2="11"/><line x1="10" y1="11" x2="16" y2="22"/><line x1="22" y1="11" x2="16" y2="22"/></g><g fill="#fff"><circle cx="10" cy="11" r="3"/><circle cx="22" cy="11" r="3"/><circle cx="16" cy="22" r="3"/></g></svg>';
+  var MARK = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" style="fill:var(--sh-ink)"/><g style="stroke:var(--sh-bg)" stroke-width="1.6" opacity=".6"><line x1="10" y1="11" x2="22" y2="11"/><line x1="10" y1="11" x2="16" y2="22"/><line x1="22" y1="11" x2="16" y2="22"/></g><g style="fill:var(--sh-bg)"><circle cx="10" cy="11" r="3"/><circle cx="22" cy="11" r="3"/><circle cx="16" cy="22" r="3"/></g></svg>';
   var GHSVG = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="' + GH + '"/></svg>';
   var THEME = '<button class="sh-icon sh-theme" type="button" aria-label="Switch between light and dark theme" title="Light or dark theme">' +
     '<svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>' +
     '<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>';
   var BURGER = '<button class="sh-icon sh-burger" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>';
-  function action(a) { return '<a class="sh-act" href="' + esc(a.href) + '">' + GHSVG + esc(a.label) + '</a>'; }
+  function action(a) { return '<a class="sh-act" href="' + esc(a.href) + '">' + (/github\.com/.test(a.href) ? GHSVG : '') + esc(a.label) + '</a>'; }
 
   function menuHTML(item, id) {
     var groups = item.menu, cols = groups.length;
@@ -226,8 +220,8 @@
     var col = function (title, links) { return '<div><h2>' + title + '</h2>' + links.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('') + '</div>'; };
     return '<div class="sf-in"><div><a class="sh-brand" href="/">' + MARK + 'Nihal <small>Portfolio</small></a>' +
       '<p>Data, business intelligence and applied AI. Projects and free tools with live results you can explore.</p></div>' +
-      col('Projects', [['/swarm/', 'Swarm Intelligence'], [H, 'Hospitality BI'], ['/kaggle/', 'Kaggle'], ['/projects/', 'All projects']]) +
-      col('Tools', [['/tools/expense-calendar/', 'Expense calendar'], [H + 'tools/index.html', 'Hotel tools'], ['/tools/', 'All tools']]) +
+      col('Projects', [['/projects/bi-toolkit/', 'BI toolkit'], [H, 'Hospitality edition'], ['/swarm/', 'Swarm Intelligence'], ['/kaggle/', 'Kaggle'], ['/projects/', 'All projects']]) +
+      col('Tools', [['/tools/', 'All tools'], ['/sectors/', "Who it's for"], ['/learn/', 'Learn: ETL course'], ['/tools/expense-calendar/', 'Expense calendar']]) +
       col('Writing', [['/blog/', 'Blog'], ['/log/', 'Activity log'], ['/rss.xml', 'RSS feed'], ['https://www.linkedin.com/in/vsnihal/', 'LinkedIn'], ['https://github.com/nihalunfc', 'GitHub'], ['https://www.kaggle.com/vsnihal', 'Kaggle']]) +
       col('Site', [['/about/', 'About'], ['/cv/', 'CV'], ['/now/', 'Now'], ['/contact/', 'Contact'], ['/search/', 'Search'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
       '<div class="sf-legal"><span>© 2026 Nihal.' + (hotel ? ' All hotels, guests, staff and figures on this site are fictional samples.' : '') + '</span>' +

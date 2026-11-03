@@ -6,6 +6,7 @@ status: Ongoing
 date: 2026-10-15
 order: 2
 featured: true
+sectors: [Research, Energy, Hotels]
 tags: [Multi-agent RL, PyTorch, Optimisation, D3]
 stats:
   - { value: "949 MW", label: "grid peak cut by a battery swarm" }

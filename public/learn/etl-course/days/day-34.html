@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 34 · Metrics, additivity and the semantic layer · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk" open><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a class="on" href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="../weeks/week-5.html">Week 5 · Model it in SQL</a> › Day 34</p>
+<h1>Day 34. Metrics, additivity and the semantic layer</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 75m · lab 130m · ship 20m · review 15m</span><span class="pill">🏷 restaurants, hotels, retail, marketing</span><span class="pill">Before: Day 33</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Write a metric dictionary with one definition, formula and owner per metric</li><li>Classify metrics as additive, semi-additive or non-additive and aggregate each correctly</li><li>Build menu engineering and same-store sales metrics</li><li>Explain what a semantic layer is and when it&#x27;s worth it</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>Two dashboards showing two different "revenue" numbers destroy more trust than any pipeline failure. Senior BI people own <strong>definitions</strong>: what each metric means, how it's computed, and where it's computed (once). Today you write the dictionary for all four sectors.</p>
+<h2 id="2-the-metric-dictionary">2. The metric dictionary</h2>
+<p>One entry per metric, kept in the repo (dbt YAML or a Markdown table) and linked from every dashboard:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Net sales</td>
+</tr>
+<tr>
+<td>Definition</td>
+<td>Gross line revenue minus discounts and refunds, excluding tax and tips, by business date</td>
+</tr>
+<tr>
+<td>Formula</td>
+<td><code>sum(line_revenue) - sum(discount) - sum(refund_amount)</code></td>
+</tr>
+<tr>
+<td>Grain / additivity</td>
+<td>Additive across all dimensions</td>
+</tr>
+<tr>
+<td>Source model</td>
+<td><code>fct_order_lines</code></td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Finance (sign-off), BI (implementation)</td>
+</tr>
+<tr>
+<td>Caveats</td>
+<td>Delivery-platform orders net of platform fees from Oct 2026</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-additivity-rules">3. Additivity rules</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Examples</th>
+<th>Aggregate by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Additive</strong></td>
+<td>Revenue, quantity, spend, clicks, room nights</td>
+<td><code>sum</code> over anything</td>
+</tr>
+<tr>
+<td><strong>Semi-additive</strong></td>
+<td>Stock on hand, OTB, active loyalty members, cash balance</td>
+<td><code>sum</code> across entities; <strong>last / average</strong> over time</td>
+</tr>
+<tr>
+<td><strong>Non-additive</strong></td>
+<td>ADR, RevPAR, ROAS, CTR, margin %, average check, food-cost %</td>
+<td><strong>ratio of sums</strong> at the display grain</td>
+</tr>
+<tr>
+<td><strong>Distinct counts</strong></td>
+<td>Unique customers, unique guests</td>
+<td>recompute <code>count(distinct)</code>; never sum daily uniques</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-sector-metrics-worth-knowing-cold">4. Sector metrics worth knowing cold</h2>
+<ul>
+<li><strong>QSR:</strong> net sales, transactions (orders), <strong>average check</strong> = net sales / orders, items per order, channel mix, <strong>speed of service</strong> (if timestamps allow), <strong>food cost %</strong> = food cost / net sales, labour % (with a schedule source), <strong>same-store sales growth</strong> (only restaurants open in both periods).</li>
+<li><strong>Menu engineering</strong> (Kasavana–Smith): classify each item by <strong>popularity</strong> (share of items sold vs a threshold of &#36;0.7 / n$ for <span class="arithmatex">\(n\)</span> items) and <strong>contribution margin</strong> (price − food cost) vs the average: <em>Stars</em> (high/high), <em>Plowhorses</em> (popular, low margin), <em>Puzzles</em> (low popularity, high margin), <em>Dogs</em> (low/low).</li>
+<li><strong>Hotels:</strong> occupancy, ADR, RevPAR, TRevPAR, pickup, pace, cancellation rate, length of stay, channel cost.</li>
+<li><strong>Retail:</strong> sales per sq ft, basket size, units per transaction, sell-through, refund rate, gross margin %.</li>
+<li><strong>Marketing:</strong> CTR, CPC, CPA, ROAS, conversion rate, blended CAC.</li>
+</ul>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> same-store sales growth must compare the same set of stores in both periods, or new openings fake growth.</p>
+<p><strong>Equation:</strong> let <span class="arithmatex">\(S\)</span> be stores open for all of both periods. <span class="arithmatex">\(\text{SSS} = \dfrac{\sum_{s \in S} R_{s,t}}{\sum_{s \in S} R_{s,t-1}} - 1\)</span>. Total growth <span class="arithmatex">\(= \dfrac{\sum_{\text{all}} R_t}{\sum_{\text{all}} R_{t-1}} - 1\)</span> mixes in new and closed stores.</p>
+<p><strong>Analogy:</strong> a controlled experiment: hold the sample fixed to measure the effect. Where it breaks: remodels, temporary closures and calendar shifts (an extra Saturday). Adjust or exclude, and state the rule.</p>
+<p><strong>Try it:</strong> last year 10 stores sold &#36;10M. This year those 10 sold &#36;10.3M and 2 new stores sold &#36;1.2M. SSS? Total growth? <em>(SSS 3%; total 15%.)</em></p>
+</details>
+<h2 id="5-the-semantic-layer">5. The semantic layer</h2>
+<p>A <strong>semantic layer</strong> stores metric definitions once, and every tool asks it for "net sales by brand by week" instead of writing its own SQL. Options: <strong>dbt Semantic Layer / MetricFlow</strong>, <strong>Cube</strong> (open source), <strong>Power BI semantic models</strong> (the dataset with DAX measures is itself a semantic layer for Microsoft shops), and LookML in Looker.</p>
+<p>For a medium company with one BI tool, the Power BI model <em>is</em> the semantic layer and a dictionary in git is enough. Add a separate layer when several tools (Power BI + Metabase + Python notebooks + an LLM chat) must agree.</p>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>When finance and operations disagree on a definition, don't pick a winner in code. Write both, name them differently (<code>net_sales_finance</code>, <code>net_sales_ops</code>), show the bridge between them on one page, and get the owners to agree which one goes on the executive dashboard. Your job is to make the disagreement visible and small, not to hide it.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Lab</p>
+<ol>
+<li>Write <code>docs/metrics.md</code> (or dbt <code>semantic_models</code>/<code>metrics</code> YAML) with 20 metrics across the four sectors: definition, formula, additivity, model, owner, caveats.</li>
+<li>Build <code>mart.fct_menu_engineering</code> (dbt model) for each brand and month: quantity, mix %, contribution margin, classification. Test with a hand-computed fixture.</li>
+<li>Build <code>fct_restaurant_daily</code> with net sales, orders, average check. Show that averaging daily average checks for a month gives a different answer than the ratio of sums. Put both in the docs with the explanation.</li>
+<li>Add <code>is_comparable</code> to <code>dim_restaurant</code> (open for ≥ 13 months) and a same-store sales model. (Generate an extra 400 days of data with an earlier start date and add two "new" restaurants by editing the reference file.)</li>
+<li>Optional: define 5 metrics in Cube or MetricFlow and query them.</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p><code>feat(metrics): metric dictionary, menu engineering, same-store sales</code>.</p>
+</div>
+<section class="quiz" id="quiz-day-34-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> Daily unique customers Mon–Sun are 300, 280, 310, 290, 350, 400, 380. Unique customers for the week?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-34-1-0" value="0" data-ok="0"> <span>2,310</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-0" value="1" data-ok="0"> <span>330</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-0" value="2" data-ok="1"> <span>Unknown from these numbers: recompute count(distinct) over the week</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-0" value="3" data-ok="0"> <span>400</span></label></li>
+</ul><p class="why" hidden>Distinct counts don't add; the same customer can appear on several days.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> A menu item is very popular with below-average contribution margin. Its menu-engineering class?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-34-1-1" value="0" data-ok="0"> <span>Star</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-1" value="1" data-ok="1"> <span>Plowhorse</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-1" value="2" data-ok="0"> <span>Puzzle</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-1" value="3" data-ok="0"> <span>Dog</span></label></li>
+</ul><p class="why" hidden>Popular, low margin: consider a small price rise or cheaper recipe.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> Why exclude new stores from same-store sales?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-34-1-2" value="0" data-ok="1"> <span>Their sales would count as growth even if existing stores didn't grow</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-2" value="1" data-ok="0"> <span>They have no data</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-2" value="2" data-ok="0"> <span>Finance forbids it</span></label></li>
+<li><label><input type="radio" name="quiz-day-34-1-2" value="3" data-ok="0"> <span>To make numbers look better</span></label></li>
+</ul><p class="why" hidden>Hold the store set fixed to measure like-for-like performance.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-34" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="day-33.html">← Day 33</a><button class="btn done" data-action="complete" data-day="day-34">Mark day 34 complete</button><a href="day-35.html">Day 35 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

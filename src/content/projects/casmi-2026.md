@@ -6,6 +6,7 @@ status: Ongoing
 date: 2026-11-02
 order: 5
 featured: false
+sectors: [Research]
 tags: [PyTorch, RDKit, LightGBM, Validation]
 stats:
   - { value: "0.415", label: "MRR@25 on the public LB" }

@@ -6,6 +6,7 @@ status: Ongoing
 date: 2026-11-02
 order: 7
 featured: false
+sectors: [Research]
 tags: [Python, NumPy, mpmath, Kaggle API]
 stats:
   - { value: "Top 13%", label: "190 of 1,473 teams (public LB)" }

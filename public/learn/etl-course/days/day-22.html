@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 22 · Choosing where the data lives · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk" open><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a class="on" href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="../weeks/week-4.html">Week 4 · Load to the warehouse</a> › Day 22</p>
+<h1>Day 22. Choosing where the data lives</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 90m · lab 110m · ship 25m · review 15m</span><span class="pill">🏷 marketing agency</span><span class="pill">Before: Week 3</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Explain OLTP vs OLAP, row stores vs column stores, and single-node vs MPP</li><li>Place Azure SQL, Postgres, DuckDB, ClickHouse, Snowflake, BigQuery and Fabric on one map</li><li>Pick a warehouse for a given company size, budget and skill set, with reasons</li><li>Estimate storage and query cost before choosing</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>"Which database?" is a decision a five-year person is expected to make and defend. The wrong answer costs a company years: a warehouse too small, too expensive, or one nobody on the team can run. Today you build the map; the rest of the week you load into four of them.</p>
+<h2 id="2-two-kinds-of-workload">2. Two kinds of workload</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>OLTP (transactions)</th>
+<th>OLAP (analytics)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Example</td>
+<td>POS taking an order, PMS saving a booking</td>
+<td>"Revenue by brand by week for two years"</td>
+</tr>
+<tr>
+<td>Query shape</td>
+<td>Read/write a few rows by key</td>
+<td>Scan millions of rows, few columns, aggregate</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Row store, B-tree indexes</td>
+<td>Column store, compression, zone maps</td>
+</tr>
+<tr>
+<td>Concurrency</td>
+<td>Thousands of small writes</td>
+<td>Tens of heavy reads, batch writes</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>SQL Server/Azure SQL (rowstore), Postgres, MySQL</td>
+<td>ClickHouse, DuckDB, Snowflake, BigQuery, Synapse/Fabric Warehouse; SQL Server/Azure SQL with <strong>columnstore</strong> indexes</td>
+</tr>
+</tbody>
+</table>
+<p>Azure SQL and Postgres are general-purpose: excellent for small and medium analytics (up to hundreds of GB) when modelled well, with columnstore (SQL Server) or extensions (Postgres: <code>pg_duckdb</code>, Citus, TimescaleDB, <code>pg_mooncake</code>) for heavier scans.</p>
+<h2 id="3-the-map">3. The map</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Cost shape</th>
+<th>Sweet spot</th>
+<th>Watch out</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Azure SQL Database</strong></td>
+<td>Managed SQL Server (row + columnstore)</td>
+<td>vCore or DTU; serverless auto-pause; free offer</td>
+<td>Microsoft shops, Power BI, up to ~TB</td>
+<td>Scan-heavy at large scale; tier limits on log rate</td>
+</tr>
+<tr>
+<td><strong>Postgres</strong> (self-hosted, Azure Flexible Server, Supabase, Neon)</td>
+<td>Open-source RDBMS</td>
+<td>VM or managed instance</td>
+<td>Cheap all-rounder, huge ecosystem</td>
+<td>Large scans without columnar extensions</td>
+</tr>
+<tr>
+<td><strong>DuckDB / MotherDuck</strong></td>
+<td>In-process columnar; MotherDuck = hosted</td>
+<td>Free / low</td>
+<td>Single-node analytics, files, dev, embedded</td>
+<td>One writer at a time locally</td>
+</tr>
+<tr>
+<td><strong>ClickHouse</strong> (OSS, Cloud)</td>
+<td>Columnar MPP</td>
+<td>VM or usage</td>
+<td>Billions of event rows, sub-second dashboards</td>
+<td>Updates/deletes are different (merge trees)</td>
+</tr>
+<tr>
+<td><strong>Snowflake / BigQuery / Databricks SQL</strong></td>
+<td>Cloud columnar MPP</td>
+<td>Usage-based</td>
+<td>Large, elastic, many teams</td>
+<td>Bills grow quietly; needs cost governance</td>
+</tr>
+<tr>
+<td><strong>Microsoft Fabric Warehouse / Synapse</strong></td>
+<td>Cloud MPP inside Fabric</td>
+<td>Capacity-based</td>
+<td>Enterprise Microsoft analytics</td>
+<td>Capacity sizing, licence complexity</td>
+</tr>
+</tbody>
+</table>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> estimate data size before choosing. Most "big data" problems at medium companies are a few hundred GB.</p>
+<p><strong>Equation:</strong> raw size <span class="arithmatex">\(\approx\)</span> rows/day × days × bytes/row. Columnar compressed <span class="arithmatex">\(\approx\)</span> raw ÷ (5 to 10) for typical sales data.</p>
+<p><strong>Analogy:</strong> order-of-magnitude estimates in physics (Fermi problems): get within a factor of 3 before reaching for precision. Where it breaks: event and clickstream data (web logs, IoT) can be 100× larger than transactions.</p>
+<p><strong>Try it:</strong> 300 restaurants × 1,500 order lines/day × 3 years × 120 bytes/row. Raw size? Compressed (÷7)? <em>(300 × 1,500 × 1,095 × 120 ≈ 59 GB raw; ≈ 8.5 GB compressed: one Postgres or Azure SQL database handles it.)</em></p>
+</details>
+<h2 id="4-how-to-choose">4. How to choose</h2>
+<p>Ask in this order:</p>
+<ol>
+<li><strong>Where does the company already live?</strong> Microsoft 365 + Power BI → Azure SQL or Fabric fits auth, networking and skills. Google Workspace → BigQuery. Nothing → Postgres.</li>
+<li><strong>How big, how fast?</strong> Size estimate above; dashboard latency needs; number of concurrent users.</li>
+<li><strong>Who runs it?</strong> A managed service beats a cheaper self-hosted one if nobody can patch the VM.</li>
+<li><strong>What does it cost at 3× today's volume?</strong> Ask for this number before signing anything.</li>
+<li><strong>How do you leave?</strong> Standard SQL and open formats (Parquet) keep the exit cheap.</li>
+</ol>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>Say "it depends" and then <strong>actually decide</strong>: "For a 40-restaurant chain on Microsoft 365 with one analyst, I'd use Azure SQL serverless General Purpose with a columnstore on the sales fact, because Power BI and Entra sign-in work out of the box and it's tens of dollars a month at this size. If they had no Microsoft licences, Postgres on a small VM plus DuckDB for heavy scans." Interviewers want the structure <em>and</em> the call.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Lab</p>
+<ol>
+<li>Generate 120 days of data. Using the Week 3 pipeline, export the ads, QSR and hotel staging tables to Parquet. Record row counts and Parquet sizes.</li>
+<li>Do a Fermi estimate for each sector at real-company scale (your guesses for stores, rows per day, years). Write <code>docs/sizing.md</code>.</li>
+<li>Write a one-page <strong>decision record</strong> (<code>docs/adr-001-warehouse.md</code>, Architecture Decision Record format: context, options, decision, consequences) for the marketing agency.</li>
+<li>Set up accounts you'll need this week: an Azure free account (or use a local SQL Server container), Docker for Postgres and ClickHouse. Don't create billable resources yet; Day 23 walks through it.</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p>New repo <code>ads-warehouse</code>. Commit <code>docs: sizing and ADR-001 warehouse choice</code>.</p>
+</div>
+<section class="quiz" id="quiz-day-22-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> Which workload is OLAP?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-22-1-0" value="0" data-ok="0"> <span>Saving a hotel booking</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-0" value="1" data-ok="1"> <span>Total ad spend by channel by week for two years</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-0" value="2" data-ok="0"> <span>Updating a customer's email</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-0" value="3" data-ok="0"> <span>Taking a drive-thru order</span></label></li>
+</ul><p class="why" hidden>Analytical: large scans, few columns, aggregation.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> A 40-store retailer has 15 GB of compressed sales history and uses Microsoft 365 and Power BI. A sensible first warehouse?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-22-1-1" value="0" data-ok="0"> <span>A 10-node ClickHouse cluster</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-1" value="1" data-ok="1"> <span>Azure SQL Database (or Postgres), with a columnstore index on the sales fact</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-1" value="2" data-ok="0"> <span>A Spark cluster</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-1" value="3" data-ok="0"> <span>Excel files on SharePoint</span></label></li>
+</ul><p class="why" hidden>Size and ecosystem both point to a single managed SQL database.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> What is an ADR?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-22-1-2" value="0" data-ok="0"> <span>An Azure data resource</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-2" value="1" data-ok="1"> <span>An Architecture Decision Record: context, options, decision, consequences</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-2" value="2" data-ok="0"> <span>Average daily rate</span></label></li>
+<li><label><input type="radio" name="quiz-day-22-1-2" value="3" data-ok="0"> <span>A type of index</span></label></li>
+</ul><p class="why" hidden>(ADR also means average daily rate in hotels. Context tells you which.)</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-22" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="day-21.html">← Day 21</a><button class="btn done" data-action="complete" data-day="day-22">Mark day 22 complete</button><a href="day-23.html">Day 23 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

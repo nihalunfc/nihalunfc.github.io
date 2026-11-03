@@ -46,6 +46,8 @@ npm run build    # writes dist/
 
 ## Activity log (#UpdateLog)
 
+The full rules any Claude session follows are in [`public/update-log-rules.md`](public/update-log-rules.md), live at https://nihalsulaiman.com/update-log-rules.md. The trigger is case-insensitive.
+
 Each activity is one Markdown file in `src/content/log/`, named `YYYY-MM-DD-HHMM-slug.md`:
 
 ```md
@@ -57,8 +59,13 @@ status: done                      # started | progress | done | blocked | idea
 link: /projects/some-page/        # optional: page or demo to look at
 repo: https://github.com/nihalunfc/some-repo   # optional: the code
 commit: https://github.com/nihalunfc/some-repo/commit/abc123   # optional: the work itself
+ref: tools/shift-scheduler        # optional: shows the entry under Updates on that page
 ---
 Optional details.
 ```
 
 Each entry is committed on its own, with `GIT_AUTHOR_DATE` and `GIT_COMMITTER_DATE` set to `time`, so GitHub shows when the work happened. Entries show on `/log/`, in the Live diary card on `/now/` and on the home page.
+
+## Tools
+
+Each tool is one Markdown file in `src/content/tools/`, rendered at `/tools/<id>/` with sections for who can use it, where it fits, how to use it, limitations, what's next, running it on your own data, and updates from the log. Write the title and summary for any sector and list sector versions under `editions`.

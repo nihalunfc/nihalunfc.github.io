@@ -21,8 +21,29 @@ const log = (await getLog()).slice(0, 4);
 
   <div class="hub-grid">
     <div class="card w2"><h2><i></i>About</h2>
-      <p>I build end-to-end data work in Python and SQL: star-schema warehouses, data-quality checks, dashboards managers open every morning, and forecasts and schedules that save money. <b>Master's in Data Analytics</b> (2026) and <b>MSc in Physics</b> (astrophysics). I also know hotel operations from the floor.</p>
+      <p>This site is everything I think up, build and deploy, so you can see how I work. Most of it is business intelligence: pipelines that pull data out of the systems people already have, clean it, store it in a warehouse and put the answer on a dashboard. I build each tool once and fit it to each field, from shops and clinics to banks and research labs. <b>Master's in Data Analytics</b> (2026) and <b>MSc in Physics</b> (astrophysics).</p>
       <p class="more"><a href="/about/">More about me</a><a href="/cv/">CV</a><a href="/contact/">Contact</a></p>
+    </div>
+
+    <div class="card"><h2><i></i>What I build</h2>
+      <ul class="tight">
+        <li>ETL pipelines and automation</li>
+        <li>Data cleaning and quality checks</li>
+        <li>Data warehouses and star schemas</li>
+        <li>BI dashboards and reports</li>
+        <li>AI-assisted automation with Claude Code</li>
+      </ul>
+      <p class="more"><a href="/tools/">Tools</a><a href="/projects/">Projects</a></p>
+    </div>
+
+    <div class="card"><h2><i></i>Who it's for</h2>
+      <p class="chips sm"><a href="/sectors/#retail">Retail</a><a href="/sectors/#small-business">Small business</a><a href="/sectors/#hospitality">Hospitality</a><a href="/sectors/#restaurants">Restaurants</a><a href="/sectors/#logistics">Logistics</a><a href="/sectors/#finance">Finance and insurance</a><a href="/sectors/#automotive">Automotive</a><a href="/sectors/#healthcare">Healthcare</a><a href="/sectors/#research">Research</a><a href="/sectors/#everyday">Everyday people</a></p>
+      <p class="more"><a href="/sectors/">See tools by field</a></p>
+    </div>
+
+    <div class="card"><h2><i></i>Learn with me</h2>
+      <p><b>Pipeline to Dashboard</b>, a free 7-week course in ETL, warehousing and BI. No sign-up; progress stays in your browser.</p>
+      <p class="more"><a href="/learn/">Start learning</a></p>
     </div>
 
     <div class="card"><h2><i></i>Looking for</h2>
@@ -33,16 +54,17 @@ const log = (await getLog()).slice(0, 4);
     <div class="card"><h2><i></i>Now</h2>
       <ul class="tight">
         <li>Data Engineer (remote) at Shipd by DataCurve</li>
-        <li>Turning hotel BI tools into ETL pipelines on Azure SQL</li>
+        <li>Turning my BI tools into ETL pipelines on Azure SQL</li>
+        <li>Restaurant-chain and retail editions of the BI toolkit</li>
         <li>Learning T-SQL, Power BI and dbt</li>
         <li>Four live Kaggle competitions</li>
       </ul>
       <p class="more"><a href="/now/">Now page</a></p>
     </div>
 
-    <a class="card proj-c" href="/projects/hospitality-bi/"><h2><i class="bi"></i>Hospitality BI</h2>
-      <p>Star-schema warehouse of 640k bookings, revenue command centre, staff schedule builder and 11 free hotel tools.</p>
-      <div class="kv"><span><b>640k</b>bookings</span><span><b>10</b>quality checks</span><span><b>12</b>tools</span></div>
+    <a class="card proj-c" href="/projects/bi-toolkit/"><h2><i class="bi"></i>BI toolkit</h2>
+      <p>One warehouse model, ten data-quality checks and 12 decision tools, fitted to each sector. Hospitality is live; restaurant chains and retail are next.</p>
+      <div class="kv"><span><b>12</b>tools</span><span><b>10</b>quality checks</span><span><b>3</b>sector editions</span></div>
     </a>
 
     <a class="card proj-c" href="/projects/swarm-intelligence/"><h2><i class="ai"></i>Swarm Intelligence</h2>
@@ -88,8 +110,9 @@ const log = (await getLog()).slice(0, 4);
 
     <div class="card"><h2><i></i>Free tools</h2>
       <ul class="hub-list">
-        <li><a href="/hotel-business/tools/rate-recommender.html">Rate recommender</a><span>Hotel</span></li>
-        <li><a href="/hotel-business/schedule.html">Staff schedule builder</a><span>Hotel</span></li>
+        <li><a href="/tools/pricing-recommender/">Pricing recommender</a><span>Pricing</span></li>
+        <li><a href="/tools/shift-scheduler/">Shift schedule builder</a><span>People</span></li>
+        <li><a href="/tools/demand-forecaster/">Demand forecaster</a><span>Planning</span></li>
         <li><a href="/tools/expense-calendar/">Expense calendar</a><span>Personal</span></li>
       </ul>
       <p class="more"><a href="/tools/">All tools</a></p>

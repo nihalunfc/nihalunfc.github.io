@@ -1,12 +1,19 @@
 ---
-title: Hospitality BI for a five-hotel group
-summary: A star-schema warehouse of 640,000 bookings, ten automated data-quality checks, a revenue command centre, a staff schedule builder and eleven free hotel tools.
+title: BI toolkit, hospitality edition
+summary: A star-schema warehouse of 640,000 bookings, ten automated data-quality checks, a revenue command centre, a staff schedule builder and eleven free tools, built for hotels first.
 category: Business intelligence
 status: Live
 date: 2026-10-01
 order: 1
 featured: true
 tags: [Python, SQL, Star schema, PuLP, D3, Excel]
+sectors: [Hotels, Resorts, Short-term rentals]
+editions:
+  - { sector: Hospitality, href: /hotel-business/, status: Live }
+roadmap:
+  - Scheduled ETL into Azure SQL Database so the dashboards refresh like a real group's.
+limitations:
+  - All hotels, guests, staff and figures are fictional samples.
 stats:
   - { value: "640k", label: "bookings over four years" }
   - { value: "10", label: "automated data-quality checks" }
@@ -18,6 +25,8 @@ links:
   - { label: "All hotel tools", href: "/hotel-business/tools/index.html" }
   - { label: "Code on GitHub", href: "https://github.com/nihalunfc/hotel-business" }
 ---
+
+*This is the first edition of my [business intelligence toolkit](/projects/bi-toolkit/). The same tools are being fitted to restaurant chains and retail.*
 
 ## The problem
 

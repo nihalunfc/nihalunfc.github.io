@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stack map · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html" class="on">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><h1 id="stack-map-core-path-and-alternatives">Stack map: core path and alternatives</h1>
+<p>The <strong>core path</strong> is the method you're mastering. Each row lists open-source or cheaper options and when they win. Weeks in brackets show where each is taught.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Core path</th>
+<th>Open-source / low-cost options</th>
+<th>Managed / enterprise options</th>
+<th>Choose the alternative when…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Email ingest</td>
+<td>Microsoft Graph (M365) or IMAP + Python <code>email</code> [W1]</td>
+<td><code>imap-tools</code>, dlt</td>
+<td>Power Automate, Logic Apps</td>
+<td>Non-Microsoft mail → IMAP/Gmail API; low-code team → Power Automate</td>
+</tr>
+<tr>
+<td>Files / drives</td>
+<td>Graph (SharePoint/OneDrive), paramiko (SFTP), fsspec [W1]</td>
+<td>rclone, MinIO, dlt <code>filesystem</code></td>
+<td>AzCopy, ADF copy, Fivetran</td>
+<td>Many backends → rclone; Azure-only → ADF</td>
+</tr>
+<tr>
+<td>APIs / DBs</td>
+<td>requests + backoff; dlt [W1]</td>
+<td>dlt, Airbyte OSS, Meltano, Debezium (CDC)</td>
+<td>Fivetran, Airbyte Cloud, ADF</td>
+<td>Many SaaS connectors → Airbyte/Fivetran; CDC → Debezium</td>
+</tr>
+<tr>
+<td>Clean</td>
+<td>Polars, DuckDB, pandera, Claude Code [W2]</td>
+<td>pandas, Great Expectations, Soda Core, Ollama models</td>
+<td>Claude API, Fabric dataflows</td>
+<td>Unstructured text → LLM cascade; YAML checks → Soda</td>
+</tr>
+<tr>
+<td>Orchestrate</td>
+<td><strong>Dagster</strong> [W3]</td>
+<td>Airflow, Prefect, Mage, Kestra, cron</td>
+<td>Dagster+, Astronomer, MWAA, ADF/Fabric pipelines</td>
+<td>Existing Airflow estate → stay; low-code Microsoft → ADF</td>
+</tr>
+<tr>
+<td>Load / warehouse</td>
+<td><strong>Azure SQL Database</strong> [W4]</td>
+<td>Postgres, DuckDB, ClickHouse</td>
+<td>Fabric Warehouse, Snowflake, BigQuery, Databricks SQL</td>
+<td>No Microsoft → Postgres; billions of events → ClickHouse; many teams/elastic → cloud MPP</td>
+</tr>
+<tr>
+<td>Lake storage</td>
+<td>Folder / Azure Blob (ADLS) + Parquet [W1, W7]</td>
+<td>MinIO, Iceberg, Delta Lake</td>
+<td>OneLake, S3, GCS</td>
+<td>Multi-engine lake → Iceberg/Delta</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>SQL + <strong>dbt Core</strong> [W5]</td>
+<td>SQLMesh, stored procedures</td>
+<td>dbt Cloud, Dataform</td>
+<td>Strong env/plan needs → SQLMesh</td>
+</tr>
+<tr>
+<td>Semantic layer</td>
+<td>Power BI semantic model + metric dictionary [W5–6]</td>
+<td>Cube, MetricFlow</td>
+<td>dbt Semantic Layer, LookML</td>
+<td>Several BI tools must agree → separate layer</td>
+</tr>
+<tr>
+<td>BI</td>
+<td><strong>Power BI</strong> [W6]</td>
+<td>Metabase, Superset, Evidence, Lightdash, Streamlit</td>
+<td>Tableau, Looker</td>
+<td>Many viewers without M365 → Metabase; SQL-first data team → Superset; reports as code → Evidence</td>
+</tr>
+<tr>
+<td>Delivery</td>
+<td>Power BI subscriptions; Python email/PDF [W6]</td>
+<td>Metabase subscriptions, Jinja + WeasyPrint</td>
+<td>Paginated reports, Power Automate</td>
+<td>Pixel-perfect statements → paginated reports</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>Dagster UI, audit + DQ tables [W3, W7]</td>
+<td>Grafana, OpenLineage/Marquez</td>
+<td>Monte Carlo, Datadog</td>
+<td>Many pipelines/teams → dedicated tools</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td>GitHub Actions + Docker [W7]</td>
+<td>GitLab CI, act</td>
+<td>Azure DevOps</td>
+<td>Company standard decides</td>
+</tr>
+<tr>
+<td>Secrets / identity</td>
+<td>Entra managed identity, Key Vault [W4]</td>
+<td>Docker secrets, SOPS, Vault</td>
+<td>AWS Secrets Manager, GCP Secret Manager</td>
+<td>Not on Azure → platform's own</td>
+</tr>
+</tbody>
+</table>
+<h2 id="three-reference-stacks">Three reference stacks</h2>
+<p><strong>A. Microsoft medium company</strong> (M365, Power BI users): Graph ingest → Dagster on a VM (or ADF) → Azure SQL (serverless GP, columnstore facts) → dbt-sqlserver → Power BI Pro, RLS, subscriptions. Identities: managed identity + Key Vault.</p>
+<p><strong>B. Open-source low-cost</strong> (no licences, 1–3 data people): dlt + Python landers → Dagster OSS → MinIO/Blob raw Parquet → Postgres (+ DuckDB) → dbt-postgres → Metabase/Superset + Python email reports; Ollama for documents. One or two VMs, Docker Compose. <em>(Week 7, Day 46.)</em></p>
+<p><strong>C. Scale-up</strong> (many teams, large event data): Airbyte/Fivetran → Airflow or Dagster+ → Snowflake/BigQuery/Databricks or ClickHouse for events → dbt → Power BI/Looker/Tableau; Iceberg/Delta lake.</p>
+<p>All three share the same ideas: immutable raw, idempotent loads, business dates, contracts and quarantine, star schemas, one metric dictionary, missing ≠ zero. That's what makes you portable across them.</p></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

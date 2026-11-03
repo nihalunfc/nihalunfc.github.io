@@ -6,6 +6,7 @@ status: Ongoing
 date: 2026-10-31
 order: 6
 featured: false
+sectors: [Research, Energy]
 tags: [Python, NumPy, Numba, Optuna, Control]
 stats:
   - { value: "0.01244", label: "best public score (lower is better)" }

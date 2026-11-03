@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 35 · Proof 5: restaurant-dbt, a tested star schema · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk" open><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a class="on" href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="../weeks/week-5.html">Week 5 · Model it in SQL</a> › Day 35</p>
+<h1>Day 35. Proof 5: restaurant-dbt, a tested star schema</h1>
+<div class="meta"><span class="pill">⏱ 4h · build 150m · README 60m · review 30m</span><span class="pill">🏷 multi-brand restaurants (BurgerBay, TacoTrail, WingWorks)</span><span class="pill">Before: Days 29 to 34</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Ship a dbt project with a documented star schema, SCD2, tests and metrics</li><li>Run it from Dagster on DuckDB and Azure SQL</li><li>Present a menu engineering and same-store sales analysis</li></ul></div><h2 id="1-what-youre-shipping">1. What you're shipping</h2>
+<p><code>restaurant-dbt</code>: Dagster ingests and cleans POS files → dbt builds <code>fct_order_lines</code>, <code>fct_orders</code>, <code>fct_restaurant_daily</code>, <code>fct_menu_engineering</code>, <code>dim_date</code>, <code>dim_restaurant</code>, <code>dim_menu_item</code> (SCD2), <code>dim_channel</code> → a dashboard and a written analysis.</p>
+<h3 id="acceptance-criteria">Acceptance criteria</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Requirement</th>
+<th>Proof</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Every mart model has a description with a grain sentence</td>
+<td>dbt docs screenshot</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PK, relationships, accepted values, and conservation tests</td>
+<td><code>dbt build</code> output</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SCD2 menu dimension; facts carry the version key</td>
+<td>test + query</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Incremental fact with look-back; backfill via Dagster partitions</td>
+<td>demo</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Runs on <code>dbt-duckdb</code> and <code>dbt-sqlserver</code> (Azure SQL)</td>
+<td>CI or screenshot</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>docs/metrics.md</code> with 20 metrics</td>
+<td>file</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Analysis: 1-page "menu engineering by brand" with recommendations</td>
+<td><code>docs/analysis.md</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Lineage graph from source files to the report</td>
+<td>screenshot</td>
+</tr>
+</tbody>
+</table>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> a model is trustworthy when its totals reconcile to the source at every layer.</p>
+<p><strong>Equation:</strong> for each business date <span class="arithmatex">\(d\)</span>: <span class="arithmatex">\(\sum \text{raw}_d - \text{dups}_d - \text{quarantine}_d = \sum \text{stg}_d = \sum \text{fct}_d\)</span> for revenue and quantity. Encode it as a singular dbt test that returns the dates where it fails.</p>
+<p><strong>Analogy:</strong> double-entry bookkeeping: every amount appears on both sides. Where it breaks: legitimate transformations (currency conversion, refunds netting). Reconcile the <em>pre</em>-transformation measure, then the transformation separately.</p>
+<p><strong>Try it:</strong> raw revenue &#36;52,400; duplicates &#36;310; quarantine &#36;90. Expected fact revenue? <em>(&#36;52,000.)</em></p>
+</details>
+<div class="callout senior">
+<p class="callout-title">Your story</p>
+<p><em>"I modelled a three-brand restaurant group as a Kimball star in dbt, with the business day ending at 5 a.m., an SCD2 menu dimension so price changes don't rewrite history, and a reconciliation test that proves revenue in equals revenue out on every build. Dagster runs dbt per business date, so a 60-day backfill is one click. The menu-engineering model flagged [item] as a plowhorse; a [x]% price change would add about $[y] a month at current volume."</em> Fill the brackets from your own analysis.</p>
+</div>
+<div class="callout lab">
+<p class="callout-title">Build checklist</p>
+<ol>
+<li>Combine Weeks 3–5 code: Dagster project + dbt project in one repo (or a monorepo with two folders).</li>
+<li><code>just build-local</code> (DuckDB) and <code>just build-azure</code> targets.</li>
+<li>Analysis doc: menu engineering per brand, top movers, same-store sales; one chart per point.</li>
+<li>README: summary + lineage screenshot, problem, model diagram (star), grain statements, tests, how to run, decisions (SCD2, incremental strategy, business day), next steps.</li>
+</ol>
+</div>
+<section class="quiz" id="quiz-day-35-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> Raw $80,000; duplicates $500; quarantine $200; fact shows $79,100. What do you conclude?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-35-1-0" value="0" data-ok="0"> <span>All good</span></label></li>
+<li><label><input type="radio" name="quiz-day-35-1-0" value="1" data-ok="1"> <span>$200 is unaccounted for: a transform is dropping or changing revenue</span></label></li>
+<li><label><input type="radio" name="quiz-day-35-1-0" value="2" data-ok="0"> <span>Quarantine is too big</span></label></li>
+<li><label><input type="radio" name="quiz-day-35-1-0" value="3" data-ok="0"> <span>Duplicates were under-counted by $300</span></label></li>
+</ul><p class="why" hidden>Expected 79,300. The 200 difference must be explained before release.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> What belongs in every mart model's description?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-35-1-1" value="0" data-ok="0"> <span>The author's name only</span></label></li>
+<li><label><input type="radio" name="quiz-day-35-1-1" value="1" data-ok="1"> <span>A grain sentence and key business rules (like the business-day cut-off)</span></label></li>
+<li><label><input type="radio" name="quiz-day-35-1-1" value="2" data-ok="0"> <span>The SQL code</span></label></li>
+<li><label><input type="radio" name="quiz-day-35-1-1" value="3" data-ok="0"> <span>A list of dashboards</span></label></li>
+</ul><p class="why" hidden>Grain and rules let anyone use the table correctly.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-35" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><a href="day-34.html">← Day 34</a><button class="btn done" data-action="complete" data-day="day-35">Mark day 35 complete</button><a href="day-36.html">Day 36 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

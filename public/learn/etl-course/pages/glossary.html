@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glossary · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="../index.html"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="../index.html">Course</a><a href="../pages/projects.html">Projects</a><a href="../pages/stack.html">Stack map</a><a href="../pages/setup.html">Setup</a><a href="../pages/glossary.html" class="on">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk"><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="../weeks/week-1.html">Week overview</a></li><li><a href="../days/day-01.html" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="../days/day-02.html" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="../days/day-03.html" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="../days/day-04.html" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="../days/day-05.html" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="../days/day-06.html" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="../days/day-07.html" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="../weeks/week-2.html">Week overview</a></li><li><a href="../days/day-08.html" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="../days/day-09.html" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="../days/day-10.html" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="../days/day-11.html" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="../days/day-12.html" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="../days/day-13.html" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="../days/day-14.html" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="../weeks/week-3.html">Week overview</a></li><li><a href="../days/day-15.html" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="../days/day-16.html" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="../days/day-17.html" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="../days/day-18.html" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="../days/day-19.html" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="../days/day-20.html" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="../days/day-21.html" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="../weeks/week-4.html">Week overview</a></li><li><a href="../days/day-22.html" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="../days/day-23.html" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="../days/day-24.html" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="../days/day-25.html" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="../days/day-26.html" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="../days/day-27.html" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="../days/day-28.html" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="../weeks/week-5.html">Week overview</a></li><li><a href="../days/day-29.html" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="../days/day-30.html" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="../days/day-31.html" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="../days/day-32.html" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="../days/day-33.html" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="../days/day-34.html" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="../days/day-35.html" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="../weeks/week-6.html">Week overview</a></li><li><a href="../days/day-36.html" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="../days/day-37.html" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="../days/day-38.html" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="../days/day-39.html" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="../days/day-40.html" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="../days/day-41.html" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="../days/day-42.html" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="../weeks/week-7.html">Week overview</a></li><li><a href="../days/day-43.html" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="../days/day-44.html" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="../days/day-45.html" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="../days/day-46.html" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="../days/day-47.html" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="../days/day-48.html" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="../days/day-49.html" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><h1 id="glossary">Glossary</h1>
+<p>Three names where useful: the warehouse word / the analytics word / the maths word.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+<th>Day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Additive / semi-additive / non-additive</strong></td>
+<td>Can be summed over all dims / over some dims but not time / never (ratios) — <em>extensive vs intensive quantities</em></td>
+<td>29, 34</td>
+</tr>
+<tr>
+<td><strong>ADR, RevPAR, Occupancy</strong></td>
+<td>Room revenue ÷ nights sold; room revenue ÷ rooms available; nights sold ÷ rooms available</td>
+<td>21</td>
+</tr>
+<tr>
+<td><strong>Asset (Dagster)</strong></td>
+<td>A piece of data the orchestrator knows how to produce — <em>a function value in a DAG</em></td>
+<td>16</td>
+</tr>
+<tr>
+<td><strong>Asset check</strong></td>
+<td>A test attached to an asset; can block downstream</td>
+<td>20</td>
+</tr>
+<tr>
+<td><strong>Backfill</strong></td>
+<td>Recomputing past partitions</td>
+<td>18</td>
+</tr>
+<tr>
+<td><strong>Bridge / reconciliation</strong></td>
+<td>Step-by-step explanation of the difference between two totals</td>
+<td>41</td>
+</tr>
+<tr>
+<td><strong>Business date</strong></td>
+<td>The trading day a transaction belongs to, after the cut-off shift — <em>phase-shifted calendar</em></td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Bus matrix</strong></td>
+<td>Processes × conformed dimensions grid</td>
+<td>29</td>
+</tr>
+<tr>
+<td><strong>CDC</strong></td>
+<td>Change data capture from a database's log</td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>Columnstore</strong></td>
+<td>Storage by column with compression and segment elimination</td>
+<td>9, 26</td>
+</tr>
+<tr>
+<td><strong>Conformed dimension</strong></td>
+<td>A dimension shared with the same keys across facts</td>
+<td>29</td>
+</tr>
+<tr>
+<td><strong>Contract</strong></td>
+<td>Machine-checked promise about a source's schema and values</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>Context transition</strong></td>
+<td>DAX turning a row context into a filter context inside CALCULATE/iterators</td>
+<td>37</td>
+</tr>
+<tr>
+<td><strong>Data diff</strong></td>
+<td>Symmetric difference of two versions of a table — <em>A △ B</em></td>
+<td>44</td>
+</tr>
+<tr>
+<td><strong>Delete-insert</strong></td>
+<td>Replace a partition's rows in one transaction</td>
+<td>24</td>
+</tr>
+<tr>
+<td><strong>Error budget</strong></td>
+<td>Allowed misses under an SLO</td>
+<td>43</td>
+</tr>
+<tr>
+<td><strong>Fan-out</strong></td>
+<td>Row multiplication from joining to a finer grain</td>
+<td>29</td>
+</tr>
+<tr>
+<td><strong>Freshness</strong></td>
+<td>How recent the latest data is vs a deadline</td>
+<td>13, 20</td>
+</tr>
+<tr>
+<td><strong>Grain</strong></td>
+<td>What one row means — <em>unit of observation</em> — <em>the index set of a function</em></td>
+<td>8, 29</td>
+</tr>
+<tr>
+<td><strong>Idempotent</strong></td>
+<td>Running twice equals running once — <em>f(f(x)) = f(x)</em></td>
+<td>3, 15</td>
+</tr>
+<tr>
+<td><strong>Incremental model</strong></td>
+<td>Processes only new/changed data plus a look-back</td>
+<td>32, 47</td>
+</tr>
+<tr>
+<td><strong>IO manager</strong></td>
+<td>Dagster component that stores and loads asset values</td>
+<td>17</td>
+</tr>
+<tr>
+<td><strong>Look-back window</strong></td>
+<td>Re-pulling the last N days because they still change</td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>MAD / robust z</strong></td>
+<td>Median absolute deviation; outlier-resistant scale</td>
+<td>13</td>
+</tr>
+<tr>
+<td><strong>Manifest</strong></td>
+<td>Ledger of every file landed with hash and metadata</td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>Medallion / layers</strong></td>
+<td>Raw (bronze), staging (silver), marts (gold)</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>MERGE / upsert</strong></td>
+<td>Insert new keys, update changed ones</td>
+<td>24</td>
+</tr>
+<tr>
+<td><strong>Menu engineering</strong></td>
+<td>Popularity × contribution margin classification (Stars, Plowhorses, Puzzles, Dogs)</td>
+<td>34</td>
+</tr>
+<tr>
+<td><strong>OTB, pickup, pace</strong></td>
+<td>On-the-books room nights; change over a period; vs same lead time last year</td>
+<td>21</td>
+</tr>
+<tr>
+<td><strong>Partition</strong></td>
+<td>An independently processed slice, usually by date — <em>block of a block-diagonal system</em></td>
+<td>18</td>
+</tr>
+<tr>
+<td><strong>PBIP</strong></td>
+<td>Power BI project format: text files for git</td>
+<td>36</td>
+</tr>
+<tr>
+<td><strong>Quarantine</strong></td>
+<td>Table of rejected rows with reasons, replayable</td>
+<td>13</td>
+</tr>
+<tr>
+<td><strong>Query folding</strong></td>
+<td>Power Query steps translated to source SQL</td>
+<td>36</td>
+</tr>
+<tr>
+<td><strong>RCSI</strong></td>
+<td>Read committed snapshot isolation: readers don't block on writers</td>
+<td>26</td>
+</tr>
+<tr>
+<td><strong>Resource (Dagster)</strong></td>
+<td>Injected connection/config object</td>
+<td>17</td>
+</tr>
+<tr>
+<td><strong>RLS</strong></td>
+<td>Row-level security in the database or Power BI</td>
+<td>27, 39</td>
+</tr>
+<tr>
+<td><strong>ROAS, CPA, CTR</strong></td>
+<td>Value ÷ spend; spend ÷ conversions; clicks ÷ impressions</td>
+<td>28</td>
+</tr>
+<tr>
+<td><strong>Run key</strong></td>
+<td>Sensor deduplication key for run requests</td>
+<td>19</td>
+</tr>
+<tr>
+<td><strong>Same-store sales</strong></td>
+<td>Growth over locations open in both periods</td>
+<td>34</td>
+</tr>
+<tr>
+<td><strong>SCD Type 1/2/3</strong></td>
+<td>Overwrite / new versioned row / previous-value column</td>
+<td>30</td>
+</tr>
+<tr>
+<td><strong>Semantic layer</strong></td>
+<td>Single store of metric definitions for all tools</td>
+<td>34</td>
+</tr>
+<tr>
+<td><strong>Sensor</strong></td>
+<td>Function that watches for events and requests runs</td>
+<td>19</td>
+</tr>
+<tr>
+<td><strong>SLO</strong></td>
+<td>Service level objective, e.g. sent by 08:00 on 98% of days</td>
+<td>43</td>
+</tr>
+<tr>
+<td><strong>Surrogate key</strong></td>
+<td>Meaningless warehouse key for a dimension row</td>
+<td>12, 30</td>
+</tr>
+<tr>
+<td><strong>Watermark</strong></td>
+<td>Highest key safely processed; next run starts there minus overlap</td>
+<td>4, 24</td>
+</tr>
+</tbody>
+</table></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="../assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="../assets/vendor/katex/katex.min.js"></script>
+<script defer src="../assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="../assets/days.js"></script>
+<script src="../assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>
