@@ -6,30 +6,23 @@ import { getPosts, fmtDate } from '../lib';
 const posts = (await getPosts()).slice(0, 3);
 ---
 <Base title={SITE.name}>
-<main class="prof">
+<main class="prof wide">
   <div class="top">
     <div>
       <h1 class="name"><b>Nihal</b> Vellaramkallingal Sulaiman</h1>
       <p class="tagline">Data analyst and BI developer · Niagara Falls, Ontario</p>
       <ProfileLinks />
+      <form class="home-search" action="/search/" role="search"><input name="q" type="search" placeholder="Search projects, posts and tools" aria-label="Search this site"><button type="submit">Search</button></form>
     </div>
     <img class="photo" src="/assets/photo.jpg" alt="Nihal Sulaiman" width="132" height="132">
   </div>
 
+  <div class="cols">
+  <div class="main-col">
   <div class="bio">
     <p>I build end-to-end data work in Python and SQL: pipelines and star-schema warehouses, data-quality checks, dashboards that managers open every morning, and forecasts and schedules that save money. I hold a <b>Master's in Data Analytics</b> from the University of Niagara Falls Canada and an <b>MSc in Physics</b> (astrophysics, with a mathematics minor) from Cochin University of Science and Technology.</p>
     <p>Physics taught me to model a messy signal and check every number; analytics taught me to turn that into a decision someone can act on. I also know hotel operations from the floor, from over a year in hotel housekeeping in Niagara Falls. I am open to data analyst, BI developer and data science roles anywhere in Ontario.</p>
   </div>
-
-  <h2>news</h2>
-  <dl class="news">
-    <dt>Nov 2026</dt><dd>Started a <a href="/blog/">blog</a> with write-ups of my projects and Kaggle work, and moved this site to nihalsulaiman.com.</dd>
-    <dt>Nov 2026</dt><dd>Added an <a href="https://github.com/nihalunfc/hotel-business/tree/main/ai-workflow">AI workflow kit</a> to the Hospitality BI portfolio: safety rules for Claude Code on a live warehouse, an ETL triage method and a tested read-only SQL runner.</dd>
-    <dt>Nov 2026</dt><dd>Currently in the top 10% of 4,346 on the public leaderboard of Kaggle's <i>Name That LLM</i> competition.</dd>
-    <dt>Oct 2026</dt><dd>Graduated with a Master's in Data Analytics.</dd>
-    <dt>Oct 2026</dt><dd>Launched the <a href="/hotel-business/">Hospitality BI portfolio</a>: a revenue command centre, a staff schedule builder and 12 hotel tools on a five-hotel sample group.</dd>
-    <dt>Sep 2026</dt><dd>Built <a href="https://github.com/nihalunfc/GDGCHackathon2026">WARL</a>, a drone-swarm wildfire response with a live dashboard, at the GDG on Campus Build with AI hackathon.</dd>
-  </dl>
 
   <h2>selected projects</h2>
   <div class="item">
@@ -57,6 +50,18 @@ const posts = (await getPosts()).slice(0, 3);
     <div class="more"><a href="/kaggle/">Ranks and write-ups</a><a href="https://www.kaggle.com/vsnihal">Kaggle profile</a><a href="https://github.com/nihalunfc/kaggle">Code</a></div>
   </div>
 
+  </div>
+  <aside class="side-col">
+  <h2>news</h2>
+  <dl class="news">
+    <dt>Nov 2026</dt><dd>Started a <a href="/blog/">blog</a> with write-ups of my projects and Kaggle work, and moved this site to nihalsulaiman.com.</dd>
+    <dt>Nov 2026</dt><dd>Added an <a href="https://github.com/nihalunfc/hotel-business/tree/main/ai-workflow">AI workflow kit</a> to the Hospitality BI portfolio: safety rules for Claude Code on a live warehouse, an ETL triage method and a tested read-only SQL runner.</dd>
+    <dt>Nov 2026</dt><dd>Currently in the top 10% of 4,346 on the public leaderboard of Kaggle's <i>Name That LLM</i> competition.</dd>
+    <dt>Oct 2026</dt><dd>Graduated with a Master's in Data Analytics.</dd>
+    <dt>Oct 2026</dt><dd>Launched the <a href="/hotel-business/">Hospitality BI portfolio</a>: a revenue command centre, a staff schedule builder and 12 hotel tools on a five-hotel sample group.</dd>
+    <dt>Sep 2026</dt><dd>Built <a href="https://github.com/nihalunfc/GDGCHackathon2026">WARL</a>, a drone-swarm wildfire response with a live dashboard, at the GDG on Campus Build with AI hackathon.</dd>
+  </dl>
+
   <h2>writing</h2>
   {posts.map((p) => (
     <div class="item">
@@ -81,6 +86,8 @@ const posts = (await getPosts()).slice(0, 3);
     <p class="where">Government Victoria College, Palakkad (University of Calicut), India</p>
   </div>
 
+  </aside>
+  </div>
   <p class="foot">More: <a href="/projects/">all projects</a> · <a href="/contact/">contact</a> · <a href="/sitemap/">site map</a> · <a href="/blog/">blog</a> · <a href="/now/">now</a> · <a href="/tools/">free tools</a> · <a href="/cv/">CV</a> · <a href="/about/">how I work</a></p>
 </main>
 </Base>

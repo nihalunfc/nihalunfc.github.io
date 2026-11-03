@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Base title="Search" description="Search every page, project and blog post on nihalsulaiman.com.">
+  <PageHero title="Search" crumbs={[{ label: 'Search' }]} lead="Search every project, blog post, tool and demo on this site." />
+  <main>
+    <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+    <div id="search" class="search-box"></div>
+    <p class="fine" style="margin-top:18px">Or browse the <a href="/sitemap/">site map</a>.</p>
+    <script is:inline src="/pagefind/pagefind-ui.js"></script>
+    <script is:inline>
+      window.addEventListener('DOMContentLoaded', function () {
+        var ui = new PagefindUI({ element: '#search', showSubResults: true, showImages: false, resetStyles: false, autofocus: true });
+        var q = new URLSearchParams(location.search).get('q');
+        if (q) ui.triggerSearch(q);
+      });
+    </script>
+  </main>
+</Base>
