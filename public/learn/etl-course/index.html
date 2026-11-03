@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="/learn/etl-course/assets/style.css">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/katex/katex.min.css">
+</head><body data-root="">
+<header class="top"><a class="brand" href="/learn/etl-course/"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="/learn/etl-course/" class="on">Course</a><a href="/learn/etl-course/pages/projects/">Projects</a><a href="/learn/etl-course/pages/stack/">Stack map</a><a href="/learn/etl-course/pages/setup/">Setup</a><a href="/learn/etl-course/pages/glossary/">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><main class="main"><section class="hero"><h1>Pipeline to Dashboard</h1><p class="lede">A 7-week, senior-depth course in ETL, warehousing and BI delivery</p><div class="bar big"><span data-allbar="1"></span></div><p class="progress-text" data-progress-text></p><a class="btn" data-action="resume" href="/learn/etl-course/days/day-01/">Start Day 1</a></section><h2 id="what-this-course-is">What this course is</h2>
+<p>You already watched a real pipeline run: files and emails arrive every morning, Python cleans them, an orchestrator runs the jobs, the data lands in a SQL database, and Power BI turns it into reports people act on. This course teaches you to <strong>build and run that whole chain on your own</strong>, at the depth of someone who has done it for five years: not just "it works", but why each piece is shaped the way it is, what breaks at 6 a.m., and how to choose cheaper tools when the budget is small.</p>
+<p>The <strong>core path</strong> is the method you saw:</p>
+<div class="flow">
+<p><strong>Ingest</strong> (email, folders, shared drives, SFTP, APIs) → <strong>Clean</strong> (Python, Polars, DuckDB, Claude Code) → <strong>Orchestrate</strong> (Dagster) → <strong>Load</strong> (Azure SQL) → <strong>Model</strong> (SQL, dbt) → <strong>Deliver</strong> (Power BI, scheduled reports)</p>
+</div>
+<p>At every step you also meet the <strong>alternatives</strong>: Postgres, DuckDB, ClickHouse; Airflow, Prefect, Mage, Kestra; dlt and Airbyte; Metabase, Superset and Evidence; local open models through Ollama. By Week 7 you can design a <strong>low-cost open-source stack</strong> that a medium-sized retail, restaurant, hotel or marketing company could actually afford.</p>
+<h2 id="how-a-day-works-about-4-hours">How a day works (about 4 hours)</h2>
+<table>
+<thead>
+<tr>
+<th>Block</th>
+<th>Time</th>
+<th>What you do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Learn</td>
+<td>~60 min</td>
+<td>Read the lesson. Do the small calculation in each <em>Maths and principle</em> box.</td>
+</tr>
+<tr>
+<td>Lab</td>
+<td>~120 min</td>
+<td>Build the day's piece on the course's synthetic data. Type the code; don't paste it.</td>
+</tr>
+<tr>
+<td>Ship</td>
+<td>~40 min</td>
+<td>Commit to the week's repo with a clear message. Update the README.</td>
+</tr>
+<tr>
+<td>Review</td>
+<td>~20 min</td>
+<td>Quiz, then three lines in <em>My notes</em>: what clicked, what didn't, what to revisit.</td>
+</tr>
+</tbody>
+</table>
+<p>Day 7 of each week is a <strong>proof day</strong>: you finish a GitHub-ready project with a pipeline, tests, a dashboard and a README a hiring manager can read in two minutes. Seven weeks, seven proofs, then one capstone that ties them together.</p>
+<h2 id="the-data">The data</h2>
+<p>All data is <strong>synthetic</strong> and made by <a href="/learn/etl-course/starter/generate_data.py"><code>starter/generate_data.py</code></a>. It writes the kind of mess a BI team really receives: daily sales emails from 12 retail stores (CSV and Excel attachments), POS exports from 18 fast-food restaurants on a shared drive, nightly hotel booking extracts on an SFTP folder, and paginated ad-platform JSON for a marketing agency. Faults are planted on purpose: duplicates, late and half-uploaded files, renamed columns, day-first dates, Windows-1252 text, refunds hidden as negative quantities, and a store that goes silent for four days.</p>
+<pre class="highlight"><code class="language-bash">python starter/generate_data.py --start 2026-09-01 --days 60 --out ./data</code></pre>
+<div class="callout senior">
+<p class="callout-title">How to read the &quot;5-year lens&quot; boxes</p>
+<p>Juniors learn tools. People with five years learn <strong>failure modes, trade-offs and costs</strong>: what happens when a file arrives twice, who gets paged, what a query costs per month, how to explain a wrong number to a finance manager. Every lesson has at least one of these boxes. They are the part interviewers probe.</p>
+</div>
+<div class="callout warn">
+<p class="callout-title">Ground rules</p>
+<p>Synthetic or public data only. Never use any employer's names, systems, files or figures, even masked. Secrets live in <code>.env</code> files that are git-ignored, never in code or screenshots.</p>
+</div><h2>The seven weeks</h2><div class="cards"><a class="card" href="/learn/etl-course/weeks/week-1/"><span class="wnum">Week 1</span><h3>Ingest anything</h3><p>Landing zones, email, shared drives, APIs. Retail chain.</p><div class="bar"><span data-weekbar="1"></span></div></a><a class="card" href="/learn/etl-course/weeks/week-2/"><span class="wnum">Week 2</span><h3>Clean and trust the data</h3><p>Profiling, contracts, Polars/DuckDB, Claude Code, quality gates. QSR chain.</p><div class="bar"><span data-weekbar="2"></span></div></a><a class="card" href="/learn/etl-course/weeks/week-3/"><span class="wnum">Week 3</span><h3>Orchestrate with Dagster</h3><p>Assets, resources, partitions, sensors, checks. Hotel group.</p><div class="bar"><span data-weekbar="3"></span></div></a><a class="card" href="/learn/etl-course/weeks/week-4/"><span class="wnum">Week 4</span><h3>Load to the warehouse</h3><p>Azure SQL, Postgres, DuckDB, ClickHouse; MERGE, watermarks, cost. Marketing agency.</p><div class="bar"><span data-weekbar="4"></span></div></a><a class="card" href="/learn/etl-course/weeks/week-5/"><span class="wnum">Week 5</span><h3>Model it in SQL</h3><p>Star schemas, SCD2, advanced SQL, dbt, semantic layer. Multi-brand restaurants.</p><div class="bar"><span data-weekbar="5"></span></div></a><a class="card" href="/learn/etl-course/weeks/week-6/"><span class="wnum">Week 6</span><h3>Deliver BI people trust</h3><p>Power BI, DAX, open-source BI, scheduled reports, reconciliation.</p><div class="bar"><span data-weekbar="6"></span></div></a><a class="card" href="/learn/etl-course/weeks/week-7/"><span class="wnum">Week 7</span><h3>Run it in production</h3><p>Observability, CI/CD, tool choices, the low-cost open stack, capstone.</p><div class="bar"><span data-weekbar="7"></span></div></a></div></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="/learn/etl-course/assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/katex.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="/learn/etl-course/assets/days.js"></script>
+<script src="/learn/etl-course/assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

@@ -29,6 +29,7 @@ const person = {
   sameAs: [SITE.links.github, SITE.links.linkedin, SITE.links.kaggle],
 };
 const ld = jsonld ?? person;
+const v = Date.now().toString(36); // changes every build, so browsers fetch fresh CSS and JS
 ---
 <!doctype html>
 <html lang="en-CA">
@@ -55,10 +56,11 @@ const ld = jsonld ?? person;
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
-<link rel="stylesheet" href="/assets/blog.css">
-<link rel="stylesheet" href="/assets/home.css">
-<script is:inline src="/assets/header.js"></script>
+<link rel="stylesheet" href={`/assets/site.css?v=${v}`}>
+<link rel="stylesheet" href={`/assets/blog.css?v=${v}`}>
+<link rel="stylesheet" href={`/assets/home.css?v=${v}`}>
+<script is:inline src={`/assets/header.js?v=${v}`}></script>
+<script is:inline defer src={`/assets/counter.js?v=${v}`}></script>
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
 <body class={bodyClass}>

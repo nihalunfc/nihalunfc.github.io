@@ -1,23 +1,35 @@
 ---
-title: Hospitality BI for a five-hotel group
-summary: A star-schema warehouse of 640,000 bookings, ten automated data-quality checks, a revenue command centre, a staff schedule builder and eleven free hotel tools.
+field: hospitality
+kind: pipelines
+title: BI toolkit, hospitality edition
+summary: A star-schema warehouse of 640,000 bookings, ten automated data-quality checks, a revenue command centre, a staff schedule builder and eleven free tools, built for hotels first.
 category: Business intelligence
 status: Live
 date: 2026-10-01
 order: 1
 featured: true
 tags: [Python, SQL, Star schema, PuLP, D3, Excel]
+sectors: [Hotels, Resorts, Short-term rentals]
+editions:
+  - { sector: Hospitality, href: /projects/hospitality-bi/overview/, status: Live }
+roadmap:
+  - Scheduled ETL into Azure SQL Database so the dashboards refresh like a real group's.
+limitations:
+  - All hotels, guests, staff and figures are fictional samples.
 stats:
   - { value: "640k", label: "bookings over four years" }
   - { value: "10", label: "automated data-quality checks" }
   - { value: "12", label: "tools and dashboards" }
 links:
-  - { label: "Open the Hospitality BI site", href: "/hotel-business/" }
-  - { label: "Revenue command centre", href: "/hotel-business/revenue.html" }
-  - { label: "Staff schedule builder", href: "/hotel-business/schedule.html" }
-  - { label: "All hotel tools", href: "/hotel-business/tools/index.html" }
+  - { label: "Overview of the sample hotel group", href: "/projects/hospitality-bi/overview/" }
+  - { label: "Proposals", href: "/projects/hospitality-bi/proposals/" }
+  - { label: "Revenue command centre", href: "/tools/revenue-command-centre/hotels/" }
+  - { label: "Staff schedule builder", href: "/tools/shift-scheduler/hotels/" }
+  - { label: "All hotel tools", href: "/tools/" }
   - { label: "Code on GitHub", href: "https://github.com/nihalunfc/hotel-business" }
 ---
+
+*This is the first edition of my [business intelligence toolkit](/projects/bi-toolkit/). The same tools are being fitted to restaurant chains and retail.*
 
 ## The problem
 

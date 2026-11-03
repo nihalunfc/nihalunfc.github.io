@@ -1,4 +1,6 @@
 ---
+field: science
+kind: optimisation
 title: Squares in Squares
 summary: Pack N unit squares into the smallest possible square for every N up to 1,000. A validation and submission pipeline that only submits packings proven valid on Kaggle's high-precision checker.
 category: Kaggle
@@ -6,6 +8,7 @@ status: Ongoing
 date: 2026-11-02
 order: 7
 featured: false
+sectors: [Research]
 tags: [Python, NumPy, mpmath, Kaggle API]
 stats:
   - { value: "Top 13%", label: "190 of 1,473 teams (public LB)" }

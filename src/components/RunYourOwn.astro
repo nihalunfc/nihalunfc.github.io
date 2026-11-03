@@ -1,0 +1,17 @@
+---
+// Shared section on every tool and project page: how the tool grows from the browser
+// to a client's own server, database or warehouse, and how I would set it up.
+interface Props { specific?: string[] }
+const { specific = [] } = Astro.props;
+---
+<section class="own">
+  <h2>Run it on your own data</h2>
+  <ol class="levels">
+    <li><b>In the browser (today)</b>Free, no sign-up. What you enter stays on your device. Good for trying it and for small teams.</li>
+    <li><b>On your files or database</b>Point the same logic at your exports or a database view (PostgreSQL, SQL Server, Azure SQL or DuckDB), on your own machine or network.</li>
+    <li><b>As a pipeline and warehouse</b>A scheduled ETL job pulls from your systems (reservations, point of sale, inventory, payroll) into a star-schema warehouse, runs data-quality checks, and the tool or a Power BI report reads the result every morning.</li>
+  </ol>
+  {specific.length > 0 && <><h3>What that adds here</h3><ul>{specific.map((s) => <li>{s}</li>)}</ul></>}
+  <h3>How I'd set it up for you</h3>
+  <p>I'd map your exports or database to the tool's model, package the job in a container that runs on your server or cloud account, add the checks your data needs, and hand over the code and a runbook. Your data stays on your systems. <a href="/contact/">Get in touch</a> if you'd like it fitted to your business.</p>
+</section>

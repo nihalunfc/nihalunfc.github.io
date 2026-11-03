@@ -210,3 +210,33 @@ a.proj:hover { text-decoration: none; border-color: var(--brand-2); box-shadow: 
 .facts span { display: block; line-height: 1.4; margin-top: 2px; }
 .toolgrid { align-items: start; }
 [hidden] { display: none !important; }
+
+/* =====================================================================
+   Monochrome theme (2026-11-03): black, white and zinc greys, with colour
+   kept only for status (green done, amber in progress). Overrides above.
+   ===================================================================== */
+:root {
+  --bg: #fafafa; --panel: #ffffff; --surface: #ffffff; --surface-2: #f4f4f5;
+  --ink: #09090b; --ink-2: #3f3f46; --ink-3: #71717a; --line: #e4e4e7; --line-2: #d4d4d8;
+  --brand: #09090b; --brand-2: #18181b; --link: #09090b; --brand-soft: #f4f4f5; --on-brand: #fafafa;
+  --hotel: #52525b; --hotel-soft: #f4f4f5;
+  --good: #15803d; --good-soft: #effaf2; --warn: #a16207; --warn-soft: #fdf8e8;
+  --grid: #f1f1f3; --axis: #c4c4cc; --hi-row: #f7f7f8;
+  --shadow: 0 1px 2px rgba(9, 9, 11, .04);
+}
+:root[data-theme="dark"] {
+  --bg: #09090b; --panel: #111113; --surface: #111113; --surface-2: #1c1c1f;
+  --ink: #fafafa; --ink-2: #d4d4d8; --ink-3: #a1a1aa; --line: #27272a; --line-2: #3f3f46;
+  --brand: #fafafa; --brand-2: #fafafa; --link: #fafafa; --brand-soft: rgba(250, 250, 250, .08); --on-brand: #09090b;
+  --hotel: #a1a1aa; --hotel-soft: rgba(250, 250, 250, .06);
+  --good: #4ade80; --good-soft: rgba(74, 222, 128, .12); --warn: #facc15; --warn-soft: rgba(250, 204, 21, .12);
+  --grid: #1c1c1f; --axis: #3f3f46; --hi-row: rgba(250, 250, 250, .04);
+}
+::selection { background: #18181b; color: #fafafa; }
+:root[data-theme="dark"] ::selection { background: #fafafa; color: #09090b; }
+/* Black links need a cue: underline links inside text, keep nav and cards clean */
+.prose a, .card p a, .callout a, .hub-list a, .lead a, .updated a, li a { text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.prose a:hover, .card p a:hover, .callout a:hover, .hub-list a:hover, li a:hover { text-decoration-color: currentColor; }
+.btn.primary { text-decoration: none !important; }
+.card { border-radius: 12px; }
+h1, h2, h3 { letter-spacing: -.015em; }

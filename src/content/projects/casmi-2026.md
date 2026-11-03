@@ -1,4 +1,6 @@
 ---
+field: science
+kind: ml
 title: Enveda CASMI 2026 molecule identification
 summary: Rank candidate chemical structures for unknown molecules from their mass spectra. My main contribution is a leak-free 300-structure hold-out that caught leaderboard drops the provided validation missed.
 category: Kaggle
@@ -6,6 +8,7 @@ status: Ongoing
 date: 2026-11-02
 order: 5
 featured: false
+sectors: [Research]
 tags: [PyTorch, RDKit, LightGBM, Validation]
 stats:
   - { value: "0.415", label: "MRR@25 on the public LB" }

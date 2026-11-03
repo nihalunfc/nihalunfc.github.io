@@ -1,0 +1,20 @@
+---
+import fs from 'node:fs';
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+const all: { group: string; title: string; summary: string; url: string }[] = JSON.parse(fs.readFileSync('public/data/hospitality/proposals.json', 'utf8'));
+const groups = [...new Set(all.map((p) => p.group))];
+---
+<Base title="Hospitality proposals" description="Written proposals for a hotel group: revenue, energy, operations and data projects, each with the problem, the method and the expected value.">
+  <PageHero title="Proposals" crumbs={[{ label: 'Projects', href: '/projects/' }, { label: 'Hospitality edition', href: '/projects/hospitality-bi/' }, { label: 'Proposals' }]} lead="Written proposals for a sample hotel group. Each one sets out the problem, the method and the expected value, and links to the full document on GitHub." />
+  <main>
+    <div class="now-grid two">
+      {groups.map((g) => (
+        <section class="card">
+          <h2><i></i>{g}</h2>
+          <ul class="hub-list">{all.filter((p) => p.group === g).map((p) => <li><a href={p.url}>{p.title}</a><span>{p.summary}</span></li>)}</ul>
+        </section>
+      ))}
+    </div>
+  </main>
+</Base>

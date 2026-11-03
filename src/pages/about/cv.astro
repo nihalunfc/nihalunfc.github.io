@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProfileLinks from '../../components/ProfileLinks.astro';
+// Source: Nihal_Sulaiman_Data_Analyst_CV.docx (Nov 2026). Phone number left off the public page on purpose.
+const skills = [
+  ['Analytics and BI', 'Power BI, Tableau, Excel (advanced), KPI design, dashboards, automated reporting, exploratory data analysis, statistical analysis (SAS)'],
+  ['Data and engineering', 'SQL (SQL Server / T-SQL, SQLite), ETL pipelines, star-schema data modelling, data cleaning, data-quality testing, Databricks, Google Cloud Platform, Git and GitHub'],
+  ['Programming', 'Python (pandas, NumPy, Polars), JavaScript, HTML, CSS, D3.js, XML, LaTeX'],
+  ['Machine learning and AI', 'Feature engineering, time-series forecasting, XGBoost, CatBoost, LightGBM, Optuna, PyTorch, reinforcement learning, LLM fine-tuning (LoRA), Gemini API'],
+  ['Optimisation and tools', 'Mixed-integer optimisation (PuLP), Microsoft Office, Google Workspace, AI coding assistants (Claude Code, Google Antigravity)'],
+];
+const jobs = [
+  { role: 'Data Engineer (remote)', org: 'Shipd by DataCurve, San Francisco, CA, USA', when: 'Feb 2026 – Present', points: [
+    'Recruited directly by the company after a top-15% Kaggle competition finish, to build high-quality training data for large language models and AI coding agents (Project Eris).',
+    'Design complex programming and data challenges, with verified reference solutions, that expose reasoning gaps in advanced AI agents.',
+    'Write, test and refine machine-learning code used to train and fine-tune models, meeting strict standards for correctness and quality.',
+  ] },
+  { role: 'Data Annotator (remote)', org: 'TELUS Digital, Canada', when: 'Jun 2025 – Sep 2026', points: [
+    'Labelled and quality-rated multimodal AI training data (text, image and video) on the Multimango and Parimango platforms.',
+    'Performed entity tagging on social-media content, video interleaving, and image and video quality rating against detailed guidelines, keeping accuracy consistent at volume.',
+  ] },
+  { role: 'Content Writer (full-time, remote)', org: 'BrightMedia International, Calicut, India', when: 'Apr 2019 – Apr 2024', points: [
+    'Researched and wrote news articles, investigative reports, science-communication pieces and reviews, plus marketing copy, online ads and social-media content, to deadline for five years.',
+    'Turned technical and scientific topics into clear, accurate writing for a general audience, the same skill I now use to present data insights to stakeholders.',
+  ] },
+];
+const projects = [
+  { title: 'Hospitality Data and Business Intelligence Platform (Projects HARLTON and H2)', href: '/projects/hospitality-bi/', stack: 'Python, SQL, Excel, PuLP', points: [
+    'Built an end-to-end BI pipeline on a synthetic dataset of five hotels (about 640,000 bookings over four years): star-schema warehouse, ETL, ten automated data-quality checks and unit tests.',
+    'Designed a Revenue Command Centre dashboard covering occupancy, ADR, RevPAR, booking pace against last year, cancellations, channel net rates and a back-tested demand forecast.',
+    'Developing revenue and cost analyses (group displacement, rate recommendations, overbooking, energy costs) and a staff scheduler that turns forecast workload into shifts with mixed-integer optimisation, checks Ontario labour rules and exports to Excel.',
+  ] },
+  { title: 'Kaggle competitions', href: '/projects/kaggle/', stack: 'Python, PyTorch, XGBoost, CatBoost, LightGBM', points: [
+    'Mallorn Challenge (top 15% of about 800 teams): detected rare astronomical events in noisy time-series data with under 1% positive cases, using physics-informed features and an XGBoost and CatBoost ensemble tuned with Optuna.',
+    'Name That LLM (436th of 4,346 teams, top 10%, ongoing): fine-tuned Qwen2.5-7B and GLM-4-9B with LoRA on a 38,935-passage training set and built leak-free grouped cross-validation (0.663 balanced accuracy).',
+    "NeurIPS 2026 Smart Buildings: designed a physics-informed HVAC control policy that beats the best public notebook (0.01244 vs 0.01853, lower is better), and found and reported a bug in the organisers' simulator.",
+    'Also: Squares in Squares (top 13%), Enveda CASMI 2026 molecule identification, CAFA protein-function prediction (deep learning with extreme class imbalance), and Google MedGemma Impact Challenge.',
+  ] },
+  { title: 'WARL: Wildfire Autonomous Reinforcement Learning (GDG on Campus Build with AI Challenge 2026)', href: '/projects/warl-wildfire/', stack: 'PyTorch, JavaScript, Leaflet.js, Gemini API', points: [
+    'Developed a decentralised drone-swarm simulation using a Deep Q-Network to route drones to wildfire choke points, building on my earlier multi-agent reinforcement learning model of ERCOT (Texas grid) energy data.',
+    "Built a live web dashboard with satellite mapping and a Gemini-powered chatbot that explains the model's decisions in plain English.",
+  ] },
+];
+const education = [
+  ['Master\'s in Data Analytics', 'University of Niagara Falls Canada, Ontario', 'Apr 2025 – Oct 2026'],
+  ['M.Sc. Physics', 'Cochin University of Science and Technology, India', '2017 – 2019'],
+  ['B.Sc. Physics (mathematics minor)', 'University of Calicut, India', '2013 – 2016'],
+];
+const certs = [
+  'Google Advanced Data Analytics Professional Certificate and Google Business Intelligence Professional Certificate (Coursera, 2026)',
+  'SAS Statistical Business Analyst Professional Certificate (Coursera, 2026)',
+  'Microsoft Data Visualization Fundamentals; Microsoft Data Preparation and Management (Coursera, 2026)',
+  'Google Cloud Skill Badge: Prompt Design in Vertex AI',
+  'Workplace: WHMIS with GHS, Worker Health and Safety Awareness, AODA Awareness, Delivery Driver Safety',
+];
+const canadian = [
+  ['Housekeeping Staff', 'Canadian Niagara Hotels (Brock Hotel), Niagara Falls, ON', 'Jun 2025 – Present'],
+  ['Waterpark Attendant', 'Great Wolf Lodge, Niagara Falls, ON', 'Oct 2025 – Jan 2026'],
+  ['Customer Service and Kitchen Staff', 'Rapha Kerala Restaurant, Niagara Falls, ON', 'Aug 2025 – Oct 2025'],
+  ['Kitchen Helper', 'Mr Johns Kerala Kitchen, Brampton, ON', 'Apr 2025 – Jun 2025'],
+];
+---
+<Base title="CV" description="CV of Nihal Vellaramkallingal Sulaiman: data analyst in Ontario. Power BI, SQL, Python, star-schema warehouses, forecasting, machine learning and Kaggle results.">
+<main class="prof wide cvp">
+  <header class="cv-top">
+    <div>
+      <h1 class="name"><b>Nihal</b> Vellaramkallingal Sulaiman</h1>
+      <p class="tagline">Data Analyst · Business Intelligence · Machine Learning</p>
+      <p class="cv-meta">Niagara Falls, ON · <a href="mailto:nihalunfc@gmail.com">nihalunfc@gmail.com</a> · Authorized to work in Canada · Available immediately for full-time roles</p>
+      <ProfileLinks print />
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="main-col">
+      <h2>summary</h2>
+      <p class="cv-sum">Recent Master's graduate in Data Analytics (University of Niagara Falls Canada, October 2026) with an M.Sc. in Physics and a strong grounding in statistics, mathematics and modelling. I build end-to-end analytics solutions in Python, SQL, Power BI and Excel: star-schema data warehouses, automated data-quality checks, KPI dashboards, demand forecasts and optimisation models. Currently a remote Data Engineer at Shipd (DataCurve), creating training data for AI models after being recruited on the strength of my Kaggle results (top 10 to 15% finishes in global competitions). Holder of five professional certificates in data analytics and business intelligence from Google, SAS and Microsoft, and an experienced writer who explains data clearly to non-technical audiences.</p>
+
+      <h2>experience</h2>
+      {jobs.map((j) => (
+        <div class="item">
+          <div class="head"><h3>{j.role}</h3><span class="when">{j.when}</span></div>
+          <p class="where">{j.org}</p>
+          <ul>{j.points.map((pt) => <li>{pt}</li>)}</ul>
+        </div>
+      ))}
+
+      <h2>data and AI projects</h2>
+      {projects.map((p) => (
+        <div class="item">
+          <div class="head"><h3><a href={p.href}>{p.title}</a></h3></div>
+          <p class="where">{p.stack}</p>
+          <ul>{p.points.map((pt) => <li>{pt}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+
+    <aside class="side-col">
+      <h2>skills</h2>
+      <dl class="cv-skills">{skills.map(([k, v]) => <><dt>{k}</dt><dd>{v}</dd></>)}</dl>
+
+      <h2>education</h2>
+      {education.map(([d, s, w]) => (
+        <div class="item"><div class="head"><h3>{d}</h3><span class="when">{w}</span></div><p class="where">{s}</p></div>
+      ))}
+
+      <h2>certifications</h2>
+      <ul class="cv-list">{certs.map((c) => <li>{c}</li>)}</ul>
+
+      <h2>canadian work experience</h2>
+      <p class="cv-note">Alongside my studies I have worked in Niagara's hospitality sector, building reliability, teamwork and customer service skills, plus first-hand knowledge of the hotel operations behind my BI projects.</p>
+      {canadian.map(([r, o, w]) => (
+        <div class="item"><div class="head"><h3>{r}</h3><span class="when">{w}</span></div><p class="where">{o}</p></div>
+      ))}
+
+      <h2>achievements and languages</h2>
+      <ul class="cv-list">
+        <li><b>Achievement:</b> Finalist, International Astronomy and Astrophysics Competition (IAAC) 2020</li>
+        <li><b>Community:</b> Member, Google Developer Group (GDG) on Campus, Niagara Falls (Oct 2025 – Present)</li>
+        <li><b>Languages:</b> English (fluent), Malayalam (native)</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+</Base>

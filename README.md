@@ -27,7 +27,7 @@ Add a Markdown file to `src/content/projects/` with `title`, `summary`, `categor
 ## Other pages
 
 - `src/pages/` holds Home, About, CV, Now, Kaggle, Tools and the blog and project templates.
-- `public/` is copied as is: the shared header and styles (`assets/`), the Swarm demos (`swarm/`), the expense calendar (`tools/expense-calendar/`) and the disclaimer. `/hotel-business/` is served from the separate hotel-business repo.
+- `public/` is copied as is: the shared header and styles (`assets/`), the Swarm demos (`swarm/`), tool apps (`tools/<tool>/<edition>/`), hospitality sub-pages (`projects/hospitality-bi/`), courses (`learn/`), data and downloads, and the disclaimer. The full map of what lives where is `public/site-structure.md`.
 
 ## Run it locally
 
@@ -43,3 +43,29 @@ npm run build    # writes dist/
 2. Change `SITE_URL` in `src/site.ts`, `site` in `astro.config.mjs` and the sitemap line in `public/robots.txt`.
 3. In DNS, add four `A` records for the apex (`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`) and a `CNAME` for `www` pointing to `nihalunfc.github.io`. On Cloudflare, set them to "DNS only" (grey cloud) until GitHub has issued the HTTPS certificate.
 4. In the repo's Settings → Pages, enter the domain and tick "Enforce HTTPS" once it is offered.
+
+## Activity log (#UpdateLog)
+
+The full rules any Claude session follows are in [`public/update-log-rules.md`](public/update-log-rules.md), live at https://nihalsulaiman.com/update-log-rules.md. The trigger is case-insensitive.
+
+Each activity is one Markdown file in `src/content/log/`, named `YYYY-MM-DD-HHMM-slug.md`:
+
+```md
+---
+time: 2026-11-03T15:45:00-05:00   # when the work happened (Eastern time)
+title: What I did, in one line
+project: Project name
+status: done                      # started | progress | done | blocked | idea
+link: /projects/some-page/        # optional: page or demo to look at
+repo: https://github.com/nihalunfc/some-repo   # optional: the code
+commit: https://github.com/nihalunfc/some-repo/commit/abc123   # optional: the work itself
+ref: tools/shift-scheduler        # optional: shows the entry under Updates on that page
+---
+Optional details.
+```
+
+Each entry is committed on its own, with `GIT_AUTHOR_DATE` and `GIT_COMMITTER_DATE` set to `time`, so GitHub shows when the work happened. Entries show on `/log/`, in the Live diary card on `/now/` and on the home page.
+
+## Tools
+
+Each tool is one Markdown file in `src/content/tools/`, rendered at `/tools/<id>/` with sections for who can use it, where it fits, how to use it, limitations, what's next, running it on your own data, and updates from the log. Write the title and summary for any sector and list sector versions under `editions`.

@@ -1,0 +1,35 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getCourses, getUpdates } from '../../lib';
+const courses = await Promise.all((await getCourses()).map(async (c) => ({ c, Content: (await render(c)).Content, updates: (await getUpdates(`courses/${c.id}`)).length })));
+---
+<Base title="Learn" description="Free courses by Nihal Sulaiman in ETL pipelines, data cleaning, warehousing and BI. No sign-up; progress is saved in your browser.">
+  <PageHero title="Learn" crumbs={[{ label: 'Learn' }]} lead="Courses I write to teach myself, open to anyone. Free, no sign-up, and your progress stays in your own browser." />
+  <main>
+    <div class="now-grid two">
+      {courses.map(({ c, Content }) => (
+        <section class="card course" id={c.id}>
+          <h2><i></i>{c.data.title}<span class={`status ${c.data.status.replace(' ', '')}`}>{c.data.status}</span></h2>
+          <p>{c.data.summary}</p>
+          <p class="muted small">{c.data.length} · {c.data.level}</p>
+          <div class="prose small"><Content /></div>
+          {c.data.who && <p class="muted small"><b>For:</b> {c.data.who}</p>}
+          <div class="tags">{c.data.topics.map((t) => <span class="tag">{t}</span>)}</div>
+          <p style="margin-top:12px"><a class="btn primary" href={c.data.href} data-open-count={`course-${c.id}`}>Start the course</a></p>
+          <p class="more">{c.data.links.map((l) => <a href={l.href}>{l.label}</a>)}<span class="muted small" data-opens={`course-${c.id}`} hidden></span></p>
+        </section>
+      ))}
+      <section class="card">
+        <h2><i></i>How your progress is saved</h2>
+        <ul class="tight">
+          <li>Ticks, quiz answers and notes save automatically in this browser, on this device only. No account or email, and nothing is sent to me.</li>
+          <li><b>You lose it if you haven't backed up and</b> you clear your browser's history, cookies or site data, use a private or incognito window, switch browser or device, or your browser clears site data on its own (Safari and iPhone can after about 7 days without a visit).</li>
+          <li><b>To keep it,</b> press <b>Download backup</b> on the course home page now and then, and keep the file.</li>
+          <li><b>To continue</b> on another browser or device, open the course there and press <b>Load backup</b>. Your progress only comes back once you load the file.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</Base>

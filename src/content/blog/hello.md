@@ -19,4 +19,4 @@ That mix is why I care about data that changes a decision. In astrophysics you m
 
 Every number has a source. If a score came from someone else's public notebook, I say so. If my own idea didn't beat the baseline, I say that too. I think that's more useful to read, and it's the only kind of portfolio I'd want to hire from.
 
-If you're hiring for data or BI roles in Ontario, my [CV is here](/cv/) and I'm on [LinkedIn](https://www.linkedin.com/in/vsnihal/).
+If you're hiring for data or BI roles in Ontario, my [CV is here](/about/cv/) and I'm on [LinkedIn](https://www.linkedin.com/in/vsnihal/).

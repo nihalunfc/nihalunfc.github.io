@@ -1,20 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
-import { SITE, SITE_URL } from '../../site';
-// The form posts to FormSubmit, a free service that forwards each message to SITE.email.
-// The very first message triggers a one-time "Activate form" email to that inbox.
-const action = `https://formsubmit.co/${SITE.email}`;
+import { SITE } from '../../site';
 ---
 <Base title="Contact" description="Contact Nihal Sulaiman about data analyst, BI developer and data science roles in Ontario, or about any project on this site.">
   <PageHero title="Contact me" crumbs={[{ label: 'Contact' }]} lead="Hiring for a data or BI role, have a question about a project, or want to work on something together? Send me a message and I'll reply by email, usually within a day." />
   <main>
     <div class="contact-grid">
-      <form class="card cform" action={action} method="POST">
-        <input type="hidden" name="_subject" value="New message from nihalsulaiman.com">
-        <input type="hidden" name="_next" value={`${SITE_URL}/contact/thanks/`}>
-        <input type="hidden" name="_template" value="table">
-        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <form class="card cform" id="cform" data-key={SITE.web3formsKey} data-to={SITE.email}>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <label>Your name<input name="name" required autocomplete="name"></label>
         <label>Your email<input type="email" name="email" required autocomplete="email"></label>
         <label>What's it about?
@@ -27,7 +21,7 @@ const action = `https://formsubmit.co/${SITE.email}`;
         </label>
         <label>Message<textarea name="message" rows="7" required></textarea></label>
         <button class="btn primary" type="submit">Send message</button>
-        <p class="fine">Your message is sent by email through FormSubmit. Nothing is stored on this site.</p>
+        <p class="fine" id="cstatus" role="status">Prefer email? Write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
       </form>
       <div class="side">
         <div class="card">
@@ -37,9 +31,38 @@ const action = `https://formsubmit.co/${SITE.email}`;
           <p><a href={SITE.links.linkedin}>LinkedIn</a> · <a href={SITE.links.github}>GitHub</a> · <a href={SITE.links.kaggle}>Kaggle</a></p>
           <h2>Location</h2>
           <p>Niagara Falls, Ontario. Open to roles anywhere in Ontario, on site or remote.</p>
-          <p><a href="/cv/">View my CV →</a></p>
+          <p><a href="/about/cv/">View my CV →</a></p>
         </div>
       </div>
     </div>
   </main>
+  <script is:inline>
+    (function () {
+      var f = document.getElementById('cform'), st = document.getElementById('cstatus');
+      var key = f.dataset.key, to = f.dataset.to;
+      function mailto(d) {
+        var body = d.message + '\n\n' + d.name + ' <' + d.email + '>';
+        location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('[nihalsulaiman.com] ' + d.topic) + '&body=' + encodeURIComponent(body);
+        st.textContent = 'Your email app should open with the message filled in. If it does not, write to ' + to + '.';
+      }
+      f.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var fd = new FormData(f), d = Object.fromEntries(fd.entries());
+        if (d.botcheck) return;
+        if (!key) { mailto(d); return; }
+        var btn = f.querySelector('button'); btn.disabled = true; st.textContent = 'Sending…';
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ access_key: key, subject: 'New message from nihalsulaiman.com: ' + d.topic, from_name: d.name, name: d.name, email: d.email, topic: d.topic, message: d.message })
+        }).then(function (r) { return r.json(); }).then(function (j) {
+          if (!j.success) throw new Error(j.message || 'failed');
+          location.href = '/contact/thanks/';
+        }).catch(function () {
+          btn.disabled = false;
+          st.textContent = 'The form service did not respond, so I am opening your email app instead.';
+          setTimeout(function () { mailto(d); }, 600);
+        });
+      });
+    })();
+  </script>
 </Base>

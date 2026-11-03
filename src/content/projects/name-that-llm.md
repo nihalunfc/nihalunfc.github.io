@@ -1,4 +1,6 @@
 ---
+field: science
+kind: ml
 title: Name That LLM
 summary: Identify which of 18 frontier language models wrote a passage, on prompts never seen in training. LoRA-tuned Qwen and Llama ensembles with leak-free, prompt-grouped validation.
 category: Kaggle
@@ -6,6 +8,7 @@ status: Ongoing
 date: 2026-11-02
 order: 4
 featured: true
+sectors: [Research]
 tags: [PyTorch, Transformers, LoRA, scikit-learn, NLP]
 stats:
   - { value: "Top 10%", label: "436 of 4,346 teams (public LB)" }

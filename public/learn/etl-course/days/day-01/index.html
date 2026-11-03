@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 1 · The shape of a data platform · Pipeline to Dashboard</title>
+<link rel="stylesheet" href="/learn/etl-course/assets/style.css">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/hljs/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="/learn/etl-course/assets/vendor/katex/katex.min.css">
+</head><body data-root="../">
+<header class="top"><a class="brand" href="/learn/etl-course/"><span class="logo">P→D</span> Pipeline to Dashboard</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href="/learn/etl-course/">Course</a><a href="/learn/etl-course/pages/projects/">Projects</a><a href="/learn/etl-course/pages/stack/">Stack map</a><a href="/learn/etl-course/pages/setup/">Setup</a><a href="/learn/etl-course/pages/glossary/">Glossary</a></nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner"><details class="wk" open><summary><span class="wnum">W1</span> Ingest anything <span class="wprog" data-week="1"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-1/">Week overview</a></li><li><a class="on" href="/learn/etl-course/days/day-01/" data-day="day-01"><span class="dot"></span>Day 1 · The shape of a data platform</a></li><li><a href="/learn/etl-course/days/day-02/" data-day="day-02"><span class="dot"></span>Day 2 · Engineering setup that survives a real job</a></li><li><a href="/learn/etl-course/days/day-03/" data-day="day-03"><span class="dot"></span>Day 3 · Landing files from folders and shared drives</a></li><li><a href="/learn/etl-course/days/day-04/" data-day="day-04"><span class="dot"></span>Day 4 · Extracting data from email</a></li><li><a href="/learn/etl-course/days/day-05/" data-day="day-05"><span class="dot"></span>Day 5 · SharePoint, OneDrive, Google Drive, SFTP and object storage</a></li><li><a href="/learn/etl-course/days/day-06/" data-day="day-06"><span class="dot"></span>Day 6 · APIs and source databases</a></li><li><a href="/learn/etl-course/days/day-07/" data-day="day-07"><span class="dot"></span>Day 7 · Proof 1: retail-ingest, a multi-source landing service</a></li></ol></details><details class="wk"><summary><span class="wnum">W2</span> Clean and trust the data <span class="wprog" data-week="2"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-2/">Week overview</a></li><li><a href="/learn/etl-course/days/day-08/" data-day="day-08"><span class="dot"></span>Day 8 · Profiling and data contracts</a></li><li><a href="/learn/etl-course/days/day-09/" data-day="day-09"><span class="dot"></span>Day 9 · Transforming with Polars and DuckDB</a></li><li><a href="/learn/etl-course/days/day-10/" data-day="day-10"><span class="dot"></span>Day 10 · The messy-data field guide</a></li><li><a href="/learn/etl-course/days/day-11/" data-day="day-11"><span class="dot"></span>Day 11 · Cleaning with Claude Code and open models</a></li><li><a href="/learn/etl-course/days/day-12/" data-day="day-12"><span class="dot"></span>Day 12 · Duplicates, keys and entity resolution</a></li><li><a href="/learn/etl-course/days/day-13/" data-day="day-13"><span class="dot"></span>Day 13 · Quality gates, quarantine and the DQ report</a></li><li><a href="/learn/etl-course/days/day-14/" data-day="day-14"><span class="dot"></span>Day 14 · Proof 2: qsr-clean, a trustworthy cleaning pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W3</span> Orchestrate with Dagster <span class="wprog" data-week="3"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-3/">Week overview</a></li><li><a href="/learn/etl-course/days/day-15/" data-day="day-15"><span class="dot"></span>Day 15 · What an orchestrator really does</a></li><li><a href="/learn/etl-course/days/day-16/" data-day="day-16"><span class="dot"></span>Day 16 · Dagster assets and your first real project</a></li><li><a href="/learn/etl-course/days/day-17/" data-day="day-17"><span class="dot"></span>Day 17 · Resources, config, IO managers and environments</a></li><li><a href="/learn/etl-course/days/day-18/" data-day="day-18"><span class="dot"></span>Day 18 · Partitions and backfills</a></li><li><a href="/learn/etl-course/days/day-19/" data-day="day-19"><span class="dot"></span>Day 19 · Schedules, sensors, retries and alerts</a></li><li><a href="/learn/etl-course/days/day-20/" data-day="day-20"><span class="dot"></span>Day 20 · Asset checks, testing and deploying Dagster</a></li><li><a href="/learn/etl-course/days/day-21/" data-day="day-21"><span class="dot"></span>Day 21 · Proof 3: hotel-dagster, a self-running hotel pipeline</a></li></ol></details><details class="wk"><summary><span class="wnum">W4</span> Load to the warehouse <span class="wprog" data-week="4"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-4/">Week overview</a></li><li><a href="/learn/etl-course/days/day-22/" data-day="day-22"><span class="dot"></span>Day 22 · Choosing where the data lives</a></li><li><a href="/learn/etl-course/days/day-23/" data-day="day-23"><span class="dot"></span>Day 23 · Azure SQL Database, hands on</a></li><li><a href="/learn/etl-course/days/day-24/" data-day="day-24"><span class="dot"></span>Day 24 · Loading patterns that survive reruns</a></li><li><a href="/learn/etl-course/days/day-25/" data-day="day-25"><span class="dot"></span>Day 25 · Postgres, DuckDB and ClickHouse side by side</a></li><li><a href="/learn/etl-course/days/day-26/" data-day="day-26"><span class="dot"></span>Day 26 · T-SQL for people who run warehouses</a></li><li><a href="/learn/etl-course/days/day-27/" data-day="day-27"><span class="dot"></span>Day 27 · Security, cost and operations in Azure</a></li><li><a href="/learn/etl-course/days/day-28/" data-day="day-28"><span class="dot"></span>Day 28 · Proof 4: ads-warehouse, one pipeline, any warehouse</a></li></ol></details><details class="wk"><summary><span class="wnum">W5</span> Model it in SQL <span class="wprog" data-week="5"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-5/">Week overview</a></li><li><a href="/learn/etl-course/days/day-29/" data-day="day-29"><span class="dot"></span>Day 29 · Dimensional modelling and grain</a></li><li><a href="/learn/etl-course/days/day-30/" data-day="day-30"><span class="dot"></span>Day 30 · Dimensions done right (keys, dates, SCD2)</a></li><li><a href="/learn/etl-course/days/day-31/" data-day="day-31"><span class="dot"></span>Day 31 · SQL the way senior analysts write it</a></li><li><a href="/learn/etl-course/days/day-32/" data-day="day-32"><span class="dot"></span>Day 32 · dbt, SQL models with software discipline</a></li><li><a href="/learn/etl-course/days/day-33/" data-day="day-33"><span class="dot"></span>Day 33 · dbt inside Dagster, and the alternatives</a></li><li><a href="/learn/etl-course/days/day-34/" data-day="day-34"><span class="dot"></span>Day 34 · Metrics, additivity and the semantic layer</a></li><li><a href="/learn/etl-course/days/day-35/" data-day="day-35"><span class="dot"></span>Day 35 · Proof 5: restaurant-dbt, a tested star schema</a></li></ol></details><details class="wk"><summary><span class="wnum">W6</span> Deliver BI people trust <span class="wprog" data-week="6"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-6/">Week overview</a></li><li><a href="/learn/etl-course/days/day-36/" data-day="day-36"><span class="dot"></span>Day 36 · Power BI data models that stay fast</a></li><li><a href="/learn/etl-course/days/day-37/" data-day="day-37"><span class="dot"></span>Day 37 · DAX that is correct, not just working</a></li><li><a href="/learn/etl-course/days/day-38/" data-day="day-38"><span class="dot"></span>Day 38 · Dashboards people read in ten seconds</a></li><li><a href="/learn/etl-course/days/day-39/" data-day="day-39"><span class="dot"></span>Day 39 · Refresh, security and report delivery</a></li><li><a href="/learn/etl-course/days/day-40/" data-day="day-40"><span class="dot"></span>Day 40 · Open-source BI for companies without Microsoft licences</a></li><li><a href="/learn/etl-course/days/day-41/" data-day="day-41"><span class="dot"></span>Day 41 · Reconciliation, the skill that earns trust</a></li><li><a href="/learn/etl-course/days/day-42/" data-day="day-42"><span class="dot"></span>Day 42 · Proof 6: chain-dashboards, BI people can trust</a></li></ol></details><details class="wk"><summary><span class="wnum">W7</span> Run it in production <span class="wprog" data-week="7"></span></summary><ol><li><a href="/learn/etl-course/weeks/week-7/">Week overview</a></li><li><a href="/learn/etl-course/days/day-43/" data-day="day-43"><span class="dot"></span>Day 43 · Observability and incident response</a></li><li><a href="/learn/etl-course/days/day-44/" data-day="day-44"><span class="dot"></span>Day 44 · CI/CD, environments and safe change</a></li><li><a href="/learn/etl-course/days/day-45/" data-day="day-45"><span class="dot"></span>Day 45 · Choosing tools with a written rationale</a></li><li><a href="/learn/etl-course/days/day-46/" data-day="day-46"><span class="dot"></span>Day 46 · The low-cost open-source stack for medium companies</a></li><li><a href="/learn/etl-course/days/day-47/" data-day="day-47"><span class="dot"></span>Day 47 · Performance, scale and when to change gear</a></li><li><a href="/learn/etl-course/days/day-48/" data-day="day-48"><span class="dot"></span>Day 48 · Capstone build: daily-data-platform</a></li><li><a href="/learn/etl-course/days/day-49/" data-day="day-49"><span class="dot"></span>Day 49 · Ship it and tell the story</a></li></ol></details></div></aside><main class="main"><article class="lesson"><p class="crumbs"><a href="/learn/etl-course/weeks/week-1/">Week 1 · Ingest anything</a> › Day 1</p>
+<h1>Day 1. The shape of a data platform</h1>
+<div class="meta"><span class="pill">⏱ 4h · learn 75m · lab 120m · ship 30m · review 15m</span><span class="pill">🏷 all four sectors</span></div>
+<div class="outcomes"><p><b>By the end of today you can</b></p><ul><li>Draw the six stages of the pipeline and name a tool for each</li><li>Explain ETL vs ELT and when each wins</li><li>Explain raw, staging and mart layers and why raw is immutable</li><li>Generate the course data and describe what arrives each morning</li></ul></div><h2 id="1-why-this-matters">1. Why this matters</h2>
+<p>When an interviewer says "walk me through a pipeline you built", they are not asking for a tool list. They want to hear that you understand <strong>where data comes from, what can go wrong at each hop, and how you'd know</strong>. Today you build that mental map. Everything in the next 48 days hangs on it.</p>
+<h2 id="2-the-six-stages">2. The six stages</h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Question it answers</th>
+<th>Core tool in this course</th>
+<th>Alternatives you'll meet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ingest</td>
+<td>What arrived, from where, when?</td>
+<td>Python (imaplib / Microsoft Graph, pathlib, paramiko, requests)</td>
+<td>dlt, Airbyte, Meltano, rclone</td>
+</tr>
+<tr>
+<td>Clean</td>
+<td>Is it typed, valid, de-duplicated?</td>
+<td>Polars, DuckDB, pandera, Claude Code</td>
+<td>pandas, Great Expectations, Soda</td>
+</tr>
+<tr>
+<td>Orchestrate</td>
+<td>What runs when, in what order, and what happens on failure?</td>
+<td>Dagster</td>
+<td>Airflow, Prefect, Mage, Kestra, cron</td>
+</tr>
+<tr>
+<td>Load</td>
+<td>Where does it live permanently?</td>
+<td>Azure SQL Database</td>
+<td>Postgres, DuckDB/MotherDuck, ClickHouse, Snowflake, BigQuery</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>What shape makes questions easy and answers consistent?</td>
+<td>SQL + dbt</td>
+<td>SQLMesh, plain views</td>
+</tr>
+<tr>
+<td>Deliver</td>
+<td>Who sees what, how, and how often?</td>
+<td>Power BI</td>
+<td>Metabase, Superset, Evidence, emailed PDFs</td>
+</tr>
+</tbody>
+</table>
+<p>Two things run <strong>across</strong> all six: <strong>observability</strong> (logs, freshness, row counts, lineage) and <strong>governance</strong> (who can see what, where secrets live, how changes are reviewed).</p>
+<h2 id="3-etl-vs-elt">3. ETL vs ELT</h2>
+<p><strong>ETL</strong> transforms before loading: Python cleans the file, then writes finished tables. <strong>ELT</strong> loads raw data first, then transforms inside the warehouse with SQL. Modern teams mostly do <strong>ELT with a Python edge</strong>: Python handles what SQL is bad at (parsing emails, Excel, encodings, APIs), loads lightly-typed raw tables, and SQL/dbt does the business logic where it's visible, testable and fast.</p>
+<details class="maths" open="open">
+<summary>Maths and principle</summary>
+<p><strong>Principle:</strong> a pipeline is a composition of functions, and you want each function to be <em>pure</em> (same input, same output) so you can rerun any step safely.</p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(\text{mart} = M(S(R(\text{source}, t)))\)</span> where <span class="arithmatex">\(R\)</span> = land raw at time <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(S\)</span> = standardise, <span class="arithmatex">\(M\)</span> = model. If <span class="arithmatex">\(R\)</span> is stored immutably, you can recompute <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(M\)</span> any time without going back to the source.</p>
+<p><strong>Analogy:</strong> in physics you keep the raw detector readings and re-run calibration when you find a better constant. You never overwrite the readings. Where it breaks: sources that only give you "current state" (a product price table) lose history unless <em>you</em> snapshot it.</p>
+<p><strong>Try it:</strong> a bug in <span class="arithmatex">\(S\)</span> was live for 10 days. With immutable raw, how many source re-pulls do you need to fix history? <em>(Zero: rerun S and M over the 10 raw partitions.)</em></p>
+</details>
+<h2 id="4-layers-raw-staging-marts">4. Layers: raw → staging → marts</h2>
+<ul>
+<li><strong>Raw (bronze / landing):</strong> an exact copy of what arrived, plus metadata (source, received time, file hash). Append-only. Never edited.</li>
+<li><strong>Staging (silver):</strong> one cleaned, typed table per source entity. Column names standardised, duplicates removed, bad rows quarantined.</li>
+<li><strong>Marts (gold):</strong> star schemas and aggregates shaped for questions: <code>fct_sales</code>, <code>dim_store</code>, <code>dim_date</code>.</li>
+</ul>
+<div class="callout senior">
+<p class="callout-title">The 5-year lens</p>
+<p>The raw layer is your <strong>alibi</strong>. When finance says "your dashboard said &#36;41,200 for store R107 but the store says &#36;43,900", you need to show exactly which files you received, when, and what was in them. Teams that skip raw end up arguing from memory. Also: storage is cheap, re-requesting data from a vendor is not, and some sources (emails, API windows) can't be re-pulled at all after 30–90 days.</p>
+</div>
+<h2 id="5-what-a-morning-looks-like">5. What a morning looks like</h2>
+<p>At 06:00 the sales emails start arriving. At 06:30 the POS exports sync to the shared drive. The hotel PMS pushes its extract to SFTP around 04:00, but sometimes the upload is still running at 06:00. The ad API's numbers for yesterday keep changing until about noon (late conversions). Reports must be in managers' inboxes by 08:00.</p>
+<p>That timeline is the real design brief. It decides your <strong>schedules, sensors, freshness checks and the "data as of" label</strong> on every report.</p>
+<div class="callout lab">
+<p class="callout-title">Lab: generate and explore the course data (about 2 hours)</p>
+<ol>
+<li>Create a folder <code>~/p2d</code> and copy <code>starter/generate_data.py</code> into it.</li>
+<li>Make a virtual environment and install basics:
+   <pre class="highlight"><code class="language-bash">python -m venv .venv &amp;&amp; source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install pandas numpy openpyxl
+python generate_data.py --start 2026-09-01 --days 30 --out ./data</code></pre></li>
+<li>Explore each landing area and fill in this table in a file <code>notes/sources.md</code>:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Path</th>
+<th>Format</th>
+<th>Grain (one row = ?)</th>
+<th>Arrives</th>
+<th>Faults you can spot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retail sales</td>
+<td><code>landing/email_inbox</code></td>
+<td>.eml with CSV/XLSX</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>QSR POS</td>
+<td><code>landing/shared_drive/qsr/&lt;date&gt;</code></td>
+<td>CSV</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>Hotel PMS</td>
+<td><code>landing/sftp/hotel</code></td>
+<td>pipe-delimited</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>Ads</td>
+<td><code>landing/api/ads</code></td>
+<td>paginated JSON</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>Open one <code>.eml</code> in a text editor. Find the headers, the MIME boundary and the base64 attachment.</li>
+<li>Draw the six-stage diagram for this company on paper or in <a href="https://excalidraw.com">excalidraw.com</a>. Photograph it into <code>notes/</code>.</li>
+</ol>
+</div>
+<div class="callout proof">
+<p class="callout-title">Ship</p>
+<p><code>git init</code>, commit <code>notes/sources.md</code> and your diagram: <code>docs: map sources and pipeline stages</code>.</p>
+</div>
+<h2 id="go-deeper">Go deeper</h2>
+<ul>
+<li>Joe Reis &amp; Matt Housley, <em>Fundamentals of Data Engineering</em> (O'Reilly), chapters 1–3: the lifecycle model this course follows.</li>
+<li>Dagster docs, "What is an asset?" (skim now; Week 3 goes deep).</li>
+</ul>
+<section class="quiz" id="quiz-day-01-1"><h2>Check yourself</h2>
+<div class="q" data-q="0"><p class="qtext"><b>1.</b> A vendor API only keeps 30 days of history. Your cleaning code had a bug for 45 days. What design would have saved you?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-01-1-0" value="0" data-ok="0"> <span>Running the pipeline more often</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-0" value="1" data-ok="1"> <span>Landing every API response unchanged in an immutable raw layer</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-0" value="2" data-ok="0"> <span>Using ETL instead of ELT</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-0" value="3" data-ok="0"> <span>Adding more indexes to the warehouse</span></label></li>
+</ul><p class="why" hidden>With raw stored, you just rerun the clean and model steps over the stored responses. The API window no longer matters.</p></div>
+<div class="q" data-q="1"><p class="qtext"><b>2.</b> Which job belongs in Python rather than SQL in a typical ELT design?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-01-1-1" value="0" data-ok="0"> <span>Joining sales to the store dimension</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-1" value="1" data-ok="0"> <span>Computing revenue per store per day</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-1" value="2" data-ok="1"> <span>Extracting a CSV attachment from an email</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-1" value="3" data-ok="0"> <span>Building the date dimension</span></label></li>
+</ul><p class="why" hidden>SQL is great at set logic on tables. Parsing MIME emails, Excel files and APIs is Python's job.</p></div>
+<div class="q" data-q="2"><p class="qtext"><b>3.</b> What is the "grain" of the hotel PMS extract?</p><ul class="opts">
+<li><label><input type="radio" name="quiz-day-01-1-2" value="0" data-ok="0"> <span>One row per hotel per day</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-2" value="1" data-ok="1"> <span>One row per booking version (a booking can reappear with a new status)</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-2" value="2" data-ok="0"> <span>One row per guest</span></label></li>
+<li><label><input type="radio" name="quiz-day-01-1-2" value="3" data-ok="0"> <span>One row per room night</span></label></li>
+</ul><p class="why" hidden>Look at the data: cancelled bookings reappear with the same booking_id. That makes it a change feed, which you'll upsert in Week 3.</p></div>
+<button class="btn" data-action="grade">Check answers</button> <span class="score" aria-live="polite"></span></section><section class="notes"><h2>My notes</h2><textarea data-notes="day-01" placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section><nav class="pager"><span></span><button class="btn done" data-action="complete" data-day="day-01">Mark day 1 complete</button><a href="/learn/etl-course/days/day-02/">Day 2 →</a></nav></article></main></div>
+<footer class="foot">Pipeline to Dashboard · written for nihal · synthetic data only · progress is saved in this browser</footer>
+<script src="/learn/etl-course/assets/vendor/hljs/highlight.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/katex.min.js"></script>
+<script defer src="/learn/etl-course/assets/vendor/katex/auto-render.min.js" onload="renderMathInElement(document.querySelector('.main'),{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]})"></script>
+<script src="/learn/etl-course/assets/days.js"></script>
+<script src="/learn/etl-course/assets/app.js"></script>
+<script src="/assets/counter.js" defer></script>
+</body></html>

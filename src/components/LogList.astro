@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { fmtTime, dayKey, fmtDay, logNumbers, projectHue } from '../lib';
+interface Props { entries: CollectionEntry<'log'>[]; compact?: boolean }
+const { entries, compact = false } = Astro.props;
+const days: { key: string; label: string; items: { e: CollectionEntry<'log'>; Content: any }[] }[] = [];
+for (const e of entries) {
+  const k = dayKey(e.data.time);
+  let d = days.find((x) => x.key === k);
+  if (!d) { d = { key: k, label: fmtDay(e.data.time), items: [] }; days.push(d); }
+  d.items.push({ e, Content: compact ? null : (await render(e)).Content });
+}
+const NUM = await logNumbers();
+const LOG_SRC = 'https://github.com/nihalunfc/nihalunfc.github.io/commits/main/src/content/log/';
+const STATUS: Record<string, string> = { started: 'Started', progress: 'In progress', done: 'Done', blocked: 'Blocked', idea: 'Idea' };
+---
+<div class={`logd${compact ? ' compact' : ''}`}>
+  {days.map((d) => (
+    <section>
+      <h3>{d.label}</h3>
+      <ol>
+        {d.items.map(({ e, Content }) => (
+          <li id={e.id} data-p={e.data.project} style={`--h:${projectHue(e.data.project)}`}>
+            <time datetime={e.data.time.toISOString()}>{fmtTime(e.data.time)}</time>
+            <div>
+              <p class="lt"><span class="num">#{NUM.get(e.id)}</span>{e.data.link ? <a href={e.data.link}>{e.data.title}</a> : e.data.title}</p>
+              <p class="lm"><span class="lp">{e.data.project}</span><span class={`ls s-${e.data.status}`}>{STATUS[e.data.status]}</span>
+                {e.data.link && <a href={e.data.link}>View</a>}
+                {e.data.repo && <a href={e.data.repo}>Code</a>}
+                {e.data.commit && <a href={e.data.commit}>Commit</a>}
+                <a href={`${LOG_SRC}${e.id}.md`} title="The commit that recorded this entry">Log entry</a></p>
+              {Content && <div class="prose small"><Content /></div>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+</div>

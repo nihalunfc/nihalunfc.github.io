@@ -1,20 +1,54 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import { getTools, partsFor } from '../../lib';
+import Progress from '../../components/Progress.astro';
+import { FIELDS } from '../../data/fields';
+const tools = await getTools();
+const groups = [...new Set(tools.map((t) => t.data.group))];
+const tagsFor = (t: (typeof tools)[number]) => t.data.field;
+const planned = tools.flatMap((t) => t.data.editions.filter((e) => e.status !== 'Live').map((e) => ({ t, e })));
 ---
-<Base title="Tools" description="Free tools by Nihal Sulaiman: a personal expense calendar and hotel revenue and operations tools. They run in your browser.">
-  <PageHero title="Tools" crumbs={[{ label: 'Tools' }]} lead="Free tools I built. Personal tools are for everyday planning. Hotel tools are for revenue and operations teams and live on the Hospitality BI site. They all run in your browser, save your work on your own device and need no sign-up." />
+<Base title="Tools" description="Free business intelligence tools by Nihal Sulaiman for pricing, forecasting, scheduling, operations and reporting, with editions for hotels, restaurants and retail.">
+  <PageHero title="Tools" crumbs={[{ label: 'Tools' }]} lead="Free tools for pricing, forecasting, scheduling, operations and reporting. Each one solves a problem most businesses share, with editions fitted to a sector. They run in your browser today, and each page explains who it's for, its limits, what's next and how it can run on your own database or warehouse." />
   <main>
-    <div class="toolgrid">
-      <div class="tg"><h3><i></i>Personal tools</h3><a href="/tools/expense-calendar/">Expense calendar<span>Plan and track expenses day by day. Works offline.</span></a></div>
-      <div class="tg hotel"><h3><i></i>Hotel tools</h3><div class="cols"><div><a href="/hotel-business/tools/rate-recommender.html">Rate recommender<span>A rate for each of the next 30 days</span></a><a href="/hotel-business/tools/forecaster.html">Occupancy forecaster<span>The next 30 to 90 days of occupancy</span></a><a href="/hotel-business/tools/overbooking.html">Overbooking calculator<span>How many extra rooms to sell</span></a><a href="/hotel-business/tools/group-displacement.html">Group quote and displacement<span>Is this group worth it?</span></a><a href="/hotel-business/tools/kpi.html">Hotel KPI dashboard<span>Occupancy, ADR, RevPAR and profit</span></a></div><div><a href="/hotel-business/schedule.html">Staff schedule builder<span>A week's schedule at the lowest cost</span></a><a href="/hotel-business/tools/housekeeping-board.html">Housekeeping board<span>Today's room assignments</span></a><a href="/hotel-business/tools/labour.html">Labour productivity<span>Hours and cost per occupied room</span></a><a href="/hotel-business/tools/night-audit.html">Night audit assistant<span>Checklist, balancing and daily report</span></a><a href="/hotel-business/tools/energy-estimator.html">Peak-energy savings<span>Ontario Global Adjustment savings</span></a><a href="/hotel-business/tools/report-dashboard/">Hotel report builder<span>Upload any exports, get a manager's report</span></a></div></div><a class="more" href="/hotel-business/tools/index.html">All hotel tools →</a></div>
+    <div class="filters" role="group" aria-label="Filter tools by field">
+      <button type="button" aria-pressed="true" data-f="all">All fields</button>
+      {FIELDS.map((f) => <button type="button" aria-pressed="false" data-f={f.id}>{f.name}</button>)}
     </div>
-    <h2 class="section">Coming next</h2>
-    <div class="soon" style="margin-top:14px">
-      <div><b>Calendar sync</b>Pull expected bills from Google Calendar and phone or laptop calendars into the expense calendar</div>
-      <div><b>More tools</b>In progress</div>
-      <div><b>More tools</b>In progress</div>
+    <div class="tgroups" id="tgroups">
+      {groups.map((g) => (
+        <section class="tg">
+          <h3><i></i>{g}</h3>
+          {tools.filter((t) => t.data.group === g).map((t) => (
+            <a href={`/tools/${t.id}/`} data-s={tagsFor(t)}>{t.data.title}<span>{t.data.summary}</span>
+              <Progress parts={partsFor(t.data)} compact />
+              <span class="cnt" data-count-path={`/tools/${t.id}/`} hidden></span>
+              <span class="ed-line">{t.data.editions.map((e) => <em class={`es ${e.status.replace(' ', '')}`}>{e.sector.replace(/ \(.*\)/, '')}</em>)}</span></a>
+          ))}
+        </section>
+      ))}
     </div>
-    <div class="callout" style="margin-top:24px"><p>These tools save what you enter in your own browser. Nothing is sent to a server and nothing is collected. They are free to use for any purpose under CC BY 4.0 with credit to Nihal. See <a href="/disclaimer/#tools">privacy and licence</a>.</p></div>
+    <p class="muted" style="margin-top:18px">See everything grouped by field, with what's planned, on <a href="/fields/">Fields</a>.</p>
+    <h2 class="section">Editions in the works</h2>
+    <p class="muted">The hospitality edition came first because that's the industry I've worked in. Restaurant-chain and retail editions reuse the same models with sector-specific inputs.</p>
+    <ul class="hub-list soon-list">{planned.map(({ t, e }) => <li><a href={`/tools/${t.id}/`}>{t.data.title}</a><span>{e.sector} · {e.status}</span></li>)}</ul>
+    <div class="callout" style="margin-top:24px"><p>These tools save what you enter in your own browser. Nothing is sent to a server and nothing is collected. They are free to use for any purpose under CC BY 4.0 with credit to Nihal. See <a href="/disclaimer/#tools">privacy and licence</a>. Want one fitted to your data? <a href="/contact/">Get in touch</a>.</p></div>
   </main>
+  <script is:inline>
+    (function () {
+      var btns = document.querySelectorAll('.filters button');
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          var f = b.dataset.f;
+          document.querySelectorAll('#tgroups .tg').forEach(function (g) {
+            var n = 0;
+            g.querySelectorAll('a').forEach(function (a) { var on = f === 'all' || a.dataset.s.split('|').indexOf(f) > -1; a.hidden = !on; if (on) n++; });
+            g.hidden = n === 0;
+          });
+        });
+      });
+    })();
+  </script>
 </Base>
