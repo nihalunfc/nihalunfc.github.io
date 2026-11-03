@@ -9,6 +9,7 @@ export const SITE = {
   description:
     'Nihal Sulaiman, data analyst and BI developer in Ontario. Hospitality BI dashboards, forecasting and optimisation, applied AI, Kaggle write-ups and a blog about building data work.',
   location: 'Niagara Falls, Ontario · open to anywhere in Ontario',
+  email: 'nihalunfc@gmail.com',
   links: {
     github: 'https://github.com/nihalunfc',
     linkedin: 'https://www.linkedin.com/in/vsnihal/',

@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+<Base title="Message sent" description="Thanks for your message." noindex>
+  <PageHero title="Thanks, your message is on its way" crumbs={[{ label: 'Contact', href: '/contact/' }, { label: 'Sent' }]} lead="I'll reply by email, usually within a day.">
+    <div class="btns"><a class="btn primary" href="/">Back to home</a><a class="btn ghost" href="/blog/">Read the blog</a></div>
+  </PageHero>
+  <main></main>
+</Base>
