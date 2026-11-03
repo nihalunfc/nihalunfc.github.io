@@ -186,3 +186,42 @@ p.section-sub { margin-bottom: 12px; }
 .home-search { display: flex; gap: 8px; margin-top: 14px; max-width: 420px; }
 .home-search input { flex: 1; font: inherit; font-size: 14.5px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 12px; min-width: 0; }
 .home-search button { font: inherit; font-size: 14.5px; font-weight: 600; border: 0; border-radius: 8px; padding: 8px 14px; background: var(--brand-2); color: var(--on-brand); cursor: pointer; }
+
+/* daily log */
+.logl { list-style: none; margin: 0; padding: 0; max-width: 860px; }
+.logl > li { display: grid; grid-template-columns: 8rem 1fr; gap: 4px 20px; padding: 16px 0; border-top: 1px solid var(--line); }
+.logl > li:first-child { border-top: 0; padding-top: 0; }
+.logl time { font-size: 13.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.logl h2 { font-size: 16.5px; margin: 0 0 6px; }
+.logl .tags { padding: 0 0 6px; margin: 0; }
+.prose.small { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+.prose.small > * + * { margin-top: .5em; }
+@media (max-width: 640px) { .logl > li { grid-template-columns: 1fr; } }
+
+/* activity log (one entry per activity) */
+.logd { max-width: 860px; }
+.logd section + section { margin-top: 22px; }
+.logd h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); margin: 0 0 6px; }
+.logd ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+.logd li { display: grid; grid-template-columns: 4.8rem 1fr; gap: 2px 12px; padding: 8px 0 8px 14px; position: relative; }
+.logd li::before { content: ""; position: absolute; left: -6px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid var(--brand-2); }
+.logd time { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; padding-top: 1px; }
+.logd .lt { margin: 0; font-weight: 600; font-size: 15px; line-height: 1.4; }
+.logd .lt a { color: var(--ink); }
+.logd .lt a:hover { color: var(--link); }
+.logd .lm { margin: 3px 0 0; display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; }
+.logd .lp { color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); border-radius: 99px; padding: 0 8px; }
+.logd .ls { border-radius: 99px; padding: 0 8px; font-weight: 600; }
+.s-done { background: var(--good-soft); color: var(--good); }
+.s-progress, .s-started { background: var(--brand-soft); color: var(--link); }
+.s-blocked { background: var(--bad-soft); color: var(--bad); }
+.s-idea { background: var(--warn-soft); color: var(--warn); }
+.logd .prose.small { margin-top: 4px; }
+.logd.compact h3 { font-size: 12px; margin-bottom: 4px; }
+.logd.compact li { grid-template-columns: 4.2rem 1fr; padding: 5px 0 5px 12px; }
+.logd.compact li::before { top: 10px; width: 8px; height: 8px; left: -5px; }
+.logd.compact .lt { font-size: 13.5px; }
+.logd.compact section + section { margin-top: 12px; }
+@media (max-width: 480px) { .logd li { grid-template-columns: 1fr; } }
+.logd .lm a { font-weight: 600; color: var(--link); }
+.logd .lm a::before { content: '↗ '; font-weight: 400; color: var(--ink-3); }

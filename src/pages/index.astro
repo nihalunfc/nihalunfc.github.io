@@ -2,57 +2,70 @@
 import Base from '../layouts/Base.astro';
 import ProfileLinks from '../components/ProfileLinks.astro';
 import { SITE } from '../site';
-import { getPosts, fmtDate } from '../lib';
+import LogList from '../components/LogList.astro';
+import { getPosts, getLog, fmtDate } from '../lib';
 const posts = (await getPosts()).slice(0, 3);
+const log = (await getLog()).slice(0, 4);
 ---
 <Base title={SITE.name}>
-<main class="prof wide">
-  <div class="top">
-    <div>
-      <h1 class="name"><b>Nihal</b> Vellaramkallingal Sulaiman</h1>
-      <p class="tagline">Data analyst and BI developer · Niagara Falls, Ontario</p>
+<main class="hub">
+  <section class="hub-top">
+    <img class="hub-photo" src="/assets/photo.jpg" alt="Nihal Sulaiman" width="88" height="88">
+    <div class="hub-id">
+      <h1><b>Nihal</b> Vellaramkallingal Sulaiman</h1>
+      <p class="hub-tag">Data analyst and BI developer · Niagara Falls, Ontario · open to roles anywhere in Ontario</p>
       <ProfileLinks />
-      <form class="home-search" action="/search/" role="search"><input name="q" type="search" placeholder="Search projects, posts and tools" aria-label="Search this site"><button type="submit">Search</button></form>
     </div>
-    <img class="photo" src="/assets/photo.jpg" alt="Nihal Sulaiman" width="132" height="132">
-  </div>
+    <form class="home-search" action="/search/" role="search"><input name="q" type="search" placeholder="Search projects, posts and tools" aria-label="Search this site"><button type="submit">Search</button></form>
+  </section>
 
-  <div class="cols">
-  <div class="main-col">
-  <div class="bio">
-    <p>I build end-to-end data work in Python and SQL: pipelines and star-schema warehouses, data-quality checks, dashboards that managers open every morning, and forecasts and schedules that save money. I hold a <b>Master's in Data Analytics</b> from the University of Niagara Falls Canada and an <b>MSc in Physics</b> (astrophysics, with a mathematics minor) from Cochin University of Science and Technology.</p>
-    <p>Physics taught me to model a messy signal and check every number; analytics taught me to turn that into a decision someone can act on. I also know hotel operations from the floor, from over a year in hotel housekeeping in Niagara Falls. I am open to data analyst, BI developer and data science roles anywhere in Ontario.</p>
-  </div>
+  <div class="hub-grid">
+    <div class="card w2"><h2><i></i>About</h2>
+      <p>I build end-to-end data work in Python and SQL: star-schema warehouses, data-quality checks, dashboards managers open every morning, and forecasts and schedules that save money. <b>Master's in Data Analytics</b> (2026) and <b>MSc in Physics</b> (astrophysics). I also know hotel operations from the floor.</p>
+      <p class="more"><a href="/about/">More about me</a><a href="/cv/">CV</a><a href="/contact/">Contact</a></p>
+    </div>
 
-  <h2>selected projects</h2>
-  <div class="item">
-    <div class="head"><h3><a href="/hotel-business/">Hospitality BI portfolio</a></h3><span class="when">2026</span></div>
-    <p>A synthetic five-hotel group with about 640,000 bookings over four years, loaded into a star-schema warehouse with ten automated data-quality checks. The Revenue Command Centre shows occupancy, ADR, RevPAR, booking pace against last year, a back-tested demand forecast and demand lost on sold-out nights. The staff schedule builder turns forecast workload into shifts with integer programming and checks them against Ontario labour rules.</p>
-    <div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Star schema</span><span class="tag">Forecasting</span><span class="tag">PuLP</span><span class="tag">Dashboards</span></div>
-    <div class="more"><a href="/hotel-business/revenue.html">Revenue command centre</a><a href="/hotel-business/schedule.html">Schedule builder</a><a href="/hotel-business/tools/index.html">Hotel tools</a><a href="https://github.com/nihalunfc/hotel-business">Code</a></div>
-  </div>
-  <div class="item">
-    <div class="head"><h3><a href="/swarm/">Swarm intelligence</a></h3><span class="when">2026</span></div>
-    <p>One engine in which many small agents each make their own decision and together act as a coordinated team, tested against today's rules on hotel equipment, grid batteries and wildfire drones.</p>
-    <div class="tags"><span class="tag">Multi-agent RL</span><span class="tag">Optimisation</span><span class="tag">D3</span></div>
-    <div class="more"><a href="/swarm/hotel/">Hotel operations</a><a href="/swarm/energy/">Grid batteries</a><a href="/swarm/wildfire/">Wildfire drones</a></div>
-  </div>
-  <div class="item">
-    <div class="head"><h3><a href="https://github.com/nihalunfc/GDGCHackathon2026">WARL: wildfire response with a drone swarm</a></h3><span class="when">2026</span></div>
-    <p>A decentralised drone swarm trained with a PyTorch DQN to route to fire choke points, with a live map dashboard and a Gemini chatbot that explains the swarm's decisions.</p>
-    <div class="tags"><span class="tag">PyTorch</span><span class="tag">Reinforcement learning</span><span class="tag">Leaflet</span><span class="tag">Gemini API</span></div>
-    <div class="more"><a href="https://nihalunfc.github.io/GDGCHackathon2026/docs/">Demo</a><a href="https://github.com/nihalunfc/GDGCHackathon2026">Code</a></div>
-  </div>
-  <div class="item">
-    <div class="head"><h3><a href="/kaggle/">Kaggle competitions</a></h3><span class="when">2026</span></div>
-    <p>Machine learning, deep learning and optimisation competitions, including LLM identification, mass-spectrometry structure identification and smart-building forecasting. I keep honest hold-out sets and report where a result came from.</p>
-    <div class="tags"><span class="tag">XGBoost</span><span class="tag">LightGBM</span><span class="tag">PyTorch</span><span class="tag">Optuna</span></div>
-    <div class="more"><a href="/kaggle/">Ranks and write-ups</a><a href="https://www.kaggle.com/vsnihal">Kaggle profile</a><a href="https://github.com/nihalunfc/kaggle">Code</a></div>
-  </div>
+    <div class="card"><h2><i></i>Looking for</h2>
+      <p>Data analyst, BI developer or data science roles in Ontario. Full-time, part-time or internship, on site or remote. Available now.</p>
+      <p class="more"><a href="/contact/">Get in touch</a></p>
+    </div>
 
-  </div>
-  <aside class="side-col">
-  <h2>news</h2>
+    <div class="card"><h2><i></i>Now</h2>
+      <ul class="tight">
+        <li>Data Engineer (remote) at Shipd by DataCurve</li>
+        <li>Turning hotel BI tools into ETL pipelines on Azure SQL</li>
+        <li>Learning T-SQL, Power BI and dbt</li>
+        <li>Four live Kaggle competitions</li>
+      </ul>
+      <p class="more"><a href="/now/">Now page</a></p>
+    </div>
+
+    <a class="card proj-c" href="/projects/hospitality-bi/"><h2><i class="bi"></i>Hospitality BI</h2>
+      <p>Star-schema warehouse of 640k bookings, revenue command centre, staff schedule builder and 11 free hotel tools.</p>
+      <div class="kv"><span><b>640k</b>bookings</span><span><b>10</b>quality checks</span><span><b>12</b>tools</span></div>
+    </a>
+
+    <a class="card proj-c" href="/projects/swarm-intelligence/"><h2><i class="ai"></i>Swarm Intelligence</h2>
+      <p>One multi-agent engine for grid batteries, wildfire drones and hotel operations, tested against today's rules.</p>
+      <div class="kv"><span><b>949 MW</b>peak cut</span><span><b>87%</b>forest saved</span></div>
+    </a>
+
+    <a class="card proj-c" href="/kaggle/"><h2><i class="kg"></i>Kaggle</h2>
+      <p>Name That LLM, CASMI 2026, NeurIPS Smart Buildings and Squares in Squares, with honest notes on what's my own work.</p>
+      <div class="kv"><span><b>Top 10%</b>Name That LLM</span><span><b>Top 13%</b>Squares</span></div>
+    </a>
+
+    <div class="card"><h2><i></i>Latest writing</h2>
+      <ul class="hub-list">{posts.map((p) => <li><a href={`/blog/${p.id}/`}>{p.data.title}</a><span>{fmtDate(p.data.date)}</span></li>)}</ul>
+      <p class="more"><a href="/blog/">All posts</a><a href="/rss.xml">RSS</a></p>
+    </div>
+
+    <div class="card"><h2><i></i>Activity log</h2>
+      <LogList entries={log} compact />
+      <p class="more"><a href="/log/">Full log</a></p>
+    </div>
+
+    <div class="card"><h2><i></i>News</h2>
   <dl class="news">
     <dt>Nov 2026</dt><dd>Started a <a href="/blog/">blog</a> with write-ups of my projects and Kaggle work, and moved this site to nihalsulaiman.com.</dd>
     <dt>Nov 2026</dt><dd>Added an <a href="https://github.com/nihalunfc/hotel-business/tree/main/ai-workflow">AI workflow kit</a> to the Hospitality BI portfolio: safety rules for Claude Code on a live warehouse, an ETL triage method and a tested read-only SQL runner.</dd>
@@ -62,32 +75,37 @@ const posts = (await getPosts()).slice(0, 3);
     <dt>Sep 2026</dt><dd>Built <a href="https://github.com/nihalunfc/GDGCHackathon2026">WARL</a>, a drone-swarm wildfire response with a live dashboard, at the GDG on Campus Build with AI hackathon.</dd>
   </dl>
 
-  <h2>writing</h2>
-  {posts.map((p) => (
-    <div class="item">
-      <div class="head"><h3><a href={`/blog/${p.id}/`}>{p.data.title}</a></h3><span class="when">{fmtDate(p.data.date)}</span></div>
-      <p>{p.data.description}</p>
     </div>
-  ))}
-  <p class="more"><a href="/blog/">All posts</a><a href="/rss.xml">RSS</a></p>
 
-  <h2>education</h2>
-  <div class="item">
-    <div class="head"><h3>Master's, Data Analytics</h3><span class="when">2026</span></div>
-    <p class="where">University of Niagara Falls Canada, Ontario</p>
-  </div>
-  <div class="item">
-    <div class="head"><h3>MSc Physics</h3><span class="when">2017 – 2019</span></div>
-    <p class="where">Cochin University of Science and Technology, Kochi, India</p>
-    <p>Astrophysics major, mathematics minor.</p>
-  </div>
-  <div class="item">
-    <div class="head"><h3>BSc Physics</h3><span class="when">2013 – 2016</span></div>
-    <p class="where">Government Victoria College, Palakkad (University of Calicut), India</p>
-  </div>
+    <div class="card"><h2><i></i>More projects</h2>
+      <ul class="hub-list">
+        <li><a href="/projects/warl-wildfire/">WARL wildfire drone swarm</a><span>Hackathon, 2026</span></li>
+        <li><a href="/projects/casmi-2026/">CASMI 2026 leak-free validation</a><span>Kaggle</span></li>
+        <li><a href="/projects/smart-buildings/">NeurIPS Smart Buildings</a><span>Kaggle</span></li>
+      </ul>
+      <p class="more"><a href="/projects/">All projects</a></p>
+    </div>
 
-  </aside>
+    <div class="card"><h2><i></i>Free tools</h2>
+      <ul class="hub-list">
+        <li><a href="/hotel-business/tools/rate-recommender.html">Rate recommender</a><span>Hotel</span></li>
+        <li><a href="/hotel-business/schedule.html">Staff schedule builder</a><span>Hotel</span></li>
+        <li><a href="/tools/expense-calendar/">Expense calendar</a><span>Personal</span></li>
+      </ul>
+      <p class="more"><a href="/tools/">All tools</a></p>
+    </div>
+
+    <div class="card"><h2><i></i>Education</h2>
+      <ul class="hub-list">
+        <li><b>Master's, Data Analytics</b><span>University of Niagara Falls Canada · 2026</span></li>
+        <li><b>MSc Physics</b><span>CUSAT, India · 2017 – 2019</span></li>
+        <li><b>BSc Physics</b><span>University of Calicut, India · 2013 – 2016</span></li>
+      </ul>
+    </div>
+
+    <div class="card"><h2><i></i>Skills</h2>
+      <div class="chips sm"><span>SQL</span><span>Python</span><span>Power BI</span><span>Excel</span><span>Star schemas</span><span>ETL</span><span>Forecasting</span><span>PuLP</span><span>XGBoost</span><span>PyTorch</span><span>D3</span><span>Git</span></div>
+    </div>
   </div>
-  <p class="foot">More: <a href="/projects/">all projects</a> · <a href="/contact/">contact</a> · <a href="/sitemap/">site map</a> · <a href="/blog/">blog</a> · <a href="/now/">now</a> · <a href="/tools/">free tools</a> · <a href="/cv/">CV</a> · <a href="/about/">how I work</a></p>
 </main>
 </Base>

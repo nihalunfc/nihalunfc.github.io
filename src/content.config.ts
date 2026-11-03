@@ -29,4 +29,20 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, projects };
+// Activity log, written by the #UpdateLog skill: one file per activity,
+// src/content/log/YYYY-MM-DD-HHMM-slug.md, committed with its real time as the commit date.
+const log = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/log' }),
+  schema: z.object({
+    time: z.coerce.date(),
+    title: z.string(),
+    project: z.string(),
+    status: z.enum(['started', 'progress', 'done', 'blocked', 'idea']).default('progress'),
+    link: z.string().optional(),     // the page or demo to look at
+    repo: z.string().optional(),     // the code: a GitHub repo, folder or file URL
+    commit: z.string().optional(),   // the commit with the actual work, in any repo
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { blog, projects, log };

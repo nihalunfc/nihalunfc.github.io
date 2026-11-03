@@ -10,6 +10,9 @@ export const SITE = {
     'Nihal Sulaiman, data analyst and BI developer in Ontario. Hospitality BI dashboards, forecasting and optimisation, applied AI, Kaggle write-ups and a blog about building data work.',
   location: 'Niagara Falls, Ontario · open to anywhere in Ontario',
   email: 'nihalunfc@gmail.com',
+  // Web3Forms access key for the contact form (free; get it at web3forms.com with the email above).
+  // It is safe to publish. While it is empty, the form opens the visitor's email app instead.
+  web3formsKey: '',
   links: {
     github: 'https://github.com/nihalunfc',
     linkedin: 'https://www.linkedin.com/in/vsnihal/',

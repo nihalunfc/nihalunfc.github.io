@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import LogList from '../../components/LogList.astro';
+import { getLog } from '../../lib';
+const entries = await getLog();
+const projects = [...new Set(entries.map((e) => e.data.project))];
+---
+<Base title="Activity log" description="Nihal Sulaiman's activity log: each thing I built, fixed or started, with the time it happened. Every entry is a commit on GitHub.">
+  <PageHero title="Activity log" crumbs={[{ label: 'Now', href: '/now/' }, { label: 'Log' }]} lead="Every piece of work I do, finished or not, one entry at a time. Each entry is its own commit on GitHub, made at the time the work happened.">
+    <p class="updated" style="margin-top:10px">{entries.length} entries across {projects.length} project{projects.length === 1 ? '' : 's'} · times in Eastern time · <a href="https://github.com/nihalunfc/nihalunfc.github.io/commits/main/src/content/log">see the commits</a></p>
+  </PageHero>
+  <main><LogList entries={entries} /></main>
+</Base>

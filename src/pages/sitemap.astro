@@ -7,7 +7,7 @@ const projects = await getProjects();
 const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 const H = '/hotel-business/';
 const groups: { title: string; links: [string, string, string?][] }[] = [
-  { title: 'Main pages', links: [['/', 'Home'], ['/about/', 'About me'], ['/cv/', 'CV'], ['/now/', 'Now', 'What I am working on'], ['/contact/', 'Contact']] },
+  { title: 'Main pages', links: [['/', 'Home'], ['/about/', 'About me'], ['/cv/', 'CV'], ['/now/', 'Now', 'What I am working on'], ['/log/', 'Activity log', 'What I did, entry by entry'], ['/contact/', 'Contact']] },
   { title: 'Projects', links: [['/projects/', 'All projects'], ...projects.map((p) => [`/projects/${p.id}/`, p.data.title] as [string, string]), ['/kaggle/', 'Kaggle ranks']] },
   { title: 'Blog', links: [['/blog/', 'All posts'], ...posts.map((p) => [`/blog/${p.id}/`, p.data.title] as [string, string]), ['/rss.xml', 'RSS feed']] },
   { title: 'Blog topics', links: tags.map((t) => [`/blog/tags/${slugify(t)}/`, t] as [string, string]) },

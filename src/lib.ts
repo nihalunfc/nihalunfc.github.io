@@ -21,3 +21,13 @@ export function readingTime(body = '') {
   const words = body.trim().split(/\s+/).length;
   return Math.max(1, Math.round(words / 220));
 }
+
+export async function getLog() {
+  const all = await getCollection('log');
+  return all.sort((a, b) => b.data.time.valueOf() - a.data.time.valueOf());
+}
+
+const TZ = 'America/Toronto';
+export const fmtTime = (d: Date) => d.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: TZ });
+export const dayKey = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: TZ });
+export const fmtDay = (d: Date) => d.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: TZ });
