@@ -10,6 +10,8 @@ const { f } = Astro.props;
 const tools = (await getTools()).filter((t) => t.data.field === f.id);
 const projects = (await getProjects()).filter((p) => p.data.field === f.id);
 const swarm = (await getCollection('swarm')).filter((s) => s.data.field === f.id);
+// Tools from other fields that also suit this one (by their "Also useful for" sectors).
+const also = (await getTools()).filter((t) => t.data.field !== f.id && ('also' in f) && t.data.sectors.some((s) => (f as any).also.some((w: string) => s.toLowerCase().includes(w))));
 const byKind = KINDS.map((k) => ({ k, items: [
   ...projects.filter((p) => p.data.kind === k.id).map((p) => ({ href: `/projects/${p.id}/`, title: p.data.title, note: `Project · ${p.data.status}` })),
   ...tools.filter((t) => t.data.kind === k.id).map((t) => ({ href: `/tools/${t.id}/`, title: t.data.title, note: `Tool · ${t.data.status}` })),
@@ -26,6 +28,7 @@ const byKind = KINDS.map((k) => ({ k, items: [
           {items.length ? <ItemList items={items} /> : <p class="muted">Nothing here yet.</p>}
         </section>
       ))}
+      {also.length > 0 && <section class="card"><h2><i></i>Also works here</h2><p class="muted small">Tools built for another field that fit this one too.</p><ItemList items={also.map((t) => ({ href: `/tools/${t.id}/`, title: t.data.title, note: `Tool · ${t.data.status}` }))} /></section>}
       <section class="card"><h2><i></i>Planned</h2><ul class="tight">{f.ideas.map((i) => <li>{i}</li>)}</ul></section>
     </div>
     <nav class="field-nav" aria-label="Other fields">{FIELDS.filter((x) => x.id !== f.id).map((x) => <a href={`/fields/${x.id}/`}>{x.name}</a>)}</nav>

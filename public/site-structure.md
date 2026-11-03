@@ -22,7 +22,7 @@ Everything is one site, one repo, one header. Every page is a folder with an `in
 | Section | Index | Items | Pages inside an item |
 |---|---|---|---|
 | Swarm (flagship) | `/swarm/` | `/swarm/<application>/` (the live demo), `/swarm/explorer/` | |
-| Fields | `/fields/` | `/fields/<field>/` (hospitality, logistics, energy, crisis, science, health, finance) | kinds are headings on the page |
+| Fields | `/fields/` | `/fields/<field>/` (hospitality, retail, logistics, energy, crisis, science, health, finance) | kinds are headings on the page |
 | Projects | `/projects/` | `/projects/<project>/`, `/projects/kaggle/` | `/projects/hospitality-bi/overview/`, `/projects/hospitality-bi/proposals/` |
 | Tools | `/tools/` | `/tools/<tool>/` (about page) | `/tools/<tool>/<edition>/` (the app: `hotels`, `ontario`, `personal`), `/tools/<tool>/<edition>/<view>/` |
 | Learn | `/learn/` | `/learn/<course>/` | `/learn/<course>/days/day-01/`, `/learn/<course>/weeks/week-1/`, `/learn/<course>/pages/setup/` |
@@ -63,9 +63,9 @@ Each folder in `src/content/` is a collection, with its schema in `src/content.c
 
 ### Field and kind (every tool, project and swarm item)
 
-- `field`: one of `hospitality`, `logistics`, `energy`, `crisis` (Crisis management), `science`, `health`, `finance`.
+- `field`: one of `hospitality`, `retail`, `logistics`, `energy`, `crisis` (Crisis management), `science`, `health`, `finance`.
 - `kind` (tools and projects): one of `bi` (BI and dashboards), `optimisation`, `tools`, `pipelines` (pipelines and ETL), `ml` (machine learning).
-- Restaurants count as hospitality. Retail, small business and everyday users are not fields: list them under `sectors` ("Also useful for").
+- Restaurants count as hospitality. Small business and everyday users are not fields: list them under `sectors` ("Also useful for").
 - **If the field or kind isn't obvious, ask nihal.** Example: an ambulance-rerouting algorithm could be logistics or health; nihal chose health.
 - Swarm work goes in `src/content/swarm/` with its own `field`, not in projects.
 

@@ -2,7 +2,7 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { FIELD_IDS, KIND_IDS } from './data/fields';
 
-const field = z.enum(FIELD_IDS);   // one of the seven fields, see src/data/fields.ts
+const field = z.enum(FIELD_IDS);   // one of the eight fields, see src/data/fields.ts
 const kind = z.enum(KIND_IDS);     // bi | optimisation | tools | pipelines | ml
 // Progress ticker parts. `added` marks a part added after the original plan.
 const parts = z.array(z.object({ name: z.string(), done: z.boolean().default(false), added: z.coerce.date().optional() })).default([]);

@@ -177,7 +177,7 @@
     return '<div class="sf-in"><div><a class="sh-brand" href="/">' + MARK + 'Nihal <small>Portfolio</small></a>' +
       '<p>Data, business intelligence and applied AI. Projects and free tools with live results you can explore.</p></div>' +
       col('Work', [['/swarm/', 'Swarm Intelligence'], ['/fields/', 'Fields'], ['/projects/', 'Projects'], ['/projects/kaggle/', 'Kaggle']]) +
-      col('Fields', [['/fields/hospitality/', 'Hospitality'], ['/fields/logistics/', 'Logistics'], ['/fields/energy/', 'Energy'], ['/fields/crisis/', 'Crisis management'], ['/fields/science/', 'Science'], ['/fields/health/', 'Health'], ['/fields/finance/', 'Finance']]) +
+      col('Fields', [['/fields/hospitality/', 'Hospitality'], ['/fields/retail/', 'Retail'], ['/fields/logistics/', 'Logistics'], ['/fields/energy/', 'Energy'], ['/fields/crisis/', 'Crisis management'], ['/fields/science/', 'Science'], ['/fields/health/', 'Health'], ['/fields/finance/', 'Finance']]) +
       col('Use', [['/tools/', 'Tools'], ['/learn/', 'Learn'], ['/blog/', 'Blog'], ['/log/', 'Activity log'], ['/rss.xml', 'RSS feed']]) +
       col('Site', [['/about/', 'About'], ['/about/cv/', 'CV'], ['/now/', 'Now'], ['/contact/', 'Contact'], ['/search/', 'Search'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
       '<div class="sf-legal"><span>© 2026 Nihal.' + (hotel ? ' All hotels, guests, staff and figures on this site are fictional samples.' : '') + '</span>' +

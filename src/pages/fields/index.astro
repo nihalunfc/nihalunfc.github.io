@@ -7,8 +7,8 @@ import { getTools, getProjects } from '../../lib';
 const tools = await getTools(); const projects = await getProjects(); const swarm = await getCollection('swarm');
 const count = (id: string) => tools.filter((t) => t.data.field === id).length + projects.filter((p) => p.data.field === id).length + swarm.filter((s) => s.data.field === id).length;
 ---
-<Base title="Fields" description="The seven fields Nihal Sulaiman works in: hospitality, logistics, energy, crisis management, science, health and finance, each with BI, optimisation, tools, pipelines and machine learning.">
-  <PageHero title="Fields" crumbs={[{ label: 'Fields' }]} lead="Seven fields, the same five kinds of work in each: BI and dashboards, optimisation, tools, pipelines and ETL, and machine learning." />
+<Base title="Fields" description="The eight fields Nihal Sulaiman works in: hospitality, retail, logistics, energy, crisis management, science, health and finance, each with BI, optimisation, tools, pipelines and machine learning.">
+  <PageHero title="Fields" crumbs={[{ label: 'Fields' }]} lead="Eight fields, the same five kinds of work in each: BI and dashboards, optimisation, tools, pipelines and ETL, and machine learning." />
   <main>
     <div class="now-grid two">
       {FIELDS.map((f) => { const n = count(f.id); return (

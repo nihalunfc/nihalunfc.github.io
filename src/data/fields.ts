@@ -1,8 +1,9 @@
-// The seven fields nihal works in, and the five kinds of work inside each.
+// The eight fields nihal works in, and the five kinds of work inside each.
 // Every tool and project has exactly one `field` and one `kind`.
 // If it isn't clear which field or kind a new item belongs to, ask nihal (rule book, section 3).
 export const FIELDS = [
-  { id: 'hospitality', name: 'Hospitality', blurb: 'Hotels, resorts, restaurants and venues: pricing, demand, staffing and daily operations.', ideas: ['Restaurant-chain editions of the BI toolkit', 'Menu engineering and food-cost tracker'] },
+  { id: 'hospitality', name: 'Hospitality', blurb: 'Hotels, resorts, restaurants and venues: pricing, demand, staffing and daily operations.', ideas: ['Restaurant-chain editions of the BI toolkit', 'Menu engineering and food-cost tracker'], also: ['hotel', 'restaurant'] },
+  { id: 'retail', name: 'Retail', blurb: 'Stores, chains and online retail: sales, stock, pricing, staffing and the supply chain behind them.', ideas: ['Store and SKU demand forecasting', 'Inventory and replenishment pipeline', 'Markdown and price optimisation', 'Multi-store sales dashboard'], also: ['retail'] },
   { id: 'logistics', name: 'Logistics', blurb: 'Warehouses, fleets and deliveries: demand, routing, loads and throughput.', ideas: ['Delivery load and route planner', 'Warehouse pick-rate dashboard'] },
   { id: 'energy', name: 'Energy', blurb: 'Grids, buildings and batteries: peaks, savings and control.', ideas: ['Building energy pipeline from meter data'] },
   { id: 'crisis', name: 'Crisis management', blurb: 'Wildfires, floods and emergencies: response planning, resources and live dashboards.', ideas: ['Evacuation route planner', 'Incident data pipeline'] },

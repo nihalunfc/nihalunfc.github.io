@@ -63,7 +63,7 @@ Decide what the activity touched:
 | A course (new or changed) | Follow "Courses" in the structure map: course files in `public/learn/<id>/`, a card file `src/content/courses/<id>.md`, and `/learn/<id>/` in `STATIC_PAGES`. Progress stays in the learner's browser with the backup notice. Set `ref: courses/<id>`. |
 | Swarm work (the flagship) | Update or create `src/content/swarm/<id>.md` with its `field`, and put the demo at `public/swarm/<id>/`. Set `ref: swarm/<id>`. |
 | Progress on any item | Update its `parts`: mark finished parts `done: true`; add new parts with `added:` set to today when the plan grows. |
-| Unclear field or kind | **Ask nihal** which of the seven fields (hospitality, logistics, energy, crisis, science, health, finance) and which kind (BI, optimisation, tools, pipelines and ETL, machine learning) it belongs to. Example: an ambulance-rerouting algorithm could be logistics or health. Until nihal answers, write the log entry only. |
+| Unclear field or kind | **Ask nihal** which of the eight fields (hospitality, retail, logistics, energy, crisis, science, health, finance) and which kind (BI, optimisation, tools, pipelines and ETL, machine learning) it belongs to. Example: an ambulance-rerouting algorithm could be logistics or health. Until nihal answers, write the log entry only. |
 | Anything that changes the site's structure | Follow the URL scheme in the structure map (no `.html` addresses, no `#/` routes, no second home or header), and update `public/site-structure.md` in the same commit. |
 
 The log entry and its page change go in the same commit.
