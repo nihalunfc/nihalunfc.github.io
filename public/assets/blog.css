@@ -152,3 +152,6 @@ a.tag:hover { text-decoration: none; border-color: var(--brand-2); color: var(--
 .smap ul { list-style: none; margin: 0; padding: 0; }
 .smap li { padding: 4px 0; font-size: 15px; }
 .smap li span { display: block; font-size: 13px; color: var(--ink-3); }
+
+/* photo */
+.about-photo { float: right; width: 112px; height: 112px; border-radius: 12px; object-fit: cover; border: 1px solid var(--line); margin: 0 0 12px 16px; }
