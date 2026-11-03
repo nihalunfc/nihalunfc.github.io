@@ -144,6 +144,7 @@ An app with several views (the workforce and operations suites) gives every view
 ## Rules that always apply
 
 - Never name nihal's former employer from the one-week BI job (November 2026) or use its data. Mask anything sensitive.
+- Never name companies nihal is applying to; describe them generically ("a national retail chain", "a supermarket").
 - Kaggle: only nihal's own scores and ranks.
 - Tools read as general first, with sectors as editions. Sample data is called sample data. No invented figures.
 - Commits that count for nihal use the author `nihal <256238846+nihalunfc@users.noreply.github.com>`.

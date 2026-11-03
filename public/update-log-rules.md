@@ -105,6 +105,7 @@ The site is a portfolio for employers and recruiters in any sector, so every too
 ## 8. Privacy
 
 - Never name nihal's former employer from the one-week BI job in November 2026, or use any of its data.
+- Never name a company nihal is applying to or targeting, anywhere on the site, in commits or in log entries. Describe it generically instead: "a national retail chain", "a supermarket", "a department store". Projects built with a target employer in mind read as general retail work.
 - Mask anything sensitive: client names, private data, credentials, phone numbers.
 - Kaggle: only claim scores and ranks that come from nihal's own work.
 
