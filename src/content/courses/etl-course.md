@@ -7,6 +7,18 @@ date: 2026-11-03
 href: /learn/etl-course/
 length: "7 weeks · 49 days · about 4 hours a day"
 level: Intermediate
+duration: "7 weeks"
+hours: 196
+lessons: 49
+progressKey: p2d-progress-v1
+modules:
+  - { name: "Ingest anything", summary: "Landing zones, email, shared drives, SFTP and APIs, on a retail chain.", size: "7 days" }
+  - { name: "Clean and trust the data", summary: "Profiling, data contracts, Polars and DuckDB, Claude Code and quality gates, on a quick-service chain.", size: "7 days" }
+  - { name: "Orchestrate with Dagster", summary: "Assets, partitions, sensors and checks, on a hotel group.", size: "7 days" }
+  - { name: "Load to the warehouse", summary: "Azure SQL, PostgreSQL, DuckDB and ClickHouse; MERGE, watermarks and cost, on a marketing agency.", size: "7 days" }
+  - { name: "Model it in SQL", summary: "Star schemas, slowly changing dimensions, advanced SQL, dbt and a semantic layer, on restaurant brands.", size: "7 days" }
+  - { name: "Deliver BI people trust", summary: "Power BI and DAX, open-source BI, scheduled reports and reconciliation.", size: "7 days" }
+  - { name: "Run it in production", summary: "Observability, CI/CD, choosing tools, a low-cost open stack and a capstone.", size: "7 days" }
 topics: [ETL, Data cleaning, Dagster, Azure SQL, PostgreSQL, DuckDB, dbt, Power BI, Claude Code]
 who: "Analysts moving into data engineering, BI developers who want to own the pipeline, and anyone who wants a practical path from spreadsheets to a warehouse."
 links:

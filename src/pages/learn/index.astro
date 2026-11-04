@@ -1,35 +1,95 @@
 ---
-import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
-import { getCourses, getUpdates } from '../../lib';
-const courses = await Promise.all((await getCourses()).map(async (c) => ({ c, Content: (await render(c)).Content, updates: (await getUpdates(`courses/${c.id}`)).length })));
+import { getCourses, getLessons } from '../../lib';
+// One compact card per course, like the projects page. Courses written in src/content/lessons/
+// take their lesson count, time and module sizes from the lessons; static courses (public/learn/<id>/)
+// give them in their front matter.
+const courses = await Promise.all((await getCourses()).map(async (c) => {
+  const ls = (await getLessons(c.id)).filter((l) => !l.entry.data.page);
+  const mins = ls.reduce((s, l) => s + l.entry.data.minutes, 0);
+  const modules = c.data.modules.map((m, i) => {
+    const mine = ls.filter((l) => l.entry.data.module === i + 1);
+    const size = m.size ?? (mine.length ? `${mine.length} lessons · ${mine.reduce((s, l) => s + l.entry.data.minutes, 0)} min` : undefined);
+    return { ...m, size };
+  });
+  const lessons = ls.length || c.data.lessons || 0;
+  const hours = ls.length ? Math.round(mins / 60) : c.data.hours;
+  return { c, modules, lessons, hours, unit: ls.length ? 'lessons' : 'days' };
+}));
 ---
-<Base title="Learn" description="Free courses by Nihal Sulaiman in ETL pipelines, data cleaning, warehousing and BI. No sign-up; progress is saved in your browser.">
+<Base title="Learn" description="Free courses by Nihal Sulaiman in ETL pipelines, BI, big data, cloud, streaming and ad measurement. No sign-up; progress is saved in your browser.">
   <PageHero title="Learn" crumbs={[{ label: 'Learn' }]} lead="Courses I write to teach myself, open to anyone. Free, no sign-up, and your progress stays in your own browser." />
   <main>
-    <div class="now-grid two">
-      {courses.map(({ c, Content }) => (
-        <section class="card course" id={c.id}>
-          <h2><i></i>{c.data.title}<span class={`status ${c.data.status.replace(' ', '')}`}>{c.data.status}</span></h2>
+    <div class="pgrid cgrid">
+      {courses.map(({ c, modules, lessons, hours, unit }) => (
+        <section class="pcard ccard" id={c.id} data-key={c.data.progressKey} data-total={lessons} data-unit={unit}>
+          <div class="top"><p class="eyebrow" style="margin:0">Free course · {c.data.level}</p><span class={`status ${c.data.status.replace(' ', '')}`}>{c.data.status}</span></div>
+          <h3><a href={c.data.href}>{c.data.title}</a></h3>
           <p>{c.data.summary}</p>
-          <p class="muted small">{c.data.length} · {c.data.level}</p>
-          <div class="prose small"><Content /></div>
+          <div class="stat-row">
+            <div><b>{modules.length || '–'}</b>modules</div>
+            <div><b>{lessons}</b>{unit}</div>
+            {hours ? <div><b>~{hours} h</b>study time</div> : null}
+          </div>
+          {c.data.duration && <p class="muted small cmeta">⏱ {c.data.duration}</p>}
+          {modules.length > 0 && (
+            <details class="cmods">
+              <summary>Modules ({modules.length})</summary>
+              <ol>{modules.map((m) => <li><b>{m.name}</b>{m.size && <span class="muted"> · {m.size}</span>}{m.summary && <span class="cm-sum">{m.summary}</span>}</li>)}</ol>
+            </details>
+          )}
           {c.data.who && <p class="muted small"><b>For:</b> {c.data.who}</p>}
-          <div class="tags">{c.data.topics.map((t) => <span class="tag">{t}</span>)}</div>
-          <p style="margin-top:12px"><a class="btn primary" href={c.data.href} data-open-count={`course-${c.id}`}>Start the course</a></p>
-          <p class="more">{c.data.links.map((l) => <a href={l.href}>{l.label}</a>)}<span class="muted small" data-opens={`course-${c.id}`} hidden></span></p>
+          <div class="tags">{c.data.topics.slice(0, 8).map((t) => <span class="tag">{t}</span>)}{c.data.topics.length > 8 && <span class="tag">+{c.data.topics.length - 8}</span>}</div>
+          <div class="cprog" hidden><div class="cbar"><span></span></div><p class="muted small"></p></div>
+          <div class="cfoot">
+            <a class="btn primary" href={c.data.href} data-open-count={`course-${c.id}`}>Start the course</a>
+            <span class="clinks">{c.data.links.map((l) => <a href={l.href}>{l.label}</a>)}</span>
+          </div>
+          <p class="muted small" data-opens={`course-${c.id}`} hidden></p>
         </section>
       ))}
-      <section class="card">
-        <h2><i></i>How your progress is saved</h2>
-        <ul class="tight">
-          <li>Ticks, quiz answers and notes save automatically in this browser, on this device only. No account or email, and nothing is sent to me.</li>
-          <li><b>You lose it if you haven't backed up and</b> you clear your browser's history, cookies or site data, use a private or incognito window, switch browser or device, or your browser clears site data on its own (Safari and iPhone can after about 7 days without a visit).</li>
-          <li><b>To keep it,</b> press <b>Download backup</b> on the course home page now and then, and keep the file.</li>
-          <li><b>To continue</b> on another browser or device, open the course there and press <b>Load backup</b>. Your progress only comes back once you load the file.</li>
-        </ul>
-      </section>
     </div>
+    <section class="card" style="margin-top:18px">
+      <h2><i></i>How your progress is saved</h2>
+      <ul class="tight">
+        <li>Ticks, quiz answers and notes save automatically in this browser, on this device only. No account or email, and nothing is sent to me.</li>
+        <li><b>You lose it if you haven't backed up and</b> you clear your browser's history, cookies or site data, use a private or incognito window, switch browser or device, or your browser clears site data on its own (Safari and iPhone can after about 7 days without a visit).</li>
+        <li><b>To keep it,</b> press <b>Download backup</b> on the course home page now and then, and keep the file.</li>
+        <li><b>To continue</b> on another browser or device, open the course there and press <b>Load backup</b>. Your progress only comes back once you load the file.</li>
+      </ul>
+    </section>
   </main>
+  <style is:global>
+    .cgrid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); align-items: start; }
+    .ccard h3 a { color: inherit; }
+    .ccard .tags { margin-top: 0; padding-top: 0; }
+    .ccard p.small { font-size: 13.5px; }
+    .ccard .stat-row { margin-top: 4px; }
+    .ccard .cmeta { margin: 0; }
+    .cmods { border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); }
+    .cmods summary { cursor: pointer; padding: 8px 12px; font-weight: 600; font-size: 14px; }
+    .cmods ol { margin: 0; padding: 0 14px 10px 34px; font-size: 13.5px; color: var(--ink-2); }
+    .cmods li { margin: 6px 0; }
+    .cmods li b { color: var(--ink); font-weight: 600; }
+    .cmods .cm-sum { display: block; color: var(--ink-3); font-size: 13px; }
+    .cprog p { margin: 4px 0 0; }
+    .cbar { height: 6px; border-radius: 99px; background: var(--line); overflow: hidden; }
+    .cbar span { display: block; height: 100%; width: 0; background: var(--good); }
+    .cfoot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
+    .clinks { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13.5px; font-weight: 600; }
+  </style>
+  <script is:inline>
+    (function () {
+      document.querySelectorAll('.ccard[data-key]').forEach(function (c) {
+        var n = 0, total = +c.dataset.total;
+        try { n = Object.keys(JSON.parse(localStorage.getItem(c.dataset.key) || '{}')).length; } catch (e) {}
+        if (!n || !total) return;
+        var p = c.querySelector('.cprog'); p.hidden = false;
+        p.querySelector('span').style.width = Math.min(100, 100 * n / total) + '%';
+        p.querySelector('p').textContent = 'Your progress: ' + n + ' of ' + total + ' ' + c.dataset.unit + ' done';
+        var b = c.querySelector('.btn.primary'); if (n < total) b.textContent = 'Continue the course';
+      });
+    })();
+  </script>
 </Base>

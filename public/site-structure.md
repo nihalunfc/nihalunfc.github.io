@@ -57,7 +57,7 @@ Each folder in `src/content/` is a collection, with its schema in `src/content.c
 | Swarm application | `src/content/swarm/<id>.md` + demo at `public/swarm/<id>/index.html` | `/swarm/` and its field page |
 | Tool | `src/content/tools/<id>.md` (+ apps in `public/tools/<id>/<edition>/`) | `/tools/<id>/`, `/tools/`, its field page |
 | Project | `src/content/projects/<id>.md` (+ sub-pages in `public/projects/<id>/<page>/` or `src/pages/projects/<id>/<page>.astro`) | `/projects/<id>/`, `/projects/`, its field page |
-| Course | `src/content/courses/<id>.md` + course files in `public/learn/<id>/` | `/learn/` and the course at `/learn/<id>/` |
+| Course | `src/content/courses/<id>.md`, plus either lessons in `src/content/lessons/<id>/` (built by Astro) or a static course in `public/learn/<id>/` | `/learn/` (one card per course) and the course at `/learn/<id>/` |
 | Blog post | `src/content/blog/<slug>.md` | `/blog/<slug>/`, RSS, tag pages |
 | Fields and kinds | `src/data/fields.ts` | `/fields/`, `/fields/<field>/`, filters |
 
@@ -96,6 +96,17 @@ An app with several views (the workforce and operations suites) gives every view
 
 ### Courses
 
+Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: title, summary, status, level, `duration` (calendar length), `hours`, `lessons`, `modules` (name, summary, optional `size`; shown in the card's Modules drop-down), `topics`, `who`, `links`, and `progressKey` (the localStorage key the course saves ticks under, so the card can show the learner's progress and switch Start to Continue).
+
+**Courses built by Astro (preferred for new courses, e.g. Data at Scale, `/learn/big-data-cloud/`):**
+
+1. One Markdown file per lesson in `src/content/lessons/<id>/NN-slug.md` with `title`, `summary`, `module` (1-based, matching `modules` in the course file), `minutes`, `outcomes` and `quiz` (`q`, `options`, `answer` as a 0-based index, `why`). The lesson is served at `/learn/<id>/lessons/<slug>/` (the number sets the order and is dropped from the URL).
+2. Course pages (projects, setup, glossary) are files with `page: true`, served at `/learn/<id>/pages/<slug>/` and listed in the course's top bar. Number them 90 and up.
+3. The course-file body is the course home intro. Pages come from `src/pages/learn/[course]/` and `src/components/CourseShell.astro`; look and progress are `public/assets/course.css` and `public/assets/course.js` (ticks, notes, quiz grading, backup and load). Lesson and module counts and times are worked out from the lessons.
+4. Boxes inside lessons are HTML blocks with a blank line inside so Markdown still renders: `<div class="callout analogy">`, `exercise`, `project`, `senior`, `warn`, and `<details class="answer">` for hidden answers. No LaTeX: write maths with `<sub>`, ×, ÷ and √.
+
+**Static courses (Pipeline to Dashboard):**
+
 1. Course files go in `public/learn/<id>/`, with folder URLs (`days/day-01/index.html`) and absolute links. Add `<script src="/assets/counter.js" defer></script>` before `</body>`.
 2. Progress stays in the learner's browser. Reuse the backup notice and buttons from `public/learn/etl-course/assets/app.js`.
 3. Add `src/content/courses/<id>.md`, and add `/learn/<id>/` to `STATIC_PAGES`.
@@ -113,7 +124,7 @@ An app with several views (the workforce and operations suites) gives every view
 | About, CV | `src/pages/about/index.astro`, `src/pages/about/cv.astro` (no phone number). The PDF `public/nihal-sulaiman-cv.pdf` is printed from that page: after any CV change run `npm run build && npm run cv:pdf`, build again and commit the PDF. Every CV link (header, home intro, About, Now, Contact) points straight at the PDF, never at a redirect. |
 | Kaggle | `src/pages/projects/kaggle.astro` (only nihal's own scores) |
 | Hospitality proposals | `src/pages/projects/hospitality-bi/proposals.astro` (reads `public/data/hospitality/proposals.json`) |
-| Learn | `src/pages/learn/index.astro` |
+| Learn | `src/pages/learn/index.astro` (course cards with a Modules drop-down; the one drop-down on the site, asked for by nihal) |
 | Tools index | `src/pages/tools/index.astro` |
 | Contact | `src/pages/contact/index.astro` (Web3Forms key in `src/site.ts`; empty = mailto) |
 | Search | `src/pages/search.astro` (Pagefind) |
@@ -126,7 +137,7 @@ An app with several views (the workforce and operations suites) gives every view
 | Layout, head, SEO | `src/layouts/Base.astro` (cache-busts CSS and JS with `?v=`) |
 | Header and footer | `public/assets/header.js`: one header for every page, with plain links (Home, Swarm, Fields, Projects, Tools, Learn, Blog, Now, About) and two buttons: CV (PDF), which stays visible on phones, and Contact. The expense calendar app has an inline copy for offline use: refresh it when the header changes. Never write a literal closing script tag inside this file's comments. |
 | Theme | Monochrome. `public/assets/site.css` (tokens at the end), `blog.css`, `home.css`. The hotel apps also load `/assets/hospitality/site.css`. Light and dark, saved in localStorage `nihal.theme`. |
-| Layout rule | Two columns of cards on desktop, one on phones (`.now-grid`, `.hub-grid`). No drop-down menus. |
+| Layout rule | Two columns of cards on desktop, one on phones (`.now-grid`, `.hub-grid`). No drop-down menus (the Modules drop-down on course cards is the agreed exception). |
 | Visit counter | `public/assets/counter.js` (Abacus API, no cookies) |
 | Progress ticker | `src/components/Progress.astro`, `partsFor()` in `src/lib.ts` |
 | Helpers | `src/lib.ts`, `src/data/fields.ts`, `src/site.ts` |

@@ -92,6 +92,28 @@ const courses = defineCollection({
     topics: z.array(z.string()).default([]),
     who: z.string().optional(),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
+    duration: z.string().optional(),                 // calendar length, e.g. "7 weeks" or "Self-paced, 3 to 4 weeks"
+    hours: z.number().optional(),                    // total study time in hours, shown on the card
+    lessons: z.number().optional(),                  // number of lessons or days (taken from the lessons collection when it has them)
+    progressKey: z.string().optional(),              // localStorage key the course saves ticks under, so the card can show the learner's progress
+    // Module names for the card's drop-down. Courses written in src/content/lessons/<id>/ number their lessons by `module`.
+    modules: z.array(z.object({ name: z.string(), summary: z.string().optional(), size: z.string().optional() })).default([]),
+  }),
+});
+
+// Lessons for courses that are written in this repo and built by Astro (rather than a static
+// site in public/learn/<id>/). One file per lesson: src/content/lessons/<course>/<NN>-<slug>.md,
+// served at /learn/<course>/lessons/<slug>/. `page: true` files are course pages at /learn/<course>/pages/<slug>/.
+const lessons = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/lessons' }),
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    module: z.number().default(0),
+    minutes: z.number().default(20),
+    page: z.boolean().default(false),
+    outcomes: z.array(z.string()).default([]),
+    quiz: z.array(z.object({ q: z.string(), options: z.array(z.string()), answer: z.number(), why: z.string() })).default([]),
   }),
 });
 
@@ -131,4 +153,4 @@ const log = defineCollection({
   }),
 });
 
-export const collections = { blog, projects, tools, courses, swarm, log };
+export const collections = { blog, projects, tools, courses, lessons, swarm, log };

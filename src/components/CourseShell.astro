@@ -1,0 +1,45 @@
+---
+// Page shell for courses written in src/content/lessons/<course>/ (same look as the
+// static Pipeline to Dashboard course). Progress logic is in public/assets/course.js.
+import type { CollectionEntry } from 'astro:content';
+import { SITE_URL } from '../site';
+interface L { slug: string; href: string; n: number; entry: CollectionEntry<'lessons'> }
+interface Props { course: CollectionEntry<'courses'>; lessons: L[]; pages: L[]; title: string; description: string; current?: string; logo?: string }
+const { course, lessons, pages, title, description, current, logo = 'BD' } = Astro.props;
+const id = course.id, home = `/learn/${id}/`;
+const key = course.data.progressKey ?? `${id}-progress-v1`;
+const mods = course.data.modules;
+const data = lessons.map((l) => ({ slug: l.slug, href: l.href, module: l.entry.data.module, minutes: l.entry.data.minutes, title: l.entry.data.title }));
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const v = Date.now().toString(36);
+---
+<!doctype html>
+<html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:url" content={canonical}>
+<link rel="stylesheet" href={`/assets/course.css?v=${v}`}>
+</head><body data-course={id} data-key={key}>
+<header class="top"><a class="brand" href={home}><span class="logo">{logo}</span> {course.data.title}</a><a class="site-home" href="/learn/" title="Back to nihalsulaiman.com">nihalsulaiman.com</a>
+<nav class="topnav"><a href={home} class={!current ? 'on' : ''}>Course</a>{pages.map((p) => <a href={p.href} class={current === p.slug ? 'on' : ''}>{p.entry.data.title}</a>)}</nav>
+<button class="menu" aria-label="Menu" data-action="menu">☰</button></header>
+<div class="wrap"><aside class="side"><div class="side-inner">
+{mods.map((m, i) => {
+  const ls = lessons.filter((l) => l.entry.data.module === i + 1);
+  const open = ls.some((l) => l.slug === current) || (!current && i === 0);
+  return (
+    <details class="wk" open={open}><summary><span class="wnum">M{i + 1}</span> {m.name} <span class="wprog" data-modprog={i + 1}></span></summary>
+      <ol>{ls.map((l) => <li><a class={l.slug === current ? 'on' : ''} href={l.href} data-lesson={l.slug}><span class="dot"></span>{l.n}. {l.entry.data.title}</a></li>)}</ol>
+    </details>
+  );
+})}
+</div></aside><main class="main">
+<p class="bk-remind" hidden>Your progress is only in this browser and isn't backed up. <a href={`${home}#bk-h`}>Download a backup</a> so you don't lose it.</p>
+<slot />
+</main></div>
+<footer class="foot">{course.data.title} · free on nihalsulaiman.com · progress is saved in this browser</footer>
+<script is:inline set:html={`window.COURSE_LESSONS=${JSON.stringify(data)};`}></script>
+<script src={`/assets/course.js?v=${v}`} is:inline></script>
+<script src="/assets/counter.js" defer is:inline></script>
+</body></html>
