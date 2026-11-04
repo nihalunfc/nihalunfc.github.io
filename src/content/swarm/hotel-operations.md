@@ -6,6 +6,7 @@ status: Live
 order: 3
 date: 2026-10-01
 demo: /swarm/hotel-operations/
+code: https://github.com/nihalunfc/nihalunfc.github.io/tree/main/public/swarm/hotel-operations
 stats:
   - { value: "$279k", label: "yearly hotel energy saving (simulated)" }
 ---

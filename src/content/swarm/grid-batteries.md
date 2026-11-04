@@ -6,6 +6,7 @@ status: Live
 order: 1
 date: 2026-10-01
 demo: /swarm/grid-batteries/
+code: https://github.com/nihalunfc/nihalunfc.github.io/tree/main/public/swarm/grid-batteries
 stats:
   - { value: "949 MW", label: "simulated peak cut" }
 ---

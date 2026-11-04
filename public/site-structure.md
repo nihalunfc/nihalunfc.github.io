@@ -27,7 +27,7 @@ Everything is one site, one repo, one header. Every page is a folder with an `in
 | Tools | `/tools/` | `/tools/<tool>/` (about page) | `/tools/<tool>/<edition>/` (the app: `hotels`, `ontario`, `personal`), `/tools/<tool>/<edition>/<view>/` |
 | Learn | `/learn/` | `/learn/<course>/` | `/learn/<course>/days/day-01/`, `/learn/<course>/weeks/week-1/`, `/learn/<course>/pages/setup/` |
 | Blog | `/blog/` | `/blog/<post>/` | `/blog/tags/<tag>/` |
-| About | `/about/` | `/about/cv/` | |
+| About | `/about/` | `/about/cv/`, and the PDF at `/nihal-sulaiman-cv.pdf` | |
 | Single pages | `/now/`, `/log/`, `/contact/`, `/search/`, `/sitemap/`, `/disclaimer/` | | |
 
 Shared files: `/assets/` (site CSS and JS; `/assets/hospitality/` for the hotel apps), `/data/<field>/` (JSON the apps read), `/downloads/<field>/` (Excel files).
@@ -110,7 +110,7 @@ An app with several views (the workforce and operations suites) gives every view
 | Fields | `src/pages/fields/index.astro`, `src/pages/fields/[id].astro` |
 | Now | `src/pages/now.astro` (current status; update "Last updated") |
 | Activity log | `src/pages/log/index.astro`, `src/components/LogList.astro` |
-| About, CV | `src/pages/about/index.astro`, `src/pages/about/cv.astro` (no phone number) |
+| About, CV | `src/pages/about/index.astro`, `src/pages/about/cv.astro` (no phone number). The PDF `public/nihal-sulaiman-cv.pdf` is printed from that page: after any CV change run `npm run build && npm run cv:pdf`, build again and commit the PDF. Every CV link (header, home intro, About, Now, Contact) points straight at the PDF, never at a redirect. |
 | Kaggle | `src/pages/projects/kaggle.astro` (only nihal's own scores) |
 | Hospitality proposals | `src/pages/projects/hospitality-bi/proposals.astro` (reads `public/data/hospitality/proposals.json`) |
 | Learn | `src/pages/learn/index.astro` |
@@ -124,12 +124,14 @@ An app with several views (the workforce and operations suites) gives every view
 | Thing | File |
 |---|---|
 | Layout, head, SEO | `src/layouts/Base.astro` (cache-busts CSS and JS with `?v=`) |
-| Header and footer | `public/assets/header.js`: one header for every page, with plain links (Home, Swarm, Fields, Projects, Tools, Learn, Blog, Now, About) and a Contact button. The expense calendar app has an inline copy for offline use: refresh it when the header changes. Never write a literal closing script tag inside this file's comments. |
+| Header and footer | `public/assets/header.js`: one header for every page, with plain links (Home, Swarm, Fields, Projects, Tools, Learn, Blog, Now, About) and two buttons: CV (PDF), which stays visible on phones, and Contact. The expense calendar app has an inline copy for offline use: refresh it when the header changes. Never write a literal closing script tag inside this file's comments. |
 | Theme | Monochrome. `public/assets/site.css` (tokens at the end), `blog.css`, `home.css`. The hotel apps also load `/assets/hospitality/site.css`. Light and dark, saved in localStorage `nihal.theme`. |
 | Layout rule | Two columns of cards on desktop, one on phones (`.now-grid`, `.hub-grid`). No drop-down menus. |
 | Visit counter | `public/assets/counter.js` (Abacus API, no cookies) |
 | Progress ticker | `src/components/Progress.astro`, `partsFor()` in `src/lib.ts` |
 | Helpers | `src/lib.ts`, `src/data/fields.ts`, `src/site.ts` |
+| Live demo buttons | Projects take `demo:` and `repo:`, swarm items `demo:` and `code:`, tools `open:` and `code:`. Each shows as an "Open the live demo" button and a "Code" button under the title, so no card or page is a dead end. Home cards for the flagship and the BI toolkit link to the demos directly. |
+| Libraries | Chart.js, PapaParse and SheetJS are served from `public/assets/vendor/`, not a CDN, so dashboards load from the site itself. D3 is `public/assets/d3.min.js`. Add new libraries the same way. |
 
 ## How to change things
 

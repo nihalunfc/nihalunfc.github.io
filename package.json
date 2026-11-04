@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "cv:pdf": "node scripts/cv-pdf.cjs"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.15",

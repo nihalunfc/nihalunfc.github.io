@@ -34,6 +34,8 @@ const projects = defineCollection({
     featured: z.boolean().default(false),
     stats: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
+    demo: z.string().optional(),   // the live dashboard or demo, shown as the first button under the title
+    repo: z.string().optional(),   // the code, shown as the second button
     tags: z.array(z.string()).default([]),
     sectors: z.array(z.string()).default([]),       // who it's for, e.g. Hotels, Retail, Any business
     editions: z.array(z.object({ sector: z.string(), href: z.string().optional(), status: z.enum(['Live', 'In progress', 'Planned']) })).default([]),
@@ -106,6 +108,7 @@ const swarm = defineCollection({
     order: z.number().default(50),
     date: z.coerce.date(),
     demo: z.string().optional(),
+    code: z.string().optional(),      // where the demo's code lives (a GitHub repo or folder URL)
     stats: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     project: z.string().optional(),   // a related project id, e.g. warl-wildfire
   }),
