@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import CourseShell from '../../../../components/CourseShell.astro';
+import { getLessons } from '../../../../lib';
+export async function getStaticPaths() {
+  const out = [];
+  for (const c of await getCollection('courses')) {
+    const all = await getLessons(c.id);
+    const lessons = all.filter((l) => !l.entry.data.page), pages = all.filter((l) => l.entry.data.page);
+    lessons.forEach((l, i) => out.push({ params: { course: c.id, lesson: l.slug }, props: { course: c, lessons, pages, i } }));
+  }
+  return out;
+}
+const { course, lessons, pages, i } = Astro.props;
+const l = lessons[i], d = l.entry.data;
+const prev = lessons[i - 1], next = lessons[i + 1];
+const mod = course.data.modules[d.module - 1];
+const { Content } = await render(l.entry);
+---
+<CourseShell course={course} lessons={lessons} pages={pages} current={l.slug} title={`${l.n}. ${d.title} · ${course.data.title}`} description={d.summary}>
+  <article class="lesson">
+    <p class="crumbs"><a href={`/learn/${course.id}/`}>{course.data.title}</a> › Module {d.module}{mod ? ` · ${mod.name}` : ''} › Lesson {l.n}</p>
+    <h1>{d.title}</h1>
+    <div class="meta"><span class="pill">⏱ about {d.minutes} min</span>{d.quiz.length > 0 && <span class="pill">✎ {d.quiz.length}-question quiz</span>}</div>
+    <p class="lede">{d.summary}</p>
+    {d.outcomes.length > 0 && <div class="outcomes"><p><b>By the end of this lesson you can</b></p><ul>{d.outcomes.map((o) => <li>{o}</li>)}</ul></div>}
+    <Content />
+    {d.quiz.length > 0 && (
+      <section class="quiz">
+        <h2>Check yourself</h2>
+        {d.quiz.map((q, qi) => (
+          <div class="q">
+            <p><b>{qi + 1}. {q.q}</b></p>
+            <ul class="opts">{q.options.map((o, oi) => <li><label><input type="radio" name={`q${qi}`} data-ok={oi === q.answer ? '1' : '0'} /><span>{o}</span></label></li>)}</ul>
+            <p class="why" hidden>{q.why}</p>
+          </div>
+        ))}
+        <button type="button" class="btn" data-action="grade">Check answers</button><span class="score"></span>
+      </section>
+    )}
+    <section class="notes"><h2>My notes</h2><textarea data-notes={l.slug} placeholder="What clicked, what didn't, what to revisit. Saved in this browser."></textarea></section>
+    <div class="pager">
+      {prev ? <a href={prev.href}>← {prev.n}. {prev.entry.data.title}</a> : <a href={`/learn/${course.id}/`}>← Course home</a>}
+      <button type="button" class="btn done" data-action="complete" data-lesson={l.slug}>Mark this lesson complete</button>
+      {next ? <a href={next.href}>{next.n}. {next.entry.data.title} →</a> : <a href={`/learn/${course.id}/pages/projects/`}>Projects →</a>}
+    </div>
+  </article>
+</CourseShell>

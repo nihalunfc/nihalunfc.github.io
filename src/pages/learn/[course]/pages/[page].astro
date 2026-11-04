@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from 'astro:content';
+import CourseShell from '../../../../components/CourseShell.astro';
+import { getLessons } from '../../../../lib';
+export async function getStaticPaths() {
+  const out = [];
+  for (const c of await getCollection('courses')) {
+    const all = await getLessons(c.id);
+    const lessons = all.filter((l) => !l.entry.data.page), pages = all.filter((l) => l.entry.data.page);
+    pages.forEach((p) => out.push({ params: { course: c.id, page: p.slug }, props: { course: c, lessons, pages, p } }));
+  }
+  return out;
+}
+const { course, lessons, pages, p } = Astro.props;
+const { Content } = await render(p.entry);
+---
+<CourseShell course={course} lessons={lessons} pages={pages} current={p.slug} title={`${p.entry.data.title} · ${course.data.title}`} description={p.entry.data.summary}>
+  <article class="lesson">
+    <p class="crumbs"><a href={`/learn/${course.id}/`}>{course.data.title}</a> › {p.entry.data.title}</p>
+    <h1>{p.entry.data.title}</h1>
+    <p class="lede">{p.entry.data.summary}</p>
+    <Content />
+  </article>
+</CourseShell>

@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import CourseShell from '../../../components/CourseShell.astro';
+import { getLessons } from '../../../lib';
+export async function getStaticPaths() {
+  const out = [];
+  for (const c of await getCollection('courses')) {
+    const all = await getLessons(c.id);
+    if (all.length) out.push({ params: { course: c.id }, props: { course: c, all } });
+  }
+  return out;
+}
+const { course, all } = Astro.props;
+const lessons = all.filter((l) => !l.entry.data.page), pages = all.filter((l) => l.entry.data.page);
+const { Content } = await render(course);
+const mins = lessons.reduce((s, l) => s + l.entry.data.minutes, 0);
+const quizzes = lessons.reduce((s, l) => s + l.entry.data.quiz.length, 0);
+---
+<CourseShell course={course} lessons={lessons} pages={pages} title={`${course.data.title} · free course · Nihal Sulaiman`} description={course.data.summary}>
+  <section class="hero">
+    <p class="crumbs"><a href="/learn/">Learn</a> › {course.data.title}</p>
+    <h1>{course.data.title}</h1>
+    <p class="lede">{course.data.summary}</p>
+    <div class="facts"><div><b>{course.data.modules.length}</b>modules</div><div><b>{lessons.length}</b>lessons</div><div><b>~{Math.round(mins / 60)} h</b>reading and exercises</div><div><b>{quizzes}</b>quiz questions</div><div><b>{course.data.level}</b>level</div></div>
+    <div class="bar big"><span data-allbar="1"></span></div><p class="progress-text" data-progress-text></p>
+    <a class="btn" data-action="resume" href={lessons[0].href}>Start lesson 1</a>
+  </section>
+  <section class="backup" aria-labelledby="bk-h">
+    <h2 id="bk-h">Your progress is saved in this browser only</h2>
+    <p>Ticks and notes save automatically on this device, in this browser. Nothing is sent to a server, and there is no account.</p>
+    <p><b>You will lose your progress if you don't back it up and</b> you clear your browser's history or site data, use a private window, switch browser or device, or your browser clears site data on its own (Safari and iPhone can after about 7 days without a visit).</p>
+    <p><b>To keep it:</b> press <b>Download backup</b> now and then. <b>To continue</b> elsewhere, open this page there and press <b>Load backup</b> with that file.</p>
+    <div class="bk-row"><button type="button" class="btn" data-bk="save">Download backup</button><label class="btn ghost">Load backup<input type="file" accept=".json,application/json" hidden></label><span class="bk-status" data-bk-status></span></div>
+    <p class="bk-msg" role="status"></p>
+  </section>
+  <article class="lesson"><Content /></article>
+  <h2>The modules</h2>
+  {course.data.modules.map((m, i) => {
+    const ls = lessons.filter((l) => l.entry.data.module === i + 1);
+    return (
+      <section class="modrow">
+        <h3><span class="wnum">Module {i + 1}</span>{m.name}<span class="mp" data-modprog={i + 1}></span></h3>
+        {m.summary && <p>{m.summary}</p>}
+        <div class="bar"><span data-modbar={i + 1}></span></div>
+        <ol>{ls.map((l) => <li><a href={l.href} data-lesson={l.slug}><span class="dot"></span><span class="dt">{l.n}. {l.entry.data.title}</span><span class="dm">{l.entry.data.minutes} min</span></a></li>)}</ol>
+      </section>
+    );
+  })}
+</CourseShell>

@@ -72,3 +72,18 @@ const TZ = 'America/Toronto';
 export const fmtTime = (d: Date) => d.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit', timeZone: TZ });
 export const dayKey = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: TZ });
 export const fmtDay = (d: Date) => d.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: TZ });
+
+// Lessons of a course written in src/content/lessons/<course>/ (see content.config.ts).
+// Files are named NN-slug.md; the number sets the order and is dropped from the URL.
+export async function getLessons(course: string) {
+  const all = (await getCollection('lessons')).filter((l) => l.id.startsWith(course + '/'));
+  return all
+    .map((l) => {
+      const file = l.id.slice(course.length + 1);
+      const n = parseInt(file, 10) || 0;
+      const slug = file.replace(/^\d+-/, '');
+      const base = l.data.page ? 'pages' : 'lessons';
+      return { entry: l, n, slug, href: `/learn/${course}/${base}/${slug}/` };
+    })
+    .sort((a, b) => a.n - b.n);
+}
