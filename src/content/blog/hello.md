@@ -5,9 +5,9 @@ date: 2026-11-01
 tags: [Career, Data analytics]
 ---
 
-I'm Nihal. I studied physics first: a BSc at Government Victoria College and an MSc at CUSAT in India, majoring in astrophysics. In October 2026 I finished a Master's in Data Analytics at the University of Niagara Falls Canada. In between, I spent five years as a content writer turning science and technology into clear writing, and since moving to Canada I've worked in hotel housekeeping in Niagara Falls.
+I'm Nihal. I studied physics first: a BSc at Government Victoria College and an MSc at CUSAT in India, majoring in cosmology. In October 2026 I finished a Master's in Data Analytics at the University of Niagara Falls Canada. In between, I spent five years as a content writer turning science and technology into clear writing, and since moving to Canada I've worked in hotel housekeeping in Niagara Falls.
 
-That mix is why I care about data that changes a decision. In astrophysics you model things you can never touch. On a hotel floor you see what happens when the schedule doesn't match the arrivals. Data analytics is where the two meet.
+That mix is why I care about data that changes a decision. In cosmology you model things you can never touch. On a hotel floor you see what happens when the schedule doesn't match the arrivals. Data analytics is where the two meet.
 
 ## What this blog covers
 
