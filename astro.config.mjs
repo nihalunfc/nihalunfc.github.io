@@ -5,7 +5,7 @@ import rehypeFigures from './src/plugins/rehype-figures.mjs';
 // Static pages in public/ that Astro doesn't build, so the sitemap lists them too.
 const STATIC_PAGES = [
   '/swarm/explorer/', '/swarm/grid-batteries/', '/swarm/wildfire-drones/', '/swarm/hotel-operations/',
-  '/projects/hospitality-bi/overview/',
+  '/projects/hospitality-bi/overview/', '/projects/self-healing-pipelines/compare/', '/projects/self-healing-pipelines/command-centre/',
   '/tools/expense-calendar/personal/', '/tools/workforce-suite/hotels/', '/tools/operations-suite/hotels/',
   '/tools/pricing-recommender/hotels/', '/tools/demand-forecaster/hotels/', '/tools/overbooking-calculator/hotels/',
   '/tools/large-order-quote/hotels/', '/tools/kpi-dashboard/hotels/', '/tools/revenue-command-centre/hotels/',

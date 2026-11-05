@@ -19,7 +19,7 @@ const isBI = d.category === 'Business intelligence' || d.category === 'Tools';
 ---
 <Base title={p.data.title} description={p.data.summary} type="article">
   <PageHero title={p.data.title} crumbs={[{ label: 'Projects', href: '/projects/' }, { label: p.data.title }]} lead={p.data.summary}>
-    <div class="post-meta"><a class="eyebrow" style="margin:0" href={`/fields/${d.field}/`}>{fieldName(d.field)} · {kindName(d.kind)}</a><span class={`status ${p.data.status}`}>{p.data.status}</span>
+    <div class="post-meta">{d.field ? <a class="eyebrow" style="margin:0" href={`/fields/${d.field}/`}>{fieldName(d.field)} · {kindName(d.kind)}</a> : <span class="eyebrow" style="margin:0">Any sector · {kindName(d.kind)}</span>}<span class={`status ${p.data.status}`}>{p.data.status}</span>
       <div class="tags">{p.data.tags.map((t) => <span class="tag">{t}</span>)}</div></div>
     <Progress parts={partsFor(d)} />
     {(d.demo || d.repo) && <div class="btns">{d.demo && <a class="btn primary" href={d.demo}>Open the live demo</a>}{d.repo && <a class="btn ghost" href={d.repo}>Code on GitHub</a>}</div>}

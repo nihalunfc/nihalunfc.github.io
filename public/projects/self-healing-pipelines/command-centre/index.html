@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pipeline Command Centre · Nihal</title>
+<meta name="description" content="Demo console for a self-healing daily pipeline: live agent activity, a shared incident board, a revertible ledger and pause, stop, approve and rework controls.">
+<meta property="og:title" content="Pipeline Command Centre · Nihal">
+<meta property="og:description" content="Demo console for a self-healing daily pipeline: live agent activity, a shared incident board, a revertible ledger and pause, stop, approve and rework controls.">
+<link rel="canonical" href="https://nihalsulaiman.com/projects/self-healing-pipelines/command-centre/">
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<script src="/assets/header.js"></script>
+<style>
+/* Layout: a control-room console. Top bar = clock + crew switches; three columns = agents | incidents | ledger; bottom strip = spend and asset freshness. */
+:root{
+  --bg:#f4f6f8; --panel:#ffffff; --ink:#14181d; --ink-2:#4b5560; --ink-3:#7a8591; --line:#dde2e8; --soft:#eef1f5;
+  --accent:#2a78d6; --accent-ink:#ffffff; --classic:#eb6834;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --good-bg:#e5f4e4; --warn-bg:#f9eeda; --crit-bg:#fbebeb; --info-bg:#e7f1fb;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101317; --panel:#171b20; --ink:#eef1f4; --ink-2:#b4bdc7; --ink-3:#8590a0; --line:#2a3038; --soft:#1f242b;
+  --accent:#3987e5; --accent-ink:#ffffff; --classic:#d95926;
+  --good-bg:#16301a; --warn-bg:#352a10; --crit-bg:#3a1a1a; --info-bg:#132840; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101317; --panel:#171b20; --ink:#eef1f4; --ink-2:#b4bdc7; --ink-3:#8590a0; --line:#2a3038; --soft:#1f242b;
+  --accent:#3987e5; --accent-ink:#ffffff; --classic:#d95926;
+  --good-bg:#16301a; --warn-bg:#352a10; --crit-bg:#3a1a1a; --info-bg:#132840; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;
+  }
+.wrap{max-width:1440px;margin:0 auto;display:grid;gap:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 32px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.demo-note{font-size:12.5px;color:var(--ink-2);background:var(--info-bg);border-radius:6px;padding:8px 12px}
+header.top{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:0}
+.brand h1{font-size:18px;margin:0;letter-spacing:.01em}
+.brand span{color:var(--ink-3);font-size:12.5px}
+.clock{display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
+.clock .big{font-size:26px;font-weight:600}
+.kv{display:flex;flex-direction:column;gap:1px}
+.kv b{font-weight:600}
+.kv small{color:var(--ink-3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:inherit;font-size:13px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 11px;cursor:pointer}
+button:hover{border-color:var(--ink-3)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.danger{color:var(--crit);border-color:color-mix(in srgb,var(--crit) 45%,var(--line))}
+button:disabled{opacity:.45;cursor:not-allowed}
+select{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px 8px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.p-run{background:var(--info-bg);color:var(--accent)}
+.p-good{background:var(--good-bg);color:var(--good)}
+.p-warn{background:var(--warn-bg);color:#a86d00}
+.p-crit{background:var(--crit-bg);color:var(--crit)}
+.p-idle{background:var(--soft);color:var(--ink-3)}
+:root[data-theme="dark"] .p-warn{color:var(--warn)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .p-warn{color:var(--warn)}}
+.grid{display:grid;grid-template-columns:260px minmax(0,1fr) 340px;gap:14px;align-items:start}
+@media (max-width:1100px){.grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ledger{grid-column:1/-1}}
+@media (max-width:720px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;min-width:0}
+.panel>h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);margin:0;padding:11px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}
+.agents{display:grid}
+.agent{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.agent:last-child{border-bottom:0}
+.agent .name{font-weight:600}
+.agent .model{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.agent .task{grid-column:1/-1;font-size:12.5px;color:var(--ink-2);min-height:18px}
+.incidents{display:grid;gap:0}
+.inc{padding:14px;border-bottom:1px solid var(--line);display:grid;gap:10px;border-left:4px solid transparent}
+.inc:last-child{border-bottom:0}
+.inc.sev-crit{border-left-color:var(--crit)} .inc.sev-warn{border-left-color:var(--warn)} .inc.sev-good{border-left-color:var(--good)} .inc.sev-run{border-left-color:var(--accent)}
+.inc-head{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between}
+.inc-title{font-weight:600;font-size:15px}
+.inc-meta{color:var(--ink-3);font-size:12.5px}
+.steps{display:flex;gap:4px;flex-wrap:wrap}
+.step{font-size:11.5px;padding:3px 7px;border-radius:4px;background:var(--soft);color:var(--ink-3);font-family:var(--mono)}
+.step.done{background:var(--good-bg);color:var(--good)}
+.step.now{background:var(--info-bg);color:var(--accent);font-weight:600}
+.step.fail{background:var(--crit-bg);color:var(--crit)}
+.step.wait{background:var(--warn-bg);color:#a86d00}
+.verdict{font-size:13px;color:var(--ink-2)}
+.verdict b{color:var(--ink)}
+.ask{background:var(--warn-bg);border-radius:6px;padding:9px 11px;font-size:13px;display:grid;gap:8px}
+.ask .draft{font-family:var(--mono);font-size:12px;white-space:pre-wrap;color:var(--ink-2);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:8px}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.thread{font-size:12px;color:var(--accent)}
+.ledger ol{list-style:none;margin:0;padding:0;max-height:620px;overflow:auto}
+.ledger li{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;padding:9px 14px;border-bottom:1px solid var(--line);font-size:12.5px}
+.ledger li .t{font-family:var(--mono);color:var(--ink-3)}
+.ledger li .what{min-width:0}
+.ledger li .what b{font-weight:600}
+.ledger li .sub{grid-column:2/3;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);overflow-wrap:anywhere}
+.ledger li .rv{grid-row:1/3;grid-column:3;align-self:center}
+.ledger li.reverted .what{text-decoration:line-through;color:var(--ink-3)}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+@media (max-width:900px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.strip{grid-template-columns:minmax(0,1fr)}}
+.tile{padding:12px 14px;display:grid;gap:6px}
+.tile small{color:var(--ink-3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.tile .num{font-size:22px;font-weight:600;font-family:var(--mono)}
+.bar{height:8px;background:var(--soft);border-radius:4px;overflow:hidden;display:flex;gap:2px}
+.bar i{display:block;height:100%}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:5px;align-items:center}
+.legend span::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--c)}
+.assets{display:grid;gap:4px;font-size:12.5px}
+.assets div{display:flex;justify-content:space-between;gap:8px}
+.empty{padding:16px 14px;color:var(--ink-3)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;max-width:calc(100% - 32px)}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<site-header></site-header>
+<div class="wrap">
+  <p class="demo-note"><b>Demo with simulated data.</b> Everything below is a scripted night of a daily pipeline playing at high speed. The buttons work on the demo: pause or stop the crew or one incident, approve a step, revert any logged step, or rework from it. No agent gives orders: each one watches the shared board and claims the incidents in the state it handles.</p>
+  <p class="demo-note"><b>To run it live:</b> nothing here is connected yet. Point the page at a small API over your board tables (<span class="mono">/api/board</span>), with Dagster at <span class="mono">DAGSTER_GRAPHQL_URL</span>, the warehouse through a read-only login, the ledger in your pipeline's git repository and a Claude API key with a spend limit. The <a href="/projects/self-healing-pipelines/setup-guide/">setup guide</a> lists every connection point.</p>
+
+  <header class="top">
+    <div class="brand">
+      <h1>Pipeline Command Centre</h1>
+      <span>Daily ETL run · schedule <span class="mono">0 5 * * *</span> · reports due <span class="mono">07:00</span></span>
+    </div>
+    <div class="clock">
+      <div class="kv"><small>Clock</small><span class="big mono" id="clock">05:00</span></div>
+      <div class="kv"><small>Business date</small><b class="mono" id="bdate">2026-11-04</b></div>
+      <div class="kv"><small>Crew</small><span id="crewState" class="pill p-run">Running</span></div>
+      <div class="kv"><small>Reports</small><span id="reportState" class="pill p-warn">Waiting on data</span></div>
+    </div>
+    <div class="controls">
+      <label for="speed" class="inc-meta">Speed</label>
+      <select id="speed"><option value="1">1×</option><option value="3" selected>3×</option><option value="8">8×</option></select>
+      <button id="pauseAll">Pause crew</button>
+      <button id="stopAll" class="danger">Stop crew</button>
+      <button id="restart">Replay night</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>Agents · no boss <span class="mono" id="agentCount"></span></h2>
+      <div class="agents" id="agents"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Shared board <span id="incCount" class="mono"></span></h2>
+      <div class="incidents" id="incidents"></div>
+    </section>
+
+    <section class="panel ledger">
+      <h2>Ledger <span class="mono">one commit per step</span></h2>
+      <ol id="ledger"></ol>
+    </section>
+  </div>
+
+  <div class="strip">
+    <section class="panel tile">
+      <small>Model spend tonight</small>
+      <div class="num" id="spend">$0.000</div>
+      <div class="bar" id="spendBar"></div>
+      <div class="legend"><span style="--c:#9ec5f4">Haiku</span><span style="--c:var(--accent)">Sonnet</span><span style="--c:#184f95">Opus</span><span class="mono" id="cap">cap $0.50 / incident</span></div>
+    </section>
+    <section class="panel tile">
+      <small>Tokens tonight</small>
+      <div class="num" id="tokens">0</div>
+      <div class="inc-meta" id="tokSplit">Haiku 0 · Sonnet 0 · Opus 0</div>
+    </section>
+    <section class="panel tile">
+      <small>People time needed</small>
+      <div class="num" id="people">0 min</div>
+      <div class="inc-meta">Approvals and reviews only</div>
+    </section>
+    <section class="panel tile">
+      <small>Warehouse assets</small>
+      <div class="assets" id="assets"></div>
+    </section>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+const AGENTS=[
+ {id:"watcher",name:"Watcher",model:"code"},
+ {id:"collector",name:"Collector",model:"code"},
+ {id:"memory",name:"Memory",model:"code"},
+ {id:"triager",name:"Triager",model:"Haiku 5.5"},
+ {id:"fixer",name:"Fixer",model:"Sonnet 5.5 → Opus 5.5"},
+ {id:"gate",name:"Gate",model:"code"},
+ {id:"verifier",name:"Verifier",model:"code + Dagster dev"},
+ {id:"ledger",name:"Ledger",model:"code + git"},
+ {id:"reporter",name:"Reporter",model:"Haiku 5.5"}];
+const PRICE={haiku:[0.10,0.50],sonnet:[2,10],opus:[4,20]};
+const STAGES=["detect","evidence","verdict","fix","verify","approve","rerun","report"];
+const ASSETS=["raw_pos_sales","raw_inventory_snapshot","raw_supplier_deliveries","raw_labour_hours","raw_web_orders","stg_sales","fact_sales","fact_inventory","mart_daily_store","report_morning_brief"];
+
+// Scripted night. t = minutes after 05:00.
+const SCRIPT=[
+ {t:0,  a:"watcher", msg:"Run started: 15 sources, 10 assets", led:["watcher","code","Run 2026-11-04 started",0,0]},
+ {t:4,  inc:"A", a:"watcher", stage:"detect", open:{title:"supplier_deliveries file not in landing folder",feed:"raw_supplier_deliveries",sev:"warn"}, led:["watcher","code","Freshness check failed: raw_supplier_deliveries",0,0], asset:["raw_supplier_deliveries","late"]},
+ {t:5,  inc:"A", a:"collector", stage:"evidence", led:["collector","code","Evidence bundle: last 15 loads, folder listing, sender history (2.1K tokens)",0,0]},
+ {t:5,  inc:"A", a:"memory", msg:"Fingerprint new: no stored fix"},
+ {t:6,  inc:"A", a:"triager", stage:"verdict", verdict:"Source gap (late file). Sender's file usually lands 05:10-05:40; nothing wrong in our code.", tok:["haiku",2100,180], led:["triager","haiku","Verdict: source late, confidence 0.91",2100,180]},
+ {t:6,  inc:"A", a:"gate", stage:"rerun", skip:["fix","verify","approve"], msg:"Tier A: wait for file, re-run partition by itself", led:["gate","code","Allowed: re-run on arrival (idempotent)",0,0]},
+ {t:9,  inc:"B", a:"watcher", stage:"detect", open:{title:"stg_sales failed: column net_amt not found",feed:"stg_sales",sev:"crit"}, led:["watcher","code","Run failure: stg_sales KeyError 'net_amt'",0,0], asset:["stg_sales","failed"]},
+ {t:10, inc:"B", a:"collector", stage:"evidence", led:["collector","code","Evidence: header diff of today's pos_sales vs yesterday (net_amt → net_amount)",0,0]},
+ {t:11, inc:"B", a:"triager", stage:"verdict", verdict:"Real fault (ours). The source renamed a column; our mapping must accept the new name.", tok:["haiku",2600,220], led:["triager","haiku","Verdict: real fault, schema drift, confidence 0.88",2600,220]},
+ {t:12, inc:"C", a:"watcher", stage:"detect", open:{title:"labour_hours export missing for business date",feed:"raw_labour_hours",sev:"warn"}, led:["watcher","code","Freshness check failed: raw_labour_hours",0,0], asset:["raw_labour_hours","late"]},
+ {t:13, inc:"B", a:"fixer", stage:"fix", msg:"Sonnet try 1: map net_amount → net_amt in stg_sales", tok:["sonnet",7800,1900], led:["fixer","sonnet","Patch try 1: rename mapping in stg_sales.sql",7800,1900]},
+ {t:13, inc:"C", a:"collector", stage:"evidence", led:["collector","code","Evidence: export is a manual step; last 3 arrived 06:30-07:10",0,0]},
+ {t:14, inc:"C", a:"triager", stage:"verdict", verdict:"Manual step missed. The export is run by a person each morning and has not been sent yet.", tok:["haiku",1900,200], led:["triager","haiku","Verdict: manual step missed, confidence 0.84",1900,200]},
+ {t:15, inc:"C", a:"gate", stage:"approve", skip:["fix","verify"], ask:{kind:"send",text:"Draft note to the export owner:\n\nGood morning. Today's labour hours export for 2026-11-04 has not reached the shared folder yet. The morning brief refreshes at 07:00. Could you send it when you can? Thank you."}, led:["gate","code","Tier B: drafted note, waiting for a person to send it",0,0]},
+ {t:17, inc:"B", a:"verifier", stage:"verify", fail:true, msg:"Revenue tie-out failed: 0.4% gap (refund rows double counted)", led:["verifier","dagster","Dev re-run: tie-out check FAILED (0.4%)",0,0]},
+ {t:19, inc:"B", a:"fixer", stage:"fix", msg:"Sonnet try 2: also map refund_flag → is_refund", tok:["sonnet",9200,2100], led:["fixer","sonnet","Patch try 2: rename mapping + refund flag",9200,2100]},
+ {t:22, inc:"D", a:"watcher", stage:"detect", open:{title:"web_orders volume 58% below 4-week normal",feed:"raw_web_orders",sev:"warn"}, led:["watcher","code","Volume check warning: raw_web_orders",0,0]},
+ {t:23, inc:"B", a:"verifier", stage:"verify", msg:"Dev re-run passed: 10/10 quality checks, row counts match", led:["verifier","dagster","Dev re-run: all checks PASSED",0,0]},
+ {t:23, inc:"D", a:"collector", stage:"evidence", led:["collector","code","Evidence: same weekday last year also -55% (public holiday)",0,0]},
+ {t:24, inc:"B", a:"gate", stage:"approve", ask:{kind:"merge",text:"Patch is ready on branch crew/incident-B (2 files, +6 −2). Approving merges it and re-runs stg_sales and everything downstream in production."}, led:["gate","code","Tier B: code change needs a person to approve",0,0]},
+ {t:25, inc:"D", a:"triager", stage:"verdict", verdict:"False alarm. Holiday trading; the rule does not know the calendar. Proposed rule fix: compare with same day last year.", tok:["haiku",2300,260], led:["triager","haiku","Verdict: false alarm, confidence 0.93",2300,260]},
+ {t:26, inc:"D", a:"reporter", stage:"report", skip:["fix","verify","approve","rerun"], close:"good", tok:["haiku",1800,500], led:["reporter","haiku","Report: false alarm + proposed calendar-aware rule",1800,500]},
+ {t:41, inc:"A", a:"watcher", stage:"rerun", msg:"File landed 05:41; re-running raw_supplier_deliveries", led:["watcher","code","File arrived; partition re-run started",0,0], asset:["raw_supplier_deliveries","running"]},
+ {t:44, inc:"A", a:"verifier", msg:"Partition re-run passed", asset:["raw_supplier_deliveries","fresh"], led:["verifier","dagster","Prod partition re-run PASSED",0,0]},
+ {t:45, inc:"A", a:"reporter", stage:"report", close:"good", tok:["haiku",1500,420], led:["reporter","haiku","Report: late file, fixed by itself at 05:44",1500,420]},
+];
+// steps that follow a person's approval, relative to the approval time
+const AFTER={
+ B:[{dt:1,a:"ledger",stage:"rerun",led:["ledger","git","Merged crew/incident-B into main (approved by you)",0,0],asset:["stg_sales","running"]},
+    {dt:5,a:"verifier",asset:["stg_sales","fresh"],led:["verifier","dagster","Prod re-run: stg_sales → fact_sales → mart PASSED",0,0]},
+    {dt:6,a:"reporter",stage:"report",close:"good",tok:["haiku",2200,640],led:["reporter","haiku","Report + fingerprint saved for next time",2200,640]}],
+ C:[{dt:1,a:"reporter",msg:"Note sent by you; waiting for file",led:["reporter","code","Note marked sent by you",0,0]},
+    {dt:22,a:"watcher",stage:"rerun",msg:"Export landed; re-running raw_labour_hours",asset:["raw_labour_hours","running"],led:["watcher","code","File arrived; partition re-run started",0,0]},
+    {dt:25,a:"verifier",asset:["raw_labour_hours","fresh"],led:["verifier","dagster","Prod partition re-run PASSED",0,0]},
+    {dt:26,a:"reporter",stage:"report",close:"good",tok:["haiku",1400,380],led:["reporter","haiku","Report: manual export late, closed",1400,380]}]
+};
+
+let S;
+function reset(){
+  S={min:0,running:true,stopped:false,queue:SCRIPT.map((e,i)=>({...e,id:i})),inc:{},ledger:[],agent:{},tok:{haiku:[0,0],sonnet:[0,0],opus:[0,0]},people:0,assets:{}};
+  ASSETS.forEach(a=>S.assets[a]="waiting");
+  AGENTS.forEach(a=>S.agent[a.id]={state:"idle",task:"Waiting"});
+}
+const $=id=>document.getElementById(id);
+const hhmm=m=>{const t=5*60+Math.floor(m);return String(Math.floor(t/60)%24).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const hash=()=>Math.random().toString(16).slice(2,9);
+function cost(){let c=0;for(const k in S.tok)c+=S.tok[k][0]/1e6*PRICE[k][0]+S.tok[k][1]/1e6*PRICE[k][1];return c}
+function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>el.classList.remove("on"),2200)}
+
+function apply(e){
+  const inc=e.inc?S.inc[e.inc]:null;
+  if(e.open){S.inc[e.inc]={id:e.inc,...e.open,stages:{},state:"open",paused:false,verdict:"",ask:null,openedAt:S.min,thread:"#"+e.inc.toLowerCase()+"-"+e.open.feed.replace(/_/g,"-")};}
+  const I=S.inc[e.inc];
+  if(I&&(I.paused||I.state==="stopped"))return false;
+  if(e.a){S.agent[e.a]={state:"busy",task:(e.inc?"Incident "+e.inc+": ":"")+(e.msg||(e.led&&e.led[2])||"")};
+    setTimeout(()=>{if(S.agent[e.a]&&S.agent[e.a].task.startsWith((e.inc?"Incident "+e.inc:""))){S.agent[e.a].state="idle";render()}},1200);}
+  if(I){
+    if(e.skip)e.skip.forEach(s=>I.stages[s]=I.stages[s]||"skip");
+    if(e.stage){STAGES.forEach(s=>{if(I.stages[s]==="now")I.stages[s]="done"});I.stages[e.stage]=e.fail?"fail":"now";}
+    if(e.fail){I.stages.fix="now";}
+    if(e.verdict)I.verdict=e.verdict;
+    if(e.ask){I.ask=e.ask;I.stages.approve="wait";I.state="waiting";}
+    if(e.close){STAGES.forEach(s=>{if(I.stages[s]==="now"||!I.stages[s])I.stages[s]=I.stages[s]==="now"?"done":"skip"});I.stages.report="done";I.state="closed";I.closedAt=S.min;}
+    if(e.msg)I.last=e.msg;
+  }
+  if(e.tok){S.tok[e.tok[0]][0]+=e.tok[1];S.tok[e.tok[0]][1]+=e.tok[2];}
+  if(e.asset)S.assets[e.asset[0]]=e.asset[1];
+  if(e.led)S.ledger.unshift({t:S.min,inc:e.inc||"-",agent:e.led[0],model:e.led[1],what:e.led[2],tin:e.led[3],tout:e.led[4],hash:hash(),reverted:false,stage:e.stage});
+  return true;
+}
+function tick(dtMin){
+  if(!S.running||S.stopped)return;
+  S.min+=dtMin;
+  // assets with no incident turn fresh along the run
+  ASSETS.forEach((a,i)=>{if(S.assets[a]==="waiting"&&S.min>2+i*1.6&&!blocked(a))S.assets[a]="fresh"});
+  const due=S.queue.filter(e=>e.t<=S.min);
+  S.queue=S.queue.filter(e=>e.t>S.min);
+  const held=[];
+  due.forEach(e=>{if(!apply(e))held.push(e)});
+  held.forEach(e=>{e.t=S.min+1;S.queue.push(e)});
+  render();
+}
+function blocked(a){
+  if(a==="stg_sales"||a==="fact_sales"||a==="mart_daily_store"||a==="report_morning_brief"){return !(S.inc.B&&S.inc.B.state==="closed")}
+  if(a==="raw_labour_hours")return !(S.inc.C&&S.inc.C.state==="closed");
+  if(a==="raw_supplier_deliveries")return !(S.inc.A&&S.inc.A.state==="closed");
+  return false;
+}
+function approve(id){
+  const I=S.inc[id];if(!I||!I.ask)return;
+  S.people+=I.ask.kind==="merge"?20:3;
+  S.ledger.unshift({t:S.min,inc:id,agent:"you",model:"person",what:I.ask.kind==="merge"?"Approved merge of crew/incident-"+id:"Approved and sent the drafted note",tin:0,tout:0,hash:hash(),reverted:false});
+  I.ask=null;I.stages.approve="done";I.state="open";
+  (AFTER[id]||[]).forEach(s=>S.queue.push({...s,inc:id,t:S.min+s.dt}));
+  toast(id==="B"?"Approved. Merging and re-running in production.":"Approved. Note marked as sent.");render();
+}
+function pauseInc(id){const I=S.inc[id];I.paused=!I.paused;toast(I.paused?"Incident "+id+" paused. Nothing more runs on it until you resume.":"Incident "+id+" resumed.");render()}
+function stopInc(id){const I=S.inc[id];I.state="stopped";I.ask=null;S.queue=S.queue.filter(e=>e.inc!==id);
+  S.ledger.unshift({t:S.min,inc:id,agent:"you",model:"person",what:"Stopped incident "+id+"; handed to a person with the full trail",tin:0,tout:0,hash:hash(),reverted:false});toast("Incident "+id+" stopped and handed over to you.");render()}
+function revert(i){
+  const L=S.ledger[i];if(!L||L.reverted)return;L.reverted=true;
+  S.ledger.unshift({t:S.min,inc:L.inc,agent:"ledger",model:"git",what:"git revert "+L.hash+" ("+L.what+")",tin:0,tout:0,hash:hash(),reverted:false});
+  const I=S.inc[L.inc];
+  if(I&&I.state!=="stopped"){
+    I.paused=true;I.state="open";I.ask=null;
+    const idx=STAGES.indexOf(L.stage);
+    if(idx>=0)STAGES.forEach((s,j)=>{if(j>=idx)delete I.stages[s]});
+    I.last="Reverted to before: "+L.what+". Paused so you can rework from here.";
+  }
+  toast("Step reverted. The incident is paused at that point.");render();
+}
+function rework(id){const I=S.inc[id];I.paused=false;I.state="open";
+  const todo=STAGES.find(s=>!I.stages[s]);
+  S.ledger.unshift({t:S.min,inc:id,agent:"you",model:"person",what:"Rework requested from step: "+(todo||"report"),tin:0,tout:0,hash:hash(),reverted:false});
+  if(id==="B"&&(todo==="fix"||todo==="verify"||todo==="verdict"||todo==="evidence")){
+    S.queue.push({t:S.min+1,inc:"B",a:"fixer",stage:"fix",msg:"Rework: Sonnet re-reads the evidence and your note",tok:["sonnet",9000,2000],led:["fixer","sonnet","Patch (rework from your note)",9000,2000]});
+    S.queue.push({t:S.min+4,inc:"B",a:"verifier",stage:"verify",msg:"Dev re-run passed",led:["verifier","dagster","Dev re-run: all checks PASSED",0,0]});
+    S.queue.push({t:S.min+5,inc:"B",a:"gate",stage:"approve",ask:{kind:"merge",text:"Reworked patch is ready on branch crew/incident-B. Approving merges it and re-runs stg_sales and downstream."},led:["gate","code","Tier B: code change needs a person to approve",0,0]});
+  } else if(AFTER[id]&&I.stages.approve==="done"){AFTER[id].forEach(s=>S.queue.push({...s,inc:id,t:S.min+s.dt}))}
+  toast("Reworking incident "+id+" from "+(todo||"the report")+".");render()}
+
+function stepHTML(I){return STAGES.map(s=>{const v=I.stages[s];const cls=v==="done"?"done":v==="now"?"now":v==="fail"?"fail":v==="wait"?"wait":"";return v==="skip"?"":`<span class="step ${cls}">${s}</span>`}).join("")}
+function statePill(I){
+  if(I.state==="closed")return'<span class="pill p-good">Fixed '+hhmm(I.closedAt)+'</span>';
+  if(I.state==="stopped")return'<span class="pill p-crit">Stopped · with you</span>';
+  if(I.paused)return'<span class="pill p-idle">Paused</span>';
+  if(I.state==="waiting")return'<span class="pill p-warn">Needs you</span>';
+  return'<span class="pill p-run">Crew working</span>';
+}
+function render(){
+  $("clock").textContent=hhmm(S.min);
+  const cs=$("crewState");cs.className="pill "+(S.stopped?"p-crit":S.running?"p-run":"p-idle");cs.textContent=S.stopped?"Stopped":S.running?"Running":"Paused";
+  $("pauseAll").textContent=S.running?"Pause crew":"Resume crew";$("pauseAll").disabled=S.stopped;$("stopAll").disabled=S.stopped;
+  const late=S.min>=120&&ASSETS.some(a=>S.assets[a]!=="fresh");
+  const allFresh=ASSETS.every(a=>S.assets[a]==="fresh");
+  const rs=$("reportState");rs.className="pill "+(allFresh?"p-good":late?"p-crit":"p-warn");rs.textContent=allFresh?"Fresh":late?"Late":"Waiting on data";
+  $("agentCount").textContent=AGENTS.filter(a=>S.agent[a.id].state==="busy").length+" busy";
+  $("agents").innerHTML=AGENTS.map(a=>{const st=S.agent[a.id];return`<div class="agent"><span class="name">${a.name}</span><span class="pill ${st.state==="busy"&&!S.stopped?"p-run":"p-idle"}">${S.stopped?"Stopped":st.state==="busy"?"Working":"Idle"}</span><span class="model">${a.model}</span><span class="task">${st.task}</span></div>`}).join("");
+  const incs=Object.values(S.inc).sort((x,y)=>(x.state==="closed")-(y.state==="closed")||y.openedAt-x.openedAt);
+  $("incCount").textContent=incs.filter(i=>i.state!=="closed").length+" open · "+incs.filter(i=>i.state==="closed").length+" fixed";
+  $("incidents").innerHTML=incs.length?incs.map(I=>{
+    const sev=I.state==="closed"?"good":I.state==="stopped"?"crit":I.state==="waiting"?"warn":I.sev==="crit"?"crit":"run";
+    const open=I.state!=="closed"&&I.state!=="stopped";
+    return`<article class="inc sev-${sev}">
+      <div class="inc-head"><span class="inc-title">${I.id} · ${I.title}</span>${statePill(I)}</div>
+      <div class="inc-meta mono">${I.feed} · opened ${hhmm(I.openedAt)} · <span class="thread" title="In a real setup each incident opens its own Claude Code thread, which acts as its command centre">thread ${I.thread}</span></div>
+      <div class="steps">${stepHTML(I)}</div>
+      ${I.verdict?`<div class="verdict"><b>Verdict:</b> ${I.verdict}</div>`:""}
+      ${I.last?`<div class="inc-meta">${I.last}</div>`:""}
+      ${I.ask?`<div class="ask"><b>${I.ask.kind==="merge"?"Approve this code change?":"Send this note?"}</b><div class="draft">${I.ask.text}</div><div class="actions"><button class="primary" data-act="approve" data-id="${I.id}">${I.ask.kind==="merge"?"Approve and merge":"Approve and send"}</button></div></div>`:""}
+      ${open?`<div class="actions"><button data-act="pause" data-id="${I.id}">${I.paused?"Resume":"Pause"}</button><button class="danger" data-act="stop" data-id="${I.id}">Stop and hand to me</button>${I.paused?`<button data-act="rework" data-id="${I.id}">Rework from here</button>`:""}</div>`:""}
+    </article>`}).join(""):`<p class="empty">No incidents yet. The Watcher opens one when a run or check fails.</p>`;
+  $("ledger").innerHTML=S.ledger.map((L,i)=>`<li class="${L.reverted?"reverted":""}"><span class="t">${hhmm(L.t)}</span><span class="what"><b>${L.agent}</b> · ${L.what}</span>${L.agent!=="you"&&!L.reverted&&L.inc!=="-"&&!L.what.startsWith("git revert")?`<button class="rv" data-act="revert" data-i="${i}" title="Undo this step with git revert">Revert</button>`:"<span></span>"}<span class="sub">${L.hash} · inc ${L.inc} · ${L.model}${L.tin?` · ${L.tin.toLocaleString()} in / ${L.tout.toLocaleString()} out`:""}</span></li>`).join("");
+  const c=cost();$("spend").textContent="$"+c.toFixed(3);
+  const parts=["haiku","sonnet","opus"].map(k=>S.tok[k][0]/1e6*PRICE[k][0]+S.tok[k][1]/1e6*PRICE[k][1]);
+  const colors=["#9ec5f4","var(--accent)","#184f95"];
+  $("spendBar").innerHTML=parts.map((p,i)=>p>0?`<i style="width:${Math.max(2,p/0.5*100)}%;background:${colors[i]}" title="${["Haiku","Sonnet","Opus"][i]} $${p.toFixed(3)}"></i>`:"").join("");
+  const tk=k=>S.tok[k][0]+S.tok[k][1];
+  $("tokens").textContent=(tk("haiku")+tk("sonnet")+tk("opus")).toLocaleString();
+  $("tokSplit").textContent=`Haiku ${tk("haiku").toLocaleString()} · Sonnet ${tk("sonnet").toLocaleString()} · Opus ${tk("opus").toLocaleString()}`;
+  $("people").textContent=S.people+" min";
+  $("assets").innerHTML=ASSETS.map(a=>{const st=S.assets[a];const cls=st==="fresh"?"p-good":st==="failed"?"p-crit":st==="late"?"p-warn":st==="running"?"p-run":"p-idle";return`<div><span class="mono">${a}</span><span class="pill ${cls}">${st}</span></div>`}).join("");
+}
+document.addEventListener("click",ev=>{
+  const b=ev.target.closest("button[data-act]");if(!b)return;
+  const id=b.dataset.id,act=b.dataset.act;
+  if(act==="approve")approve(id);else if(act==="pause")pauseInc(id);else if(act==="stop")stopInc(id);else if(act==="rework")rework(id);else if(act==="revert")revert(+b.dataset.i);
+});
+$("pauseAll").onclick=()=>{S.running=!S.running;toast(S.running?"Crew resumed.":"Crew paused. Nothing new starts until you resume.");render()};
+$("stopAll").onclick=()=>{S.stopped=true;AGENTS.forEach(a=>S.agent[a.id].state="idle");S.ledger.unshift({t:S.min,inc:"-",agent:"you",model:"person",what:"Stopped the crew; open incidents handed to people",tin:0,tout:0,hash:hash(),reverted:false});toast("Crew stopped. Use Replay night to start again.");render()};
+$("restart").onclick=()=>{reset();fastForward(30);render();toast("Replaying the night from 05:30.")};
+function fastForward(m){for(let i=0;i<m;i++)tick(1)}
+reset();fastForward(30);render();
+let last=performance.now();
+setInterval(()=>{const now=performance.now();const sp=+$("speed").value;const dt=(now-last)/1000*sp*0.5;last=now;if(S.min<180)tick(dt)},250);
+})();
+</script>
+<site-footer></site-footer>
+</body>
+</html>
