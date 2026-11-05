@@ -25,7 +25,7 @@ const projects = defineCollection({
     title: z.string(),
     summary: z.string(),
     category: z.enum(['Business intelligence', 'Applied AI', 'Kaggle', 'Tools']),
-    field,
+    field: field.optional(),   // leave out for work meant for every sector; it shows as "Any sector"
     kind,
     parts,
     status: z.enum(['Live', 'Ongoing', 'Complete']),

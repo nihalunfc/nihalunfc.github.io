@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Self-healing pipelines: side by side · Nihal</title>
+<meta name="description" content="A scheduled daily ETL pipeline beside the same pipeline run by a decentralised crew of AI agents, step by step, with the maths and a simulation.">
+<meta property="og:title" content="Self-healing pipelines: side by side · Nihal">
+<meta property="og:description" content="A scheduled daily ETL pipeline beside the same pipeline run by a decentralised crew of AI agents, step by step, with the maths and a simulation.">
+<link rel="canonical" href="https://nihalsulaiman.com/projects/self-healing-pipelines/compare/">
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<script src="/assets/header.js"></script>
+<style>
+/* Layout: a screen-wide split. Each step of the daily run is one row: the scheduled pipeline on the left, the same step with the agent crew on the right. Evidence sections (maths, charts, limits) run full width between rows. */
+:root{
+  --bg:#f6f7f9; --paper:#ffffff; --ink:#11161c; --ink-2:#47515c; --ink-3:#77818c; --rule:#dfe3e8; --tint:#eef1f5;
+  --left:#eb6834; --left-bg:#fbefe9; --right:#2a78d6; --right-bg:#eaf2fc;
+  --good:#0ca30c; --crit:#d03b3b;
+  --display:"Inter",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1216; --paper:#161a1f; --ink:#edf0f3; --ink-2:#b3bcc6; --ink-3:#8791a0; --rule:#2a3139; --tint:#1d232a;
+  --left:#d95926; --left-bg:#2c1c14; --right:#3987e5; --right-bg:#13243a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1216; --paper:#161a1f; --ink:#edf0f3; --ink-2:#b3bcc6; --ink-3:#8791a0; --rule:#2a3139; --tint:#1d232a;
+  --left:#d95926; --left-bg:#2c1c14; --right:#3987e5; --right-bg:#13243a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  }
+.page{max-width:1500px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5.2vw,64px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(24px,2.6vw,34px);font-weight:700}
+h3{font-size:19px;font-weight:700;font-stretch:90%}
+p{margin:0}
+.mono,code{font-family:var(--mono);font-size:.88em;font-variant-numeric:tabular-nums}
+code{background:var(--tint);padding:1px 5px;border-radius:3px}
+.hero{padding-block:44px 28px;display:grid;gap:18px;max-width:1100px}
+.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.stand{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:62ch}
+.byline{font-size:14px;color:var(--ink-3)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-block:8px 36px}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.tiles{grid-template-columns:minmax(0,1fr)}}
+.tile{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;display:grid;gap:4px}
+.tile small{font-size:12.5px;color:var(--ink-2)}
+.tile .pair{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--display);font-weight:700}
+.tile .from{font-size:22px;color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--left);text-decoration-thickness:2px}
+.tile .to{font-size:34px;color:var(--ink)}
+.tile .note{font-size:12.5px;color:var(--ink-3)}
+/* split */
+.colheads{position:sticky;top:64px;z-index:5;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;background:var(--bg);padding-block:10px 0}
+
+.colhead{padding:10px 18px;font-family:var(--display);font-weight:700;font-size:18px;display:flex;gap:10px;align-items:center}
+.colhead.l{background:var(--left-bg);border-top:4px solid var(--left);border-radius:8px 0 0 0}
+.colhead.r{background:var(--right-bg);border-top:4px solid var(--right);border-radius:0 8px 0 0}
+.colhead span{font-family:var(--body);font-weight:400;font-size:13px;color:var(--ink-2);font-stretch:100%}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-bottom:1px solid var(--rule)}
+.rowlabel{grid-column:1/-1;padding:26px 18px 6px;display:flex;gap:14px;align-items:baseline;background:var(--paper);border-inline:1px solid var(--rule)}
+.rowlabel .n{font-family:var(--mono);font-size:13px;color:var(--ink-3)}
+.cell{padding:12px 18px 22px;background:var(--paper);min-width:0;display:grid;gap:12px;align-content:start}
+.cell.l{border-left:1px solid var(--rule);border-right:1px solid var(--rule);box-shadow:inset 3px 0 0 var(--left)}
+.cell.r{border-right:1px solid var(--rule);box-shadow:inset 3px 0 0 var(--right)}
+.cell ul,.cell ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.tag{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+.cell.l .tag{color:var(--left)} .cell.r .tag{color:var(--right)}
+.breaks{background:var(--left-bg);border-radius:6px;padding:10px 12px;font-size:14.5px}
+.fixes{background:var(--right-bg);border-radius:6px;padding:10px 12px;font-size:14.5px}
+@media (max-width:760px){
+  .colheads{display:none}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .cell.l,.cell.r{border-left:1px solid var(--rule);border-right:1px solid var(--rule)}
+  .cell::before{font-family:var(--display);font-weight:700;font-size:15px}
+  .cell.l::before{content:"Scheduled pipeline";color:var(--left)}
+  .cell.r::before{content:"Agent crew";color:var(--right)}
+}
+.diagram{overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:520px;height:auto}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .box{fill:var(--paper);stroke:var(--rule);stroke-width:1.5}
+svg .boxL{fill:var(--left-bg);stroke:var(--left);stroke-width:1.5}
+svg .boxR{fill:var(--right-bg);stroke:var(--right);stroke-width:1.5}
+svg .ln{stroke:var(--ink-3);stroke-width:1.5;fill:none}
+svg .lnR{stroke:var(--right);stroke-width:2;fill:none}
+svg .lnL{stroke:var(--left);stroke-width:2;fill:none;stroke-dasharray:5 4}
+svg .muted{fill:var(--ink-3)}
+svg .sm{font-size:12px}
+svg .xs{font-size:10.5px;font-family:var(--mono)}
+svg .bad{fill:var(--crit)}
+/* full width evidence */
+.full{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:28px clamp(16px,3vw,36px);margin-block:28px;display:grid;gap:18px}
+.full .lead{font-size:17px;color:var(--ink-2);max-width:72ch}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+@media (max-width:900px){.two{grid-template-columns:minmax(0,1fr)}}
+.math{font-family:var(--mono);font-size:15px;background:var(--tint);border-radius:6px;padding:14px 16px;overflow-x:auto;white-space:nowrap;line-height:1.9}
+.math i{font-family:var(--body);font-style:italic}
+.chart{position:relative}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart .ax{stroke:var(--rule);stroke-width:1}
+.chart .tick{font-size:11px;fill:var(--ink-3);font-family:var(--mono)}
+.chart .lab{font-size:12px;fill:var(--ink-2)}
+.chart .sL{stroke:var(--left);fill:none;stroke-width:2}
+.chart .sR{stroke:var(--right);fill:none;stroke-width:2}
+.chart .fL{fill:var(--left)} .chart .fR{fill:var(--right)}
+.chart .hit{fill:transparent;cursor:crosshair}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend span::before{content:"";width:14px;height:3px;border-radius:2px;background:var(--c)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;padding:6px 9px;border-radius:5px;white-space:nowrap;opacity:0;transform:translate(-50%,-110%)}
+.tip.on{opacity:1}
+.caption{font-size:13.5px;color:var(--ink-3)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:12.5px;color:var(--ink-2);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.L{color:var(--left)} td.R{color:var(--right)}
+.limits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px}
+@media (max-width:760px){.limits{grid-template-columns:minmax(0,1fr)}}
+.limits div{display:grid;gap:4px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.cta a{font-weight:600;color:var(--right)}
+a{color:var(--right)}
+a:focus-visible{outline:2px solid var(--right);outline-offset:2px}
+.foot{font-size:13.5px;color:var(--ink-3);display:grid;gap:6px;margin-top:20px}
+.edition-note{background:var(--tint);border-radius:8px;padding:14px 16px;font-size:15px;color:var(--ink-2);max-width:80ch}
+</style>
+</head>
+<body>
+<site-header></site-header>
+<div class="page">
+<header class="hero">
+  <div class="kicker">Project · Pipelines and ETL · any sector</div>
+  <h1>A daily data pipeline that fixes itself, run by a crew of agents with no boss</h1>
+  <p class="stand">Retail, hospitality, restaurant and logistics chains all run the same nightly routine: collect the day's exports, clean them, load a warehouse and refresh the morning reports. This page puts the usual scheduled pipeline beside the same pipeline run by a decentralised crew of AI agents, step by step, with the maths and a simulation to show what changes.</p>
+  <p class="byline">Nihal Vellaramkallingal Sulaiman · design and simulation, November 2026</p>
+  
+</header>
+
+<section class="tiles" aria-label="Headline results">
+  <div class="tile"><small>Median time until the data is right again</small><div class="pair"><span class="from" data-v="ttf_c"></span><span class="to" data-v="ttf_r"></span></div><span class="note">per incident, simulated</span></div>
+  <div class="tile"><small>People hours spent on breakages a year</small><div class="pair"><span class="from" data-v="ph_c"></span><span class="to" data-v="ph_r"></span></div><span class="note">crew figure includes 2 h a week of upkeep</span></div>
+  <div class="tile"><small>Wrong numbers that reach a report unnoticed</small><div class="pair"><span class="from" data-v="si_c"></span><span class="to" data-v="si_r"></span></div><span class="note">silent errors a year</span></div>
+  <div class="tile"><small>Model cost of the crew</small><div class="pair"><span class="to" data-v="tok"></span></div><span class="note">a year, at current list prices</span></div>
+</section>
+
+<div class="colheads" aria-hidden="true">
+  <div class="colhead l">Scheduled pipeline <span>one scheduler, one person on call</span></div>
+  <div class="colhead r">Decentralised agent crew <span>same jobs, nine agents, one shared board</span></div>
+</div>
+
+<section class="row">
+  <div class="rowlabel"><span class="n">00</span><h2>Who is in charge</h2></div>
+  <div class="cell l">
+    <span class="tag">Centralised</span>
+    <div class="diagram"><svg viewBox="0 0 620 270" role="img" aria-label="A central scheduler and one person in the middle; every job and every fix passes through them">
+      <defs><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)"/></marker></defs>
+      <g class="sm">
+      <rect class="boxL" x="230" y="96" width="160" height="64" rx="8"/><text x="310" y="122" text-anchor="middle" style="font-weight:700">Scheduler + one person</text><text x="310" y="140" text-anchor="middle" class="xs muted">every job, every fix</text>
+      <text x="310" y="84" text-anchor="middle" class="bad xs" style="font-weight:600">single point of failure</text>
+      <g text-anchor="middle">
+      <rect class="box" x="20" y="20" width="110" height="34" rx="6"/><text x="75" y="42">Load job 1</text>
+      <rect class="box" x="20" y="116" width="110" height="34" rx="6"/><text x="75" y="138">Load job 2</text>
+      <rect class="box" x="20" y="212" width="110" height="34" rx="6"/><text x="75" y="234">Load job …</text>
+      <rect class="box" x="490" y="20" width="110" height="34" rx="6"/><text x="545" y="42">Checks</text>
+      <rect class="box" x="490" y="116" width="110" height="34" rx="6"/><text x="545" y="138">Re-runs</text>
+      <rect class="box" x="490" y="212" width="110" height="34" rx="6"/><text x="545" y="234">Reports</text></g>
+      <path class="ln" d="M130 37L228 104" marker-end="url(#ahc)"/><path class="ln" d="M130 133H228" marker-end="url(#ahc)"/><path class="ln" d="M130 229L228 156" marker-end="url(#ahc)"/>
+      <path class="ln" d="M392 104L488 37" marker-end="url(#ahc)"/><path class="ln" d="M392 128H488" marker-end="url(#ahc)"/><path class="ln" d="M392 156L488 229" marker-end="url(#ahc)"/>
+      </g></svg></div>
+    <p>One scheduler decides what runs, and one person decides what to do when it fails. Everything waits on them, one problem at a time. When that person is busy or away, nothing moves.</p>
+  </div>
+  <div class="cell r">
+    <span class="tag">Decentralised</span>
+    <div class="diagram"><svg viewBox="0 0 620 270" role="img" aria-label="Nine agents around one shared board; each reads and writes the board, none calls another">
+      <defs><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--right)"/></marker></defs>
+      <g class="sm"><ellipse cx="310" cy="128" rx="80" ry="46" class="box" style="stroke:var(--right);stroke-width:2"/>
+      <text x="310" y="122" text-anchor="middle" style="font-weight:700">Shared board</text><text x="310" y="138" text-anchor="middle" class="xs muted">append-only incident log</text><text x="310" y="152" text-anchor="middle" class="xs muted">goal: every asset fresh</text>
+      <path class="lnR" d="M310 49L310 84" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="266" y="16" width="88" height="34" rx="6"/><text x="310" y="31" text-anchor="middle" style="font-weight:600">Watcher</text><text x="310" y="44" text-anchor="middle" class="xs muted">sensor</text><path class="lnR" d="M393 67L360 94" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="366" y="38" width="88" height="34" rx="6"/><text x="410" y="53" text-anchor="middle" style="font-weight:600">Collector</text><text x="410" y="66" text-anchor="middle" class="xs muted">evidence</text><path class="lnR" d="M437 114L387 120" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="419" y="95" width="88" height="34" rx="6"/><text x="463" y="110" text-anchor="middle" style="font-weight:600">Memory</text><text x="463" y="123" text-anchor="middle" class="xs muted">past fixes</text><path class="lnR" d="M422 168L378 150" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="400" y="158" width="88" height="34" rx="6"/><text x="444" y="174" text-anchor="middle" style="font-weight:600">Triager</text><text x="444" y="186" text-anchor="middle" class="xs muted">Haiku</text><path class="lnR" d="M354 202L337 169" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="319" y="200" width="88" height="34" rx="6"/><text x="363" y="215" text-anchor="middle" style="font-weight:600">Fixer</text><text x="363" y="228" text-anchor="middle" class="xs muted">Sonnet/Opus</text><path class="lnR" d="M266 202L283 169" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="213" y="200" width="88" height="34" rx="6"/><text x="257" y="215" text-anchor="middle" style="font-weight:600">Verifier</text><text x="257" y="228" text-anchor="middle" class="xs muted">dev copy</text><path class="lnR" d="M198 168L242 150" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="132" y="159" width="88" height="34" rx="6"/><text x="176" y="174" text-anchor="middle" style="font-weight:600">Gate</text><text x="176" y="187" text-anchor="middle" class="xs muted">rules</text><path class="lnR" d="M183 114L233 120" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="113" y="95" width="88" height="34" rx="6"/><text x="157" y="110" text-anchor="middle" style="font-weight:600">Ledger</text><text x="157" y="123" text-anchor="middle" class="xs muted">git</text><path class="lnR" d="M227 67L260 94" marker-end="url(#ahb)" marker-start="url(#ahb)"/><rect class="boxR" x="166" y="38" width="88" height="34" rx="6"/><text x="210" y="53" text-anchor="middle" style="font-weight:600">Reporter</text><text x="210" y="66" text-anchor="middle" class="xs muted">Haiku</text></g></svg></div>
+    <p>There is no boss agent. Each agent has one duty and one rule for when to act, and they all read and write the same board. Nobody hands work to anybody: an agent sees an incident in the state it handles, claims it, does its part and posts the result. Like a small team in sync, the whole crew moves the system toward one shared goal, every asset fresh by 07:00.</p>
+    <div class="fixes"><b>Four rules make it behave like one team.</b>
+      <ol>
+        <li><b>Act on state, not orders.</b> "Evidence posted, no verdict yet" is the Triager's cue. "Verdict is real fault, no patch yet" is the Fixer's.</li>
+        <li><b>Claim with a lease.</b> A claim expires after a few minutes, so if an agent stalls, a spare copy picks the task up.</li>
+        <li><b>One writer per field.</b> Only the Triager writes verdicts and only the Verifier writes test results, so agents never overwrite each other.</li>
+        <li><b>Append, never edit.</b> The board and the Ledger only grow, so any step can be traced and reverted.</li>
+      </ol></div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="rowlabel"><span class="n">01</span><h2>The nightly run, start to finish</h2></div>
+  <div class="cell l">
+    <div class="diagram"><svg viewBox="0 0 620 250" role="img" aria-label="A straight chain of steps; one failure stops everything after it until a person notices at 09:00">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)"/></marker></defs>
+      <g class="sm">
+        <rect class="box" x="6" y="30" width="104" height="54" rx="6"/><text x="58" y="53" text-anchor="middle">Exports</text><text x="58" y="70" text-anchor="middle" class="xs muted">mail, folders, SFTP</text>
+        <rect class="box" x="130" y="30" width="104" height="54" rx="6"/><text x="182" y="53" text-anchor="middle">Landing</text><text x="182" y="70" text-anchor="middle" class="xs muted">shared folder</text>
+        <rect class="boxL" x="254" y="30" width="104" height="54" rx="6"/><text x="306" y="53" text-anchor="middle">Staging</text><text x="306" y="70" text-anchor="middle" class="xs muted">job fails 05:09</text>
+        <rect class="box" x="378" y="30" width="104" height="54" rx="6" opacity=".55"/><text x="430" y="53" text-anchor="middle" class="muted">Warehouse</text><text x="430" y="70" text-anchor="middle" class="xs muted">not loaded</text>
+        <rect class="box" x="502" y="30" width="110" height="54" rx="6" opacity=".55"/><text x="557" y="53" text-anchor="middle" class="muted">Reports 07:00</text><text x="557" y="70" text-anchor="middle" class="xs muted">yesterday's data</text>
+        <path class="ln" d="M110 57H128" marker-end="url(#ah)"/><path class="ln" d="M234 57H252" marker-end="url(#ah)"/>
+        <path class="lnL" d="M358 57H376"/><path class="lnL" d="M482 57H500"/>
+        <text x="306" y="22" text-anchor="middle" class="bad" style="font-weight:700">✕ KeyError 'net_amt'</text>
+        <path class="lnL" d="M306 84V150"/>
+        <rect class="boxL" x="196" y="150" width="220" height="62" rx="6"/>
+        <text x="306" y="172" text-anchor="middle">Someone opens the monitor</text><text x="306" y="190" text-anchor="middle" class="xs muted">09:00, or Monday after a weekend</text><text x="306" y="204" text-anchor="middle" class="xs muted">triage by hand, then a manual re-run</text>
+        <text x="6" y="240" class="xs muted">Nothing between the failure and a person. The run waits.</text>
+      </g></svg></div>
+    <p>A schedule fires at 05:00 and runs each job in order. When one fails, everything after it waits. Nobody looks until working hours, and then a person has to find the cause, fix it and re-run by hand.</p>
+  </div>
+  <div class="cell r">
+    <div class="diagram"><svg viewBox="0 0 620 250" role="img" aria-label="The same chain with a crew loop under it: sensor, evidence, verdict, fix, test in a copy, approve, re-run, with every step logged">
+      <defs><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--right)"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)"/></marker></defs>
+      <g class="sm">
+        <rect class="box" x="6" y="30" width="104" height="54" rx="6"/><text x="58" y="53" text-anchor="middle">Exports</text><text x="58" y="70" text-anchor="middle" class="xs muted">mail, folders, SFTP</text>
+        <rect class="box" x="130" y="30" width="104" height="54" rx="6"/><text x="182" y="53" text-anchor="middle">Landing</text><text x="182" y="70" text-anchor="middle" class="xs muted">hashed on arrival</text>
+        <rect class="boxR" x="254" y="30" width="104" height="54" rx="6"/><text x="306" y="53" text-anchor="middle">Staging</text><text x="306" y="70" text-anchor="middle" class="xs muted">fixed 05:33</text>
+        <rect class="box" x="378" y="30" width="104" height="54" rx="6"/><text x="430" y="53" text-anchor="middle">Warehouse</text><text x="430" y="70" text-anchor="middle" class="xs muted">loaded</text>
+        <rect class="box" x="502" y="30" width="110" height="54" rx="6"/><text x="557" y="53" text-anchor="middle">Reports 07:00</text><text x="557" y="70" text-anchor="middle" class="xs muted">today's data</text>
+        <path class="ln" d="M110 57H128" marker-end="url(#ahg)"/><path class="ln" d="M234 57H252" marker-end="url(#ahg)"/><path class="ln" d="M358 57H376" marker-end="url(#ahg)"/><path class="ln" d="M482 57H500" marker-end="url(#ahg)"/>
+        <rect class="boxR" x="20" y="140" width="580" height="74" rx="8"/>
+        <g class="xs" text-anchor="middle">
+          <text x="70" y="168">Watcher</text><text x="70" y="182" class="muted">sensor, 1 min</text>
+          <text x="160" y="168">Collector</text><text x="160" y="182" class="muted">evidence</text>
+          <text x="250" y="168">Triager</text><text x="250" y="182" class="muted">Haiku</text>
+          <text x="340" y="168">Fixer</text><text x="340" y="182" class="muted">Sonnet→Opus</text>
+          <text x="430" y="168">Verifier</text><text x="430" y="182" class="muted">dev copy</text>
+          <text x="525" y="168">Gate</text><text x="525" y="182" class="muted">you approve</text>
+        </g>
+        <path class="lnR" d="M100 172H124"  marker-end="url(#ahr)"/><path class="lnR" d="M190 172H214" marker-end="url(#ahr)"/><path class="lnR" d="M280 172H304" marker-end="url(#ahr)"/><path class="lnR" d="M370 172H394" marker-end="url(#ahr)"/><path class="lnR" d="M460 172H490" marker-end="url(#ahr)"/>
+        <path class="lnR" d="M430 188V204H340V190" marker-end="url(#ahr)"/><text x="385" y="200" text-anchor="middle" class="xs" style="fill:var(--right)">retry</text>
+        <path class="lnR" d="M306 86V136" marker-end="url(#ahr)"/><path class="lnR" d="M540 138V90" marker-end="url(#ahr)"/>
+        <text x="310" y="232" text-anchor="middle" class="xs muted">Ledger: every step logged and committed · any step can be reverted</text>
+      </g></svg></div>
+    <p>The same jobs run on the same schedule. A sensor notices the failure within a minute, a crew of small agents works out why, tests a fix in a copy of the pipeline, and either applies it by itself (safe re-runs) or asks a person with one click. Every step is written to a ledger that can undo it.</p>
+  </div>
+</section>
+
+<section class="row">
+  <div class="rowlabel"><span class="n">02</span><h2>Collect the dirty data</h2></div>
+  <div class="cell l">
+    <span class="tag">How it is usually done</span>
+    <ul>
+      <li>Daily exports arrive as email attachments, files in a shared folder, or an SFTP drop: sales, stock, deliveries, labour hours, online orders.</li>
+      <li>A rule or a person saves each one into a landing folder. Some exports are run by hand each morning.</li>
+      <li>The job reads whatever file is there at 05:00.</li>
+    </ul>
+    <div class="breaks"><b>Where it breaks.</b> A file is late, missing, sent twice, half-empty, or arrives with a renamed column. The job either fails or, worse, loads it and carries on.</div>
+  </div>
+  <div class="cell r">
+    <span class="tag">Same step, with the crew</span>
+    <ol>
+      <li><b>Land, never overwrite.</b> Each file goes to <code>landing/&lt;source&gt;/&lt;business_date&gt;/</code> with its SHA-256 hash, size, sender and arrival time in a manifest table.</li>
+      <li><b>Keep the original.</b> A read-only copy goes to <code>raw/</code>. Nothing ever edits it.</li>
+      <li><b>Expect the file.</b> Each source has a contract: expected arrival window, columns and types, and a normal row-count range.</li>
+      <li><b>Sense, don't poll.</b> A Dagster sensor starts the load when the file lands, not when the clock says so.</li>
+    </ol>
+    <div class="fixes"><b>What the crew adds.</b> A late file is re-run by itself the moment it lands. A duplicate is spotted by its hash. A missing manual export becomes a drafted note to its owner, sent by a person with one click.</div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="rowlabel"><span class="n">03</span><h2>Clean it</h2></div>
+  <div class="cell l">
+    <span class="tag">How it is usually done</span>
+    <ul>
+      <li>Cleaning code assumes yesterday's layout: fixed column names, date formats and units.</li>
+      <li>Bad rows are dropped or fixed silently inside the job.</li>
+      <li>Checks run after the load, if at all.</li>
+    </ul>
+    <div class="breaks"><b>Where it breaks.</b> A renamed column fails the job. A changed unit or a double-counted refund passes every check and lands in the report.</div>
+  </div>
+  <div class="cell r">
+    <span class="tag">Same step, with the crew</span>
+    <ol>
+      <li><b>Check the contract first:</b> header, types, nulls in key columns, duplicates on the business key, row count against the last 4 weeks and the same weekday last year.</li>
+      <li><b>Quarantine, don't drop.</b> Rows that fail go to a <code>quarantine</code> table with the rule they broke, so they can be counted and fixed later.</li>
+      <li><b>Standardise:</b> one date format, one currency and unit, trimmed text, mapped codes (store, item, channel) through lookup tables, not code.</li>
+      <li><b>Tie out:</b> totals in staging must match totals in the source file before anything moves on.</li>
+    </ol>
+    <div class="fixes"><b>What the crew adds.</b> A failed contract opens an incident with the evidence attached: yesterday's header next to today's, the rows that failed and why. The Triager reads that small file, not the whole log.</div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="rowlabel"><span class="n">04</span><h2>Save it to the data warehouse</h2></div>
+  <div class="cell l">
+    <span class="tag">How it is usually done</span>
+    <ul>
+      <li>Append the day's rows to the fact tables.</li>
+      <li>Re-running a job means deleting rows by hand first, or risking doubles.</li>
+    </ul>
+    <div class="breaks"><b>Where it breaks.</b> A re-run after a partial load doubles a day's sales. Fixing it needs someone who knows which rows to delete.</div>
+  </div>
+  <div class="cell r">
+    <span class="tag">Same step, with the crew</span>
+    <ol>
+      <li><b>Partition by business date.</b> Every asset is a Dagster asset partitioned by day.</li>
+      <li><b>Make every load idempotent:</b> <code>MERGE</code> on the business key, or replace the whole partition. Running it twice gives the same result as once.</li>
+      <li><b>Star schema:</b> facts (sales, stock, deliveries, hours) at a stated grain, with conformed dimensions (date, location, product, channel).</li>
+      <li><b>Asset checks</b> after each load: keys unique, totals tie out, nothing sold above capacity, no gaps in dates.</li>
+    </ol>
+    <div class="fixes"><b>What the crew adds.</b> Because loads are idempotent, the crew may re-run a partition by itself. This one design choice is what makes most incidents safe to fix without a person.</div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="rowlabel"><span class="n">05</span><h2>Reports and dashboards, live every morning</h2></div>
+  <div class="cell l">
+    <span class="tag">How it is usually done</span>
+    <ul>
+      <li>Dashboards refresh on their own timer, whether or not the data under them loaded.</li>
+      <li>A refreshed dashboard looks the same whether its data is from today or yesterday.</li>
+    </ul>
+    <div class="breaks"><b>Where it breaks.</b> Managers read yesterday's numbers as today's. The first sign of trouble is often a question from a reader.</div>
+  </div>
+  <div class="cell r">
+    <span class="tag">Same step, with the crew</span>
+    <ol>
+      <li><b>Refresh on success, not on a timer:</b> the report refresh is the last asset in the graph, so it runs only when its inputs are fresh.</li>
+      <li><b>Show freshness on the page:</b> each dashboard carries a "data as of" stamp and a banner when a source is late.</li>
+      <li><b>Refresh again after a fix:</b> when the crew repairs a source at 05:33, the reports refresh by 07:00 as if nothing happened.</li>
+      <li><b>One morning note:</b> the Reporter writes a short note listing what broke overnight, what was fixed, and what still needs a person.</li>
+    </ol>
+    <div class="fixes"><b>What the crew adds.</b> The <a href="/projects/self-healing-pipelines/command-centre/">command centre</a> shows each agent's work as it happens, with buttons to pause, stop, approve, revert a step, or rework from it.</div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="rowlabel"><span class="n">06</span><h2>When something breaks: six common faults</h2></div>
+  <div class="cell l">
+    <span class="tag">Handled by a person</span>
+    <div class="tbl"><table id="faultL"><thead><tr><th>Fault</th><th>What happens</th><th class="num">Median hours</th></tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="cell r">
+    <span class="tag">Handled by the crew</span>
+    <div class="tbl"><table id="faultR"><thead><tr><th>Fault</th><th>What happens</th><th class="num">Median hours</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</section>
+
+<section class="full">
+  <h2>The maths of working without a boss</h2>
+  <p class="lead">Two properties come from spreading the work across independent agents instead of one central point. Errors have to slip past several different checks, and no single failure can stop the whole crew.</p>
+  <div class="two">
+    <div class="math">
+      <b>Independent eyes.</b> If <i>m</i> agents each catch a bad file with chance <i>d<sub>i</sub></i>, independently:<br>
+      P(missed by all) = (1 − <i>d</i><sub>1</sub>)(1 − <i>d</i><sub>2</sub>)…(1 − <i>d<sub>m</sub></i>)<br>
+      One rule at 0.75: <b data-v="miss_c"></b> slip through<br>
+      Four agents at 0.6, 0.5, 0.5, 0.5: <b data-v="miss_r"></b> slip through<br><br>
+      <b>No single point of failure.</b> If one instance is down on a night with chance <i>f</i>:<br>
+      Central coordinator: P(everything stalls) = <i>f</i> = <b data-v="stall_c"></b><br>
+      Two copies of each role: P(one role stalls) = <i>f</i><sup>2</sup> = <b data-v="stall_r"></b><br>
+      Any of 9 roles stalls: 1 − (1 − <i>f</i><sup>2</sup>)<sup>9</sup> = <b data-v="stall_any"></b>
+    </div>
+    <div>
+      <div class="legend"><span style="--c:var(--right)">Chance a bad file reaches a report</span></div>
+      <div class="chart" id="chartMiss"></div>
+      <p class="caption">Each extra independent check (each catching half of bad files) halves what slips through. This holds only while the checks look at different things.</p>
+    </div>
+  </div>
+</section>
+
+<section class="full">
+  <h2>Why breakage is the normal case</h2>
+  <p class="lead">Each source has a small chance of a problem on any day. Small chances multiply. With <span data-v="feeds"></span> daily sources and about <span data-v="pfeed"></span> chance of a problem per source per day, fewer than half of all nights run clean.</p>
+  <div class="two">
+    <div class="math">
+      P(clean night) = (1 − <i>p</i>)<sup><i>n</i></sup> × (1 − <i>b</i>)<br>
+      = (1 − <span data-v="pfeed_raw"></span>)<sup><span data-v="feeds"></span></sup> × (1 − <span data-v="bug"></span>) = <b data-v="pclean"></b><br>
+      Expected incidents a night: λ = <i>n·p</i> + <i>b</i> = <b data-v="lambda"></b><br>
+      Incidents a year ≈ 365 λ = <b data-v="inc_year"></b>
+    </div>
+    <div>
+      <div class="legend"><span style="--c:var(--right)">Chance that a night runs clean</span></div>
+      <div class="chart" id="chartClean"></div>
+      <p class="caption">Chance of a clean night as the number of daily sources grows, at <span data-v="pfeed"></span> per source. The marked point is this pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<section class="full">
+  <h2>How long reports stay wrong</h2>
+  <p class="lead">Simulated over <span data-v="years"></span> years of nightly runs with the same faults on both sides. The crew fixes half of all incidents within about an hour. The long tail on both sides is waiting for people outside the team, such as an export owner re-sending a file.</p>
+  <div class="two">
+    <div>
+      <div class="legend"><span style="--c:var(--left)">Scheduled pipeline</span><span style="--c:var(--right)">Agent crew</span></div>
+      <div class="chart" id="chartCdf"></div>
+      <p class="caption">Share of incidents where the data is right again within a given time (log scale). Hover to read values.</p>
+    </div>
+    <div>
+      <div class="chart" id="chartBars"></div>
+      <p class="caption">Yearly totals, simulated. Report-hours late adds up how many hours each affected report missed its 07:00 deadline.</p>
+    </div>
+  </div>
+</section>
+
+<section class="full">
+  <h2>Why a few retries are enough</h2>
+  <p class="lead">If the Fixer's patch passes the tests in the dev copy with chance <i>q</i> on each try, and each try learns from the last failure, the chance of a fix within <i>k</i> tries is:</p>
+  <div class="two">
+    <div class="math">
+      P(fixed within <i>k</i> tries) = 1 − (1 − <i>q</i>)<sup><i>k</i></sup><br>
+      with <i>q</i> = <span data-v="q"></span>: 1 try <b data-v="k1"></b> · 2 tries <b data-v="k2"></b> · 3 tries <b data-v="k3"></b><br>
+      Cost of a worst case: 2 × Sonnet + 1 × Opus ≈ <b>$0.19</b><br>
+      Expected model cost a year ≈ <b data-v="tok"></b>
+    </div>
+    <div>
+      <div class="chart" id="chartTries"></div>
+      <p class="caption">After three tries the crew stops and hands the full trail to a person. Past that point a fourth try adds little and costs more.</p>
+    </div>
+  </div>
+</section>
+
+<section class="full">
+  <h2>Limits, as of now</h2>
+  <div class="limits">
+    <div><h3>The numbers are a model</h3><p>Fault rates, times and costs are stated assumptions, not measurements. Replace them with a real pipeline's run history to get real figures.</p></div>
+    <div><h3>People outside the team are still slow</h3><p>When a manual export is missing, the crew can only draft the note faster. The wait for the sender stays.</p></div>
+    <div><h3>Code changes still need a person</h3><p>The crew tests every patch, but merging into production is a one-click human decision by design.</p></div>
+    <div><h3>Idempotent loads come first</h3><p>Safe automatic re-runs depend on loads that can run twice. A pipeline without that must be fixed before the crew is switched on.</p></div>
+    <div><h3>Models can be wrong</h3><p>A wrong verdict is caught by the Verifier's tests, not by trust. Checks that are missing cannot catch anything.</p></div>
+    <div><h3>Secrets and access</h3><p>The crew reads production through a read-only login and writes only to a dev copy and a git branch.</p></div>
+  </div>
+</section>
+
+<section class="full" id="connect">
+  <h2>Connect it to your own systems</h2>
+  <p class="lead">This page and the command centre run on a simulation: no live database or pipeline sits behind them. To run the crew for real, connect these points in this order. The <a href="/projects/self-healing-pipelines/setup-guide/">setup guide</a> walks through each step.</p>
+  <div class="tbl"><table><thead><tr><th>Part</th><th>In this demo</th><th>Connect yours here</th><th>Setting</th></tr></thead><tbody>
+    <tr><td>Daily exports</td><td>Simulated faults</td><td>Shared mailbox rule or folder, SFTP drop or API pull</td><td><code>LANDING_ROOT</code></td></tr>
+    <tr><td>Source contracts</td><td>Built into the script</td><td>One YAML file per source</td><td><code>contracts/&lt;source&gt;.yaml</code></td></tr>
+    <tr><td>Orchestrator</td><td>Scripted timeline</td><td>Dagster, with a sensor per source</td><td><code>DAGSTER_GRAPHQL_URL</code></td></tr>
+    <tr><td>Warehouse and dev copy</td><td>None</td><td>Azure SQL, SQL Server, PostgreSQL, Snowflake or similar</td><td><code>WAREHOUSE_URL</code>, <code>WAREHOUSE_DEV_URL</code></td></tr>
+    <tr><td>Read-only access for the crew</td><td>None</td><td>A login that can only read</td><td><code>CREW_RO_URL</code></td></tr>
+    <tr><td>Shared board and ledger</td><td>In the page's memory</td><td>Two tables in an <code>ops</code> schema and a git repository</td><td><code>BOARD_URL</code>, <code>PIPELINE_REPO</code></td></tr>
+    <tr><td>Language models</td><td>Fixed token counts</td><td>A Claude API key with a monthly spend limit</td><td><code>ANTHROPIC_API_KEY</code></td></tr>
+    <tr><td>Dashboards</td><td>Asset list only</td><td>Power BI or Tableau refresh API</td><td><code>POWERBI_DATASET_ID</code> or <code>TABLEAU_EXTRACT_ID</code></td></tr>
+    <tr><td>Command centre</td><td>Scripted night</td><td>A small API over the board tables</td><td><code>/api/board</code></td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="full">
+  <h2>Assumptions and how to reproduce</h2>
+  <div class="tbl"><table id="assume"><thead><tr><th>Assumption</th><th class="num">Value</th></tr></thead><tbody></tbody></table></div>
+  <p class="caption">The simulation is one Python file with no dependencies. Change any value and run <code>python simulate.py</code>. Download <a href="https://nihalsulaiman.com/projects/self-healing-pipelines/simulate.py">simulate.py</a> and its <a href="https://nihalsulaiman.com/projects/self-healing-pipelines/results.json">results.json</a>.</p>
+</section>
+
+<div class="foot"><p>Figures come from a simulation with stated assumptions, not from any company's data.</p><p>© 2026 Nihal Vellaramkallingal Sulaiman · released under Apache-2.0 · draft for review</p></div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const R={"assumptions":{"feeds":15,"run_start_h":5.0,"deadline_h":7.0,"office":[9.0,17.0],"analyst_cost_per_h":45.0,"faults":{"late_file":{"p":0.02,"label":"Late file"},"missing_file":{"p":0.01,"label":"Missing export (manual step)"},"schema_drift":{"p":0.004,"label":"Renamed / new column"},"duplicate":{"p":0.005,"label":"File loaded twice"},"partial":{"p":0.006,"label":"Partial or empty file"},"false_alarm":{"p":0.008,"label":"False alarm (check rule)"}},"code_bug_p_per_day":0.003,"detectors":{"classic":[0.75],"crew":[0.6,0.5,0.5,0.5]},"instance_down_p":0.02,"role_copies":2,"crew_fix_success_per_try":0.6,"crew_max_tries":3,"approval_wait_min":20,"fix_review_min":20,"crew_upkeep_h_per_year":104,"token_cost":{"triage":0.001,"fix_try":0.036,"opus_try":0.12},"years":300,"seed":7,"silent_share":{"classic":0.25,"crew":0.05}},"analytic":{"incidents_per_day_lambda":0.7979999999999999,"p_clean_day_formula":0.44049891533383506,"p_clean_by_feeds":[[1,0.947],[2,0.8968089999999999],[3,0.8492781229999998],[4,0.8042663824809998],[5,0.7616402642095068],[6,0.7212733302064029],[7,0.6830458437054635],[8,0.6468444139890739],[9,0.612561660047653],[10,0.5800958920651273],[11,0.5493508097856755],[12,0.5202352168670348],[13,0.4926627503730819],[14,0.4665516246033085],[15,0.44182438849933314],[16,0.41840769590886845],[17,0.3962320880256984],[18,0.37523178736033636],[19,0.35534450263023853],[20,0.3365112439908359],[21,0.31867614805932154],[22,0.3017863122121775],[23,0.2857916376649321],[24,0.27064468086869065],[25,0.25630051278265004],[26,0.24271658560516957],[27,0.22985260656809559],[28,0.2176704184199865],[29,0.20613388624372722],[30,0.19520879027280966],[31,0.18486272438835075],[32,0.17506499999576813],[33,0.16578655499599243],[34,0.15699986758120482],[35,0.14867887459940096],[36,0.1407988942456327],[37,0.13333655285061416],[38,0.1262697155495316],[39,0.11957742062540641],[40,0.11323981733225987]],"p_silent_by_detectors":[[1,0.5],[2,0.25],[3,0.125],[4,0.0625],[5,0.03125],[6,0.015625]],"silent_share":{"classic":0.25,"crew":0.05},"p_stall_central":0.02,"p_stall_decentral_per_role":0.0004,"p_stall_decentral_any_role":0.0035942453727753065,"p_fixed_within_k_tries":[[1,0.6],[2,0.84],[3,0.9359999999999999],[4,0.9744],[5,0.98976]]},"simulated":{"p_clean_day":0.44681278538812785,"incidents_per_year":291.9266666666667,"stale_report_hours_per_year":{"classic":5199.822629065044,"crew":1956.8666869932074},"people_hours_per_year":{"classic":533.9073013632066,"crew":121.28183333333337},"people_cost_per_year":{"classic":24025.828561344297,"crew":5457.682500000002},"incident_mix_per_year":{"duplicate":27.826666666666668,"late_file":109.42,"false_alarm":43.81666666666667,"partial":33.44,"missing_file":54.126666666666665,"schema_drift":22.206666666666667,"code_bug":1.09},"token_cost_per_year":1.8666066666666532,"silent_errors_per_year":{"classic":15.373333333333333,"crew":2.9},"time_to_fix_hours":{"classic":{"p50":9.153987745929303,"p90":56.03114787820972,"p99":120.6457751404278},"crew":{"p50":1.1260707840629505,"p90":31.011190171488877,"p99":60.14775812319494}},"median_hours_by_fault":{"duplicate":{"classic":9.138211637509634,"crew":0.43333333333333335},"late_file":{"classic":6.395586011821867,"crew":0.7826247697965875},"partial":{"classic":14.169513741717362,"crew":8.23527809454733},"missing_file":{"classic":10.937012583427475,"crew":8.012773049856008},"schema_drift":{"classic":9.709714255137094,"crew":4.616150837518293},"code_bug":{"classic":11.629119467902587,"crew":4.632910588932055}},"cdf":{"classic":[[0.25,0.0],[0.3,0.0],[0.36,0.0],[0.432,0.0],[0.518,0.0],[0.622,0.0],[0.746,0.0],[0.896,0.0],[1.075,0.0],[1.29,0.0],[1.548,0.0],[1.858,0.0],[2.229,0.0],[2.675,0.0],[3.21,0.0],[3.852,0.0],[4.622,0.0],[5.547,0.0491986081442371],[6.656,0.27806214985288785],[7.987,0.41292168796098505],[9.584,0.5269436943291282],[11.501,0.6103744306960622],[13.802,0.65034326172531],[16.562,0.6657396584848119],[19.874,0.6694073865086723],[23.849,0.6705224833071353],[28.619,0.6707374417261162],[34.343,0.7868687275805086],[41.211,0.8103529348541642],[49.453,0.8151357596764875],[59.344,0.9396369889699461],[71.213,0.9593594239114371],[85.455,0.9679577606706703],[102.547,0.9785713326078487],[123.056,0.9915763169561888],[147.667,0.9976085875888383],[177.2,1.0]],"crew":[[0.25,0.0],[0.3,0.0],[0.36,0.0],[0.432,0.0],[0.518,0.11313530288984724],[0.622,0.1731624413902436],[0.746,0.2930017599720554],[0.896,0.41206185428506176],[1.075,0.4867733397820859],[1.29,0.5247806752381337],[1.548,0.540821947254578],[1.858,0.5460078191124904],[2.229,0.5472975696263754],[2.675,0.5476603119584056],[3.21,0.547767791167896],[3.852,0.5504279016027838],[4.622,0.5957303884029933],[5.547,0.6329181948866766],[6.656,0.7060712318460898],[7.987,0.785861109991536],[9.584,0.8331519621673182],[11.501,0.8536133166740558],[13.802,0.859941155132804],[16.562,0.8620504346190534],[19.874,0.8625206561605739],[23.849,0.8626012655676918],[28.619,0.8718847822874263],[34.343,0.92182230999691],[41.211,0.9260005642658499],[49.453,0.926941007348891],[59.344,0.9891714696438407],[71.213,0.9925033251380436],[85.455,0.9941289481815861],[102.547,0.9962516625690218],[123.056,0.9986027702766246],[147.667,0.9995835180632247],[177.2,1.0]]}}};
+(function(){
+const A=R.assumptions,S=R.simulated,N=R.analytic;
+const pfeed=Object.values(A.faults).reduce((s,f)=>s+f.p,0);
+const fmtH=h=>h<1?Math.round(h*60)+" min":h<10?h.toFixed(1)+" h":Math.round(h)+" h";
+const V={
+  ttf_c:fmtH(S.time_to_fix_hours.classic.p50), ttf_r:fmtH(S.time_to_fix_hours.crew.p50),
+  ph_c:Math.round(S.people_hours_per_year.classic)+" h", ph_r:Math.round(S.people_hours_per_year.crew)+" h",
+  si_c:S.silent_errors_per_year.classic.toFixed(0), si_r:S.silent_errors_per_year.crew.toFixed(0),
+  tok:"$"+S.token_cost_per_year.toFixed(2),
+  feeds:A.feeds, pfeed:(pfeed*100).toFixed(1)+"%", pfeed_raw:pfeed.toFixed(3), bug:A.code_bug_p_per_day,
+  pclean:(N.p_clean_day_formula*100).toFixed(1)+"%", lambda:N.incidents_per_day_lambda.toFixed(2),
+  inc_year:Math.round(N.incidents_per_day_lambda*365), years:A.years, q:A.crew_fix_success_per_try,
+  miss_c:(N.silent_share.classic*100).toFixed(0)+"%",miss_r:(N.silent_share.crew*100).toFixed(0)+"%",
+  stall_c:(N.p_stall_central*100).toFixed(0)+"% of nights",stall_r:(N.p_stall_decentral_per_role*100).toFixed(2)+"%",stall_any:(N.p_stall_decentral_any_role*100).toFixed(2)+"%",
+  k1:(N.p_fixed_within_k_tries[0][1]*100).toFixed(0)+"%", k2:(N.p_fixed_within_k_tries[1][1]*100).toFixed(0)+"%", k3:(N.p_fixed_within_k_tries[2][1]*100).toFixed(1)+"%"
+};
+document.querySelectorAll("[data-v]").forEach(el=>{const v=V[el.dataset.v];if(v!==undefined)el.textContent=v});
+
+// fault tables
+const M=S.median_hours_by_fault;
+const how={
+ late_file:["Job fails; re-run by hand once someone notices","Re-runs by itself the minute the file lands"],
+ missing_file:["Noticed at 09:00; someone emails the owner","Note drafted at 05:15; one click to send; re-runs on arrival"],
+ schema_drift:["Job fails; code fixed and re-run by hand","Patch written and tested in dev; one click to merge"],
+ duplicate:["Doubles a day's totals; often found by a reader","Caught by file hash; idempotent reload"],
+ partial:["Loads short; often found by a reader","Row-count check flags it; note to the sender"],
+ code_bug:["Job fails; debugging from scratch","Patch loop, then a person with the full trail"]};
+const label={late_file:"Late file",missing_file:"Missing manual export",schema_drift:"Renamed or new column",duplicate:"File loaded twice",partial:"Partial or empty file",code_bug:"Bug in our own code"};
+["late_file","missing_file","schema_drift","duplicate","partial","code_bug"].forEach(k=>{
+  document.querySelector("#faultL tbody").insertAdjacentHTML("beforeend",`<tr><td>${label[k]}</td><td>${how[k][0]}</td><td class="num L">${fmtH(M[k].classic)}</td></tr>`);
+  document.querySelector("#faultR tbody").insertAdjacentHTML("beforeend",`<tr><td>${label[k]}</td><td>${how[k][1]}</td><td class="num R">${fmtH(M[k].crew)}</td></tr>`);
+});
+// assumptions table
+const rows=[["Daily data sources",A.feeds],["Nightly run starts","05:00"],["Reports due","07:00"],["People at desks","Mon–Fri 09:00–17:00"],
+ ...Object.values(A.faults).map(f=>[f.label+" (chance per source per day)",(f.p*100).toFixed(1)+"%"]),
+ ["Bug in our own code (per night)",(A.code_bug_p_per_day*100).toFixed(1)+"%"],
+ ["Partial/duplicate files that no check catches: scheduled / crew",(A.silent_share.classic*100)+"% / "+(A.silent_share.crew*100)+"%"],
+ ["Fixer success per try / max tries",A.crew_fix_success_per_try+" / "+A.crew_max_tries],
+ ["Wait for a one-click approval in office hours",A.approval_wait_min+" min"],["Person reviews a crew patch",A.fix_review_min+" min"],
+ ["Crew upkeep",A.crew_upkeep_h_per_year+" h a year"],["Loaded cost of an analyst hour","$"+A.analyst_cost_per_h],["Simulated years",A.years]];
+document.querySelector("#assume tbody").innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td></tr>`).join("");
+
+// charts
+const tip=document.getElementById("tip");
+function showTip(el,x,y,html){tip.innerHTML=html;const b=el.getBoundingClientRect();tip.style.left=(b.left+x+window.scrollX)+"px";tip.style.top=(b.top+y+window.scrollY)+"px";tip.style.position="absolute";tip.classList.add("on")}
+document.body.appendChild(tip);
+function svg(w,h){return`<svg viewBox="0 0 ${w} ${h}" role="img">`}
+function lineChart(el,{series,xs,xlog,xticks,yticks,xfmt,yfmt,mark,xlabel,aria,ymax=1}){
+  const W=560,H=260,m={l:44,r:16,t:12,b:40},iw=W-m.l-m.r,ih=H-m.t-m.b;
+  const xmin=xs[0],xmax=xs[1];
+  const X=v=>m.l+(xlog?(Math.log(v)-Math.log(xmin))/(Math.log(xmax)-Math.log(xmin)):(v-xmin)/(xmax-xmin))*iw;
+  const Y=v=>m.t+(1-v/ymax)*ih;
+  let s=svg(W,H).replace('role="img"',`role="img" aria-label="${aria}"`);
+  yticks.forEach(t=>{s+=`<line class="ax" x1="${m.l}" x2="${W-m.r}" y1="${Y(t)}" y2="${Y(t)}"/><text class="tick" x="${m.l-8}" y="${Y(t)+4}" text-anchor="end">${yfmt(t)}</text>`});
+  xticks.forEach(t=>{s+=`<text class="tick" x="${X(t)}" y="${H-m.b+18}" text-anchor="middle">${xfmt(t)}</text>`});
+  s+=`<text class="lab" x="${m.l+iw/2}" y="${H-4}" text-anchor="middle">${xlabel}</text>`;
+  series.forEach(se=>{s+=`<path class="${se.cls}" d="${se.pts.map((p,i)=>(i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join("")}"/>`});
+  if(mark){s+=`<circle cx="${X(mark[0])}" cy="${Y(mark[1])}" r="5" class="fR" stroke="var(--paper)" stroke-width="2"/><text class="lab" x="${X(mark[0])+9}" y="${Y(mark[1])-8}">${mark[2]}</text>`}
+  s+=`<line id="xh" class="ax" x1="0" x2="0" y1="${m.t}" y2="${m.t+ih}" style="stroke:var(--ink-3);opacity:0"/>`;
+  s+=`<rect class="hit" x="${m.l}" y="${m.t}" width="${iw}" height="${ih}"/></svg>`;
+  el.innerHTML=s;
+  const svgEl=el.querySelector("svg"),hit=el.querySelector(".hit"),xh=el.querySelector("#xh");
+  hit.addEventListener("mousemove",ev=>{
+    const b=svgEl.getBoundingClientRect(),sx=(ev.clientX-b.left)/b.width*W;
+    const p=series[0].pts.reduce((best,q)=>Math.abs(X(q[0])-sx)<Math.abs(X(best[0])-sx)?q:best);
+    xh.setAttribute("x1",X(p[0]));xh.setAttribute("x2",X(p[0]));xh.style.opacity=1;
+    const html=`<b>${xfmt(p[0],true)}</b><br>`+series.map(se=>{const q=se.pts.find(z=>z[0]===p[0]);return`${se.name}: ${yfmt(q[1],true)}`}).join("<br>");
+    showTip(el,X(p[0])/W*b.width,Y(Math.max(...series.map(se=>se.pts.find(z=>z[0]===p[0])[1])))/H*b.height,html)});
+  hit.addEventListener("mouseleave",()=>{tip.classList.remove("on");xh.style.opacity=0});
+}
+lineChart(document.getElementById("chartClean"),{
+  series:[{cls:"sR",name:"Clean night",pts:N.p_clean_by_feeds}],xs:[1,40],xticks:[1,10,20,30,40],yticks:[0,.25,.5,.75,1],
+  xfmt:(v,t)=>t?v+" sources":String(v),yfmt:v=>Math.round(v*100)+"%",xlabel:"Daily data sources",
+  mark:[A.feeds,N.p_clean_by_feeds[A.feeds-1][1],Math.round(N.p_clean_by_feeds[A.feeds-1][1]*100)+"% at "+A.feeds],aria:"Chance of a clean night falls as sources grow"});
+lineChart(document.getElementById("chartMiss"),{
+  series:[{cls:"sR",name:"Slips through",pts:N.p_silent_by_detectors}],xs:[1,6],xticks:[1,2,3,4,5,6],yticks:[0,.1,.2,.3,.4,.5],ymax:.5,
+  xfmt:(v,t)=>t?v+(v>1?" independent checks":" check"):String(v),yfmt:(v,t)=>t?(v*100).toFixed(1)+"%":Math.round(v*100)+"%",xlabel:"Independent checks looking at the same file",
+  mark:[4,N.p_silent_by_detectors[3][1],"6.3% with four"],aria:"Chance a bad file slips through halves with each independent check"});
+const fh=h=>h<1?Math.round(h*60)+"m":h<24?Math.round(h)+"h":Math.round(h/24)+"d";
+lineChart(document.getElementById("chartCdf"),{
+  series:[{cls:"sL",name:"Scheduled pipeline",pts:S.cdf.classic},{cls:"sR",name:"Agent crew",pts:S.cdf.crew}],
+  xs:[0.25,177.2],xlog:true,xticks:[0.5,1,4,12,24,72,168],yticks:[0,.25,.5,.75,1],
+  xfmt:(v,t)=>t?"within "+fmtH(v):fh(v),yfmt:(v,t)=>Math.round(v*100)+(t?"% of incidents":"%"),xlabel:"Time until the data is right again",aria:"Time to fix: crew curve rises far earlier than the scheduled pipeline curve"});
+lineChart(document.getElementById("chartTries"),{
+  series:[{cls:"sR",name:"Fixed",pts:N.p_fixed_within_k_tries}],xs:[1,5],xticks:[1,2,3,4,5],yticks:[0,.25,.5,.75,1],
+  xfmt:(v,t)=>t?v+(v>1?" tries":" try"):String(v),yfmt:v=>Math.round(v*100)+"%",xlabel:"Tries",
+  mark:[3,N.p_fixed_within_k_tries[2][1],(N.p_fixed_within_k_tries[2][1]*100).toFixed(1)+"% by try 3"],aria:"Chance of a fix rises to 94% by the third try"});
+
+// paired horizontal bars, one small chart per measure (no shared axis across different units)
+(function(){
+  const items=[["Report-hours late a year",S.stale_report_hours_per_year,v=>Math.round(v).toLocaleString()+" h"],
+    ["People hours on breakages a year",S.people_hours_per_year,v=>Math.round(v)+" h"],
+    ["Silent errors reaching reports a year",S.silent_errors_per_year,v=>v.toFixed(1)]];
+  const W=560,rowH=78,H=items.length*rowH+4,l=8,barMax=W-l-110;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Yearly totals for both approaches">`;
+  items.forEach((it,i)=>{const y=i*rowH,mx=Math.max(it[1].classic,it[1].crew);
+    s+=`<text class="lab" x="${l}" y="${y+14}" style="font-weight:600;fill:var(--ink)">${it[0]}</text>`;
+    [["classic","fL","Scheduled pipeline"],["crew","fR","Agent crew"]].forEach((c,j)=>{const w=Math.max(4,it[1][c[0]]/mx*barMax),by=y+24+j*24;
+      s+=`<rect class="${c[1]}" x="${l}" y="${by}" width="${w}" height="18" rx="4"><title>${c[2]}: ${it[2](it[1][c[0]])}</title></rect><text class="tick" x="${l+w+8}" y="${by+13}" style="fill:var(--ink-2)">${it[2](it[1][c[0]])}</text>`});
+  });
+  document.getElementById("chartBars").innerHTML=s+"</svg>";
+})();
+})();
+</script>
+<site-footer></site-footer>
+</body>
+</html>
