@@ -184,7 +184,7 @@
       col('Use', [['/tools/', 'Tools'], ['/learn/', 'Learn'], ['/blog/', 'Blog'], ['/log/', 'Activity log'], ['/rss.xml', 'RSS feed']]) +
       col('Site', [['/about/', 'About'], ['/about/cv/', 'CV'], ['/nihal-sulaiman-cv.pdf', 'CV (PDF)'], ['/now/', 'Now'], ['/contact/', 'Contact'], ['/search/', 'Search'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
       '<div class="sf-legal"><span>© 2026 Nihal.' + (hotel ? ' All hotels, guests, staff and figures on this site are fictional samples.' : '') + '</span>' +
-      '<span>Built with the help of AI tools. <a href="/disclaimer/">Credits</a></span></div></div>';
+      '<span><span data-views hidden></span><span class="pv-dot" hidden> · </span>Built with the help of AI tools. <a href="/disclaimer/">Credits</a></span></div></div>';
   }
 
   /* ------------------------------------------------------------ behaviour */
@@ -242,5 +242,11 @@
   }
   define('site-header', function (el) { el.setAttribute('role', 'banner'); el.innerHTML = headerHTML(); wire(el); });
   define('site-footer', function (el) { el.setAttribute('role', 'contentinfo'); el.classList.add('sf'); el.innerHTML = footerHTML(); });
+  /* Every page counts its views: load the counter on pages that don't include it. */
+  function loadCounter() {
+    if (window.__siteCounter || document.querySelector('script[src*="/assets/counter.js"]')) return;
+    var sc = document.createElement('script'); sc.src = '/assets/counter.js'; sc.defer = true; document.head.appendChild(sc);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadCounter); else loadCounter();
   window.SiteChrome = { sites: SITES, theme: function () { return root.getAttribute('data-theme'); } };
 })();

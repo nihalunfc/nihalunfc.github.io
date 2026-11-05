@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import rehypeFigures from './src/plugins/rehype-figures.mjs';
 
 // Static pages in public/ that Astro doesn't build, so the sitemap lists them too.
 const STATIC_PAGES = [
@@ -31,7 +32,13 @@ export default defineConfig({
     '/tools/expense-calendar/v2': '/tools/expense-calendar/personal/v2/',
     '/tools/expense-calendar/v3': '/tools/expense-calendar/personal/v3/',
   },
-  build: { format: 'directory' },
   integrations: [sitemap({ customPages: STATIC_PAGES, filter: (page) => !page.includes('/contact/thanks/') })],
-  markdown: { shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } } },
+  // Load the next page while the reader hovers or taps a link, so clicks feel instant.
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
+  // Inline the small page CSS Astro generates, saving a request per page.
+  build: { format: 'directory', inlineStylesheets: 'always' },
+  markdown: {
+    shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
+    rehypePlugins: [rehypeFigures],
+  },
 });
