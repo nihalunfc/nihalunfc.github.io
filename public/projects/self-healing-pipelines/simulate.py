@@ -2,7 +2,8 @@
 agent crew (self-healing triage). All rates are stated assumptions, not measurements from
 any company. Change them in ASSUMPTIONS and re-run:  python simulate.py  -> results.json
 
-Author: Nihal Vellaramkallingal Sulaiman (github.com/nihalunfc). Apache-2.0.
+Author: Nihal Vellaramkallingal Sulaiman (github.com/nihalunfc).
+Open source under the MIT License: https://nihalsulaiman.com/projects/self-healing-pipelines/LICENSE.txt
 """
 import json, math, random, statistics as st
 from pathlib import Path

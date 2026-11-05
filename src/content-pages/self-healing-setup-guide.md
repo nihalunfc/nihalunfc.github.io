@@ -212,3 +212,7 @@ The command centre is a page over the two board tables and the Ledger. Each butt
 - It never sends a message, deletes data, or changes a check's rule by itself. It drafts them.
 - It never shows credentials, and keeps the API key in the environment.
 - It stops at a cap per incident (for example 3 tries, 40,000 tokens or $0.50) and hands over the trail.
+
+## License
+
+This guide, the command centre and the simulation are open source under the [MIT License](/projects/self-healing-pipelines/LICENSE.txt). Anyone can use, change and run them, including commercially. Just keep the copyright notice: © 2026 Nihal Vellaramkallingal Sulaiman.

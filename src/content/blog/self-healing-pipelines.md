@@ -55,3 +55,5 @@ The [side-by-side comparison](/projects/self-healing-pipelines/compare/) walks t
 - **Independence has to be real.** The "more eyes" maths only holds if the agents check different things. Four copies of the same check are one check.
 
 I'm building it in the open, one milestone at a time, on the [project page](/projects/self-healing-pipelines/). If you run a daily pipeline for a chain of any kind, I'd like to hear which faults cost you the most mornings.
+
+Everything in this post, including the setup guide, the command centre and the simulation code, is open source under the [MIT License](/projects/self-healing-pipelines/LICENSE.txt), so you can use it, change it and run it commercially.
