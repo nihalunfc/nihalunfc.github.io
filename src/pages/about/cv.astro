@@ -30,6 +30,10 @@ const projects = [
     'Designed a Revenue Command Centre dashboard covering occupancy, ADR, RevPAR, booking pace against last year, cancellations, channel net rates and a back-tested demand forecast.',
     'Developing revenue and cost analyses (group displacement, rate recommendations, overbooking, energy costs) and a staff scheduler that turns forecast workload into shifts with mixed-integer optimisation, checks Ontario labour rules and exports to Excel.',
   ] },
+  { title: 'Self-healing data pipelines (open source, MIT)', href: '/projects/self-healing-pipelines/', stack: 'Python, multi-agent AI, Claude API, Dagster (planned)', points: [
+    'Designed a decentralised crew of nine AI agents with no central controller that detects, diagnoses, fixes, tests and re-runs failures in a daily ETL pipeline, with every step logged and reversible and production merges left to a person.',
+    'Simulated a year of failures: median time to fix fell from 9.2 hours to 1.1 hours and people-hours on breakages from 534 to 121, for about $2 a year in model cost (simulated figures; a measured reference pipeline is next).',
+  ] },
   { title: 'Kaggle competitions', href: '/projects/kaggle/', stack: 'Python, PyTorch, XGBoost, CatBoost, LightGBM', points: [
     'Mallorn Challenge (top 15% of about 800 teams): detected rare astronomical events in noisy time-series data with under 1% positive cases, using physics-informed features and an XGBoost and CatBoost ensemble tuned with Optuna.',
     'Name That LLM (436th of 4,346 teams, top 10%, ongoing): fine-tuned Qwen2.5-7B and GLM-4-9B with LoRA on a 38,935-passage training set and built leak-free grouped cross-validation (0.663 balanced accuracy).',
