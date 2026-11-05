@@ -1,0 +1,43 @@
+Historical estimates: 104 points from 9 sources, years 1-1955
+World Bank series: 66 years, 1960-2025
+
+[1] t0 = 2026.87 -> Saturday 14 November 2026 (±1 s.e.: 2021.37 to 2032.37)
+[2] 1960 law vs 104 pre-1958 estimates: RMS log error 0.399 (~40%)
+    same, 1500-1955 only: 0.134
+[3] Our refit on pre-1958 data: K=3.115e+10, k=0.676, t0=1989.58 (s.e. 6.14), RMS log 0.140
+    -> refit doomsday 01 August 1989
+    bootstrap t0 (2000 resamples): median 1989.2, 95% interval 1980.7 to 1999.6
+    refit on 1500-1955 only: k=0.881, t0=2021.64
+[4] Out of sample (1960 law vs World Bank):
+    1960: observed   3.02 bn, 1960 law     2.79 bn, ratio   0.92
+    1970: observed   3.68 bn, 1960 law     3.28 bn, ratio   0.89
+    1980: observed   4.44 bn, 1960 law     3.97 bn, ratio   0.89
+    1990: observed   5.30 bn, 1960 law     5.03 bn, ratio   0.95
+    2000: observed   6.16 bn, 1960 law     6.88 bn, ratio   1.12
+    2010: observed   7.00 bn, 1960 law    10.91 bn, ratio   1.56
+    2020: observed   7.85 bn, 1960 law    26.56 bn, ratio   3.38
+    2025: observed   8.22 bn, 1960 law    96.32 bn, ratio  11.72
+    law first matches reality in 1995; overshoots by more than the paper's own 7% from 1999; prediction is double reality from 2015; ten times reality from 2025
+[5] Monte Carlo, 20000 draws from the paper's ± values:
+    37.5% of draws put doomsday before 2025 (already 'happened')
+    of the rest, 2025 population 5-50-95%: 15.1 / 40.3 / 386 bn vs observed 8.22 bn
+    draws within 7% of reality or below it: 0.04%
+[6] Observed growth peaked at 2.12%/yr in 1963; 2025: 0.91%/yr. The 1960 law requires 52.9%/yr in 2025.
+[7] Refit with data up to year Y (pre-1958 estimates + World Bank):
+    up to 1960: t0 =    1990.2, k = 0.677, RMS log 0.139
+    up to 1965: t0 =    1992.2, k = 0.682, RMS log 0.136
+    up to 1970: t0 =    1993.7, k = 0.687, RMS log 0.134
+    up to 1975: t0 =    1995.6, k = 0.693, RMS log 0.131
+    up to 1980: t0 =    1998.4, k = 0.704, RMS log 0.130
+    up to 1985: t0 =    2001.8, k = 0.718, RMS log 0.130
+    up to 1990: t0 =    2005.8, k = 0.736, RMS log 0.131
+    up to 1995: t0 =    2010.3, k = 0.757, RMS log 0.134
+    up to 2000: t0 =    2015.2, k = 0.780, RMS log 0.139
+    up to 2005: t0 =    2020.4, k = 0.805, RMS log 0.145
+    up to 2010: t0 =    2025.9, k = 0.831, RMS log 0.152
+    up to 2015: t0 =    2031.5, k = 0.858, RMS log 0.159
+    up to 2020: t0 =    2037.2, k = 0.885, RMS log 0.167
+    up to 2025: t0 =    2043.2, k = 0.913, RMS log 0.176
+[8] Logistic fit to World Bank 1960-2025: L = 12.12 ± 0.06 bn, r = 0.0287, midpoint 1998.9, RMS log 0.0024
+
+Figures written to figures/, results to results/

@@ -293,3 +293,8 @@ a.card h2 { margin: 4px 0 6px; }
 .logd li { border-left: 3px solid transparent; }
 .log-filter { margin-bottom: 18px; }
 .log-filter button { border-left: 4px solid hsl(var(--h, 0) 55% 45%) !important; }
+
+/* highlighted box inside a post (equations, summaries) */
+.prose .callout { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 4px 18px; margin: 1.2em 0; }
+.prose .callout p { margin: .6em 0; }
+.prose img { background: #fff; border: 1px solid var(--line); }
