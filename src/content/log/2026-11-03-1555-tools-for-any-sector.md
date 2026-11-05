@@ -1,6 +1,6 @@
 ---
 time: 2026-11-03T15:55:00-05:00
-title: Rewrote every tool for any sector and added the #UpdateLog rule file
+title: "Rewrote every tool for any sector and added the #UpdateLog rule file"
 project: BI toolkit
 status: done
 ref: projects/bi-toolkit

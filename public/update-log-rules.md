@@ -47,6 +47,7 @@ One to three sentences of detail, if useful.
 ```
 
 - Give every entry at least one link (`link`, `repo` or `commit`) when one exists, so anyone can check the work.
+- Put a `title` in double quotes if it contains `#` or `: `. Unquoted, YAML treats ` #` as the start of a comment and cuts the title short.
 - Keep `project` names consistent (the same spelling every time): the log gives each project its own colour and filter, and numbers entries automatically (#1 is the oldest).
 - Work that isn't a project (study, job search, admin) is still logged, with `project: Learning`, `project: Job search` and so on, and no page update.
 
@@ -64,6 +65,7 @@ Decide what the activity touched:
 | Swarm work (the flagship) | Update or create `src/content/swarm/<id>.md` with its `field`, and put the demo at `public/swarm/<id>/`. Set `ref: swarm/<id>`. |
 | Progress on any item | Update its `parts`: mark finished parts `done: true`; add new parts with `added:` set to today when the plan grows. |
 | Unclear field or kind | **Ask nihal** which of the eight fields (hospitality, retail, logistics, energy, crisis, science, health, finance) and which kind (BI, optimisation, tools, pipelines and ETL, machine learning) it belongs to. Example: an ambulance-rerouting algorithm could be logistics or health. Until nihal answers, write the log entry only. |
+| A new certificate, badge, skill or tool, a job change, or a Kaggle rank or result | Update the CV and About pages, and the hand-edited sections of `README.md` in github.com/nihalunfc/nihalunfc (the GitHub profile; its `CLAUDE.md` lists which sections). Projects, courses, swarm items, blog posts and this log reach the GitHub profile on their own within a day. |
 | Anything that changes the site's structure | Follow the URL scheme in the structure map (no `.html` addresses, no `#/` routes, no second home or header), and update `public/site-structure.md` in the same commit. |
 
 The log entry and its page change go in the same commit.
