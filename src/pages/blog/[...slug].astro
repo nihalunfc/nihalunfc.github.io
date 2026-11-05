@@ -11,6 +11,8 @@ export async function getStaticPaths() {
 const { post, newer, older } = Astro.props;
 const { Content } = await render(post);
 const mins = readingTime(post.body);
+// First image in the post (if any) becomes its social-preview and search image.
+const firstImg = (post.body ?? '').match(/!\[[^\]]*\]\((\/[^)\s]+\.(?:png|jpe?g|webp))\)/i)?.[1];
 const ld = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -21,12 +23,14 @@ const ld = {
   author: { '@type': 'Person', name: 'Nihal Sulaiman', url: SITE_URL + '/about/' },
   mainEntityOfPage: new URL(`/blog/${post.id}/`, SITE_URL).href,
   keywords: post.data.tags.join(', '),
+  ...(firstImg ? { image: new URL(firstImg, SITE_URL).href } : {}),
 };
 ---
-<Base title={post.data.title} description={post.data.description} type="article" published={post.data.date} jsonld={ld}>
+<Base title={post.data.title} description={post.data.description} type="article" published={post.data.date} jsonld={ld} image={firstImg}>
   <PageHero title={post.data.title} crumbs={[{ label: 'Blog', href: '/blog/' }, { label: 'Post' }]} lead={post.data.description}>
     <div class="post-meta">
-      <time datetime={post.data.date.toISOString()}>{fmtDate(post.data.date)}</time>
+      <span class="byline">By <a href="/about/" rel="author">Nihal Sulaiman</a></span>
+      <span>·</span><time datetime={post.data.date.toISOString()}>{fmtDate(post.data.date)}</time>
       <span>·</span><span>{mins} min read</span>
       <span class="pv-dot" hidden>·</span><span data-views hidden></span>
       {post.data.updated && <><span>·</span><span>Updated {fmtDate(post.data.updated)}</span></>}

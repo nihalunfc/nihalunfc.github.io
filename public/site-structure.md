@@ -142,6 +142,9 @@ Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: 
 | Progress ticker | `src/components/Progress.astro`, `partsFor()` in `src/lib.ts` |
 | Helpers | `src/lib.ts`, `src/data/fields.ts`, `src/site.ts` |
 | Live demo buttons | Projects take `demo:` and `repo:`, swarm items `demo:` and `code:`, tools `open:` and `code:`. Each shows as an "Open the live demo" button and a "Code" button under the title, so no card or page is a dead end. Home cards for the flagship and the BI toolkit link to the demos directly. |
+| Fonts | Self-hosted, no Google Fonts: `public/assets/fonts/` (Inter variable and JetBrains Mono 500, woff2, OFL licence). Pages link `/assets/fonts/fonts.css` and preload `inter-latin-wght-normal.woff2`. Never add a Google Fonts link back. |
+| Images in posts and lessons | `src/plugins/rehype-figures.mjs` (set in `astro.config.mjs`) turns each Markdown image into a figure with width, height, lazy loading and a "Download PNG" button (a plain `download` link, counted by the counter). Put figure files under `public/` and link them with absolute paths. The first image in a blog post becomes its social preview (`og:image`) and its search image. |
+| Speed | `astro.config.mjs`: `prefetch` (loads a page when a link is hovered or tapped) and `inlineStylesheets`. Blog posts show a byline (By Nihal Sulaiman) under the title. |
 | Libraries | Chart.js, PapaParse and SheetJS are served from `public/assets/vendor/`, not a CDN, so dashboards load from the site itself. D3 is `public/assets/d3.min.js`. Add new libraries the same way. |
 
 ## How to change things

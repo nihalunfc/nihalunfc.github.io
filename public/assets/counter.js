@@ -109,11 +109,24 @@
       a.insertAdjacentElement('afterend', note);
       (byFile[p] = byFile[p] || []).push(note);
     });
-    if (Object.keys(byFile).length) css();
-    Object.keys(byFile).forEach(function (p) {
+    if (!Object.keys(byFile).length) return;
+    css();
+    /* Ask for a file's count only when its link scrolls near the screen, so a page
+       with many files doesn't make many requests while it loads. */
+    var asked = {};
+    function ask(p) {
+      if (asked[p]) return; asked[p] = true;
       get('/get/', fileKey(p)).then(function (d) {
         if (d && d.value) byFile[p].forEach(function (el) { show(el, d.value, 'download'); });
       });
+    }
+    if (!('IntersectionObserver' in window)) { Object.keys(byFile).forEach(ask); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); ask(e.target.dataset.cntFile); } });
+    }, { rootMargin: '200px' });
+    /* each note sits right after its link; watch the link */
+    Object.keys(byFile).forEach(function (p) {
+      byFile[p].forEach(function (note) { var a = note.previousElementSibling; a.dataset.cntFile = p; io.observe(a); });
     });
   }
 
