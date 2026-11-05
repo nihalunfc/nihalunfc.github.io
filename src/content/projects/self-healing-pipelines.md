@@ -5,6 +5,7 @@ summary: A daily ETL pipeline looked after by a decentralised crew of nine AI ag
 category: Applied AI
 status: Ongoing
 date: 2026-11-05
+updated: 2026-11-05
 order: 1
 featured: true
 demo: /projects/self-healing-pipelines/compare/
