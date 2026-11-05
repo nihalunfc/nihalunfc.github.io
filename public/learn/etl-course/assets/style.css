@@ -126,3 +126,5 @@ svg text{fill:var(--ink)}
 :root{--bg:#fafafa;--panel:#fff;--ink:#09090b;--muted:#71717a;--line:#e4e4e7;--accent:#09090b;--accent-ink:#fafafa;--soft:#f4f4f5}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#09090b;--panel:#111113;--ink:#fafafa;--muted:#a1a1aa;--line:#27272a;--accent:#fafafa;--accent-ink:#09090b;--soft:#1c1c1f}}
 @media (max-width:600px){.site-home{display:none}}
+/* Phones (2026-11-05): menu button at the right edge, easy to tap */
+@media (max-width:600px){.top .menu{margin-left:auto;min-width:44px;min-height:40px;border-radius:10px}.main{padding:16px 14px 36px}.hero{padding:18px 14px}}

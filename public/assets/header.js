@@ -39,15 +39,15 @@
       home: '/', name: 'Nihal', sub: 'Portfolio',
       /* Plain links, no drop-downs: every section has its own card-style index page. */
       nav: [
-        { label: 'Home', href: '/', exact: true },
-        { label: 'Swarm', href: '/swarm/', match: ['/swarm/'] },
-        { label: 'Fields', href: '/fields/', match: ['/fields/'] },
-        { label: 'Projects', href: '/projects/', match: ['/projects/'] },
-        { label: 'Tools', href: '/tools/', match: ['/tools/'] },
-        { label: 'Learn', href: '/learn/', match: ['/learn/'] },
-        { label: 'Blog', href: '/blog/', match: ['/blog/'] },
-        { label: 'Now', href: '/now/', match: ['/now/', '/log/'] },
-        { label: 'About', href: '/about/', match: ['/about/', '/disclaimer/', '/contact/', '/search/', '/sitemap/'] }
+        { label: 'Home', sub: 'Start here', href: '/', exact: true },
+        { label: 'Swarm', sub: 'Flagship multi-agent demos', href: '/swarm/', match: ['/swarm/'] },
+        { label: 'Fields', sub: 'Eight sectors I work in', href: '/fields/', match: ['/fields/'] },
+        { label: 'Projects', sub: 'Write-ups and results', href: '/projects/', match: ['/projects/'] },
+        { label: 'Tools', sub: 'Free apps to use', href: '/tools/', match: ['/tools/'] },
+        { label: 'Learn', sub: 'Free courses', href: '/learn/', match: ['/learn/'] },
+        { label: 'Blog', sub: 'Notes from the work', href: '/blog/', match: ['/blog/'] },
+        { label: 'Now', sub: 'What I am doing now', href: '/now/', match: ['/now/', '/log/'] },
+        { label: 'About', sub: 'Background and CV', href: '/about/', match: ['/about/', '/disclaimer/', '/contact/', '/search/', '/sitemap/'] }
       ],
       /* The CV link points straight at the PDF file: no page, no redirect. */
       actions: [{ label: 'CV (PDF)', href: '/nihal-sulaiman-cv.pdf', pdf: true }, { label: 'Contact', href: '/contact/' }]
@@ -116,6 +116,36 @@
     ' .sh-nav .sh-mact{display:flex}',
     '}',
     '.sh-mact{display:none;gap:8px;padding-top:16px}',
+    '.sh-nav>a small{display:none}',
+    '@media (max-width:900px){.sh-nav>a small{display:block}}',
+    /* Phones (2026-11-05): app-style chrome. A slimmer header, a bottom tab bar for the
+       main sections and a menu sheet of tiles. Desktop is unchanged. */
+    '.sh-tabbar{display:none}',
+    '@media (max-width:900px){',
+    ' site-header{min-height:56px}',
+    ' .sh-in{height:56px;gap:10px}',
+    ' .sh-brand svg{width:26px;height:26px}',
+    ' .sh-icon{width:38px;height:38px;border-radius:10px}',
+    ' .sh-right .sh-act.cv{height:38px;border-radius:10px;font-size:13.5px}',
+    ' site-header.has-tabs .sh-right .sh-burger{display:none}',
+    ' .sh-nav{top:56px;bottom:calc(60px + env(safe-area-inset-bottom));display:none;grid-template-columns:1fr 1fr;align-content:start;gap:10px;padding:16px 16px 24px}',
+    ' site-header.open .sh-nav{display:grid}',
+    ' .sh-nav>a{height:auto;min-height:72px;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:12px 14px;font-size:15.5px;font-weight:600;color:var(--sh-ink);border:1px solid var(--sh-line);border-radius:12px;background:var(--sh-bg);white-space:normal}',
+    ' .sh-nav>a small{font-size:12.5px;font-weight:400;color:var(--sh-ink-3);line-height:1.3}',
+    ' .sh-nav>a.on{border-color:var(--sh-ink);background:var(--sh-hover)}',
+    ' .sh-nav>a.on::after{display:none}',
+    ' .sh-nav .sh-mact{grid-column:1/-1;padding-top:6px}',
+    ' .sh-nav .sh-mact .sh-act{flex:1;justify-content:center;height:44px;border-radius:10px}',
+    ' .sh-tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--sh-bg);border-top:1px solid var(--sh-line);padding:0 4px env(safe-area-inset-bottom);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}',
+    ' .sh-tabbar a,.sh-tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:60px;font:inherit;font-size:11px;font-weight:500;color:var(--sh-ink-3);background:none;border:0;padding:0;cursor:pointer;text-decoration:none;-webkit-tap-highlight-color:transparent}',
+    ' .sh-tabbar svg{width:22px;height:22px}',
+    ' .sh-tabbar .on{color:var(--sh-ink);font-weight:600}',
+    ' .sh-tabbar .on svg{stroke-width:2.2}',
+    ' .sh-tabbar.menu-open a.on{color:var(--sh-ink-3);font-weight:500}',
+    ' .sh-tabbar.menu-open a.on svg{stroke-width:1.7}',
+    ' body.sh-has-tabs{padding-bottom:calc(60px + env(safe-area-inset-bottom))}',
+    '}',
+    '@media (max-width:420px){.sh-brand small{display:none}}',
     '.sh-mact .sh-act{display:inline-flex}',
     '@media print{site-header,site-footer{display:none!important}}',
     /* footer */
@@ -128,7 +158,7 @@
     '.sf a.sh-brand{display:inline-flex;padding:0;color:var(--sh-ink)}',
     '.sf-legal{grid-column:1/-1;border-top:1px solid var(--sh-line);padding-top:18px;font-size:13px;color:var(--sh-ink-3);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 18px}',
     '.sf-legal a{display:inline;color:var(--sh-ink-3);text-decoration:underline}',
-    '@media (max-width:760px){.sf-in{grid-template-columns:1fr 1fr}.sf-in>div:first-child{grid-column:1/-1}}'
+    '@media (max-width:760px){.sf{margin-top:40px}.sf-in{grid-template-columns:1fr 1fr;gap:20px 16px;padding:28px 16px 20px}.sf-in>div:first-child{grid-column:1/-1}.sf-in>div:nth-child(3){display:none}.sf a{padding:6px 0}.sf-legal{padding-top:14px;font-size:12.5px}}'
   ].join('\n');
   var style = document.createElement('style');
   style.id = 'site-chrome-css';
@@ -167,12 +197,31 @@
   function headerHTML() {
     var nav = SITE.nav.map(function (item, n) {
       var on = isOn(item) ? ' on' : '';
-      if (!item.menu) return '<a class="' + on.trim() + '" href="' + esc(item.href) + '"' + (on && isHere(item.href) ? ' aria-current="page"' : '') + '>' + esc(item.label) + '</a>';
+      if (!item.menu) return '<a class="' + on.trim() + '" href="' + esc(item.href) + '"' + (on && isHere(item.href) ? ' aria-current="page"' : '') + '>' + esc(item.label) + (item.sub ? '<small>' + esc(item.sub) + '</small>' : '') + '</a>';
       return '<div class="sh-dd"><button type="button" class="' + on.trim() + '" aria-expanded="false" aria-controls="sh-m' + n + '">' + esc(item.label) + CHEV + '</button>' + menuHTML(item, 'sh-m' + n) + '</div>';
     }).join('');
     return '<div class="sh-in"><a class="sh-brand" href="' + esc(SITE.home) + '">' + MARK + esc(SITE.name) + ' <small>' + esc(SITE.sub) + '</small></a>' +
       '<nav class="sh-nav" aria-label="Main">' + nav + '<div class="sh-mact">' + actions() + '</div></nav>' +
       '<div class="sh-right">' + actions() + THEME + BURGER + '</div></div>';
+  }
+  /* Bottom tab bar on phones: the four most visited sections and a Menu tab that opens the
+     sheet with everything else. */
+  var TABICONS = {
+    Home: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+    Projects: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8"/>',
+    Tools: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
+    Learn: '<path d="M2 8.5 12 4l10 4.5-10 4.5z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/>',
+    Menu: '<path d="M4 7h16M4 12h16M4 17h16"/>'
+  };
+  function tabIcon(k) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + TABICONS[k] + '</svg>'; }
+  function tabbarHTML() {
+    var tabs = ['Home', 'Projects', 'Tools', 'Learn'].map(function (k) {
+      var item = SITE.nav.filter(function (n) { return n.label === k; })[0];
+      var on = isOn(item);
+      return '<a href="' + esc(item.href) + '"' + (on ? ' class="on"' : '') + (on && isHere(item.href) ? ' aria-current="page"' : '') + '>' + tabIcon(k) + esc(k) + '</a>';
+    }).join('');
+    var other = !SITE.nav.some(function (n) { return ['Home', 'Projects', 'Tools', 'Learn'].indexOf(n.label) > -1 && isOn(n); });
+    return tabs + '<button type="button" class="sh-tabmenu' + (other ? ' on' : '') + '" aria-label="Menu: all sections" aria-expanded="false">' + tabIcon('Menu') + 'Menu</button>';
   }
   function footerHTML() {
     var hotel = /^\/(tools\/[^/]+\/hotels|projects\/hospitality-bi)\//.test(location.pathname);
@@ -220,11 +269,24 @@
     });
     window.addEventListener('resize', close);
     var burger = el.querySelector('.sh-burger');
+    var tabbar = document.createElement('nav');
+    tabbar.className = 'sh-tabbar';
+    tabbar.setAttribute('aria-label', 'Sections');
+    tabbar.innerHTML = tabbarHTML();
+    el.insertAdjacentElement('afterend', tabbar);
+    el.classList.add('has-tabs');
+    document.body.classList.add('sh-has-tabs');
+    var tabmenu = tabbar.querySelector('.sh-tabmenu');
+    var tabmenuOn = tabmenu.classList.contains('on');
     burger.addEventListener('click', function () {
       var on = el.classList.toggle('open');
       burger.setAttribute('aria-expanded', String(on));
+      tabmenu.setAttribute('aria-expanded', String(on));
+      tabmenu.classList.toggle('on', on || tabmenuOn);
+      tabbar.classList.toggle('menu-open', on);
       document.body.style.overflow = on ? 'hidden' : '';
     });
+    tabmenu.addEventListener('click', function () { burger.click(); });
     el.querySelectorAll('.sh-nav a').forEach(function (a) { a.addEventListener('click', function () { if (el.classList.contains('open')) burger.click(); }); });
     el.querySelector('.sh-theme').addEventListener('click', function () {
       var t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -240,8 +302,14 @@
       connectedCallback() { if (this.dataset.done) return; this.dataset.done = '1'; render(this); }
     });
   }
-  define('site-header', function (el) { el.setAttribute('role', 'banner'); el.innerHTML = headerHTML(); wire(el); });
+  define('site-header', function (el) { phoneCSS(); el.setAttribute('role', 'banner'); el.innerHTML = headerHTML(); wire(el); });
   define('site-footer', function (el) { el.setAttribute('role', 'contentinfo'); el.classList.add('sf'); el.innerHTML = footerHTML(); });
+  /* Hand-written pages under public/ (tool apps, swarm demos) that show the site header also
+     get the phone layout from mobile.css, which Astro pages link in their head. */
+  function phoneCSS() {
+    if (document.querySelector('link[href*="/assets/mobile.css"]')) return;
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/assets/mobile.css'; document.head.appendChild(l);
+  }
   /* Every page counts its views: load the counter on pages that don't include it. */
   function loadCounter() {
     if (window.__siteCounter || document.querySelector('script[src*="/assets/counter.js"]')) return;

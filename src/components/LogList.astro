@@ -21,8 +21,8 @@ const STATUS: Record<string, string> = { started: 'Started', progress: 'In progr
       <h3>{d.label}</h3>
       <ol>
         {d.items.map(({ e, Content }) => (
-          <li id={e.id} data-p={e.data.project} style={`--h:${projectHue(e.data.project)}`}>
-            <time datetime={e.data.time.toISOString()}>{fmtTime(e.data.time)}</time>
+          <li id={e.id} data-p={e.data.project} data-t={e.data.time.toISOString()} style={`--h:${projectHue(e.data.project)}`}>
+            <time datetime={e.data.time.toISOString()} data-local="time">{fmtTime(e.data.time)}</time>
             <div>
               <p class="lt"><span class="num">#{NUM.get(e.id)}</span>{e.data.link ? <a href={e.data.link}>{e.data.title}</a> : e.data.title}</p>
               <p class="lm"><span class="lp">{e.data.project}</span><span class={`ls s-${e.data.status}`}>{STATUS[e.data.status]}</span>
