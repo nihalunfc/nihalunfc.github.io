@@ -28,6 +28,7 @@ links:
   - { label: "Setup guide", href: "/projects/self-healing-pipelines/setup-guide/" }
   - { label: "Blog: pipelines that fix themselves", href: "/blog/self-healing-pipelines/" }
   - { label: "Simulation code (simulate.py)", href: "/projects/self-healing-pipelines/simulate.py" }
+  - { label: "License (MIT)", href: "/projects/self-healing-pipelines/LICENSE.txt" }
 limitations:
   - "Every figure comes from a simulation with stated assumptions. No live database or pipeline is connected yet, and no company's data is used."
   - "When a person forgets a manual export, the crew can only draft the reminder faster; the wait for the sender stays."
@@ -69,4 +70,4 @@ Six of the nine agents are plain code. The three that use a language model start
 
 ## Use it
 
-The design, guide and simulation are open under the Apache-2.0 licence. Any team can adopt them. Please credit "Nihal Vellaramkallingal Sulaiman, nihalsulaiman.com" and keep the licence notice.
+The design, setup guide, command centre and simulation are open source under the [MIT License](/projects/self-healing-pipelines/LICENSE.txt). Anyone can use, change and run them, including commercially. Just keep the copyright notice: © 2026 Nihal Vellaramkallingal Sulaiman, nihalsulaiman.com.
