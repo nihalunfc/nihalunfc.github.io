@@ -8,13 +8,14 @@ const tools = await getTools(); const projects = await getProjects(); const swar
 const count = (id: string) => tools.filter((t) => t.data.field === id).length + projects.filter((p) => p.data.field === id).length + swarm.filter((s) => s.data.field === id).length;
 ---
 <Base title="Fields" description="The eight fields Nihal Sulaiman works in: hospitality, retail, logistics, energy, crisis management, science, health and finance, each with BI, optimisation, tools, pipelines and machine learning.">
-  <PageHero title="Fields" crumbs={[{ label: 'Fields' }]} lead="Eight fields, the same five kinds of work in each: BI and dashboards, optimisation, tools, pipelines and ETL, and machine learning." />
+  <PageHero title="Fields" crumbs={[{ label: 'Fields' }]} lead="Eight fields, the same five kinds of work in each: BI and dashboards, optimisation, tools, pipelines and ETL, and machine learning. My current focus is energy, oil and gas, grids and wildfires, with tools for Canadian federal and provincial governments in mind." />
   <main>
     <div class="now-grid two">
       {FIELDS.map((f) => { const n = count(f.id); return (
         <a class="card field-card" href={`/fields/${f.id}/`}>
           <h2><i></i>{f.name}</h2>
           <p>{f.blurb}</p>
+          {f.topics.length > 0 && <ul class="topics">{f.topics.map((t) => <li>{t.name}</li>)}</ul>}
           <p class="muted small">{n ? `${n} item${n === 1 ? '' : 's'} so far` : 'Starting soon'} · {f.ideas.length} planned</p>
         </a>
       ); })}

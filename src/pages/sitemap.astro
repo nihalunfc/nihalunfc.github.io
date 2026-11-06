@@ -13,7 +13,7 @@ const courses = await getCourses();
 const editions = tools.flatMap((t) => t.data.editions.filter((e) => e.href && e.href !== `/tools/${t.id}/`).map((e) => [e.href!, `${t.data.title}: ${e.sector}`] as [string, string]));
 const groups: { title: string; links: [string, string, string?][] }[] = [
   { title: 'Main pages', links: [['/', 'Home'], ['/about/', 'About me'], ['/about/cv/', 'CV'], ['/now/', 'Now', 'What I am working on'], ['/log/', 'Activity log', 'What I did, entry by entry'], ['/contact/', 'Contact'], ['/search/', 'Search']] },
-  { title: 'Swarm Intelligence', links: [['/swarm/', 'Swarm Intelligence', 'My flagship project'], ...swarm.map((s) => [s.data.demo || '/swarm/', s.data.title] as [string, string]), ['/swarm/explorer/', 'All demos compared']] },
+  { title: 'Swarm Intelligence', links: [['/swarm/', 'Swarm Intelligence', 'My flagship project'], ...swarm.map((s) => [s.data.demo || `/swarm/${s.id}/`, s.data.title] as [string, string]), ['/swarm/explorer/', 'All demos compared']] },
   { title: 'Fields', links: [['/fields/', 'All fields'], ...FIELDS.map((f) => [`/fields/${f.id}/`, f.name] as [string, string])] },
   { title: 'Projects', links: [['/projects/', 'All projects'], ...projects.map((p) => [`/projects/${p.id}/`, p.data.title] as [string, string]), ['/projects/hospitality-bi/overview/', 'Hospitality edition: overview'], ['/projects/hospitality-bi/proposals/', 'Hospitality edition: proposals'], ['/projects/kaggle/', 'Kaggle ranks']] },
   { title: 'Tools', links: [['/tools/', 'All tools'], ...tools.map((t) => [`/tools/${t.id}/`, t.data.title] as [string, string])] },

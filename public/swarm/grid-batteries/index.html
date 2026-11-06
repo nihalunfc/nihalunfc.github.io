@@ -29,8 +29,8 @@
   </div>
 
   <div class="grid" style="margin-top:18px" id="kpis">
-    <div class="card kpi"><span class="label">Highest hour cut by</span><span class="big">949 MW</span><span class="vs">Best simple rule: 0 MW. Its batteries were already empty when the peak arrived.</span></div>
-    <div class="card kpi"><span class="label">Demand swings reduced</span><span class="big">9.9%</span><span class="vs">Hour-to-hour variation in load. Best rule: 9.1%.</span></div>
+    <div class="card kpi"><span class="label">Highest hour cut by</span><span class="big">704 MW</span><span class="vs">Average of 10 seeds (547 to 857 MW). Best possible with perfect foresight: 949 MW. Best simple rule: 0 MW, its batteries were already empty when the peak arrived.</span></div>
+    <div class="card kpi"><span class="label">Demand swings reduced</span><span class="big">10.8%</span><span class="vs">Hour-to-hour variation in load. Best rule: 9.1%.</span></div>
     <div class="card kpi"><span class="label">Peak-to-average ratio</span><span class="big">1.58 → 1.50</span><span class="vs">Lower means a flatter, cheaper grid to run.</span></div>
     <div class="card kpi"><span class="label">Test period</span><span class="big">92 days</span><span class="vs">October to December 2020. Learned on January to September only.</span></div>
   </div>
@@ -59,20 +59,22 @@
       <div class="scroll"><table>
         <thead><tr><th class="l">Approach</th><th>Peak cut</th><th>Swings reduced</th><th>Peak-to-average</th></tr></thead>
         <tbody>
-          <tr class="hi"><td>Swarm</td><td>949 MW</td><td>9.9%</td><td>1.496</td></tr>
+          <tr class="hi"><td>Swarm<small>average of 10 training seeds</small></td><td>704 MW</td><td>10.8%</td><td>1.52</td></tr>
+          <tr><td>MPC with a 24 h forecast<small>plans ahead from a demand forecast</small></td><td>0 MW</td><td>6.8%</td><td>1.58</td></tr>
+          <tr><td>Best possible<small>perfect foresight, a bound no real controller can reach</small></td><td>949 MW</td><td>14.7%</td><td>1.49</td></tr>
           <tr><td>Proportional rule<small>sends just enough batteries to close the gap</small></td><td>0 MW</td><td>9.1%</td><td>1.577</td></tr>
           <tr><td>Threshold rule<small>all batteries discharge when demand is high</small></td><td>0 MW</td><td>5.0%</td><td>1.577</td></tr>
           <tr><td>No batteries</td><td>0 MW</td><td>0%</td><td>1.579</td></tr>
         </tbody>
       </table></div>
-      <p class="muted" style="font-size:13.5px;margin-top:10px">The rules are good at smoothing ordinary days (9.1% against 9.9%) but miss the one hour that sets the system's cost. That is exactly the judgement the swarm adds.</p>
+      <p class="muted" style="font-size:13.5px;margin-top:10px">The rules are good at smoothing ordinary days (9.1% against 10.8%) but miss the one hour that sets the system's cost. That is exactly the judgement the swarm adds.</p>
     </div>
   </div>
 
   <div class="grid2">
     <div class="card">
       <h2>Scales without retraining</h2>
-      <p>The same model, trained with 10 batteries, ran unchanged with the same 1 GW split into 100 and then 1,000 smaller batteries. It delivered the same 949 MW peak cut each time, and choosing all 1,000 actions took under a millisecond on one CPU core.</p>
+      <p>The same model, trained with 10 batteries, ran unchanged with the same 1 GW split into 100 and then 1,000 smaller batteries. It kept its 10-battery peak cut at 100 and 1,000 batteries (one seed tested), and choosing all 1,000 actions took under a millisecond on one CPU core.</p>
     </div>
     <div class="card">
       <h2>Data and assumptions</h2>

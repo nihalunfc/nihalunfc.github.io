@@ -30,14 +30,14 @@
       <p class="eyebrow" style="margin:0">Hospitality</p>
       <h2>Hotel operations</h2>
       <p>Five hotels: cutting peak-hour electricity charges, getting rooms ready for arriving guests, keeping overbooked guests in the group, and filling open shifts.</p>
-      <div class="stat-row"><div><b>$279k</b>energy saving / yr</div><div><b>$14.8k</b>better per oversold night</div></div>
+      <div class="stat-row"><div><b>$211k</b>energy saving / yr (rule $252k)</div><div><b>$14.8k</b>better per oversold night</div></div>
       <div class="tags"><span class="tag">4 problems</span><span class="tag">Learned + market swarms</span></div>
     </a>
     <a class="card proj" href="/swarm/grid-batteries/">
       <p class="eyebrow" style="margin:0">Energy</p>
       <h2>Grid batteries</h2>
       <p>Ten grid-scale batteries on a real Texas grid zone, working together to flatten demand peaks on three months of data they had never seen.</p>
-      <div class="stat-row"><div><b>949 MW</b>peak cut</div><div><b>0 MW</b>by the best simple rule</div></div>
+      <div class="stat-row"><div><b>704 MW</b>average peak cut</div><div><b>0 MW</b>by the best simple rule</div></div>
       <div class="tags"><span class="tag">Real grid data</span><span class="tag">Learned swarm</span></div>
     </a>
     <a class="card proj" href="/swarm/wildfire-drones/">
@@ -92,7 +92,7 @@
 
   <div class="grid">
     <div class="card"><h2>No central bottleneck</h2><p>Each member decides from its own local view, so the system keeps working when there are thousands of members, or when one drops out.</p></div>
-    <div class="card"><h2>One model, any size</h2><p>Every member uses the same model. A battery swarm trained with 10 batteries ran unchanged with 100 and 1,000, and still delivered the same 949 MW peak cut.</p></div>
+    <div class="card"><h2>One model, any size</h2><p>Every member uses the same model. A battery swarm trained with 10 batteries ran unchanged with 100 and 1,000, and kept the same peak cut as at 10 batteries (one seed tested).</p></div>
     <div class="card"><h2>Team goal, not selfish goals</h2><p>Members are rewarded for the team result (a flatter grid, less forest burned, fewer guests waiting), so they learn to cover for each other.</p></div>
     <div class="card"><h2>Honest testing</h2><p>Every result is measured on data or scenarios kept aside while building, and compared with today's practice and the best simple rule. Where the swarm loses, the pages say so.</p></div>
   </div>
@@ -115,18 +115,18 @@
         <li>Auction and contract-net markets, checked against exact optimisation (integer programming).</li>
         <li>Batched across members and parallel simulators, so training cost barely grows with swarm size.</li>
       </ul>
-      <p class="muted" style="font-size:13.5px">The engine's source code is private. These pages publish its results.</p>
+      <p class="muted" style="font-size:13.5px">The engine is open source (MIT): <a href="https://github.com/nihalunfc/swarm-intelligence">github.com/nihalunfc/swarm-intelligence</a>. These pages publish its results.</p>
     </div>
   </div>
 
   <div class="card">
-    <h2>Scaling test: the same model at 10, 100 and 1,000 members</h2>
-    <p class="sub">Each model was trained at its original size, then run unchanged with more members. The battery fleet keeps the same total power, split among more batteries. The forest grows so each drone covers the same area, but all drones still launch from one pad.</p>
+    <h2>Scaling test: the same model from its trained size up to 1,000 members</h2>
+    <p class="sub">Each model was trained at its original size, then run unchanged with more members. The battery fleet keeps the same total power, split among more batteries. The forest grows so each drone covers the same area, and the drones launch from several pads.</p>
     <div class="scroll"><table>
-      <thead><tr><th class="l">Domain</th><th>10 members</th><th>100 members</th><th>1,000 members</th><th class="l">What it shows</th></tr></thead>
+      <thead><tr><th class="l">Domain</th><th>Trained size</th><th>100 members</th><th>1,000 members</th><th class="l">What it shows</th></tr></thead>
       <tbody>
-        <tr class="hi"><td>Grid batteries: peak cut</td><td>949 MW</td><td>949 MW</td><td>949 MW</td><td class="l">Identical result at every size. Choosing all 1,000 actions takes under 1 ms.</td></tr>
-        <tr><td>Wildfire drones: forest saved</td><td>83%</td><td>41%</td><td>26%</td><td class="l">Drops with size, and the simple rule drops too (79%, 47%, 40%). One launch pad can't serve a huge forest, so the next step is several pads.</td></tr>
+        <tr class="hi"><td>Grid batteries: peak cut (10, 100, 1,000 batteries)</td><td colspan="3">Same result as at 10 batteries (one seed tested)</td><td class="l">Choosing all 1,000 actions takes under 1 ms.</td></tr>
+        <tr><td>Wildfire drones: forest saved (6, 100, 1,000 drones)</td><td>90.5%</td><td>65.9%</td><td>47.9%</td><td class="l">Average of 3 seeds, several launch pads. The nearest-fire rule holds up (91.6%, 91.6%, 85.9%), so learned drones still don't scale.</td></tr>
       </tbody>
     </table></div>
   </div>

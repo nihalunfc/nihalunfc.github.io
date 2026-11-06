@@ -3,44 +3,56 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import LogList from '../../components/LogList.astro';
+import Progress from '../../components/Progress.astro';
 import { Content as Intro } from '../../content-pages/swarm-intro.md';
-import { FIELDS, fieldName } from '../../data/fields';
-import { getLog } from '../../lib';
+import { fieldName } from '../../data/fields';
+import { getLog, partsFor } from '../../lib';
+// Each swarm topic is one Markdown file in src/content/swarm/. Its `track` picks the section below,
+// and items without a `demo` get their own page at /swarm/<id>/ (src/pages/swarm/[id].astro).
 const items = (await getCollection('swarm')).sort((a, b) => a.data.order - b.data.order);
-const used = new Set(items.map((i) => i.data.field));
-const next = FIELDS.filter((f) => !used.has(f.id));
+const href = (i: (typeof items)[number]) => i.data.demo || `/swarm/${i.id}/`;
+const TRACKS = [
+  { id: 'applications', name: 'Applications', lead: 'One engine applied to real problems, each tested against the rule people use today. Now focused on energy grids, oil and gas, and wildfires, with tools for Canadian federal and provincial governments in mind.' },
+  { id: 'crews', name: 'Swarm agents and AI agent crews', lead: 'Fast swarm agents act; a crew of AI language-model agents watches the results, flags gaps and proposes fixes that a person approves.' },
+  { id: 'nature', name: 'Natural swarm study', lead: 'The rules real flocks follow, worked out from measured data and written as fluid-like equations, to ease bottlenecks in transport, logistics and air traffic.' },
+] as const;
 const updates = (await getLog()).filter((e) => (e.data.ref || '').startsWith('swarm'));
 ---
-<Base title="Swarm Intelligence" description="Swarm Intelligence, Nihal Sulaiman's flagship project: one multi-agent engine where batteries, drones and hotel systems each decide for themselves and act as one team, applied across energy, crisis management, hospitality and more.">
-  <PageHero title="Swarm Intelligence" crumbs={[{ label: 'Swarm' }]} lead="My flagship project: one multi-agent engine in which every agent makes its own decision and the group still acts as one team. Each application below is tested against the rule people use today." />
+<Base title="Swarm Intelligence" description="Swarm Intelligence, Nihal Sulaiman's flagship project: one multi-agent engine for energy grids, oil and gas and wildfires, swarm agents working with AI agent crews, and a study of how real bird flocks move.">
+  <PageHero title="Swarm Intelligence" crumbs={[{ label: 'Swarm' }]} lead="My flagship project: one multi-agent engine in which every agent makes its own decision and the group still acts as one team. Three tracks: applications, swarm agents with AI agent crews, and a study of natural swarms." />
   <main>
-    <div class="now-grid two">
-      {items.map((i) => (
-        <article class="card swarm-item">
-          <p class="eyebrow" style="margin:0">{fieldName(i.data.field)} · {i.data.status}</p>
-          <h2><a href={i.data.demo || `/swarm/${i.id}/`}>{i.data.title}</a></h2>
-          <p>{i.data.summary}</p>
-          {i.data.stats.length > 0 && <div class="stat-row">{i.data.stats.map((s) => <div><b>{s.value}</b>{s.label}</div>)}</div>}
-          <div class="acts">
-            {i.data.demo && <a class="btn primary sm" href={i.data.demo}>Open the live demo</a>}
-            {i.data.code && <a class="btn ghost sm" href={i.data.code}>Code</a>}
-            {i.data.project && <a class="btn ghost sm" href={`/projects/${i.data.project}/`}>Write-up</a>}
-          </div>
-        </article>
-      ))}
-      <section class="card">
-        <h2><i></i>Coming to every field</h2>
-        <p class="muted">The same engine will be applied in each of my fields. Next:</p>
-        <ul class="hub-list">{next.map((f) => <li><a href={`/fields/${f.id}/`}>{f.name}</a><span>Planned</span></li>)}</ul>
-        <p class="more"><a href="/swarm/explorer/">Compare all demos side by side</a></p>
+    {TRACKS.map((t) => { const list = items.filter((i) => i.data.track === t.id); return list.length > 0 && (
+      <section id={t.id}>
+        <h2 class="track-h">{t.name}</h2>
+        <p class="track-lead">{t.lead}</p>
+        <div class="now-grid two">
+          {list.map((i) => (
+            <article class={`card swarm-item${i.data.status === 'Paused' ? ' paused' : ''}`}>
+              <div class="top" style="display:flex;justify-content:space-between;gap:10px;align-items:center"><p class="eyebrow" style="margin:0">{i.data.field ? fieldName(i.data.field) : 'Any field'}</p><span class={`status ${i.data.status.replace(' ', '')}`}>{i.data.status}</span></div>
+              <h2><a href={href(i)}>{i.data.title}</a></h2>
+              <p>{i.data.summary}</p>
+              {i.data.stats.length > 0 && <div class="stat-row">{i.data.stats.map((s) => <div><b>{s.value}</b>{s.label}</div>)}</div>}
+              {!i.data.demo && <Progress parts={partsFor(i.data)} compact />}
+              <div class="acts">
+                {i.data.demo ? <a class="btn primary sm" href={i.data.demo}>Open the live demo</a> : <a class="btn primary sm" href={href(i)}>Plan and progress</a>}
+                {i.data.code && <a class="btn ghost sm" href={i.data.code}>Code</a>}
+                {i.data.project && <a class="btn ghost sm" href={`/projects/${i.data.project}/`}>Write-up</a>}
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
-    </div>
+    ); })}
     <div class="detail" style="margin-top:28px">
       <article class="prose"><Intro />
         <h2>Updates</h2>
         {updates.length ? <LogList entries={updates} compact /> : <p class="muted">New work on the swarm will appear here and in the <a href="/log/">activity log</a>.</p>}
       </article>
-      <aside><div class="card lk"><h2>Demos</h2>{items.map((i) => <a href={i.data.demo}>{i.data.title} →</a>)}<a href="/swarm/explorer/">All demos compared →</a></div></aside>
+      <aside>
+        <div class="card lk"><h2>Demos</h2>{items.filter((i) => i.data.demo).map((i) => <a href={i.data.demo}>{i.data.title} →</a>)}<a href="/swarm/explorer/">All demos compared →</a></div>
+        <div class="card lk"><h2>In progress and planned</h2>{items.filter((i) => !i.data.demo).map((i) => <a href={href(i)}>{i.data.title} →</a>)}</div>
+        <div class="card lk"><h2>Code</h2><a href="https://github.com/nihalunfc/swarm-intelligence">Swarm engine on GitHub (MIT) →</a></div>
+      </aside>
     </div>
   </main>
 </Base>

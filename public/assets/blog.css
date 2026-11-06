@@ -63,7 +63,7 @@ a.tag:hover { text-decoration: none; border-color: var(--brand-2); color: var(--
 .status { font-size: 12px; font-weight: 600; border-radius: 99px; padding: 2px 9px; white-space: nowrap; }
 .status.Live { background: var(--good-soft); color: var(--good); }
 .status.Ongoing { background: var(--warn-soft); color: var(--warn); }
-.status.Complete { background: var(--surface-2); color: var(--ink-2); }
+.status.Complete, .status.Paused { background: var(--surface-2); color: var(--ink-2); }
 .cat-kaggle { color: var(--ink-2) !important; }
 
 .cat-bi { color: var(--hotel) !important; }
@@ -314,3 +314,11 @@ a.card h2 { margin: 4px 0 6px; }
 .prose .fig-tools .dl-cnt { color: #555; font-size: 11.5px; padding: 6px 8px; }
 .byline a { color: inherit; font-weight: 600; }
 @media (max-width: 640px) { .prose .fig-tools { position: static; justify-content: flex-end; margin-top: 6px; } }
+
+/* /swarm/ tracks and field topics */
+.track-h { margin: 0 0 4px; font-size: 22px; }
+section + section > .track-h { margin-top: 40px; }
+.track-lead { margin: 0 0 14px; color: var(--ink-2); max-width: 760px; }
+.swarm-item.paused { opacity: .85; }
+.topics { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.topics li { font-size: 12.5px; border: 1px solid var(--line); border-radius: 99px; padding: 2px 9px; color: var(--ink-2); }
