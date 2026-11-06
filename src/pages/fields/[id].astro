@@ -21,7 +21,8 @@ const byKind = KINDS.map((k) => ({ k, items: [
   <PageHero title={f.name} crumbs={[{ label: 'Fields', href: '/fields/' }, { label: f.name }]} lead={f.blurb} />
   <main>
     <div class="now-grid two">
-      {swarm.length > 0 && <section class="card"><h2><i></i>Swarm Intelligence</h2><ItemList items={swarm.map((s) => ({ href: s.data.demo || '/swarm/', title: s.data.title, note: `Swarm · ${s.data.status}` }))} /></section>}
+      {f.topics.length > 0 && <section class="card"><h2><i></i>Topics I'm working on</h2><ul class="hub-list">{f.topics.map((t) => <li>{t.href ? <a href={t.href}>{t.name}</a> : <b>{t.name}</b>}<span>{t.note}</span></li>)}</ul>{f.for.length > 0 && <p class="muted small" style="margin-top:10px">Also for: {f.for.join(', ')}.</p>}</section>}
+      {swarm.length > 0 && <section class="card"><h2><i></i>Swarm Intelligence</h2><ItemList items={swarm.map((s) => ({ href: s.data.demo || `/swarm/${s.id}/`, title: s.data.title, note: `Swarm · ${s.data.status}` }))} /></section>}
       {byKind.map(({ k, items }) => (
         <section class="card" id={k.id}>
           <h2><i></i>{k.name}</h2>

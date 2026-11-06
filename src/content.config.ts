@@ -124,12 +124,18 @@ const swarm = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    field,
+    field: field.optional(),   // leave out for work that serves every field (shows as "Any field")
+    // Which part of /swarm/ it sits in: applications of the engine, LLM agent crews, or the natural swarm study.
+    track: z.enum(['applications', 'crews', 'nature']).default('applications'),
     parts,
-    status: z.enum(['Live', 'In progress', 'Planned']),
+    status: z.enum(['Live', 'In progress', 'Planned', 'Paused']),
     order: z.number().default(50),
     date: z.coerce.date(),
-    demo: z.string().optional(),
+    updated: z.coerce.date().optional(),
+    for: z.array(z.string()).default([]),       // who it's for, e.g. Canadian provincial governments
+    roadmap: z.array(z.string()).default([]),
+    links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
+    demo: z.string().optional(),      // a live demo in public/swarm/<id>/; without one, /swarm/<id>/ is built from the Markdown body
     code: z.string().optional(),      // where the demo's code lives (a GitHub repo or folder URL)
     stats: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     project: z.string().optional(),   // a related project id, e.g. warl-wildfire

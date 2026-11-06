@@ -21,7 +21,7 @@ Everything is one site, one repo, one header. Every page is a folder with an `in
 
 | Section | Index | Items | Pages inside an item |
 |---|---|---|---|
-| Swarm (flagship) | `/swarm/` | `/swarm/<application>/` (the live demo), `/swarm/explorer/` | |
+| Swarm (flagship) | `/swarm/` | `/swarm/<topic>/` (a live demo in `public/swarm/<id>/`, or a plan-and-progress page built from the Markdown file when there is no demo), `/swarm/explorer/` | |
 | Fields | `/fields/` | `/fields/<field>/` (hospitality, retail, logistics, energy, crisis, science, health, finance) | kinds are headings on the page |
 | Projects | `/projects/` | `/projects/<project>/`, `/projects/kaggle/` | `/projects/hospitality-bi/overview/`, `/projects/hospitality-bi/proposals/` |
 | Tools | `/tools/` | `/tools/<tool>/` (about page) | `/tools/<tool>/<edition>/` (the app: `hotels`, `ontario`, `personal`), `/tools/<tool>/<edition>/<view>/` |
@@ -54,12 +54,12 @@ Each folder in `src/content/` is a collection, with its schema in `src/content.c
 | What | File | Shows on |
 |---|---|---|
 | Activity log entry | `src/content/log/YYYY-MM-DD-HHMM-slug.md` | `/log/` (numbered, one colour per project, filter by project), the home card, and the Updates list of the page named in `ref` |
-| Swarm application | `src/content/swarm/<id>.md` + demo at `public/swarm/<id>/index.html` | `/swarm/` and its field page |
+| Swarm topic | `src/content/swarm/<id>.md` (`track`: `applications`, `crews` or `nature`; `status` Live, In progress, Planned or Paused; optional `for`, `roadmap`, `links`, `parts`). With `demo:` the demo lives at `public/swarm/<id>/index.html`; without it, `/swarm/<id>/` is built from the file's body by `src/pages/swarm/[id].astro` | `/swarm/` (in its track's section), its field page, and the Updates of log entries with `ref: swarm/<id>` |
 | Tool | `src/content/tools/<id>.md` (+ apps in `public/tools/<id>/<edition>/`) | `/tools/<id>/`, `/tools/`, its field page |
 | Project | `src/content/projects/<id>.md` (+ sub-pages in `public/projects/<id>/<page>/` or `src/pages/projects/<id>/<page>.astro`) | `/projects/<id>/`, `/projects/`, its field page |
 | Course | `src/content/courses/<id>.md`, plus either lessons in `src/content/lessons/<id>/` (built by Astro) or a static course in `public/learn/<id>/` | `/learn/` (one card per course) and the course at `/learn/<id>/` |
 | Blog post | `src/content/blog/<slug>.md` | `/blog/<slug>/`, RSS, tag pages |
-| Fields and kinds | `src/data/fields.ts` | `/fields/`, `/fields/<field>/`, filters |
+| Fields and kinds | `src/data/fields.ts` (each field also has `topics`: what nihal is working on now, with a note and link, and `for`: audiences such as Canadian governments) | `/fields/` (topic chips), `/fields/<field>/` (Topics card), filters |
 
 ### Field and kind (every tool, project and swarm item)
 
@@ -118,7 +118,7 @@ Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: 
 | Page | File |
 |---|---|
 | Home (card hub) | `src/pages/index.astro` |
-| Swarm | `src/pages/swarm/index.astro` (intro text in `src/content-pages/swarm-intro.md`) |
+| Swarm | `src/pages/swarm/index.astro` (three track sections built from `src/content/swarm/`; intro and results text in `src/content-pages/swarm-intro.md`); topic pages without a demo from `src/pages/swarm/[id].astro`. To update the swarm regularly: edit the topic's Markdown (`parts`, `status`, `stats`, body) and add a log entry with `ref: swarm/<id>`. |
 | Fields | `src/pages/fields/index.astro`, `src/pages/fields/[id].astro` |
 | Now | `src/pages/now.astro` (current status; update "Last updated") |
 | Activity log | `src/pages/log/index.astro`, `src/components/LogList.astro` |

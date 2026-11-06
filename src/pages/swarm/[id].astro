@@ -1,0 +1,39 @@
+---
+// A page for each swarm topic that has no live demo yet (topics with a demo live in public/swarm/<id>/).
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Progress from '../../components/Progress.astro';
+import LogList from '../../components/LogList.astro';
+import { fieldName } from '../../data/fields';
+import { getUpdates, partsFor } from '../../lib';
+export async function getStaticPaths() {
+  const items = (await getCollection('swarm')).filter((i) => !i.data.demo);
+  return items.map((i) => ({ params: { id: i.id }, props: { i } }));
+}
+const { i } = Astro.props;
+const d = i.data;
+const { Content } = await render(i);
+const updates = await getUpdates(`swarm/${i.id}`);
+---
+<Base title={d.title} description={d.summary} type="article">
+  <PageHero title={d.title} crumbs={[{ label: 'Swarm', href: '/swarm/' }, { label: d.title }]} lead={d.summary}>
+    <div class="post-meta">{d.field ? <a class="eyebrow" style="margin:0" href={`/fields/${d.field}/`}>{fieldName(d.field)}</a> : <span class="eyebrow" style="margin:0">Any field</span>}<span class={`status ${d.status.replace(' ', '')}`}>{d.status}</span></div>
+    <Progress parts={partsFor(d)} />
+    {(d.demo || d.code) && <div class="btns">{d.demo && <a class="btn primary" href={d.demo}>Open the live demo</a>}{d.code && <a class="btn ghost" href={d.code}>Code on GitHub</a>}</div>}
+  </PageHero>
+  <main>
+    <div class="detail">
+      <article class="prose"><Content />
+        {d.roadmap.length > 0 && <><h2>What's next</h2><ul>{d.roadmap.map((x) => <li>{x}</li>)}</ul></>}
+        <h2>Updates</h2>
+        {updates.length ? <LogList entries={updates} compact /> : <p class="muted">No logged updates yet. New work will appear here and in the <a href="/log/">activity log</a>.</p>}
+      </article>
+      <aside>
+        {d.for.length > 0 && <div class="card"><h2>Who it's for</h2><div class="tags">{d.for.map((s) => <span class="tag">{s}</span>)}</div></div>}
+        {d.stats.length > 0 && <div class="card"><h2>Results</h2><div class="stat-row">{d.stats.map((s) => <div><b>{s.value}</b>{s.label}</div>)}</div></div>}
+        <div class="card lk"><h2>Links</h2>{d.links.map((l) => <a href={l.href}>{l.label} →</a>)}<a href="/swarm/">All swarm work →</a></div>
+      </aside>
+    </div>
+  </main>
+</Base>
