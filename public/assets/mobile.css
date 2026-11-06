@@ -1,0 +1,123 @@
+/* =====================================================================
+   Phone layout (2026-11-05). Loaded after site.css, blog.css and home.css.
+   Every rule sits inside a max-width query, so desktop is unchanged.
+   Goal: a compact, app-like page on phones. Tighter gutters, even
+   tap targets (44px), single-line swipeable chip rows, full-width
+   buttons, code and tables that scroll inside their box instead of
+   stretching the page. The bottom tab bar comes from header.js.
+   ===================================================================== */
+@media (max-width: 720px) {
+  /* page frame */
+  main { padding: 18px 14px 32px; }
+  .hub { padding: 14px 14px 28px; }
+  .prof { padding-left: 14px; padding-right: 14px; }
+  .phero .in { padding: 16px 14px 20px; }
+  .phero h1 { font-size: 26px; line-height: 1.18; margin-bottom: 6px; }
+  .phero .lead, .lead { font-size: 15.5px; line-height: 1.55; }
+  .phero .btns { margin-top: 14px; }
+  h1 { overflow-wrap: break-word; }
+  h2.section { font-size: 20px; margin: 30px 0 4px; }
+  p.section-sub { margin-bottom: 12px; font-size: 14.5px; }
+  .updated { font-size: 13px; }
+
+  /* breadcrumbs: one quiet line */
+  .crumbs { font-size: 12.5px; margin: 0 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* cards and grids */
+  .card { padding: 14px 15px; border-radius: 14px; }
+  .hub-grid .card { padding: 14px 15px; }
+  .grid, .grid2, .hub-grid, .now-grid { gap: 12px; }
+  .hub-grid h2 { font-size: 15.5px; }
+  .stat-row { gap: 4px 18px; }
+  .stat-row b { font-size: 19px; }
+  .kv { gap: 4px 14px; }
+  .kv b { font-size: 16px; }
+
+  /* buttons: full width, even height, easy to tap */
+  .btns { gap: 8px; }
+  .btns > .btn { flex: 1 1 calc(50% - 4px); justify-content: center; text-align: center; min-height: 44px; padding: 10px 12px; }
+  .acts { gap: 8px; }
+  .acts-l { flex-basis: 100%; margin: 0; }
+  .acts > .btn.sm { flex: 1 1 auto; justify-content: center; min-height: 38px; padding: 8px 12px; font-size: 13.5px; }
+  .hub-grid .more { gap: 6px 16px; font-size: 14px; }
+  .hub-grid .more a { padding: 4px 0; }
+
+  /* chip and filter rows: one line you can swipe, edge to edge */
+  .filters, .tagbar, .log-filter {
+    flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+    margin-left: -14px; margin-right: -14px; padding: 2px 14px; scroll-padding: 0 14px;
+  }
+  .filters::-webkit-scrollbar, .tagbar::-webkit-scrollbar, .log-filter::-webkit-scrollbar { display: none; }
+  .filters > *, .tagbar > * { flex: none; white-space: nowrap; }
+  .filters button { min-height: 36px; }
+  .tagbar .tag { padding: 6px 12px; font-size: 13px; }
+  .tabs { margin-left: -14px; margin-right: -14px; padding: 0 6px; }
+
+  /* home */
+  .hub-top { gap: 12px 14px; padding-bottom: 14px; margin-bottom: 14px; }
+  .hub-id .links { gap: 2px 14px; }
+  .hub-id .links a { padding: 4px 0; }
+  .home-search input, .home-search button { min-height: 44px; }
+
+  /* forms: 16px stops iOS from zooming into fields */
+  input, select, textarea { font-size: 16px !important; }
+
+  /* reading pages */
+  .prose { font-size: 16px; line-height: 1.68; }
+  .prose h2 { font-size: 21px; }
+  .prose h3 { font-size: 17.5px; }
+  .prose :not(pre) > code { overflow-wrap: anywhere; word-break: break-word; }
+  .prose pre { font-size: 12.5px; padding: 12px 14px; border-radius: 10px; }
+  .prose table { font-size: 13.5px; }
+  .prose th { white-space: nowrap; }
+  .post-meta { gap: 4px 10px; font-size: 13.5px; }
+  .post-row h3 { font-size: 17px; }
+  .detail { gap: 20px; }
+
+  /* Kaggle table: one card per competition */
+  .card.scroll:has(.ktable) { padding: 4px 15px; overflow: visible; }
+  .ktable, .ktable tbody, .ktable tr, .ktable td { display: block; width: auto; }
+  .ktable thead { display: none; }
+  .ktable tr { padding: 12px 0; border-top: 1px solid var(--line); }
+  .ktable tbody tr:first-child { border-top: 0; }
+  .ktable td { border: 0 !important; padding: 0 !important; }
+  .ktable td:first-child { font-weight: 700; font-size: 15.5px; }
+  .ktable td.n { white-space: normal; color: var(--ink-2); font-weight: 600; margin: 2px 0 4px; }
+  .ktable td:last-child { color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+
+  /* activity log: time above the entry, roomier links */
+  .logd li { grid-template-columns: 1fr; gap: 2px; }
+  .logd .lm { gap: 6px 10px; font-size: 12.5px; }
+  .logd .lm a { padding: 2px 0; }
+
+  /* footer sits above the tab bar */
+  .now-grid .card h2 { font-size: 17px; }
+}
+
+@media (max-width: 380px) {
+  .btns > .btn { flex-basis: 100%; }
+  .phero h1 { font-size: 24px; }
+}
+
+/* No double gap between the page banner and the first heading of a write-up */
+@media (max-width: 720px) {
+  main > .prose:first-child > :first-child, main > article.prose > :first-child, .detail > .prose > :first-child { margin-top: 0; }
+  .hub-top { align-items: start; }
+}
+
+/* Tool apps (hospitality editions) on phones */
+@media (max-width: 720px) {
+  .wrap { padding-left: 14px; padding-right: 14px; }
+  .intro, .hero-tool, .hero-tool.hero-tool { padding: 16px 0 20px !important; }
+  .hero-tool .chips span, .intro .chips span { font-size: 13px; padding: 4px 10px; }
+  .intro h1, .hero-tool h1 { font-size: 26px; line-height: 1.18; margin-bottom: 6px; }
+  .intro p.lead, .hero-tool .lead { font-size: 15.5px; line-height: 1.55; }
+  .badge-row, .hero-tool .chips, .intro .chips {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin-left: -14px; margin-right: -14px; padding: 2px 14px; margin-top: 12px;
+  }
+  .badge-row::-webkit-scrollbar, .hero-tool .chips::-webkit-scrollbar, .intro .chips::-webkit-scrollbar { display: none; }
+  .badge-row > *, .hero-tool .chips > *, .intro .chips > * { flex: none; white-space: nowrap; }
+  section.block { margin-bottom: 20px; }
+  .card + .card { margin-top: 12px; }
+}

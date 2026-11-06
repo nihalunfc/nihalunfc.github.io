@@ -148,3 +148,5 @@ details.answer summary{cursor:pointer;font-weight:600;color:var(--muted)}
 .lesson img,.lesson svg{max-width:100%;height:auto}
 .lesson .flow p{margin:.6em 0}
 .backup .btn.ghost{color:var(--ink)}
+/* Phones (2026-11-05): menu button at the right edge, easy to tap */
+@media (max-width:600px){.top .menu{margin-left:auto;min-width:44px;min-height:40px;border-radius:10px}.main{padding:16px 14px 36px}.hero{padding:18px 14px}}
