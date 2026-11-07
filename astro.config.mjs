@@ -6,7 +6,7 @@ import rehypeFigures from './src/plugins/rehype-figures.mjs';
 const STATIC_PAGES = [
   '/swarm/explorer/', '/swarm/grid-batteries/', '/swarm/wildfire-drones/', '/swarm/hotel-operations/',
   '/projects/hospitality-bi/overview/', '/projects/self-healing-pipelines/compare/', '/projects/self-healing-pipelines/command-centre/',
-  '/tools/expense-calendar/personal/', '/tools/workforce-suite/hotels/', '/tools/operations-suite/hotels/',
+  '/tools/workforce-suite/hotels/', '/tools/operations-suite/hotels/',
   '/tools/pricing-recommender/hotels/', '/tools/demand-forecaster/hotels/', '/tools/overbooking-calculator/hotels/',
   '/tools/large-order-quote/hotels/', '/tools/kpi-dashboard/hotels/', '/tools/revenue-command-centre/hotels/',
   '/tools/shift-scheduler/hotels/', '/tools/task-board/hotels/', '/tools/labour-productivity/hotels/',
@@ -28,9 +28,14 @@ export default defineConfig({
     '/swarm/energy': '/swarm/grid-batteries/',
     '/swarm/wildfire': '/swarm/wildfire-drones/',
     '/swarm/hotel': '/swarm/hotel-operations/',
-    '/tools/expense-calendar/v1': '/tools/expense-calendar/personal/v1/',
-    '/tools/expense-calendar/v2': '/tools/expense-calendar/personal/v2/',
-    '/tools/expense-calendar/v3': '/tools/expense-calendar/personal/v3/',
+    // The expense calendar moved to fibub (2026-11-07). /tools/expense-calendar/personal/ stays as a
+    // "moved" page that helps people save their bills; v3 stays only to unlock passcode-locked data.
+    '/tools/expense-calendar': 'https://fibub.com/money/bill-calendar/',
+    '/tools/expense-calendar/v1': '/tools/expense-calendar/personal/',
+    '/tools/expense-calendar/v2': '/tools/expense-calendar/personal/',
+    '/tools/expense-calendar/v3': '/tools/expense-calendar/personal/',
+    '/tools/expense-calendar/personal/v1': '/tools/expense-calendar/personal/',
+    '/tools/expense-calendar/personal/v2': '/tools/expense-calendar/personal/',
   },
   integrations: [sitemap({ customPages: STATIC_PAGES, filter: (page) => !page.includes('/contact/thanks/') })],
   // Load the next page while the reader hovers or taps a link, so clicks feel instant.
