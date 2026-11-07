@@ -34,6 +34,8 @@ Shared files: `/assets/` (site CSS and JS; `/assets/hospitality/` for the hotel 
 
 **Rules for new URLs:** lower-case words joined by hyphens. Name tools after the job, not the sector (`/tools/shift-scheduler/`), and put the sector in the edition (`/tools/shift-scheduler/hotels/`). Never add a second home page, a separate header, a `.html` address or a `#/` route. Use absolute links (`/tools/...`) inside apps so deep pages work.
 
+**fibub.com (sister site):** no tool lives on both sites (nihal, 2026-11-07). Ambitious career prototypes stay here; everyday public tools live on fibub.com, and the two sites link to each other where useful. The expense calendar moved to fibub as the bill calendar: `/tools/expense-calendar/` redirects there, and `/tools/expense-calendar/personal/` is a "moved" page that saves people's bills as a backup file fibub can restore (`v3/` stays, unlisted, only so passcode-locked data can be unlocked; its `sw.js` now removes the old offline worker).
+
 **Old addresses:** `/hotel-business/...` pages are redirect stubs in the hotel-business repo (`docs/`). Moved addresses on this site are in `redirects` in `astro.config.mjs`. When something moves, add a redirect there; never leave the old copy live.
 
 ## Hosting and deploy
@@ -138,7 +140,7 @@ Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: 
 | Thing | File |
 |---|---|
 | Layout, head, SEO | `src/layouts/Base.astro` (cache-busts CSS and JS with `?v=`) |
-| Header and footer | `public/assets/header.js`: one header for every page, with plain links (Home, Swarm, Fields, Projects, Tools, Learn, Blog, Now, About) and two buttons: CV (PDF), which stays visible on phones, and Contact. The expense calendar app has an inline copy for offline use: refresh it when the header changes. Never write a literal closing script tag inside this file's comments. |
+| Header and footer | `public/assets/header.js`: one header for every page, with plain links (Home, Swarm, Fields, Projects, Tools, Learn, Blog, Now, About) and two buttons: CV (PDF), which stays visible on phones, and Contact. Never write a literal closing script tag inside this file's comments. |
 | Theme | Monochrome. `public/assets/site.css` (tokens at the end), `blog.css`, `home.css`. The hotel apps also load `/assets/hospitality/site.css`. Light and dark, saved in localStorage `nihal.theme`. |
 | Phones | `public/assets/mobile.css` (linked by `Base.astro`; `header.js` adds it to hand-written pages that show the site header). Every rule sits inside a `max-width` query so desktop is unchanged: tighter gutters, 44px buttons, chip rows that swipe sideways, Kaggle table as cards. Under 900px `header.js` also shows a bottom tab bar (Home, Projects, Tools, Learn, Menu) and the menu opens as a sheet of tiles. |
 | Local time | `public/assets/localtime.js` rewrites `<time data-local="time">` (and `datetime`) in the visitor's own time zone and regroups activity-log days by their local date. Pages are built in Eastern time, so they still read correctly without JavaScript. Blog dates are calendar dates and are not shifted. |
