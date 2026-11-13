@@ -29,6 +29,7 @@ Everything is one site, one repo, one header. Every page is a folder with an `in
 | Blog | `/blog/` | `/blog/<post>/` | `/blog/tags/<tag>/` |
 | About | `/about/` | `/about/cv/`, and the PDF at `/nihal-sulaiman-cv.pdf` | |
 | Single pages | `/now/`, `/log/`, `/contact/`, `/search/`, `/sitemap/`, `/disclaimer/` | | |
+| Personal apps (unlisted, `noindex`, not in the sitemap or search) | `/todo/` | | |
 
 Shared files: `/assets/` (site CSS and JS; `/assets/hospitality/` for the hotel apps), `/data/<field>/` (JSON the apps read), `/downloads/<field>/` (Excel files).
 
@@ -131,6 +132,7 @@ Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: 
 | Private review | `public/projects/self-healing-pipelines/review/` is password-locked: everything but the site header and footer is AES-encrypted in the browser, `noindex`, and left out of the sitemap and search. Only the encrypted file is ever committed; the readable sources and the password stay in the Claude project. To change it, rebuild with `build_site.py`. |
 | Learn | `src/pages/learn/index.astro` (course cards with a Modules drop-down; the one drop-down on the site, asked for by nihal) |
 | Tools index | `src/pages/tools/index.astro` |
+| To-do lists (personal, unlisted) | `public/todo/` (static app: `todo.js`, `todo.css`, offline `sw.js`, `manifest.webmanifest`). Saves in the browser (localStorage `nihal.todo.v1`) and syncs to nihal's Google Sheet through `sheet-backend.gs`, an Apps Script web app; its address and secret key live only in nihal's browser (`nihal.todo.conn`), never in the repo. Ticked or crossed-off items become snaps (Snaps tab in the Sheet). |
 | Contact | `src/pages/contact/index.astro` (Web3Forms key in `src/site.ts`; empty = mailto) |
 | Search | `src/pages/search.astro` (Pagefind) |
 | HTML site map | `src/pages/sitemap.astro` (built from the collections; add a group for a new section) |
