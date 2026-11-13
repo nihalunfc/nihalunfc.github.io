@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>To-do lists · Nihal</title>
+<meta name="description" content="Nihal's personal to-do lists for plans, trips, dates and places, with ticked items kept as snaps. Saves in this browser and can sync to a Google Sheet.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<link rel="manifest" href="/todo/manifest.webmanifest">
+<link rel="icon" href="/todo/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/todo/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="To-do">
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/todo/todo.css?v=1">
+<script src="/assets/header.js"></script>
+</head>
+<body>
+<site-header></site-header>
+<main class="td" data-pagefind-ignore="all">
+  <div class="td-top">
+    <div>
+      <h1>To-do lists</h1>
+      <p class="td-sub">Plans, trips, dates and places. Ticked items move to <b>Snaps</b>, so the list stays short and nothing is forgotten.</p>
+    </div>
+    <div class="td-top-actions">
+      <button class="td-sync" id="syncChip" type="button" title="Where your lists are saved"><span class="dot"></span><span id="syncText">Saved in this browser</span></button>
+      <button class="btn ghost sm" id="openSettings" type="button">Storage and backup</button>
+    </div>
+  </div>
+
+  <div class="td-tabs" role="tablist">
+    <button role="tab" id="tabLists" aria-selected="true" type="button">Lists</button>
+    <button role="tab" id="tabSnaps" aria-selected="false" type="button">Snaps <span class="n" id="snapCount"></span></button>
+  </div>
+
+  <!-- Lists view -->
+  <section id="viewLists" class="td-grid">
+    <aside class="td-side">
+      <div class="td-lists" id="listBar" aria-label="Your lists"></div>
+      <button class="td-newlist" id="newList" type="button">+ New list</button>
+    </aside>
+
+    <div class="td-main card" id="listPanel">
+      <div id="emptyAll" class="td-empty" hidden>
+        <h2>No lists yet</h2>
+        <p>Make one list per plan: a trip, a date night, a place to visit, a weekend of jobs.</p>
+        <p><button class="btn primary" id="emptyNew" type="button">Make your first list</button>
+           <button class="btn ghost" id="loadSample" type="button">Load sample lists</button></p>
+        <p class="td-note">Sample lists are sample data, to try the buttons. Delete them any time.</p>
+      </div>
+
+      <div id="listBody" hidden>
+        <header class="td-lhead">
+          <span class="td-swatch" id="lSwatch"></span>
+          <div class="td-ltitle">
+            <h2 id="lName"></h2>
+            <p id="lMeta"></p>
+          </div>
+          <button class="td-icon" id="lEdit" type="button" aria-label="Edit list" title="Edit list">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M14 6l4 4"/></svg>
+          </button>
+        </header>
+
+        <form class="td-add" id="addForm" autocomplete="off">
+          <span class="td-plus" aria-hidden="true">+</span>
+          <input id="addTask" type="text" placeholder="Add a task" aria-label="Add a task" maxlength="300">
+          <input id="addDue" type="date" aria-label="Due date (optional)" title="Due date (optional)">
+          <button class="btn primary sm" type="submit">Add</button>
+        </form>
+
+        <ul class="td-items" id="items"></ul>
+        <p class="td-done-all" id="allDone" hidden>All done. Ticked items are in the snaps below.</p>
+
+        <details class="td-snaps" id="listSnaps">
+          <summary>Snaps in this list <span class="n" id="listSnapCount"></span></summary>
+          <ul class="td-snaplist" id="listSnapItems"></ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Snaps view -->
+  <section id="viewSnaps" hidden>
+    <div class="card">
+      <div class="td-snaphead">
+        <h2>Snaps</h2>
+        <label class="td-filter">List
+          <select id="snapFilter"><option value="">All lists</option></select>
+        </label>
+      </div>
+      <p class="td-note">Everything you ticked off or crossed out, newest first, with the time it happened. Restore puts an item back on its list.</p>
+      <div id="snapDays"></div>
+      <div id="archived"></div>
+    </div>
+  </section>
+</main>
+
+<!-- Item editor -->
+<dialog class="td-dlg" id="itemDlg">
+  <form method="dialog" id="itemForm">
+    <h3>Edit task</h3>
+    <label>Task<input id="iTask" type="text" required maxlength="300"></label>
+    <label>Notes<textarea id="iNotes" rows="3" maxlength="2000" placeholder="Address, booking number, who is bringing what"></textarea></label>
+    <label>Due date<input id="iDue" type="date"></label>
+    <label>List<select id="iList"></select></label>
+    <div class="td-dlg-row">
+      <button class="btn ghost sm danger" id="iDelete" type="button">Delete</button>
+      <button class="btn ghost sm" id="iDrop" type="button" title="Move to snaps as not done">Cross off</button>
+      <span class="sp"></span>
+      <button class="btn ghost sm" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary sm" id="iSave" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- List editor -->
+<dialog class="td-dlg" id="listDlg">
+  <form method="dialog" id="listForm">
+    <h3 id="listDlgTitle">New list</h3>
+    <label>Name<input id="lfName" type="text" required maxlength="80" placeholder="Banff trip"></label>
+    <div class="td-two">
+      <label>Kind<select id="lfType">
+        <option>Plan</option><option>Trip</option><option>Date</option><option>Place</option><option>Shopping</option><option>Event</option><option>Other</option>
+      </select></label>
+      <label>Date<input id="lfDate" type="date"></label>
+    </div>
+    <label>Place or note<input id="lfPlace" type="text" maxlength="120" placeholder="Optional"></label>
+    <fieldset class="td-colours"><legend>Colour</legend><div id="lfColours"></div></fieldset>
+    <div class="td-dlg-row">
+      <button class="btn ghost sm danger" id="lfDelete" type="button" hidden>Delete list</button>
+      <button class="btn ghost sm" id="lfArchive" type="button" hidden title="Hide the list and keep it in Snaps">Snap whole list</button>
+      <span class="sp"></span>
+      <button class="btn ghost sm" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary sm" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Storage, sync and backup -->
+<dialog class="td-dlg wide" id="setDlg">
+  <form method="dialog" id="setForm">
+    <h3>Storage and backup</h3>
+    <p>Your lists are always saved in this browser first, so the app opens instantly and works offline. Connect your Google Sheet to keep them permanently and see them on every device. Changes made offline sync when you are back online.</p>
+
+    <h4>Google Sheet</h4>
+    <p class="td-note" id="connState">Not connected.</p>
+    <label>Web app address<input id="sUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" spellcheck="false"></label>
+    <label>Secret key<input id="sKey" type="password" placeholder="The key that setup() printed" spellcheck="false" autocomplete="off"></label>
+    <p class="td-note">The key is kept only in this browser. It is never put in the site's code.</p>
+    <div class="td-dlg-row">
+      <button class="btn primary sm" id="sConnect" type="button">Connect and sync</button>
+      <button class="btn ghost sm" id="sSyncNow" type="button">Sync now</button>
+      <button class="btn ghost sm" id="sDisconnect" type="button">Disconnect</button>
+    </div>
+    <details class="td-steps">
+      <summary>How to connect your Sheet (about 5 minutes, once)</summary>
+      <ol>
+        <li>Make a new Google Sheet in your Drive and name it, for example <b>To-do lists</b>.</li>
+        <li>In the Sheet, open <b>Extensions › Apps Script</b>. Delete what is there and paste in <a href="/todo/sheet-backend.gs" download data-no-count>sheet-backend.gs</a>. Save.</li>
+        <li>Pick <b>setup</b> in the function menu and press <b>Run</b>. Allow access to your own Sheet when Google asks. It makes the Lists, Items and Snaps tabs, formats them, and prints your secret key in the log.</li>
+        <li>Press <b>Deploy › New deployment</b>, type <b>Web app</b>, execute as <b>Me</b>, who has access <b>Anyone</b>. Copy the web app address.</li>
+        <li>Paste the address and the key above and press <b>Connect and sync</b>. Lists already in this browser are copied to the Sheet.</li>
+      </ol>
+      <p class="td-note">"Anyone" only means the address answers without a Google sign-in. Without your secret key it returns nothing and changes nothing. To lock it out, run <b>newKey</b> in Apps Script and paste the new key here.</p>
+      <p class="td-note">You can also type straight into the Sheet: add a row on the Items tab with a list name and a task. Set its status to <b>done</b> and it moves to Snaps on the next sync.</p>
+    </details>
+
+    <h4>Backup file</h4>
+    <div class="td-dlg-row">
+      <button class="btn ghost sm" id="sExport" type="button">Save backup (JSON)</button>
+      <button class="btn ghost sm" id="sCsv" type="button">Save as spreadsheet (CSV)</button>
+      <label class="btn ghost sm td-file">Restore backup<input id="sImport" type="file" accept=".json,application/json"></label>
+    </div>
+    <h4>Install</h4>
+    <p class="td-note">Add it to your home screen (phone: Share › Add to Home Screen, or the browser menu › Install app). It then opens like an app and works offline.</p>
+    <div class="td-dlg-row">
+      <button class="btn ghost sm danger" id="sClear" type="button">Clear this browser</button>
+      <span class="sp"></span>
+      <button class="btn primary sm" value="close">Done</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="td-toast" id="toast" role="status" aria-live="polite" hidden><span id="toastText"></span><button type="button" id="toastUndo">Undo</button></div>
+
+<site-footer></site-footer>
+<script src="/todo/todo.js?v=1" defer></script>
+</body>
+</html>

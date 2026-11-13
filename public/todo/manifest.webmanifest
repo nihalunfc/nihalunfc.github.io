@@ -1,0 +1,16 @@
+{
+  "name": "To-do lists",
+  "short_name": "To-do",
+  "description": "Lists for plans, trips, dates and places, with ticked items kept as snaps.",
+  "start_url": "/todo/",
+  "scope": "/todo/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "/todo/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/todo/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/todo/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/todo/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
