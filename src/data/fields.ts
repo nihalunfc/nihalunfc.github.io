@@ -8,7 +8,8 @@ export const FIELDS: readonly { id: string; name: string; blurb: string; ideas: 
   { id: 'retail', name: 'Retail', blurb: 'Stores, chains and online retail: sales, stock, pricing, staffing and the supply chain behind them.', ideas: ['Store and SKU demand forecasting', 'Inventory and replenishment pipeline', 'Markdown and price optimisation', 'Multi-store sales dashboard'], also: ['retail'], topics: [], for: [] },
   { id: 'logistics', name: 'Logistics', blurb: 'Warehouses, fleets and deliveries: demand, routing, loads and throughput.', ideas: ['Delivery load and route planner', 'Warehouse pick-rate dashboard', 'Bottleneck control from natural swarm rules'], topics: [
     { name: 'Traffic and fleet bottlenecks', note: 'Flow rules from the natural swarm study, for trucks, deliveries and warehouses', href: '/swarm/bird-flocks/' },
-    { name: 'Air traffic flow', note: 'Spacing and merging rules from bird flocks, for busy airspace and drone corridors', href: '/swarm/bird-flocks/' },
+    { name: 'Air traffic flow', note: 'Swarm separation and alignment cut close aircraft pairs by 86% in simulation, from real OpenSky traffic', href: '/swarm/swarm-applications/' },
+    { name: 'Adaptive task pickup', note: 'Ant-style thresholds: mean queue 5.6 vs 69 for round robin (simulated)', href: '/swarm/swarm-applications/' },
   ], for: ['Transport departments', 'Air traffic management'] },
   { id: 'energy', name: 'Energy', blurb: 'Electricity grids, oil and gas, buildings and batteries: peaks, monitoring, savings and control.', ideas: ['Building energy pipeline from meter data', 'Energy swarm on Ontario and Alberta grid data', 'Pipeline and equipment monitoring'], topics: [
     { name: 'Grid balancing', note: 'Battery fleets that cut the daily peak, next on Ontario and Alberta grids', href: '/swarm/canada-energy-swarm/' },
@@ -20,14 +21,17 @@ export const FIELDS: readonly { id: string; name: string; blurb: string; ideas: 
     { name: 'Wildfire resource sharing', note: 'Provinces lending crews and aircraft where fires are about to grow', href: '/swarm/wildfire-resource-sharing/' },
     { name: 'Wildfire drones', note: 'Drones routing retardant to choke points, tested against the nearest-fire rule', href: '/swarm/wildfire-drones/' },
     { name: 'Emergency response coordination', note: 'Many agencies acting as one team without a single control room' },
-    { name: 'Panic, misinformation and epidemic spread', note: 'How fear, rumours and disease move through a group, from the natural swarm study', href: '/swarm/bird-flocks/' },
+    { name: 'Panic, misinformation and epidemic spread', note: 'Twitter cascades, COVID waves, wildfire growth and evacuations measured with one swarm law', href: '/swarm/universal-swarm-law/' },
   ], for: ['Provincial wildfire agencies', 'Federal and provincial emergency management'] },
   { id: 'science', name: 'Science', blurb: 'Research data: clean pipelines, reproducible models and competitions.', ideas: ['Lab data cleaning pipeline', 'Experiment results warehouse'], topics: [
-    { name: 'Natural swarm study', note: 'Rules of real bird flocks from measured data, written as fluid-like equations', href: '/swarm/bird-flocks/' },
+    { name: 'One law for 25 real swarms', note: 'Alignment, a push-to-pull switch and set-point regulation, measured in fish, birds, crowds, aircraft, epidemics and fires', href: '/swarm/universal-swarm-law/' },
+    { name: 'Natural swarm study', note: 'Rules of real fish schools and bird flocks from measured data, written as fluid-like equations', href: '/swarm/bird-flocks/' },
+    { name: 'The swarm universe (speculative)', note: 'Dark energy as a self-regulating swarm, fitted to supernova and BAO data', href: '/swarm/swarm-universe/' },
+    { name: 'Paper draft', note: 'When does a learned swarm beat the rule?', href: '/swarm/paper/' },
     { name: 'Swarm intelligence research', note: 'One engine, tested against strong rules over many seeds, written up as a paper', href: '/projects/swarm-research/' },
   ], for: [] },
   { id: 'health', name: 'Health', blurb: 'Clinics, hospitals and ambulances: appointments, staffing and response times.', ideas: ['Appointment no-show forecaster', 'Ambulance rerouting', 'Clinic staffing planner'], topics: [
-    { name: 'Epidemic spread', note: 'How disease moves through a group, from the natural swarm study', href: '/swarm/bird-flocks/' },
+    { name: 'Epidemic spread', note: 'Saturating growth laws forecast COVID waves 3 to 5 times better than exponential', href: '/swarm/swarm-applications/' },
   ], for: ['Public health agencies'] },
   { id: 'finance', name: 'Finance', blurb: 'Banks, insurance and personal money: reporting, reconciliation and anomaly checks.', ideas: ['Claims anomaly checker', 'Reconciliation pipeline', 'Portfolio KPI dashboard'], topics: [], for: [] },
 ];
