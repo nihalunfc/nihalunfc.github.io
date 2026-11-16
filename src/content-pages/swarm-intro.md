@@ -16,7 +16,7 @@ Many real problems are thousands of small decisions made at the same time: when 
 - **Hotel operations (paused).** HVAC, lighting and staff respond to occupancy and energy prices: $211k a year over 5 seeds for the sample hotel group, below the $252k a simple peak-alert rule gets.
 
 - **One law for 25 real swarms.** All 8 moving swarms align with their neighbours, the switch from keeping apart to drawing together sits at about one neighbour distance (median 0.96), and 67% of collective series pull themselves back toward a set point. [Read the study](/swarm/universal-swarm-law/).
-- **Six application frameworks.** The same rules as controllers: close aircraft pairs cut by 86% in simulation, COVID waves forecast 3 to 5 times better than exponential growth, and honest losses where a simple baseline still wins. [See all six](/swarm/swarm-applications/).
+- **Application frameworks.** The same rules as controllers for grids, mixed energy fleets, wildfire, epidemics, air traffic, drones and logistics: close aircraft pairs cut by 86% in simulation, COVID waves forecast 3 to 5 times better than exponential growth, and honest losses where a simple baseline still wins. [See them all](/swarm/swarm-applications/).
 - **The swarm universe (speculative).** Dark energy as the universe's own set-point control. It fits supernova and BAO data as well as the standard model, but the data do not prefer it, and it does not solve the Hubble tension. [Read the model and its faults](/swarm/swarm-universe/).
 
 The full write-up of the engine results is the [paper draft](/swarm/paper/). The work started with multi-agent reinforcement learning on ERCOT grid time series and grew from there. The engine is open source under the MIT licence.

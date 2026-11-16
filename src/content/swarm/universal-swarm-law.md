@@ -18,7 +18,7 @@ parts:
   - { name: "Same measurements on every dataset", done: true }
   - { name: "General adaptive swarm equation (GASE) fitted", done: true }
   - { name: "Ensemble of constants and leave-one-group-out check", done: true }
-  - { name: "Six application frameworks built on the law", done: true }
+  - { name: "Application frameworks built on the law", done: true }
   - { name: "Bootstrap over recordings for every constant", done: false }
   - { name: "Large flocks (chimney swifts, about 1,800 birds) for the fluid stage", done: false }
   - { name: "Canadian data: IESO, AESO, CWFIS", done: false }
@@ -31,7 +31,7 @@ links:
   - { label: "Study summary on GitHub", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/docs/universal-swarm/README.md" }
   - { label: "Full results tables", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/results/universal/REPORT.md" }
   - { label: "Data sources and licences", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/universal/sources.yaml" }
-  - { label: "Six application frameworks", href: "/swarm/swarm-applications/" }
+  - { label: "Application frameworks", href: "/swarm/swarm-applications/" }
   - { label: "The swarm-universe model (speculative)", href: "/swarm/swarm-universe/" }
   - { label: "First real data: fish schools", href: "/swarm/bird-flocks/" }
 code: https://github.com/nihalunfc/swarm-intelligence/tree/main/universal

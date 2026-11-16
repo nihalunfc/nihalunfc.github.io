@@ -20,12 +20,13 @@ parts:
   - { name: "Comparison with 13 models, evidence and contradiction table", done: true }
   - { name: "Full CMB likelihoods (Planck)", done: false }
   - { name: "Growth data: weak lensing and redshift-space distortions", done: false }
-  - { name: "Cautious write-up that states its limits", done: false }
+  - { name: "Cautious paper-style draft that states its limits", done: true }
 roadmap:
   - "Test against full Planck CMB likelihoods, weak lensing and redshift-space distortions, the strongest tests of a structure-triggered dark energy."
   - "Check the predictions when DESI DR3 and Euclid data are released."
-  - "Write it up as a cautious draft that states its limits first."
+  - "Decide where the draft goes next: a section of the main paper, a separate preprint, or the site only."
 links:
+  - { label: "Paper-style draft (blog post)", href: "/blog/swarm-universe-draft/" }
   - { label: "Full theory on GitHub", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/docs/universal-swarm/swarm-universe-theory.md" }
   - { label: "Cosmology fit tables", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/results/universal/cosmology.md" }
   - { label: "One law for 25 real swarms", href: "/swarm/universal-swarm-law/" }
@@ -33,7 +34,7 @@ code: https://github.com/nihalunfc/swarm-intelligence/tree/main/universal/cosmos
 ---
 <div class="callout warn">
 
-**Speculative.** This is a hypothesis with a first data test, not a result. Nothing here is a proof, and the standard model (ΛCDM) explains the same data with fewer parameters. The model is written so it can fail: each claim says which observation would rule it out.
+**Speculative.** Read the [paper-style draft](/blog/swarm-universe-draft/) for the full write-up. This is a hypothesis with a first data test, not a result. Nothing here is a proof, and the standard model (ΛCDM) explains the same data with fewer parameters. The model is written so it can fail: each claim says which observation would rule it out.
 
 </div>
 

@@ -8,4 +8,4 @@ link: /swarm/
 repo: https://github.com/nihalunfc/nihalunfc.github.io
 tags: [Website, Research]
 ---
-New pages for the universal swarm law, the six application frameworks, the speculative swarm-universe model and the paper draft (PDF). The fish results are on the natural swarm study page, and the About page, Disclaimer, Now page and field topics are updated.
+New pages for the universal swarm law, the application frameworks, the speculative swarm-universe model with its paper-style draft, and the swarm paper draft (PDF). The fish results are on the natural swarm study page, and the About page, Disclaimer, Now page and field topics are updated.
