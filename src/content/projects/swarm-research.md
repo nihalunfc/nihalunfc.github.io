@@ -5,7 +5,7 @@ summary: My flagship. One open-source multi-agent engine, tested against strong 
 category: Applied AI
 status: Ongoing
 date: 2026-10-01
-updated: 2026-11-06
+updated: 2026-11-16
 order: -1
 featured: false
 demo: /swarm/
@@ -20,6 +20,10 @@ parts:
   - { name: "Paper submitted", done: false }
   - { name: "Energy swarm on Canadian grid data", done: false, added: 2026-11-05 }
   - { name: "Swarm agents with AI agent crews", done: false, added: 2026-11-05 }
+  - { name: "Natural swarm study: fish schools on real data", done: true, added: 2026-11-16 }
+  - { name: "One law measured across 25 real datasets", done: true, added: 2026-11-16 }
+  - { name: "Six application frameworks", done: true, added: 2026-11-16 }
+  - { name: "Swarm-universe model, first data test (speculative)", done: true, added: 2026-11-16 }
 stats:
   - { value: "704 MW", label: "average grid peak cut, 10 seeds (best possible 949 MW)" }
   - { value: "10.8%", label: "demand swings cut, vs 9.1% best rule" }
@@ -27,6 +31,9 @@ stats:
 links:
   - { label: "Swarm Intelligence: all tracks and demos", href: "/swarm/" }
   - { label: "All demos compared", href: "/swarm/explorer/" }
+  - { label: "Paper draft (PDF)", href: "/downloads/science/swarm/when-does-a-learned-swarm-beat-the-rule-draft.pdf" }
+  - { label: "One law for 25 real swarms", href: "/swarm/universal-swarm-law/" }
+  - { label: "The swarm universe (speculative)", href: "/swarm/swarm-universe/" }
   - { label: "Engine code on GitHub (MIT)", href: "https://github.com/nihalunfc/swarm-intelligence" }
 limitations:
   - "All results so far are from simulations: real grid data from 2020 for the grid batteries, and simulated forests and hotels."
@@ -51,4 +58,12 @@ On a stressed grid, the swarm cut the peak by 704 MW on average over 10 training
 
 ## What's next
 
-Three tracks, all on [/swarm/](/swarm/): applications in energy, oil and gas and wildfires; swarm agents working with AI agent crews; and a study of how real bird flocks move.
+The full write-up is the [paper draft](/swarm/paper/) ([PDF](/downloads/science/swarm/when-does-a-learned-swarm-beat-the-rule-draft.pdf)).
+
+## Natural swarms
+
+The work now also studies real swarms from measured data only. Fish schools came first. Then the same measurements on 25 real datasets found one general law: agents align with neighbours, switch from keeping apart to drawing together at about one neighbour distance, and the group pulls itself back toward a set point ([the study](/swarm/universal-swarm-law/)). Six [application frameworks](/swarm/swarm-applications/) reuse it, and a [speculative model](/swarm/swarm-universe/) asks whether the universe's expansion is regulated the same way.
+
+## What's next
+
+Three tracks, all on [/swarm/](/swarm/): applications in energy, oil and gas and wildfires; swarm agents working with AI agent crews; and the natural swarm study, next with large bird flocks.

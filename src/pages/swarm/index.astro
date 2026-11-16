@@ -14,11 +14,11 @@ const href = (i: (typeof items)[number]) => i.data.demo || `/swarm/${i.id}/`;
 const TRACKS = [
   { id: 'applications', name: 'Applications', lead: 'One engine applied to real problems, each tested against the rule people use today. Now focused on energy grids, oil and gas, and wildfires, with tools for Canadian federal and provincial governments in mind.' },
   { id: 'crews', name: 'Swarm agents and AI agent crews', lead: 'Fast swarm agents act; a crew of AI language-model agents watches the results, flags gaps and proposes fixes that a person approves.' },
-  { id: 'nature', name: 'Natural swarm study', lead: 'The rules real flocks follow, worked out from measured data and written as fluid-like equations, to ease bottlenecks in transport, logistics and air traffic.' },
+  { id: 'nature', name: 'Natural swarm study', lead: 'The rules real swarms follow, worked out from measured data only: fish, birds, crowds, traffic, epidemics, fires and more. One general law, fluid-like equations for transport, logistics and air traffic, and a speculative model of the universe as a swarm.' },
 ] as const;
 const updates = (await getLog()).filter((e) => (e.data.ref || '').startsWith('swarm'));
 ---
-<Base title="Swarm Intelligence" description="Swarm Intelligence, Nihal Sulaiman's flagship project: one multi-agent engine for energy grids, oil and gas and wildfires, swarm agents working with AI agent crews, and a study of how real bird flocks move.">
+<Base title="Swarm Intelligence" description="Swarm Intelligence, Nihal Sulaiman's flagship project: one multi-agent engine for energy grids, oil and gas and wildfires, swarm agents working with AI agent crews, and a study of real swarms, from fish schools to a general swarm law.">
   <PageHero title="Swarm Intelligence" crumbs={[{ label: 'Swarm' }]} lead="My flagship project: one multi-agent engine in which every agent makes its own decision and the group still acts as one team. Three tracks: applications, swarm agents with AI agent crews, and a study of natural swarms." />
   <main>
     {TRACKS.map((t) => { const list = items.filter((i) => i.data.track === t.id); return list.length > 0 && (
@@ -51,7 +51,7 @@ const updates = (await getLog()).filter((e) => (e.data.ref || '').startsWith('sw
       <aside>
         <div class="card lk"><h2>Demos</h2>{items.filter((i) => i.data.demo).map((i) => <a href={i.data.demo}>{i.data.title} →</a>)}<a href="/swarm/explorer/">All demos compared →</a></div>
         <div class="card lk"><h2>In progress and planned</h2>{items.filter((i) => !i.data.demo).map((i) => <a href={href(i)}>{i.data.title} →</a>)}</div>
-        <div class="card lk"><h2>Code</h2><a href="https://github.com/nihalunfc/swarm-intelligence">Swarm engine on GitHub (MIT) →</a></div>
+        <div class="card lk"><h2>Paper and code</h2><a href="/swarm/paper/">Paper draft →</a><a href="/downloads/science/swarm/when-does-a-learned-swarm-beat-the-rule-draft.pdf">Paper (PDF) →</a><a href="https://github.com/nihalunfc/swarm-intelligence">Swarm engine on GitHub (MIT) →</a><a href="https://github.com/nihalunfc/swarm-intelligence/tree/main/docs/universal-swarm">Universal swarm study on GitHub →</a></div>
       </aside>
     </div>
   </main>
