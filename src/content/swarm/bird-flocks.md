@@ -15,24 +15,27 @@ parts:
   - { name: "Bird trajectories cleaned and measured: jackdaws, pigeons, chimney swifts", done: true, added: 2026-11-17 }
   - { name: "Agent models fitted (alignment, neighbours, noise, reaction delay)", done: true }
   - { name: "Fluid-like equation fitted on a large flock (swifts, horizontal plane)", done: true, added: 2026-11-17 }
-  - { name: "Fluid equation in 3D, with flock edges as boundaries", done: false }
+  - { name: "Fluid equation in 3D (swifts)", done: true, added: 2026-11-17 }
+  - { name: "Flock edges as boundaries", done: false }
+  - { name: "First real bottleneck test: crowd exit and highway merge", done: true, added: 2026-11-17 }
   - { name: "Compared with other natural swarms (fish, insects, crowds)", done: true }
   - { name: "One general form tested on held-out flocks", done: false }
   - { name: "Checked against my engineered swarm", done: false }
   - { name: "Paper", done: false }
 stats:
-  - { value: "66%", label: "fluid equation fit on chimney swifts (hundreds per frame), held out" }
+  - { value: "83%", label: "3D fluid fit on chimney swifts, held out, with one term" }
+  - { value: "32 → 36%", label: "drivers at a real lane drop explained once flock rules are added" }
   - { value: "13%", label: "same fit on a 39-fish school: too few for a continuum" }
   - { value: "10 → 27°/s", label: "pigeon turning when the robotic falcon comes within 30 m" }
-  - { value: "k = 7", label: "nearest neighbours pigeons follow, as reported for starlings" }
 roadmap:
-  - "Next: the swift fit in 3D, then the fitted terms inside the agent swarm on a traffic or logistics bottleneck."
+  - "Next: a control test at the highway merge. Give a share of vehicles the cohesion rule in a model calibrated on the real data and measure throughput."
   - "Starling tracks: a request to the research group that holds them is drafted."
   - "Real data only: published trajectories, photos and videos. No synthetic flocks."
   - "A new parameter is kept only if it improves the fit on flocks it was not fitted on."
 links:
   - { label: "Findings on GitHub", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/nature/FINDINGS.md" }
   - { label: "Four-species comparison table", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/results/nature/comparison.md" }
+  - { label: "Bottleneck result tables", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/results/nature/bottlenecks.md" }
   - { label: "Fish-school result tables", href: "https://github.com/nihalunfc/swarm-intelligence/blob/main/results/nature/fish-tetra-2024.md" }
   - { label: "One law for 25 real swarms", href: "/swarm/universal-swarm-law/" }
   - { label: "Swarm engine code (MIT)", href: "https://github.com/nihalunfc/swarm-intelligence" }
@@ -78,6 +81,18 @@ Three open bird datasets (all CC0) were measured the same way as the fish: 6 wil
 4. **A predator is a clear outside factor.** When the robotic falcon comes within 30 m, pigeons turn almost three times as sharply (27 vs 10 degrees per second) and slow from 20.8 to 17.3 m/s, yet stay aligned and turn as one.
 5. **Who they follow depends on the species.** Pigeons follow their 7 nearest neighbours, the number reported for starlings. Jackdaws lean on everyone within a fixed distance. Neither rule predicts an individual bird's turn well, so this is a tendency, not a law.
 
+## In 3D, the swift flock is almost one term
+
+With vertical motion included, the fluid fit explains **83%** of the swifts' motion on held-out data, and the sparse fit keeps a single term: the flow carrying itself along. Each bird mostly follows the bend of a smooth, steady flow circling the roost. A constant vertical pull was tested and not needed. A high score here says the flow is smooth. It is not yet a force law for how the flock reacts to something new.
+
+## First real bottlenecks: a crowd exit and a highway merge
+
+Two open datasets (CC BY 4.0): 150 people leaving a corridor through exits 0.7 to 1.8 m wide (Juelich 2009), and drone-tracked cars where a highway narrows from four lanes to three (DRaT 2025, about 5,000 vehicles).
+
+1. **Flock rules help describe drivers.** A standard car-following rule explains 32.3% of each driver's next-second speed change in congestion. Adding two bird rules (match the 6 nearest vehicles' speed and stay with them) raises that to 35.5%. In free flow it rises from 7.2% to 10.1%. Drivers react to the group, not only to the car ahead, and most of the gain comes from staying with the group.
+2. **A crowd at an exit is not a fluid at this size.** Flow rises with exit width (1.6 to 2.8 people per second), and people keep a steady personal space of about 0.6 m at every width. Neighbour rules explain about 20% of turns, more than in any animal group, but the fluid fit explains only 1 to 10%.
+3. **Order does not buy flow.** How aligned the crowd is before the exit does not predict how many people get through just after, so "more aligned means more flow" is not supported.
+
 ## Where it stands
 
-Four species measured (fish, jackdaws, pigeons, swifts), and the fluid equation works on the large flock. Next: the fit in 3D, then the fitted terms inside the agent swarm on a traffic or logistics bottleneck.
+Four species and two real bottlenecks measured. The useful ingredient for traffic so far is a group-aware rule (stay with your nearest few), not a fluid equation, which only clearly fits the large circling swift flock. Next: a control test at the merge, giving a share of vehicles that rule and measuring throughput.
