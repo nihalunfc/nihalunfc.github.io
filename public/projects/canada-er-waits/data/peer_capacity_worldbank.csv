@@ -1,0 +1,39 @@
+country_code,country,indicator,indicator_code,year,value,source_url
+CAN,Canada,Hospital beds per 1000,SH.MED.BEDS.ZS,2022,2.54,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+IND,India,Hospital beds per 1000,SH.MED.BEDS.ZS,2021,1.59,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+GBR,United Kingdom,Hospital beds per 1000,SH.MED.BEDS.ZS,2022,2.42,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+AUS,Australia,Hospital beds per 1000,SH.MED.BEDS.ZS,2016,3.82,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+DEU,Germany,Hospital beds per 1000,SH.MED.BEDS.ZS,2023,7.55,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+FRA,France,Hospital beds per 1000,SH.MED.BEDS.ZS,2022,5.65,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+USA,United States,Hospital beds per 1000,SH.MED.BEDS.ZS,2022,2.68,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+NLD,Netherlands,Hospital beds per 1000,SH.MED.BEDS.ZS,2022,2.42,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+JPN,Japan,Hospital beds per 1000,SH.MED.BEDS.ZS,2022,12.59,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.BEDS.ZS?format=json&mrnev=1&per_page=100
+CAN,Canada,Nurses and midwives per 1000,SH.MED.NUMW.P3,2023,11.26,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+IND,India,Nurses and midwives per 1000,SH.MED.NUMW.P3,2020,1.72,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+GBR,United Kingdom,Nurses and midwives per 1000,SH.MED.NUMW.P3,2023,9.549,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+AUS,Australia,Nurses and midwives per 1000,SH.MED.NUMW.P3,2022,13.45,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+DEU,Germany,Nurses and midwives per 1000,SH.MED.NUMW.P3,2022,12.25,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+FRA,France,Nurses and midwives per 1000,SH.MED.NUMW.P3,2021,9.422,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+USA,United States,Nurses and midwives per 1000,SH.MED.NUMW.P3,2022,13.38,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+NLD,Netherlands,Nurses and midwives per 1000,SH.MED.NUMW.P3,2022,11.67,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+JPN,Japan,Nurses and midwives per 1000,SH.MED.NUMW.P3,2022,12.98,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.MED.NUMW.P3?format=json&mrnev=1&per_page=100
+CAN,Canada,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2024,7645.93,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+IND,India,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2023,346.25,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+GBR,United Kingdom,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2024,6605.75,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+AUS,Australia,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2023,7690.82,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+DEU,Germany,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2024,8825.61,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+FRA,France,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2024,6868.21,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+USA,United States,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2023,13473.19,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+NLD,Netherlands,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2024,8194.57,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+JPN,Japan,Health spending per capita (PPP intl $),SH.XPD.CHEX.PP.CD,2023,5365.08,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.CHEX.PP.CD?format=json&mrnev=1&per_page=100
+CAN,Canada,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2024,15.28,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+IND,India,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2023,43.89,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+GBR,United Kingdom,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2024,14.56,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+AUS,Australia,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2023,15.85,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+DEU,Germany,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2024,10.71,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+FRA,France,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2024,9.23,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+USA,United States,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2023,10.93,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+NLD,Netherlands,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2024,11.79,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+JPN,Japan,Out-of-pocket share of health spending (%),SH.XPD.OOPC.CH.ZS,2023,12.24,https://api.worldbank.org/v2/country/CAN;IND;GBR;AUS;DEU;FRA;USA;NLD;JPN/indicator/SH.XPD.OOPC.CH.ZS?format=json&mrnev=1&per_page=100
+CAN,Canada,Physicians per 1000,SH.MED.PHYS.ZS,2023,2.819,https://api.worldbank.org/v2/country/CAN/indicator/SH.MED.PHYS.ZS?format=json&mrnev=1
+IND,India,Physicians per 1000,SH.MED.PHYS.ZS,2020,0.723,https://api.worldbank.org/v2/country/IND/indicator/SH.MED.PHYS.ZS?format=json&mrnev=1
