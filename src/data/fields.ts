@@ -32,6 +32,7 @@ export const FIELDS: readonly { id: string; name: string; blurb: string; ideas: 
   ], for: [] },
   { id: 'health', name: 'Health', blurb: 'Clinics, hospitals and ambulances: appointments, staffing and response times.', ideas: ['Appointment no-show forecaster', 'Ambulance rerouting', 'Clinic staffing planner'], topics: [
     { name: 'Epidemic spread', note: 'Saturating growth laws forecast COVID waves 3 to 5 times better than exponential', href: '/swarm/swarm-applications/' },
+    { name: 'ER wait bottlenecks', note: 'Full ward beds, not ER doctors, drive the 8-hour wait; a flow simulation tests 8 fixes', href: '/projects/canada-er-waits/' },
   ], for: ['Public health agencies'] },
   { id: 'finance', name: 'Finance', blurb: 'Banks, insurance and personal money: reporting, reconciliation and anomaly checks.', ideas: ['Claims anomaly checker', 'Reconciliation pipeline', 'Portfolio KPI dashboard'], topics: [], for: [] },
 ];
