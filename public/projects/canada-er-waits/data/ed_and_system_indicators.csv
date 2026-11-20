@@ -1,0 +1,46 @@
+geography,measure,value,unit,period,source,source_url
+Canada,Unscheduled ED visits,15.6,million,2025-26,CIHI NACRS,https://www.cihi.ca/en/nacrs-emergency-department-visits-and-lengths-of-stay
+Canada,Unscheduled ED visits,16.1,million,2024-25,CIHI NACRS,https://www.cihi.ca/en/nacrs-emergency-department-visits-and-lengths-of-stay
+Canada,ED visits ending in admission,12,%,2024-25,CIHI,https://www.cihi.ca/en/wait-times-in-canada-2026
+Canada,Total time in ED - median,4,hours,2024-25,CIHI,https://www.cihi.ca/en/wait-times-in-canada-2026
+Canada,Total time in ED - 90th percentile,14,hours,2024-25,CIHI,https://www.cihi.ca/en/wait-times-in-canada-2026
+Canada,Change in 90th percentile total ED time since 2018-19,28,%,2024-25,CIHI,https://www.cihi.ca/en/wait-times-in-canada-2026
+Canada,Wait for physician initial assessment - median (all),2,hours (just under),2024-25,CIHI,https://www.cihi.ca/en/wait-times-in-canada-2026
+Canada,Wait for physician initial assessment - 90th percentile (all),5,hours (more than),2024-25,CIHI,https://www.cihi.ca/en/wait-times-in-canada-2026
+Canada,Wait for physician - CTAS 1-2 median,1.1,hours,2024-25,CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/wait-times-reflect-patient-acuity-as-complexity-increases-in-eds
+Canada,Wait for physician - CTAS 1-2 90th percentile,4.3,hours,2024-25,CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/wait-times-reflect-patient-acuity-as-complexity-increases-in-eds
+Canada,Wait for physician - CTAS 3 median,1.8,hours,2024-25,CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/wait-times-reflect-patient-acuity-as-complexity-increases-in-eds
+Canada,Wait for physician - CTAS 3 90th percentile,5.8,hours,2024-25,CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/wait-times-reflect-patient-acuity-as-complexity-increases-in-eds
+Canada,Wait for physician - CTAS 4-5 median,1.8,hours,2024-25,CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/wait-times-reflect-patient-acuity-as-complexity-increases-in-eds
+Canada,Wait for physician - CTAS 4-5 90th percentile,5.9,hours,2024-25,CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/wait-times-reflect-patient-acuity-as-complexity-increases-in-eds
+Canada,Admitted patients - ED stay 90th percentile,46.5,hours,2025-26,CIHI NACRS,https://www.cihi.ca/en/nacrs-emergency-department-visits-and-lengths-of-stay
+Canada,Admitted patients waiting over 48 hours in ED,180000,patients,2024-25,CIHI via Global News,https://globalnews.ca/news/11938222/emergency-room-wait-times-cihi-report/
+Canada,Left ED before seeing a physician,7.7,%,2024-25,CIHI via Canadian Healthcare Technology,https://www.canhealth.com/2026/07/08/ed-wait-times-on-the-rise-across-canada/
+Canada,ALC share of admitted ED patients,8,%,2024-25,CIHI via Canadian Healthcare Technology,https://www.canhealth.com/2026/07/08/ed-wait-times-on-the-rise-across-canada/
+Canada,ALC median hospital stay,24,days,2024-25,CIHI via Canadian Healthcare Technology,https://www.canhealth.com/2026/07/08/ed-wait-times-on-the-rise-across-canada/
+Canada,Median hospital stay of admitted ED patients,4,days,2024-25,CIHI via Canadian Healthcare Technology,https://www.canhealth.com/2026/07/08/ed-wait-times-on-the-rise-across-canada/
+Canada,Acute bed occupancy,91,%,2023,OECD via CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/longer-ed-stays-reflect-growing-patient-complexity-and-delays-in-admission
+OECD average,Acute bed occupancy,71,%,2023,OECD via CIHI,https://www.cihi.ca/en/emergency-department-wait-times-in-canada-insights-from-a-health-system-perspective/longer-ed-stays-reflect-growing-patient-complexity-and-delays-in-admission
+Canada (excl. Quebec),ALC share of acute bed days,17,%,2022-23,CIHI via C.D. Howe Institute,https://www.cdhowe.org/publication/rosalie-wyonch-addressing-canadas-bed-blocker-problem-2/
+Canada,Adults without a regular family doctor or NP,5.9,million,2025,OurCare survey,https://unityhealth.to/2025/12/access-to-primary-care-growing/
+Canada,People with a family doctor who can be seen same or next day,37,%,2025,OurCare survey,https://unityhealth.to/2025/12/access-to-primary-care-growing/
+Ontario,Wait to first assessment - average,1.7,hours,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Ontario,Admitted patients - average ED time,20.3,hours,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Ontario,Admitted patients within 8-hour target,26,%,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Ontario,Low-urgency non-admitted - average ED time,3,hours,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Ontario,Low-urgency non-admitted within 4-hour target,77,%,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Ontario,High-urgency non-admitted - average ED time,4.5,hours,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Ontario,High-urgency non-admitted within 8-hour target,89,%,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Greater Niagara General (Niagara Falls),Wait to first assessment - average,2.3,hours,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+St. Catharines General,Wait to first assessment - average,2.3,hours,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Welland County,Wait to first assessment - average,2.3,hours,Jan 2026,Ontario Health,https://ontariohealth.ca/system/reporting/performance/time-spent-in-emergency-departments
+Niagara Health,Decision to admit - 90th percentile,15.3,hours,2025-26 (latest),Niagara Health,https://www.niagarahealth.on.ca/site/news/2026/05/15/setting-the-record-straight-on-emergency-department-wait-times
+Niagara Health,Decision to admit - 90th percentile,16.5,hours,2024-25,Niagara Health,https://www.niagarahealth.on.ca/site/news/2026/05/15/setting-the-record-straight-on-emergency-department-wait-times
+Niagara Health,Average time to inpatient bed after decision,56.4,hours,2025-26 (latest),Niagara Health,https://www.niagarahealth.on.ca/site/news/2026/05/15/setting-the-record-straight-on-emergency-department-wait-times
+Niagara Health,Average time to inpatient bed after decision,64.8,hours,2024-25,Niagara Health,https://www.niagarahealth.on.ca/site/news/2026/05/15/setting-the-record-straight-on-emergency-department-wait-times
+Niagara Health,Ambulance offload - 90th percentile,97,minutes,Jan-Dec 2025,Niagara Health QIP 2026-27,https://www.niagarahealth.on.ca/files/NHQIPWorkplan2026-27.pdf
+Canada,Referral to treatment - median,30.7,weeks,2026,Fraser Institute,https://www.fraserinstitute.org/sites/default/files/2026-11/waiting-your-turn-2026-newsrelease.pdf
+Canada,Referral to treatment - median,9.3,weeks,1993,Fraser Institute,https://www.fraserinstitute.org/sites/default/files/2026-11/waiting-your-turn-2026-newsrelease.pdf
+Canada,CT scan wait - median,9.7,weeks,2026,Fraser Institute,https://www.fraserinstitute.org/sites/default/files/2026-11/waiting-your-turn-2026-newsrelease.pdf
+Canada,MRI wait - median,18.1,weeks,2026,Fraser Institute,https://www.fraserinstitute.org/sites/default/files/2026-11/waiting-your-turn-2026-newsrelease.pdf
+Canada,Ultrasound wait - median,6.6,weeks,2026,Fraser Institute,https://www.fraserinstitute.org/sites/default/files/2026-11/waiting-your-turn-2026-newsrelease.pdf
