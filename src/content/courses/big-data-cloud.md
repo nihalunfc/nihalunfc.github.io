@@ -13,6 +13,7 @@ progressKey: data-at-scale-progress-v1
 topics: [Spark, PySpark, BigQuery, GCS, Dataproc, Airflow, Druid, Bigtable, Elasticsearch, Kafka, Feature stores, Retail media, Ad measurement]
 who: "Analysts and BI developers who know SQL and some Python and keep seeing these tools in job postings, students, and anyone who wants the big picture before going deep."
 links:
+  - { label: "Before this: ML basics (free, fibub)", href: "https://fibub.com/learn/courses/ml-foundations/" }
   - { label: "Mini projects", href: "/learn/big-data-cloud/pages/projects/" }
   - { label: "Glossary", href: "/learn/big-data-cloud/pages/glossary/" }
   - { label: "Free sandboxes", href: "/learn/big-data-cloud/pages/setup/" }
@@ -32,6 +33,8 @@ modules:
 Job postings for data roles at large retailers, banks, media companies and tech firms keep asking for the same list: **Spark, a cloud warehouse such as BigQuery, an orchestrator such as Airflow, a streaming tool such as Kafka, a fast analytical or NoSQL store, and experience with platforms that feed machine learning**. Retail and marketing teams add **retail media and ad measurement**. If you come from SQL, Excel and Power BI, that list can feel like a wall.
 
 This course turns the wall into a map. Each lesson is a reading of 15 to 25 minutes in plain language, with an **analogy** for the main idea, a **"who uses it and why"** section, a short **exercise** and a **quiz**. Each module ends with a **mini project**, and the course ends with a **capstone design** that ties every tool together on one retail media platform.
+
+Module 6 is easier if you already know what a model, a feature and an embedding are. If those are new, the free junior course [From a straight line to an LLM](https://fibub.com/learn/courses/ml-foundations/) on fibub covers them, from linear regression to LLMs, with a simulation in every lesson.
 
 <div class="flow">
 
