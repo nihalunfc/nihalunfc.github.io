@@ -22,6 +22,7 @@ modules:
 topics: [ETL, Data cleaning, Dagster, Azure SQL, PostgreSQL, DuckDB, dbt, Power BI, Claude Code]
 who: "Analysts moving into data engineering, BI developers who want to own the pipeline, and anyone who wants a practical path from spreadsheets to a warehouse."
 links:
+  - { label: "Before this: ML basics (free, fibub)", href: "https://fibub.com/learn/courses/ml-foundations/" }
   - { label: "Setup guide", href: "/learn/etl-course/pages/setup/" }
   - { label: "Glossary", href: "/learn/etl-course/pages/glossary/" }
   - { label: "Projects", href: "/learn/etl-course/pages/projects/" }
