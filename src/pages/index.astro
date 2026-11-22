@@ -46,15 +46,10 @@ const bi = await getEntry('projects', 'bi-toolkit');
       <p class="more"><a href="/tools/">Tools</a><a href="/projects/">Projects</a></p>
     </div>
 
-    <div class="card"><h2><i></i>Fields</h2>
-      <p class="chips sm"><a href="/fields/hospitality/">Hospitality</a><a href="/fields/retail/">Retail</a><a href="/fields/logistics/">Logistics</a><a href="/fields/energy/">Energy</a><a href="/fields/crisis/">Crisis management</a><a href="/fields/science/">Science</a><a href="/fields/health/">Health</a><a href="/fields/finance/">Finance</a></p>
-      <p style="margin-top:8px">Each with BI, optimisation, tools, pipelines and machine learning.</p>
-      <p class="more"><a href="/fields/">All fields</a></p>
-    </div>
 
-    <div class="card"><h2><i></i>Learn with me</h2>
-      <p><b>Pipeline to Dashboard</b>, a free 7-week course in ETL, warehousing and BI, and <b>Data at Scale</b>, 30 lessons on Spark, Google Cloud, Kafka and streaming. No sign-up; progress stays in your browser.</p>
-      <p class="more"><a href="/learn/">Start learning</a></p>
+    <div class="card"><h2><i></i><a href="/learn/">Courses I built</a></h2>
+      <p>Free courses I write and keep up to date on <a href="https://fibub.com/learn/courses/">fibub.com</a>, my free learning site: machine learning, statistics, SQL, Power BI, pandas, ETL, offline AI, astronomy and more. No sign-up.</p>
+      <p class="more"><a href="/learn/">All my courses</a><a href="https://fibub.com/">fibub.com</a></p>
     </div>
 
     <div class="card"><h2><i></i>Looking for</h2>
@@ -62,23 +57,12 @@ const bi = await getEntry('projects', 'bi-toolkit');
       <p class="more"><a href="/contact/">Get in touch</a></p>
     </div>
 
-    <div class="card"><h2><i></i>Now</h2>
-      <ul class="tight">
-        <li>Data Engineer (remote) at Shipd by DataCurve</li>
-        <li>Building <a href="/projects/self-healing-pipelines/">self-healing pipelines</a>: AI agents that fix ETL failures</li>
-        <li>Turning my BI tools into ETL pipelines on Azure SQL</li>
-        <li>Restaurant-chain and retail editions of the BI toolkit</li>
-        <li>Learning T-SQL, Power BI and dbt</li>
-        <li>Four live Kaggle competitions</li>
-      </ul>
-      <p class="more"><a href="/now/">Now page</a></p>
-    </div>
 
     <div class="card"><h2><i class="bi"></i><a href="/projects/bi-toolkit/">BI toolkit</a></h2>
       <p>One warehouse model, ten data-quality checks and 12 decision tools, fitted to each sector. Hospitality is live; restaurant chains and retail are next.</p>
       <div class="kv"><span><b>14</b>tools</span><span><b>10</b>quality checks</span><span><b>3</b>editions</span></div>
       {bi && <Progress parts={partsFor(bi.data)} compact />}
-      <div class="acts"><a class="btn primary sm" href="/tools/revenue-command-centre/hotels/">Live dashboard</a><a class="btn ghost sm" href="/tools/">All tools</a><a class="btn ghost sm" href="https://github.com/nihalunfc/hotel-business">Code</a></div>
+      <div class="acts"><a class="btn primary sm" href="https://fibub.com/money/revenue-dashboard/">Live dashboard</a><a class="btn ghost sm" href="/tools/">All tools</a><a class="btn ghost sm" href="https://github.com/nihalunfc/hotel-business">Code</a></div>
     </div>
 
     <a class="card proj-c" href="/projects/kaggle/"><h2><i class="kg"></i>Kaggle</h2>
@@ -96,20 +80,6 @@ const bi = await getEntry('projects', 'bi-toolkit');
       <p class="more"><a href="/log/">Full log</a></p>
     </div>
 
-    <div class="card"><h2><i></i>News</h2>
-  <dl class="news">
-    <dt>Nov 2026</dt><dd>Published <a href="/projects/self-healing-pipelines/">Self-healing pipelines</a>: a crew of nine AI agents with no boss that finds, fixes and re-runs most ETL failures, open source under the MIT License.</dd>
-    <dt>Nov 2026</dt><dd>Re-ran the 1960 <a href="/blog/doomsday-2026-restudy/">Doomsday paper</a> against 65 years of World Bank data, with the code and data to reproduce it.</dd>
-    <dt>Nov 2026</dt><dd>Published <a href="/learn/big-data-cloud/">Data at Scale</a>, a free 30-lesson course in big data, Google Cloud and streaming.</dd>
-    <dt>Nov 2026</dt><dd>Started a <a href="/blog/">blog</a> with write-ups of my projects and Kaggle work, and moved this site to nihalsulaiman.com.</dd>
-    <dt>Nov 2026</dt><dd>Added an <a href="https://github.com/nihalunfc/hotel-business/tree/main/ai-workflow">AI workflow kit</a> to the Hospitality BI portfolio: safety rules for Claude Code on a live warehouse, an ETL triage method and a tested read-only SQL runner.</dd>
-    <dt>Nov 2026</dt><dd>Currently in the top 10% of 4,346 on the public leaderboard of Kaggle's <i>Name That LLM</i> competition.</dd>
-    <dt>Oct 2026</dt><dd>Graduated with a Master's in Data Analytics.</dd>
-    <dt>Oct 2026</dt><dd>Launched the <a href="/projects/hospitality-bi/overview/">Hospitality BI portfolio</a>: a revenue command centre, a staff schedule builder and 12 hotel tools on a five-hotel sample group.</dd>
-    <dt>Sep 2026</dt><dd>Built <a href="https://github.com/nihalunfc/GDGCHackathon2026">WARL</a>, a drone-swarm wildfire response with a live dashboard, at the GDG on Campus Build with AI hackathon.</dd>
-  </dl>
-
-    </div>
 
     <div class="card"><h2><i></i>More projects</h2>
       <ul class="hub-list">
@@ -124,9 +94,9 @@ const bi = await getEntry('projects', 'bi-toolkit');
 
     <div class="card"><h2><i></i>Free tools</h2>
       <ul class="hub-list">
-        <li><a href="/tools/pricing-recommender/">Pricing recommender</a><span>Pricing</span></li>
-        <li><a href="/tools/shift-scheduler/">Shift schedule builder</a><span>People</span></li>
-        <li><a href="/tools/demand-forecaster/">Demand forecaster</a><span>Planning</span></li>
+        <li><a href="https://fibub.com/money/pricing-recommender/">Pricing recommender</a><span>Pricing</span></li>
+        <li><a href="https://fibub.com/everyday/shift-scheduler/">Shift schedule builder</a><span>People</span></li>
+        <li><a href="https://fibub.com/money/demand-forecaster/">Demand forecaster</a><span>Planning</span></li>
         <li><a href="https://fibub.com/">Everyday tools on fibub</a><span>Personal</span></li>
       </ul>
       <p class="more"><a href="/tools/">All tools</a></p>

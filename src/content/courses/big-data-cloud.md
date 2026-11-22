@@ -12,11 +12,6 @@ level: Beginner to intermediate
 progressKey: data-at-scale-progress-v1
 topics: [Spark, PySpark, BigQuery, GCS, Dataproc, Airflow, Druid, Bigtable, Elasticsearch, Kafka, Feature stores, Retail media, Ad measurement]
 who: "Analysts and BI developers who know SQL and some Python and keep seeing these tools in job postings, students, and anyone who wants the big picture before going deep."
-links:
-  - { label: "Before this: ML basics (free, fibub)", href: "https://fibub.com/learn/courses/ml-foundations/" }
-  - { label: "Mini projects", href: "/learn/big-data-cloud/pages/projects/" }
-  - { label: "Glossary", href: "/learn/big-data-cloud/pages/glossary/" }
-  - { label: "Free sandboxes", href: "/learn/big-data-cloud/pages/setup/" }
 modules:
   - { name: "The big picture", summary: "Why big data needs different tools, the map of how they connect, and who uses what in each industry." }
   - { name: "Spark and distributed processing", summary: "How a cluster splits work, PySpark DataFrames, what makes Spark slow, and Spark's relatives." }
@@ -46,7 +41,7 @@ Module 6 is easier if you already know what a model, a feature and an embedding 
 
 - **Order:** Module 1 first, then in order. Modules 4 and 5 can swap. Module 7 needs Modules 1 to 6.
 - **Pace:** one lesson a day takes about a month; two a day takes two weeks.
-- **Hands on:** every exercise runs on your laptop or on free tiers (the BigQuery sandbox, a local Spark, Kafka in Docker). See [Free sandboxes](/learn/big-data-cloud/pages/setup/). Nothing needs a credit card.
+- **Hands on:** every exercise runs on your laptop or on free tiers (the BigQuery sandbox, a local Spark, Kafka in Docker). See [Free sandboxes](https://fibub.com/learn/courses/data-at-scale/free-sandboxes/). Nothing needs a credit card.
 - **Finish line:** you can draw a modern data platform from memory, say which tool goes where and why, write basic PySpark, BigQuery SQL and an Airflow DAG, and explain how a retailer proves an ad campaign worked.
 
 <div class="callout warn">

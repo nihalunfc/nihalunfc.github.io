@@ -8,7 +8,7 @@ status: Ongoing
 date: 2026-10-01
 updated: 2026-11-03
 order: 0
-demo: /tools/revenue-command-centre/hotels/
+demo: https://fibub.com/money/revenue-dashboard/
 repo: https://github.com/nihalunfc/hotel-business
 featured: true
 tags: [Star schema, ETL, Data quality, Python, SQL, Power BI]
@@ -43,7 +43,7 @@ This toolkit is my answer, built in layers so it can move between sectors:
 
 - **A warehouse model.** A star schema with facts for sales or bookings, stays or visits, and labour, and shared dimensions for date, site, product and channel.
 - **Data quality first.** Ten automated checks (duplicates, impossible dates, negative prices, orphan keys, capacity breaches and more) run before any number reaches a dashboard.
-- **Decision tools.** [Pricing](/tools/pricing-recommender/), [demand forecasting](/tools/demand-forecaster/), [no-show planning](/tools/overbooking-calculator/), [shift scheduling](/tools/shift-scheduler/), [daily close](/tools/daily-close/), [KPI dashboards](/tools/kpi-dashboard/) and [more](/tools/).
+- **Decision tools.** [Pricing](https://fibub.com/money/pricing-recommender/), [demand forecasting](https://fibub.com/money/demand-forecaster/), [no-show planning](https://fibub.com/money/overbooking-calculator/), [shift scheduling](https://fibub.com/everyday/shift-scheduler/), [daily close](https://fibub.com/money/daily-close/), [KPI dashboards](https://fibub.com/money/kpi-dashboard/) and [more](/tools/).
 
 ## Editions
 

@@ -219,7 +219,7 @@ ER arrivals are very predictable by hour, day of the week, season and weather. R
 Most of these levers are data problems, and you don't need to be a doctor to move them:
 
 - **A bottleneck dashboard for every hospital:** arrivals by hour, time to first assessment, boarding hours, occupancy at midnight and noon, ALC count and days, and discharges by hour, all in one view.
-- **Demand forecasts:** hourly ER arrival and admission forecasts using flu season, weather and holidays (the same approach as my [demand forecaster](/tools/demand-forecaster/) for hotels).
+- **Demand forecasts:** hourly ER arrival and admission forecasts using flu season, weather and holidays (the same approach as my [demand forecaster](https://fibub.com/money/demand-forecaster/) for hotels).
 - **Discharge prediction:** a model that flags, the day before, who is likely to go home tomorrow, and who is at risk of becoming ALC.
 - **Simulate before spending:** test "add 14 beds" against "discharge until 9 pm" before spending millions.
 - **Measure with percentiles, not averages:** the 8-hour wait lives in the 90th percentile, and averages hide it.
