@@ -6,7 +6,7 @@ summary: A bottleneck study of Canadian emergency and specialist waits, run like
 category: Business intelligence
 status: Ongoing
 date: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-21
 order: 3
 featured: false
 repo: https://github.com/nihalunfc/nihalunfc.github.io/tree/main/public/projects/canada-er-waits
@@ -24,6 +24,7 @@ stats:
   - { value: "91% vs 71%", label: "Canada vs OECD acute bed occupancy" }
   - { value: "56.4 h", label: "average wait for a bed after admission, Niagara Health" }
 links:
+  - { label: "Article: Why are ER wait times so long in Canada?", href: "/blog/why-are-er-wait-times-so-long-in-canada/" }
   - { label: "Code: simulate.py", href: "/projects/canada-er-waits/code/simulate.py" }
   - { label: "Code: analysis.py", href: "/projects/canada-er-waits/code/analysis.py" }
   - { label: "Data: ED and system indicators (CSV)", href: "/projects/canada-er-waits/data/ed_and_system_indicators.csv" }
@@ -40,6 +41,8 @@ roadmap:
   - "Add CIHI's ALC tables by region and estimate how many acute beds each region would free."
 ---
 I waited 8 hours in a Niagara Falls emergency department to get a consultation for my wife. In India, the same visit would usually take minutes. So I asked the question an operations analyst would ask about a slow warehouse: **where is the bottleneck, and what is the cheapest way to move it?**
+
+*Want the plain-language version? Read the article [Why are ER wait times so long in Canada? The real reasons, and how to fix them](/blog/why-are-er-wait-times-so-long-in-canada/).*
 
 **Short answer:** it is mostly not money, and mostly not the ER. Canada spends about as much per person as its peers. The constraint is **inpatient beds**. They are 91% full, and about one bed day in six goes to patients who are medically ready to leave but have nowhere to go. Admitted patients then wait in the ER for a bed (2.5 days on average at Niagara Health). They hold the stretchers and nurses that low-urgency patients are queueing for. In my simulation, halving those "alternate level of care" (ALC) patients cuts the low-urgency 90th-percentile wait from **7.6 to 2.9 hours**. Adding two ER doctors only gets it to **6.6 hours**.
 

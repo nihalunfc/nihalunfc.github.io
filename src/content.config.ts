@@ -16,6 +16,10 @@ const blog = defineCollection({
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    // Optional: a shorter <title> for search results (the page heading still uses `title`).
+    seoTitle: z.string().optional(),
+    // Optional FAQ: shown at the end of the post and sent to search engines as FAQPage data.
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
   }),
 });
 

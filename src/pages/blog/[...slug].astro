@@ -13,20 +13,44 @@ const { Content } = await render(post);
 const mins = readingTime(post.body);
 // First image in the post (if any) becomes its social-preview and search image.
 const firstImg = (post.body ?? '').match(/!\[[^\]]*\]\((\/[^)\s]+\.(?:png|jpe?g|webp))\)/i)?.[1];
-const ld = {
-  '@context': 'https://schema.org',
+const url = new URL(`/blog/${post.id}/`, SITE_URL).href;
+const faq = post.data.faq;
+// Strip simple Markdown (links, bold) from FAQ answers for the structured data.
+const plain = (t: string) => t.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1');
+// Inline Markdown for the visible FAQ answers: links and bold only.
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const inline = (t: string) => esc(t).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+const article = {
   '@type': 'BlogPosting',
+  '@id': url + '#article',
   headline: post.data.title,
   description: post.data.description,
   datePublished: post.data.date.toISOString(),
   dateModified: (post.data.updated ?? post.data.date).toISOString(),
   author: { '@type': 'Person', name: 'Nihal Sulaiman', url: SITE_URL + '/about/' },
-  mainEntityOfPage: new URL(`/blog/${post.id}/`, SITE_URL).href,
+  publisher: { '@type': 'Person', name: 'Nihal Sulaiman', url: SITE_URL + '/' },
+  mainEntityOfPage: url,
+  inLanguage: 'en-CA',
+  wordCount: (post.body ?? '').split(/\s+/).filter(Boolean).length,
   keywords: post.data.tags.join(', '),
   ...(firstImg ? { image: new URL(firstImg, SITE_URL).href } : {}),
 };
+const crumbs = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: SITE_URL + '/blog/' },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: url },
+  ],
+};
+const faqLd = faq.length ? [{
+  '@type': 'FAQPage',
+  '@id': url + '#faq',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })),
+}] : [];
+const ld = { '@context': 'https://schema.org', '@graph': [article, crumbs, ...faqLd] };
 ---
-<Base title={post.data.title} description={post.data.description} type="article" published={post.data.date} jsonld={ld} image={firstImg}>
+<Base title={post.data.seoTitle ?? post.data.title} description={post.data.description} type="article" published={post.data.date} modified={post.data.updated} tags={post.data.tags} jsonld={ld} image={firstImg}>
   <PageHero title={post.data.title} crumbs={[{ label: 'Blog', href: '/blog/' }, { label: 'Post' }]} lead={post.data.description}>
     <div class="post-meta">
       <span class="byline">By <a href="/about/" rel="author">Nihal Sulaiman</a></span>
@@ -38,7 +62,20 @@ const ld = {
     </div>
   </PageHero>
   <main>
-    <article class="prose"><Content /></article>
+    <article class="prose">
+      <Content />
+      {faq.length > 0 && (
+        <section class="faq" id="faq" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently asked questions</h2>
+          {faq.map((f) => (
+            <div class="faq-item">
+              <h3>{f.q}</h3>
+              <p set:html={inline(f.a)} />
+            </div>
+          ))}
+        </section>
+      )}
+    </article>
     <div class="post-foot">
       <div class="author">
         <div class="av" aria-hidden="true">N</div>
