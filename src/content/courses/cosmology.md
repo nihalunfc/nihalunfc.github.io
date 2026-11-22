@@ -5,7 +5,7 @@ status: In progress
 order: 2
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/cosmology/"
-length: "12 modules · 97 lessons (23 live)"
+length: "12 modules · 97 lessons (41 live)"
 level: Beginner to advanced
 duration: "Self-paced, free on fibub.com"
 lessons: 97

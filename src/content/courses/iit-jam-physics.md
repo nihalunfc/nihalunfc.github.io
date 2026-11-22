@@ -1,11 +1,11 @@
 ---
 title: "IIT JAM Physics"
 summary: "Every topic in the IIT JAM Physics syllabus taught from scratch, with animations, worked examples and examiners' tricks, then thousands of original MCQ, MSQ and NAT questions by topic and difficulty, full solutions and timed mock tests marked the JAM way."
-status: In progress
+status: Live
 order: 14
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/iit-jam-physics/"
-length: "8 modules · 58 lessons (53 live)"
+length: "8 modules · 58 lessons"
 level: BSc physics
 duration: "Self-paced, free on fibub.com"
 lessons: 58

@@ -1,11 +1,11 @@
 ---
 title: "CUET (UG) prep"
 summary: "Everything for India's Common University Entrance Test in study order: the exam and its +5/−1 marking, English, the General Test, and the domain subjects, with about 1,800 original questions, fresh-number practice, worked solutions and full timed mock tests."
-status: In progress
+status: Live
 order: 21
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/cuet/"
-length: "12 modules · 100 lessons (57 live)"
+length: "12 modules · 100 lessons"
 level: Class 12
 duration: "Self-paced, free on fibub.com"
 lessons: 100
