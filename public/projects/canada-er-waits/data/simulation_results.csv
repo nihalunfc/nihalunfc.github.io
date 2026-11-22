@@ -1,0 +1,9 @@
+scenario,seeds,ed_visits,wait_md_median_h,wait_md_p90_h,low_urgency_wait_md_median_h,low_urgency_wait_md_p90_h,discharged_ed_los_p90_h,admitted_ed_los_p90_h,boarding_median_h,boarding_p90_h,left_without_being_seen_pct,bed_occupancy_pct,electives_postponed_per_week,alc_share_of_bed_days_pct
+Baseline,5,60159.4,0.21,3.86,0.53,7.58,9.74,27.34,2.81,22.04,11.1,99.48,9.04,19.5
+Halve ALC patients,5,60157.2,0.08,1.27,0.16,2.9,7.42,13.59,0.0,5.3,3.44,96.7,1.3,10.12
+Add 14 inpatient beds (+5%),5,60152,0.13,2.28,0.29,4.63,8.41,22.98,0.0,17.66,6.58,99.08,4.02,19.6
+"Discharge 7am-9pm, 7 days",5,60158.8,0.14,2.29,0.32,4.98,8.43,21.92,1.49,16.17,6.96,98.52,3.06,20.98
+Fast-track zone for CTAS 4-5,5,60161.2,0.02,2.07,0.09,1.61,8.24,27.47,3.58,22.53,4.74,99.66,11.06,19.82
+Divert 20% of CTAS 4-5 to primary care,5,56234.2,0.15,3.52,0.23,6.99,9.64,27.28,3.07,22.12,9.16,99.68,9.14,19.76
+Add 2 ED physicians (day+evening),5,60134.4,0.1,3.36,0.1,6.61,9.36,26.79,2.65,21.53,9.51,99.66,8.66,19.34
+Combined: ALC + discharge + fast track,5,60170,0.0,0.59,0.02,1.22,6.62,9.33,0.0,0.4,1.1,93.04,0.02,11.62
