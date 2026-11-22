@@ -1,11 +1,11 @@
 ---
 title: "CSIR NET Physics"
 summary: "A study plan for CSIR NET Physical Sciences covering Parts A, B and C: roadmaps for every unit, lessons on the advanced topics only NET asks, and thousands of original questions with full solutions and timed mock tests with NET marking."
-status: In progress
+status: Live
 order: 16
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/csir-net-physics/"
-length: "10 modules · 36 lessons (practice and mocks live)"
+length: "10 modules · 36 lessons"
 level: MSc physics
 duration: "Self-paced, free on fibub.com"
 lessons: 36

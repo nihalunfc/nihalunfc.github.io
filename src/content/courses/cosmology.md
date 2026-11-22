@@ -1,11 +1,11 @@
 ---
 title: "Cosmology from A to Z"
 summary: "How we learned the size, age and history of the universe, from ancient sky watchers to the James Webb telescope: distances, Einstein, the expanding universe, the Big Bang, the cosmic microwave background, dark matter, dark energy and inflation, with animations you can step through, live problems and the maths explained gently."
-status: In progress
+status: Live
 order: 2
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/cosmology/"
-length: "12 modules · 97 lessons (23 live)"
+length: "12 modules · 97 lessons"
 level: Beginner to advanced
 duration: "Self-paced, free on fibub.com"
 lessons: 97

@@ -1,11 +1,11 @@
 ---
 title: "GATE Physics"
 summary: "Every section of the GATE Physics syllabus, from mathematical physics and quantum mechanics to solid state, nuclear physics and electronics, taught step by step, then thousands of original MCQ, MSQ and NAT questions, full solutions and timed mock tests marked the GATE way."
-status: In progress
+status: Live
 order: 15
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/gate-physics/"
-length: "10 modules · 78 lessons (practice and mocks live)"
+length: "10 modules · 78 lessons"
 level: MSc physics
 duration: "Self-paced, free on fibub.com"
 lessons: 78
