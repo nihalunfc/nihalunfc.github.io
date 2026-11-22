@@ -5,7 +5,7 @@ status: In progress
 order: 15
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/gate-physics/"
-length: "10 modules · 78 lessons (1 live)"
+length: "10 modules · 78 lessons (practice and mocks live)"
 level: MSc physics
 duration: "Self-paced, free on fibub.com"
 lessons: 78
