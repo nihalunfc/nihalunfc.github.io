@@ -7,7 +7,7 @@ category: Business intelligence
 status: Live
 date: 2026-10-01
 order: 1
-demo: /tools/revenue-command-centre/hotels/
+demo: https://fibub.com/money/revenue-dashboard/
 repo: https://github.com/nihalunfc/hotel-business
 featured: true
 tags: [Python, SQL, Star schema, PuLP, D3, Excel]
@@ -25,8 +25,8 @@ stats:
 links:
   - { label: "Overview of the sample hotel group", href: "/projects/hospitality-bi/overview/" }
   - { label: "Proposals", href: "/projects/hospitality-bi/proposals/" }
-  - { label: "Revenue command centre", href: "/tools/revenue-command-centre/hotels/" }
-  - { label: "Staff schedule builder", href: "/tools/shift-scheduler/hotels/" }
+  - { label: "Revenue command centre", href: "https://fibub.com/money/revenue-dashboard/" }
+  - { label: "Staff schedule builder", href: "https://fibub.com/everyday/shift-scheduler/" }
   - { label: "All hotel tools", href: "/tools/" }
   - { label: "Code on GitHub", href: "https://github.com/nihalunfc/hotel-business" }
 ---

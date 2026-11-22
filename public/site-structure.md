@@ -35,7 +35,7 @@ Shared files: `/assets/` (site CSS and JS; `/assets/hospitality/` for the hotel 
 
 **Rules for new URLs:** lower-case words joined by hyphens. Name tools after the job, not the sector (`/tools/shift-scheduler/`), and put the sector in the edition (`/tools/shift-scheduler/hotels/`). Never add a second home page, a separate header, a `.html` address or a `#/` route. Use absolute links (`/tools/...`) inside apps so deep pages work.
 
-**fibub.com (sister site):** no tool lives on both sites (nihal, 2026-11-07). Ambitious career prototypes stay here; everyday public tools live on fibub.com, and the two sites link to each other where useful. The expense calendar moved to fibub as the bill calendar: `/tools/expense-calendar/` redirects there, and `/tools/expense-calendar/personal/` is a "moved" page that saves people's bills as a backup file fibub can restore (`v3/` stays, unlisted, only so passcode-locked data can be unlocked; its `sw.js` now removes the old offline worker).
+**fibub.com (sister site):** no tool lives on both sites. Since 2026-11-22 (nihal) every tool, course and guide lives on fibub; this site keeps only Swarm, nihal's own research and projects, and two full apps (the Operations and Workforce suites at `/tools/`). The business calculators were rebuilt on fibub (money shelf, small business, #T1064 to #T1074) and the old copies moved to `archive/` (no redirects). The expense calendar moved to fibub as the bill calendar earlier: `/tools/expense-calendar/` redirects there, and `/tools/expense-calendar/personal/` stays as the "moved" page that saves people's bills as a backup file fibub can restore (`v3/` stays, unlisted, only so passcode-locked data can be unlocked).
 
 **Old addresses:** `/hotel-business/...` pages are redirect stubs in the hotel-business repo (`docs/`). Moved addresses on this site are in `redirects` in `astro.config.mjs`. When something moves, add a redirect there; never leave the old copy live.
 
@@ -104,7 +104,9 @@ An app with several views (the workforce and operations suites) gives every view
 
 Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: title, summary, status, level, `duration` (calendar length), `hours`, `lessons`, `modules` (name, summary, optional `size`; shown in the card's Modules drop-down), `topics`, `who`, `links`, and `progressKey` (the localStorage key the course saves ticks under, so the card can show the learner's progress and switch Start to Continue).
 
-**Courses built by Astro (preferred for new courses, e.g. Data at Scale, `/learn/big-data-cloud/`):**
+**Courses:** all courses now live on fibub (nihal, 2026-11-22); `/learn/` here is the "Courses I built" page, one card per fibub course in `src/content/courses/`. The old Data at Scale and Pipeline to Dashboard copies are in `archive/`. The notes below describe the old in-site course setup, kept for reference.
+
+**Courses built by Astro (old, e.g. Data at Scale, now archived):**
 
 1. One Markdown file per lesson in `src/content/lessons/<id>/NN-slug.md` with `title`, `summary`, `module` (1-based, matching `modules` in the course file), `minutes`, `outcomes` and `quiz` (`q`, `options`, `answer` as a 0-based index, `why`). The lesson is served at `/learn/<id>/lessons/<slug>/` (the number sets the order and is dropped from the URL).
 2. Course pages (projects, setup, glossary) are files with `page: true`, served at `/learn/<id>/pages/<slug>/` and listed in the course's top bar. Number them 90 and up.

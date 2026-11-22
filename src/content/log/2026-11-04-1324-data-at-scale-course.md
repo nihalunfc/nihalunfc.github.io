@@ -4,7 +4,7 @@ title: Published Data at Scale, a free 30-lesson course in big data, cloud and s
 project: Data at Scale course
 status: done
 ref: courses/big-data-cloud
-link: /learn/big-data-cloud/
+link: https://fibub.com/learn/courses/data-at-scale/
 commit: https://github.com/nihalunfc/nihalunfc.github.io/commit/482e0d0
 tags: [Course, Spark, Google Cloud, Kafka]
 ---
