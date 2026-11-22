@@ -5,7 +5,7 @@ status: In progress
 order: 19
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/toefl/"
-length: "6 modules · 32 lessons (6 live)"
+length: "6 modules · 32 lessons (18 live)"
 level: About CEFR B1 and up
 duration: "Self-paced, free on fibub.com"
 lessons: 32
