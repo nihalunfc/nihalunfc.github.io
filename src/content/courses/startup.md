@@ -5,10 +5,10 @@ status: Live
 order: 11
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/startup/"
-length: "12 modules · 66 lessons"
+length: "12 modules · 72 lessons"
 level: Beginner
 duration: "Self-paced, free on fibub.com"
-lessons: 66
+lessons: 72
 topics: [Startups, Legal structure, Registration, GST, Sales tax, Payroll, Equity, India, Canada, USA]
 who: "Anyone starting a business in India, Canada or the USA, alone or with co-founders."
 modules:
@@ -26,4 +26,4 @@ modules:
   - { name: "Stay compliant and grow" }
 ---
 
-Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored. Region rules link to the official source with the date checked. Includes a glossary and printable launch checklists for India, Canada and the USA.
+Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored. Region rules link to the official source with the date checked. Every lesson is on my new learning standard, with 72 live problems. Includes a glossary and printable launch checklists for India, Canada and the USA.
