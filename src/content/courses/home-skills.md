@@ -2,7 +2,7 @@
 title: "Home skills"
 summary: "Short practical courses with pictures for every step: tyres and punctures, hand tools and safety, light carpentry, wall fixings and how machines work. Each lesson has a printable tick list and a safety quiz."
 status: Live
-order: 9
+order: 12
 date: 2026-11-16
 href: "https://fibub.com/learn/courses/"
 length: "5 short courses"
