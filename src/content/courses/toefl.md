@@ -1,6 +1,6 @@
 ---
 title: "TOEFL preparation"
-summary: "A full course for the new TOEFL iBT: every Reading, Listening, Writing and Speaking task explained, listening read aloud, word-building drills, sentence builders, timed writing and speaking practice, model answers, hundreds of original questions and a study plan."
+summary: "A full course for the new TOEFL iBT: every Reading, Listening, Writing and Speaking task explained, listening read aloud, word-building drills, sentence builders, timed writing and speaking practice, model answers, a practice room of 1,100 original questions, timed Listening and Reading practice tests and a study plan."
 status: Live
 order: 19
 date: 2026-11-22

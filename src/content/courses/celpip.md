@@ -1,6 +1,6 @@
 ---
 title: "CELPIP preparation"
-summary: "Everything needed to reach a target CELPIP level for Canadian permanent residence or citizenship: every part of Listening, Reading, Writing and Speaking explained, listening read aloud, timed writing and speaking practice, model answers, hundreds of original questions and a study plan."
+summary: "Everything needed to reach a target CELPIP level for Canadian permanent residence or citizenship: every part of Listening, Reading, Writing and Speaking explained, listening read aloud, timed writing and speaking practice, model answers, a practice room of 1,068 original questions, timed Listening and Reading practice tests and a study plan."
 status: Live
 order: 18
 date: 2026-11-22
