@@ -5,7 +5,7 @@ status: In progress
 order: 18
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/celpip/"
-length: "6 modules · 42 lessons (6 live)"
+length: "6 modules · 42 lessons (20 live)"
 level: CLB 4 and up
 duration: "Self-paced, free on fibub.com"
 lessons: 42
