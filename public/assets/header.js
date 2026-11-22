@@ -41,13 +41,10 @@
       nav: [
         { label: 'Home', sub: 'Start here', href: '/', exact: true },
         { label: 'Swarm', sub: 'Flagship multi-agent demos', href: '/swarm/', match: ['/swarm/'] },
-        { label: 'Fields', sub: 'Eight sectors I work in', href: '/fields/', match: ['/fields/'] },
         { label: 'Projects', sub: 'Write-ups and results', href: '/projects/', match: ['/projects/'] },
-        { label: 'Tools', sub: 'Free apps to use', href: '/tools/', match: ['/tools/'] },
-        { label: 'Learn', sub: 'Free courses', href: '/learn/', match: ['/learn/'] },
+        { label: 'Courses', sub: 'Free courses I built, on fibub', href: '/learn/', match: ['/learn/'] },
         { label: 'Blog', sub: 'Notes from the work', href: '/blog/', match: ['/blog/'] },
-        { label: 'Now', sub: 'What I am doing now', href: '/now/', match: ['/now/', '/log/'] },
-        { label: 'About', sub: 'Background and CV', href: '/about/', match: ['/about/', '/disclaimer/', '/contact/', '/search/', '/sitemap/'] }
+        { label: 'About', sub: 'Background and CV', href: '/about/', match: ['/about/', '/disclaimer/', '/contact/', '/search/', '/sitemap/', '/log/'] }
       ],
       /* The CV link points straight at the PDF file: no page, no redirect. */
       actions: [{ label: 'CV (PDF)', href: '/nihal-sulaiman-cv.pdf', pdf: true }, { label: 'Contact', href: '/contact/' }]
@@ -228,10 +225,9 @@
     var col = function (title, links) { return '<div><h2>' + title + '</h2>' + links.map(function (l) { return '<a href="' + esc(l[0]) + '">' + esc(l[1]) + '</a>'; }).join('') + '</div>'; };
     return '<div class="sf-in"><div><a class="sh-brand" href="/">' + MARK + 'Nihal <small>Portfolio</small></a>' +
       '<p>Data, business intelligence and applied AI. Projects and free tools with live results you can explore.</p></div>' +
-      col('Work', [['/swarm/', 'Swarm Intelligence'], ['/fields/', 'Fields'], ['/projects/', 'Projects'], ['/projects/kaggle/', 'Kaggle']]) +
-      col('Fields', [['/fields/hospitality/', 'Hospitality'], ['/fields/retail/', 'Retail'], ['/fields/logistics/', 'Logistics'], ['/fields/energy/', 'Energy'], ['/fields/crisis/', 'Crisis management'], ['/fields/science/', 'Science'], ['/fields/health/', 'Health'], ['/fields/finance/', 'Finance']]) +
-      col('Use', [['/tools/', 'Tools'], ['/learn/', 'Learn'], ['/blog/', 'Blog'], ['/log/', 'Activity log'], ['/rss.xml', 'RSS feed']]) +
-      col('Site', [['/about/', 'About'], ['/about/cv/', 'CV'], ['/nihal-sulaiman-cv.pdf', 'CV (PDF)'], ['/now/', 'Now'], ['/contact/', 'Contact'], ['/search/', 'Search'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
+      col('Work', [['/swarm/', 'Swarm Intelligence'], ['/projects/', 'Projects'], ['/projects/kaggle/', 'Kaggle'], ['/blog/', 'Blog'], ['/log/', 'Activity log'], ['/rss.xml', 'RSS feed']]) +
+      col('Free on fibub', [['https://fibub.com/', 'fibub.com: free tools'], ['/learn/', 'Courses I built'], ['https://fibub.com/learn/courses/', 'All fibub courses'], ['https://fibub.com/blog/', 'fibub blog']]) +
+      col('Site', [['/about/', 'About'], ['/about/cv/', 'CV'], ['/nihal-sulaiman-cv.pdf', 'CV (PDF)'], ['/contact/', 'Contact'], ['/search/', 'Search'], ['/sitemap/', 'Site map'], ['/disclaimer/', 'Disclaimer and privacy']]) +
       '<div class="sf-legal"><span>© 2026 Nihal.' + (hotel ? ' All hotels, guests, staff and figures on this site are fictional samples.' : '') + '</span>' +
       '<span><span data-views hidden></span><span class="pv-dot" hidden> · </span>Built with the help of AI tools. <a href="/disclaimer/">Credits</a></span></div></div>';
   }

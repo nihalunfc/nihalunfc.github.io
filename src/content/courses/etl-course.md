@@ -21,11 +21,6 @@ modules:
   - { name: "Run it in production", summary: "Observability, CI/CD, choosing tools, a low-cost open stack and a capstone.", size: "7 days" }
 topics: [ETL, Data cleaning, Dagster, Azure SQL, PostgreSQL, DuckDB, dbt, Power BI, Claude Code]
 who: "Analysts moving into data engineering, BI developers who want to own the pipeline, and anyone who wants a practical path from spreadsheets to a warehouse."
-links:
-  - { label: "Before this: ML basics (free, fibub)", href: "https://fibub.com/learn/courses/ml-foundations/" }
-  - { label: "Setup guide", href: "/learn/etl-course/pages/setup/" }
-  - { label: "Glossary", href: "/learn/etl-course/pages/glossary/" }
-  - { label: "Projects", href: "/learn/etl-course/pages/projects/" }
 ---
 
 1. **Ingest anything.** Landing zones, email, shared drives, SFTP and APIs, on a retail chain.

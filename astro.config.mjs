@@ -23,7 +23,7 @@ export default defineConfig({
   redirects: {
     '/kaggle': '/projects/kaggle/',
     '/cv': '/about/cv/',
-    '/sectors': '/fields/',
+    '/sectors': '/projects/',
     '/projects/swarm-intelligence': '/swarm/',
     '/swarm/energy': '/swarm/grid-batteries/',
     '/swarm/wildfire': '/swarm/wildfire-drones/',
