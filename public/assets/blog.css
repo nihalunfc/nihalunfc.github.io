@@ -322,3 +322,11 @@ section + section > .track-h { margin-top: 40px; }
 .swarm-item.paused { opacity: .85; }
 .topics { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .topics li { font-size: 12.5px; border: 1px solid var(--line); border-radius: 99px; padding: 2px 9px; color: var(--ink-2); }
+
+/* FAQ block at the end of a post (from the `faq` front matter). */
+.prose .faq { margin-top: 2.4em; border-top: 1px solid var(--line, rgba(127,127,127,.25)); }
+.prose .faq-item h3 { font-size: 17.5px; margin: 1.4em 0 0; }
+.prose .faq-item p { margin-top: .4em; }
+/* Key-takeaways box: <div class="tldr"> with a blank line inside so Markdown renders. */
+.prose .tldr { border: 1px solid var(--line, rgba(127,127,127,.25)); border-radius: 10px; padding: .4em 1.2em 1em; }
+.prose .tldr > :first-child { margin-top: .8em; }
