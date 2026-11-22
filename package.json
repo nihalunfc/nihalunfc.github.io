@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build && node scripts/seo-static.mjs && pagefind --site dist && node scripts/indexnow.mjs hashes",
     "preview": "astro preview",
     "cv:pdf": "node scripts/cv-pdf.cjs"
   },

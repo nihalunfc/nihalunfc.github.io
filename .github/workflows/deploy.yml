@@ -1,5 +1,5 @@
 # Builds the Astro site and publishes it to GitHub Pages.
-# Cost: one job of about 1 minute per push to main. This repo is public, so
+# Cost: one job of about 1 minute per push to main, plus a few seconds to send changed pages to IndexNow. This repo is public, so
 # GitHub-hosted runner minutes are free and don't count toward the account limit.
 name: Deploy site
 
@@ -21,6 +21,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      urls: ${{ steps.changed.outputs.urls }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,6 +31,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Which pages changed since the live site: compare this build's page fingerprints with the live ones.
+      - name: List changed pages for IndexNow
+        id: changed
+        run: |
+          curl -fsS https://nihalsulaiman.com/indexnow.json -o /tmp/live.json || echo '{}' > /tmp/live.json
+          node scripts/indexnow.mjs changed /tmp/live.json > /tmp/changed.txt
+          echo "Changed pages: $(grep -c . /tmp/changed.txt || true)"
+          { echo 'urls<<EOF_URLS'; cat /tmp/changed.txt; echo 'EOF_URLS'; } >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -43,3 +53,20 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Tell Bing and other IndexNow engines which pages changed, once they are live (a few seconds, no extra build).
+  ping:
+    needs: [build, deploy]
+    if: needs.build.outputs.urls != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - name: Send changed pages to IndexNow
+        env:
+          URLS: ${{ needs.build.outputs.urls }}
+        run: |
+          printf '%s\n' "$URLS" > /tmp/changed.txt
+          node scripts/indexnow.mjs send /tmp/changed.txt

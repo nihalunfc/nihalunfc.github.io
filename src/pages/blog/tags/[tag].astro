@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 }
 const { tag, posts, all } = Astro.props;
 ---
-<Base title={`Posts about ${tag}`} description={`Blog posts by Nihal Sulaiman about ${tag}.`}>
+<Base title={`Posts about ${tag}`} description={`${posts.length} ${posts.length === 1 ? 'post' : 'posts'} by Nihal Sulaiman about ${tag}: ${posts.map((p) => p.data.title).join('; ')}`.slice(0, 157).replace(/\s+\S*$/, '') + '…'} noindex={posts.length < 2}>
   <PageHero title={`Posts about ${tag}`} crumbs={[{ label: 'Blog', href: '/blog/' }, { label: tag }]} />
   <main>
     <div class="tagbar">{all.map((t) => <a class={`tag${t === tag ? ' on' : ''}`} href={`/blog/tags/${slugify(t)}/`}>{t}</a>)}</div>

@@ -18,13 +18,13 @@ const courses = await Promise.all((await getCourses()).map(async (c) => {
   return { c, modules, lessons, hours, unit: ls.length ? 'lessons' : 'days' };
 }));
 ---
-<Base title="Learn" description="Free courses by Nihal Sulaiman in ETL pipelines, BI, big data, cloud, streaming and ad measurement. No sign-up; progress is saved in your browser.">
-  <PageHero title="Learn" crumbs={[{ label: 'Learn' }]} lead="Courses I write to teach myself, open to anyone. Free, no sign-up, and your progress stays in your own browser." />
+<Base title="Courses I built" description="Free courses written by Nihal Sulaiman: machine learning from a straight line to an LLM, statistics for analysts, offline AI, ETL pipelines, big data and home skills. Free on fibub.com, no sign-up.">
+  <PageHero title="Courses I built" crumbs={[{ label: 'Courses' }]} lead="Courses I write and keep up to date, open to anyone. They live on fibub.com, my free learning site: no sign-up, and your progress stays in your own browser." />
   <main>
     <div class="pgrid cgrid">
       {courses.map(({ c, modules, lessons, hours, unit }) => (
         <section class="pcard ccard" id={c.id} data-key={c.data.progressKey} data-total={lessons} data-unit={unit}>
-          <div class="top"><p class="eyebrow" style="margin:0">Free course · {c.data.level}</p><span class={`status ${c.data.status.replace(' ', '')}`}>{c.data.status}</span></div>
+          <div class="top"><p class="eyebrow" style="margin:0">{c.data.href.startsWith('https://fibub.com') ? 'Free on fibub' : 'Free course'} · {c.data.level}</p><span class={`status ${c.data.status.replace(' ', '')}`}>{c.data.status}</span></div>
           <h3><a href={c.data.href}>{c.data.title}</a></h3>
           <p>{c.data.summary}</p>
           <div class="stat-row">
