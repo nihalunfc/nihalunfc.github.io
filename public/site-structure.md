@@ -100,6 +100,8 @@ An app with several views (the workforce and operations suites) gives every view
 
 ### Courses
 
+**All courses now live on fibub.com (nihal, 2026-11-22).** `/learn/` is the "Courses I built" page: one card per course, with `href` pointing at the course on fibub (for example `https://fibub.com/learn/courses/ml-foundations/`). For a new fibub course, add `src/content/courses/<id>.md` with that `href`, `hours`, `lessons` and `modules`, plus a log entry with `ref: courses/<id>`. Pipeline to Dashboard and Data at Scale are being rebuilt on fibub; their copies below come off this site, with no redirects, once the fibub versions are live. Don't start new courses here.
+
 Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: title, summary, status, level, `duration` (calendar length), `hours`, `lessons`, `modules` (name, summary, optional `size`; shown in the card's Modules drop-down), `topics`, `who`, `links`, and `progressKey` (the localStorage key the course saves ticks under, so the card can show the learner's progress and switch Start to Continue).
 
 **Courses built by Astro (preferred for new courses, e.g. Data at Scale, `/learn/big-data-cloud/`):**
@@ -173,3 +175,9 @@ Every course has `src/content/courses/<id>.md`. It feeds the card on `/learn/`: 
 - Kaggle: only nihal's own scores and ranks.
 - Tools read as general first, with sectors as editions. Sample data is called sample data. No invented figures.
 - Commits that count for nihal use the author `nihal <256238846+nihalunfc@users.noreply.github.com>`.
+
+## Search engines
+
+- Every Astro page gets a canonical address, a description and JSON-LD from `src/layouts/Base.astro` (a WebPage or Article with breadcrumbs, plus the Person who runs the site). Titles drop the " · Nihal Sulaiman" suffix when it would pass 60 characters. Tag pages with a single post are `noindex`.
+- Hand-written pages in `public/` get a canonical address and JSON-LD after the build from `scripts/seo-static.mjs`; app sub-views inside a suite point their canonical at the suite.
+- IndexNow (Bing, Yandex and others): the build writes `dist/indexnow.json` (a fingerprint of each sitemap page, `scripts/indexnow.mjs hashes`). The deploy workflow compares it with the live copy and, after the deploy, sends only the changed pages. The key file is `public/1349a5779689a7403f4dfe5c87061dfa.txt`; never rename it. Google reads the sitemap (`/sitemap-index.xml`, listed in `robots.txt`); verify Search Console with a Domain property (DNS TXT record in Cloudflare), so nothing is needed on the site.

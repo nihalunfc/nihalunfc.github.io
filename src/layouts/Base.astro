@@ -13,7 +13,8 @@ interface Props {
   image?: string; // social preview image (path on this site); defaults to /assets/og.png
 }
 const { title, description = SITE.description, type = 'website', published, modified, tags = [], bodyClass, jsonld, noindex, image = '/assets/og.png' } = Astro.props;
-const fullTitle = title === SITE.name ? `${SITE.name} · ${SITE.role}` : `${title} · ${SITE.name}`;
+// Search results show about 60 characters: drop the name suffix when it would push the title past that.
+const fullTitle = title === SITE.name ? `${SITE.name} · ${SITE.role}` : `${title} · ${SITE.name}`.length <= 60 ? `${title} · ${SITE.name}` : title;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const person = {
   '@context': 'https://schema.org',
@@ -31,7 +32,21 @@ const person = {
   ],
   sameAs: [SITE.links.github, SITE.links.linkedin, SITE.links.kaggle],
 };
-const ld = jsonld ?? person;
+// Pages without their own structured data say what they are and where they sit (breadcrumbs), next to who runs the site.
+const segs = Astro.url.pathname.split('/').filter(Boolean);
+const label = (s: string) => s.replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase());
+const crumbs = [{ name: 'Home', url: SITE_URL + '/' }, ...segs.map((s, i) => ({ name: i === segs.length - 1 ? title : label(s), url: `${SITE_URL}/${segs.slice(0, i + 1).join('/')}/` }))];
+const { '@context': _c, ...personNode } = person;
+const ld = jsonld ?? (segs.length === 0 || noindex ? person : {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': type === 'article' ? 'Article' : 'WebPage', name: title, headline: type === 'article' ? title.slice(0, 110) : undefined, description, url: canonical, inLanguage: 'en-CA',
+      datePublished: published?.toISOString(), dateModified: (modified ?? published)?.toISOString(), author: type === 'article' ? { '@id': SITE_URL + '/#me' } : undefined,
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE_URL + '/' } },
+    { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) },
+    { ...personNode, '@id': SITE_URL + '/#me' },
+  ],
+});
 const v = Date.now().toString(36); // changes every build, so browsers fetch fresh CSS and JS
 ---
 <!doctype html>
