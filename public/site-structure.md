@@ -61,7 +61,7 @@ Each folder in `src/content/` is a collection, with its schema in `src/content.c
 | Tool | `src/content/tools/<id>.md` (+ apps in `public/tools/<id>/<edition>/`) | `/tools/<id>/`, `/tools/`, its field page |
 | Project | `src/content/projects/<id>.md` (+ sub-pages in `public/projects/<id>/<page>/` or `src/pages/projects/<id>/<page>.astro`) | `/projects/<id>/`, `/projects/`, its field page |
 | Course | `src/content/courses/<id>.md`, plus either lessons in `src/content/lessons/<id>/` (built by Astro) or a static course in `public/learn/<id>/` | `/learn/` (one card per course) and the course at `/learn/<id>/` |
-| Blog post | `src/content/blog/<slug>.md` | `/blog/<slug>/`, RSS, tag pages |
+| Blog post | `src/content/blog/<slug>.md` (optional `seoTitle` for a shorter search-result title, and `faq` (`q`, `a`) which renders an FAQ at the end and adds FAQPage structured data) | `/blog/<slug>/`, RSS, tag pages |
 | Fields and kinds | `src/data/fields.ts` (each field also has `topics`: what nihal is working on now, with a note and link, and `for`: audiences such as Canadian governments) | `/fields/` (topic chips), `/fields/<field>/` (Topics card), filters |
 
 ### Field and kind (every tool, project and swarm item)
