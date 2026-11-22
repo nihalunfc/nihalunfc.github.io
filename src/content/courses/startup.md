@@ -1,11 +1,11 @@
 ---
 title: "Start a startup in India, Canada or the USA"
 summary: "How to start a business in India, Canada or the USA, online or offline, alone or with co-founders: from the idea to registering, licences, GST and sales tax, income tax, payroll, IP and co-founder agreements, with a country switch, official sources and interactive tools."
-status: In progress
+status: Live
 order: 11
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/startup/"
-length: "12 modules · 66 lessons (56 live)"
+length: "12 modules · 66 lessons"
 level: Beginner
 duration: "Self-paced, free on fibub.com"
 lessons: 66
@@ -26,4 +26,4 @@ modules:
   - { name: "Stay compliant and grow" }
 ---
 
-Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored. Region rules link to the official source with the date checked.
+Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored. Region rules link to the official source with the date checked. Includes a glossary and printable launch checklists for India, Canada and the USA.
