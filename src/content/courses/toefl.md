@@ -5,10 +5,10 @@ status: Live
 order: 19
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/toefl/"
-length: "6 modules · 33 lessons"
+length: "6 modules · 32 lessons"
 level: About CEFR B1 and up
 duration: "Self-paced, free on fibub.com"
-lessons: 33
+lessons: 32
 topics: [TOEFL, English, Exam prep, Study abroad]
 who: "Students applying to universities in the USA, Canada and elsewhere, and anyone who needs a TOEFL score."
 modules:

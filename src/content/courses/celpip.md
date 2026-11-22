@@ -5,10 +5,10 @@ status: Live
 order: 18
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/celpip/"
-length: "6 modules · 43 lessons"
+length: "6 modules · 42 lessons"
 level: CLB 4 and up
 duration: "Self-paced, free on fibub.com"
-lessons: 43
+lessons: 42
 topics: [CELPIP, English, Canada immigration, Exam prep]
 who: "Anyone taking CELPIP-General for Express Entry and other immigration programmes, or CELPIP-General LS for citizenship."
 modules:
