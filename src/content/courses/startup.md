@@ -5,7 +5,7 @@ status: In progress
 order: 11
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/startup/"
-length: "12 modules · 66 lessons (26 live)"
+length: "12 modules · 66 lessons (37 live)"
 level: Beginner
 duration: "Self-paced, free on fibub.com"
 lessons: 66
