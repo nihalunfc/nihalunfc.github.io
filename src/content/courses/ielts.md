@@ -5,7 +5,7 @@ status: In progress
 order: 13
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/ielts/"
-length: "11 modules · 75 lessons (6 live)"
+length: "11 modules · 75 lessons (23 live)"
 level: About band 5 and up
 duration: "Self-paced, free on fibub.com"
 lessons: 75
