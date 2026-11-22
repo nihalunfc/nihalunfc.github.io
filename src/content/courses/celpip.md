@@ -1,14 +1,14 @@
 ---
 title: "CELPIP preparation"
 summary: "Everything needed to reach a target CELPIP level for Canadian permanent residence or citizenship: every part of Listening, Reading, Writing and Speaking explained, listening read aloud, timed writing and speaking practice, model answers, hundreds of original questions and a study plan."
-status: In progress
+status: Live
 order: 18
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/celpip/"
-length: "6 modules · 42 lessons (20 live)"
+length: "6 modules · 43 lessons"
 level: CLB 4 and up
 duration: "Self-paced, free on fibub.com"
-lessons: 42
+lessons: 43
 topics: [CELPIP, English, Canada immigration, Exam prep]
 who: "Anyone taking CELPIP-General for Express Entry and other immigration programmes, or CELPIP-General LS for citizenship."
 modules:
