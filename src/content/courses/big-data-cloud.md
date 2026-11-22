@@ -4,9 +4,9 @@ summary: "A readable course in big data, cloud and streaming: Spark and PySpark,
 status: Live
 order: 2
 date: 2026-11-04
-href: /learn/big-data-cloud/
-length: "8 modules · 30 lessons · about 13 hours"
-duration: "Self-paced, 2 to 4 weeks at an hour a day"
+href: "https://fibub.com/learn/courses/data-at-scale/"
+length: "8 modules · 32 lessons"
+duration: "Self-paced, free on fibub.com"
 hours: 13
 level: Beginner to intermediate
 progressKey: data-at-scale-progress-v1

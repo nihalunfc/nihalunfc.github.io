@@ -4,10 +4,10 @@ summary: "A 7-week course in ETL and BI: from pulling data out of email, shared 
 status: Live
 order: 1
 date: 2026-11-03
-href: /learn/etl-course/
-length: "7 weeks · 49 days · about 4 hours a day"
+href: "https://fibub.com/learn/courses/etl/"
+length: "7 modules · 49 lessons"
 level: Intermediate
-duration: "7 weeks"
+duration: "Self-paced, free on fibub.com"
 hours: 196
 lessons: 49
 progressKey: p2d-progress-v1

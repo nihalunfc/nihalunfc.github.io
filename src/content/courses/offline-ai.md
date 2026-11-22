@@ -33,4 +33,4 @@ modules:
   - { name: "Who uses this: sectors and careers" }
 ---
 
-Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored, and every lesson runs in the browser.
+Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored, and every lesson runs in the browser. Rebuilt in November 2026 to my new learning standard: step-by-step animations, plain-words meaning boxes, live problems and a summary sheet for all 119 lessons.
