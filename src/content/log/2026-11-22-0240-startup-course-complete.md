@@ -1,6 +1,6 @@
 ---
 time: 2026-11-22T02:40:00-05:00
-title: Finished Start a startup on fibub, all 66 lessons live
+title: Finished Start a startup on fibub, all 72 lessons live
 project: Courses
 status: done
 ref: courses/startup
