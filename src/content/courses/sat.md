@@ -1,11 +1,11 @@
 ---
 title: "SAT prep"
-summary: "Free preparation for the digital SAT: how the adaptive test works, every Math skill from linear equations to circles, every Reading and Writing question type, about 10,800 original practice questions with worked solutions, and a timed Math test."
+summary: "Free preparation for the digital SAT: how the adaptive test works, every Math skill from linear equations to circles, every Reading and Writing question type, about 17,300 original practice questions with worked solutions, and a timed Math test."
 status: In progress
 order: 17
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/sat/"
-length: "10 modules · 43 lessons (16 live)"
+length: "10 modules · 43 lessons (26 live)"
 level: High school
 duration: "Self-paced, free on fibub.com"
 lessons: 43
