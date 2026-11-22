@@ -5,7 +5,7 @@ status: In progress
 order: 16
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/csir-net-physics/"
-length: "10 modules · 36 lessons (1 live)"
+length: "10 modules · 36 lessons (practice and mocks live)"
 level: MSc physics
 duration: "Self-paced, free on fibub.com"
 lessons: 36

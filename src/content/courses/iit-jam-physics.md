@@ -5,7 +5,7 @@ status: In progress
 order: 14
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/iit-jam-physics/"
-length: "8 modules · 58 lessons (1 live)"
+length: "8 modules · 58 lessons (20 live)"
 level: BSc physics
 duration: "Self-paced, free on fibub.com"
 lessons: 58
