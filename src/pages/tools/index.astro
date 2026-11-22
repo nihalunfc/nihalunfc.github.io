@@ -29,7 +29,6 @@ const planned = tools.flatMap((t) => t.data.editions.filter((e) => e.status !== 
         </section>
       ))}
     </div>
-    <p class="muted" style="margin-top:18px">See everything grouped by field, with what's planned, on <a href="/fields/">Fields</a>.</p>
     <h2 class="section">Editions in the works</h2>
     <p class="muted">The hospitality edition came first because that's the industry I've worked in. Restaurant-chain and retail editions reuse the same models with sector-specific inputs.</p>
     <ul class="hub-list soon-list">{planned.map(({ t, e }) => <li><a href={`/tools/${t.id}/`}>{t.data.title}</a><span>{e.sector} · {e.status}</span></li>)}</ul>

@@ -18,7 +18,7 @@ const updates = await getUpdates(`swarm/${i.id}`);
 ---
 <Base title={d.title} description={d.summary} type="article">
   <PageHero title={d.title} crumbs={[{ label: 'Swarm', href: '/swarm/' }, { label: d.title }]} lead={d.summary}>
-    <div class="post-meta">{d.field ? <a class="eyebrow" style="margin:0" href={`/fields/${d.field}/`}>{fieldName(d.field)}</a> : <span class="eyebrow" style="margin:0">Any field</span>}<span class={`status ${d.status.replace(' ', '')}`}>{d.status}</span></div>
+    <div class="post-meta">{d.field ? <span class="eyebrow" style="margin:0">{fieldName(d.field)}</span> : <span class="eyebrow" style="margin:0">Any field</span>}<span class={`status ${d.status.replace(' ', '')}`}>{d.status}</span></div>
     <Progress parts={partsFor(d)} />
     {(d.demo || d.code) && <div class="btns">{d.demo && <a class="btn primary" href={d.demo}>Open the live demo</a>}{d.code && <a class="btn ghost" href={d.code}>Code on GitHub</a>}</div>}
   </PageHero>
