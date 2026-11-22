@@ -25,4 +25,4 @@ modules:
   - { name: "Capstone and interviews" }
 ---
 
-Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored, and Python runs inside the page. Includes 35 interview questions, a cheat sheet and a retail analysis notebook capstone with a starter .ipynb.
+Free on fibub.com, my free learning site: no sign-up, nothing about learners is stored, and Python runs inside the page. Includes 35 interview questions, a cheat sheet and a retail analysis notebook capstone with a starter .ipynb. Rebuilt in November 2026 to my new learning standard: step-by-step animations of merge, pivot, melt and other table operations, plain-words meaning boxes, live problems and a summary sheet for all 49 lessons.
