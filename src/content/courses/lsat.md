@@ -1,11 +1,11 @@
 ---
 title: "LSAT prep"
-summary: "Free preparation for the LSAT: how arguments are built, every Logical Reasoning question type, conditional logic, Reading Comprehension and Argumentative Writing, with original practice questions, full explanations, logic drills and a timed section."
-status: In progress
+summary: "Free preparation for the LSAT: how arguments are built, every Logical Reasoning question type, conditional logic, Reading Comprehension and Argumentative Writing, with original practice questions, full explanations, logic drills, two practice tests and timed Logical Reasoning and Reading Comprehension sections."
+status: Live
 order: 20
 date: 2026-11-22
 href: "https://fibub.com/learn/courses/lsat/"
-length: "7 modules · 35 lessons (21 live)"
+length: "7 modules · 35 lessons"
 level: University
 duration: "Self-paced, free on fibub.com"
 lessons: 35
